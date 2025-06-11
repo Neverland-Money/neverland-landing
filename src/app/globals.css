@@ -1,26 +1,31 @@
 @import "tailwindcss";
 
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap');
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0a; /* Dark background for our theme */
+  --foreground: #ffffff; /* Light text for dark background */
+  --primary: #942FFF;
+  --primary-dark: #7C27D9;
+  --primary-light: #AB5FFF;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-merriweather: 'Merriweather', serif;
+  --font-cinzel: 'Cinzel Decorative', cursive;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Merriweather', serif;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
