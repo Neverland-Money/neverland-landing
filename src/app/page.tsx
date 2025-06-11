@@ -23,11 +23,11 @@ export default function Home() {
       />
 
       {/* Main content container */}
-      <div className="relative z-[5] flex flex-col items-end justify-center min-h-screen px-4 md:px-12 lg:px-20 xl:pr-20">
+      <div className="relative z-[5] flex flex-col items-start justify-center min-h-screen px-4 md:px-12 lg:px-20 xl:pl-20">
         {/* Content wrapper with max width */}
-        <div className="flex flex-col items-end justify-center gap-9 w-full max-w-[950px] ml-auto">
+        <div className="flex flex-col items-start justify-center gap-9 w-full max-w-[950px] mr-auto">
           {/* Title and description section */}
-          <div className="flex flex-col items-end justify-center gap-2 w-full">
+          <div className="flex flex-col items-start justify-center gap-2 w-full">
             {/* Main title SVG */}
             <div className="w-full max-w-[950px]">
               <svg
@@ -65,8 +65,8 @@ export default function Home() {
             </div>
 
             {/* Description text */}
-            <div className="w-full max-w-[455px] ml-auto">
-              <p className="text-white font-merriweather text-lg leading-[140%] text-right">
+            <div className="w-full max-w-[455px] mr-auto">
+              <p className="text-white font-merriweather text-lg leading-[140%] text-left">
                 Neverland is a lending protocol built on Aave's secure system,
                 governed by the community, and powered by Monad's fast
                 blockchain.
@@ -76,7 +76,7 @@ export default function Home() {
 
           {/* CTA Button */}
           <div
-            className="flex items-center justify-center w-[240px] px-6 py-4 gap-3 rounded-full cursor-pointer ml-auto"
+            className="flex items-center justify-center w-[240px] px-6 py-4 gap-3 rounded-full cursor-pointer mr-auto"
             style={{
               background:
                 "linear-gradient(0deg, #d132e0 -31%, #530ee3 111.63%)",
