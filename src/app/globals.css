@@ -14,8 +14,7 @@
   --color-primary: var(--primary);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-merriweather: "Merriweather", serif;
-  --font-cinzel: "Cinzel Decorative", cursive;
+  --font-merriweather: var(--font-merriweather);
 }
 
 body {
