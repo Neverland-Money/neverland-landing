@@ -6,7 +6,18 @@ export default function Home() {
         className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage:
-            "url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')",
+            "url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')",
+          backgroundBlendMode: "multiply",
+        }}
+      />
+
+      {/* Fantasy color overlay to match the magical aesthetic */}
+      <div
+        className="absolute inset-0 w-full h-full"
+        style={{
+          background:
+            "radial-gradient(ellipse at center, rgba(138, 43, 226, 0.3) 0%, rgba(75, 0, 130, 0.4) 50%, rgba(25, 25, 112, 0.5) 100%)",
+          mixBlendMode: "overlay",
         }}
       />
 
