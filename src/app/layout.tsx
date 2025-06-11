@@ -48,7 +48,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${merriweather.variable} ${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white`}
+        className={`${merriweather.variable} ${cinzel.variable} ${inter.variable} ${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white`}
       >
         <Header />
         {children}
