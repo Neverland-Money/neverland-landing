@@ -1,24 +1,30 @@
 export default function Home() {
   return (
     <div className="flex flex-col w-screen h-screen min-h-[1024px] relative overflow-hidden bg-[#01020D]">
-      {/* Background gradient overlay */}
+      {/* Background image layer */}
       <div
-        className="absolute inset-0 w-full h-full"
+        className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
         style={{
-          background: `
-            linear-gradient(0deg, rgba(5, 2, 18, 0.00) 48.56%, rgba(5, 2, 18, 0.60) 100%),
-            url(https://placehold.co/1440x1024/1a0b3d/1a0b3d) lightgray -172.881px -274px / 124.011% 128.613% no-repeat,
-            #01020d
-          `,
+          backgroundImage:
+            "url('https://cdn.midjourney.com/b6b5e2f4-31b5-4e30-bc7f-8bfb4a8c8c6e/0_0.png')",
         }}
       />
 
       {/* Shadow bottom gradient */}
       <div
-        className="absolute bottom-0 left-0 w-full h-[200px] z-[1]"
+        className="absolute bottom-0 left-0 w-full h-full z-[1]"
         style={{
           background:
             "linear-gradient(0deg, #050212 0.96%, rgba(5, 2, 18, 0.00) 8.65%)",
+        }}
+      />
+
+      {/* Shadow top gradient */}
+      <div
+        className="absolute top-0 left-0 w-full h-full z-[2]"
+        style={{
+          background:
+            "linear-gradient(0deg, rgba(5, 2, 18, 0.00) 48.56%, rgba(5, 2, 18, 0.60) 100%)",
         }}
       />
 
