@@ -122,7 +122,7 @@ export default function Home() {
       </div>
 
       {/* Stats Cards */}
-      <div className="absolute bottom-[248px] right-4 md:right-12 lg:right-20 z-[5] flex flex-col sm:flex-row gap-6">
+      <div className="absolute bottom-[248px] left-4 md:left-12 lg:left-20 z-[5] flex flex-col sm:flex-row gap-6">
         {/* Total Value Locked Card */}
         <div
           className="w-[255px] h-[118px] rounded-[20px] border border-white/20 relative"
