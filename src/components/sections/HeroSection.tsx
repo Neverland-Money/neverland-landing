@@ -1,3 +1,6 @@
+import Image from "next/image";
+import Link from "next/link";
+
 export default function HeroSection() {
     return (
       <div className="flex flex-col w-screen h-screen min-h-[1024px] relative overflow-hidden bg-[#01020D]">
@@ -5,7 +8,7 @@ export default function HeroSection() {
         <div
           className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: "url('/assets/images/background.png')",
+            backgroundImage: "url('/assets/images/hero/background.png')",
           }}
         />
   
@@ -27,14 +30,15 @@ export default function HeroSection() {
           }}
         />
   
-        {/* Main content container - exactly 248px from the bottom of header */}
-        <div className="relative z-[5] flex flex-col items-start px-4 md:px-12 lg:px-20 xl:pl-20 mt-[248px]">
+        {/* Main content container - exactly 248px from the bottom of header on desktop, less on mobile */}
+        <div className="relative z-[5] flex flex-col items-center md:items-start mt-[120px] md:mt-[248px]">
           {/* Content wrapper with max width */}
-          <div className="flex flex-col items-start justify-center gap-9 w-full max-w-[950px] mr-auto">
-            {/* Title and description section */}
-            <div className="flex flex-col items-start justify-center gap-2 w-full">
-              {/* Main title SVG */}
-              <div className="w-full max-w-[950px]">
+          <div className="w-full max-w-7xl mx-auto px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-0">
+            <div className="flex flex-col items-center md:items-start justify-center gap-6 md:gap-9 w-full max-w-[950px]">
+              {/* Title and description section */}
+              <div className="flex flex-col items-center md:items-start justify-center gap-2 w-full">
+              {/* Main title SVG - hidden on mobile, shown on md screens and above */}
+              <div className="w-full max-w-[950px] hidden md:block">
                 <svg
                   width="950"
                   height="160"
@@ -68,10 +72,17 @@ export default function HeroSection() {
                   />
                 </svg>
               </div>
+              
+              {/* Mobile title - shown on mobile, hidden on md screens and above */}
+              <div className="w-full block md:hidden text-center">
+                <h1 className="text-white font-cinzel text-4xl leading-[130%] tracking-wide mb-2">
+                  MAGIC AND<br />PIXIE DUST<br />ON MONAD
+                </h1>
+              </div>
   
               {/* Description text */}
-              <div className="w-full max-w-[455px] mr-auto">
-                <p className="text-white font-merriweather text-lg leading-[140%] text-left">
+              <div className="w-full max-w-[455px] mr-auto md:mr-auto mx-auto md:mx-0">
+                <p className="text-white font-merriweather text-base md:text-lg leading-[140%] text-center md:text-left">
                   Neverland is a lending protocol built on Aave's secure system,
                   governed by the community, and powered by Monad's fast
                   blockchain.
@@ -81,7 +92,7 @@ export default function HeroSection() {
   
             {/* CTA Button */}
             <div
-              className="flex items-center justify-center w-[240px] px-6 py-4 gap-3 rounded-full cursor-pointer mr-auto"
+              className="flex items-center justify-center w-[240px] px-6 py-4 gap-3 rounded-full cursor-pointer mx-auto md:mx-0 md:mr-auto"
               style={{
                 background:
                   "linear-gradient(0deg, #d132e0 -31%, #530ee3 111.63%)",
@@ -89,19 +100,13 @@ export default function HeroSection() {
               }}
             >
               {/* Star 1 */}
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 21 20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="flex-shrink-0"
-              >
-                <path
-                  d="M10.744 5.35105C10.7592 5.49043 10.7803 5.62908 10.8072 5.76681C10.8341 5.90454 10.8668 6.0408 10.9054 6.17578C10.9438 6.31076 10.9881 6.44392 11.0377 6.57505C11.0876 6.70617 11.1428 6.83511 11.2033 6.96165C11.264 7.0882 11.3301 7.212 11.401 7.33285C11.4722 7.4539 11.5483 7.57165 11.6296 7.68609C11.7106 7.8007 11.7965 7.91147 11.8869 8.01877C11.9774 8.12606 12.0723 8.22931 12.1716 8.32853C12.2708 8.42775 12.374 8.52256 12.4813 8.61317C12.5884 8.70359 12.6993 8.78942 12.8138 8.87047C12.9284 8.95154 13.0461 9.02784 13.167 9.09881C13.2881 9.16997 13.4119 9.23599 13.5384 9.29669C13.6649 9.35722 13.7937 9.41241 13.925 9.4623C14.0561 9.51201 14.1892 9.5562 14.3242 9.59472C14.459 9.63323 14.5955 9.66588 14.7333 9.69284C14.8709 9.71979 15.0094 9.74089 15.149 9.75611C16.5012 9.90423 18.2467 10 20.5 10C18.2467 10 16.5012 10.0958 15.149 10.244C15.0094 10.2592 14.8709 10.2802 14.7333 10.3072C14.5955 10.3341 14.459 10.3671 14.3242 10.4055C14.1892 10.4439 14.0561 10.488 13.925 10.5378C13.7937 10.5877 13.6649 10.6429 13.5384 10.7036C13.4119 10.764 13.2881 10.83 13.167 10.9013C13.0461 10.9723 12.9284 11.0485 12.8138 11.1296C12.6993 11.2107 12.5884 11.2965 12.4813 11.3869C12.374 11.4775 12.2708 11.5723 12.1716 11.6715C12.0723 11.7708 11.9774 11.874 11.8869 11.9812C11.7965 12.0886 11.7106 12.1993 11.6296 12.314C11.5483 12.4285 11.4722 12.5461 11.401 12.6672C11.3299 12.7881 11.264 12.9118 11.2033 13.0384C11.1428 13.165 11.0874 13.2939 11.0377 13.425C10.9881 13.5561 10.9438 13.6893 10.9054 13.8243C10.8668 13.9593 10.8341 14.0955 10.8072 14.2333C10.7803 14.371 10.7592 14.5096 10.744 14.649C10.5958 16.0012 10.5 17.7467 10.5 20C10.5 17.7468 10.4041 16.0012 10.2561 14.649C10.2409 14.5096 10.2198 14.371 10.1928 14.2333C10.1659 14.0955 10.1331 13.9593 10.0945 13.8243C10.056 13.6893 10.012 13.5561 9.9621 13.425C9.91234 13.2939 9.85726 13.165 9.79644 13.0384C9.73575 12.9118 9.66999 12.7881 9.59876 12.6672C9.52767 12.5461 9.45151 12.4285 9.37042 12.314C9.28945 12.1993 9.20356 12.0886 9.11312 11.9812C9.02256 11.874 8.92772 11.7708 8.82849 11.6715C8.72925 11.5723 8.62601 11.4775 8.51878 11.3869C8.4114 11.2965 8.30057 11.2107 8.18613 11.1296C8.07168 11.0485 7.95391 10.9723 7.8328 10.9013C7.71196 10.83 7.58818 10.764 7.4616 10.7036C7.33515 10.6429 7.20617 10.5877 7.07506 10.5378C6.94368 10.488 6.8107 10.444 6.67572 10.4055C6.54074 10.3671 6.40455 10.3341 6.26677 10.3072C6.12912 10.2802 5.99041 10.2592 5.85089 10.244C4.49867 10.0958 2.75325 10 0.5 10C2.75325 10 4.49867 9.90423 5.85089 9.75611C5.99041 9.74089 6.12912 9.71979 6.26677 9.69284C6.40455 9.66588 6.54074 9.63323 6.67572 9.59472C6.8107 9.5562 6.94368 9.51201 7.07506 9.4623C7.20617 9.41241 7.33515 9.35722 7.4616 9.29651C7.58818 9.23599 7.71196 9.16997 7.8328 9.09881C7.95391 9.02784 8.07168 8.95154 8.18613 8.87047C8.30057 8.78942 8.4114 8.70359 8.51878 8.61317C8.62601 8.52256 8.72925 8.42775 8.82849 8.32853C8.92772 8.22931 9.02256 8.12606 9.11299 8.01877C9.20356 7.91147 9.28945 7.8007 9.37042 7.68609C9.45151 7.57165 9.52767 7.4539 9.59876 7.33285C9.66999 7.212 9.73575 7.0882 9.79644 6.96165C9.85726 6.83511 9.91234 6.70617 9.9621 6.57505C10.012 6.44373 10.056 6.31076 10.0945 6.17578C10.1331 6.0408 10.1659 5.90454 10.1928 5.76681C10.2198 5.62908 10.2409 5.49043 10.2561 5.35105C10.4041 3.99884 10.5 2.25342 10.5 0C10.5 2.25324 10.5958 3.99884 10.744 5.35105Z"
-                  fill="white"
+              <Image
+                  src="/assets/images/hero/star.svg"
+                  alt="Star"
+                  width={16}
+                  height={16}
+                  style={{ aspectRatio: "16/16" }}
                 />
-              </svg>
   
               {/* Button text */}
               <span className="text-white text-center font-inter text-base font-medium leading-[110%]">
@@ -109,28 +114,23 @@ export default function HeroSection() {
               </span>
   
               {/* Star 2 */}
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 21 20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="flex-shrink-0"
-              >
-                <path
-                  d="M10.744 5.35105C10.7592 5.49043 10.7803 5.62908 10.8072 5.76681C10.8341 5.90454 10.8668 6.0408 10.9054 6.17578C10.9438 6.31076 10.9881 6.44392 11.0377 6.57505C11.0876 6.70617 11.1428 6.83511 11.2033 6.96165C11.264 7.0882 11.3301 7.212 11.401 7.33285C11.4722 7.4539 11.5483 7.57165 11.6296 7.68609C11.7106 7.8007 11.7965 7.91147 11.8869 8.01877C11.9774 8.12606 12.0723 8.22931 12.1716 8.32853C12.2708 8.42775 12.374 8.52256 12.4813 8.61317C12.5884 8.70359 12.6993 8.78942 12.8138 8.87047C12.9284 8.95154 13.0461 9.02784 13.167 9.09881C13.2881 9.16997 13.4119 9.23599 13.5384 9.29669C13.6649 9.35722 13.7937 9.41241 13.925 9.4623C14.0561 9.51201 14.1892 9.5562 14.3242 9.59472C14.459 9.63323 14.5955 9.66588 14.7333 9.69284C14.8709 9.71979 15.0094 9.74089 15.149 9.75611C16.5012 9.90423 18.2467 10 20.5 10C18.2467 10 16.5012 10.0958 15.149 10.244C15.0094 10.2592 14.8709 10.2802 14.7333 10.3072C14.5955 10.3341 14.459 10.3671 14.3242 10.4055C14.1892 10.4439 14.0561 10.488 13.925 10.5378C13.7937 10.5877 13.6649 10.6429 13.5384 10.7036C13.4119 10.764 13.2881 10.83 13.167 10.9013C13.0461 10.9723 12.9284 11.0485 12.8138 11.1296C12.6993 11.2107 12.5884 11.2965 12.4813 11.3869C12.374 11.4775 12.2708 11.5723 12.1716 11.6715C12.0723 11.7708 11.9774 11.874 11.8869 11.9812C11.7965 12.0886 11.7106 12.1993 11.6296 12.314C11.5483 12.4285 11.4722 12.5461 11.401 12.6672C11.3299 12.7881 11.264 12.9118 11.2033 13.0384C11.1428 13.165 11.0874 13.2939 11.0377 13.425C10.9881 13.5561 10.9438 13.6893 10.9054 13.8243C10.8668 13.9593 10.8341 14.0955 10.8072 14.2333C10.7803 14.371 10.7592 14.5096 10.744 14.649C10.5958 16.0012 10.5 17.7467 10.5 20C10.5 17.7468 10.4041 16.0012 10.2561 14.649C10.2409 14.5096 10.2198 14.371 10.1928 14.2333C10.1659 14.0955 10.1331 13.9593 10.0945 13.8243C10.056 13.6893 10.012 13.5561 9.9621 13.425C9.91234 13.2939 9.85726 13.165 9.79644 13.0384C9.73575 12.9118 9.66999 12.7881 9.59876 12.6672C9.52767 12.5461 9.45151 12.4285 9.37042 12.314C9.28945 12.1993 9.20356 12.0886 9.11312 11.9812C9.02256 11.874 8.92772 11.7708 8.82849 11.6715C8.72925 11.5723 8.62601 11.4775 8.51878 11.3869C8.4114 11.2965 8.30057 11.2107 8.18613 11.1296C8.07168 11.0485 7.95391 10.9723 7.8328 10.9013C7.71196 10.83 7.58818 10.764 7.4616 10.7036C7.33515 10.6429 7.20617 10.5877 7.07506 10.5378C6.94368 10.488 6.8107 10.444 6.67572 10.4055C6.54074 10.3671 6.40455 10.3341 6.26677 10.3072C6.12912 10.2802 5.99041 10.2592 5.85089 10.244C4.49867 10.0958 2.75325 10 0.5 10C2.75325 10 4.49867 9.90423 5.85089 9.75611C5.99041 9.74089 6.12912 9.71979 6.26677 9.69284C6.40455 9.66588 6.54074 9.63323 6.67572 9.59472C6.8107 9.5562 6.94368 9.51201 7.07506 9.4623C7.20617 9.41241 7.33515 9.35722 7.4616 9.29651C7.58818 9.23599 7.71196 9.16997 7.8328 9.09881C7.95391 9.02784 8.07168 8.95154 8.18613 8.87047C8.30057 8.78942 8.4114 8.70359 8.51878 8.61317C8.62601 8.52256 8.72925 8.42775 8.82849 8.32853C8.92772 8.22931 9.02256 8.12606 9.11299 8.01877C9.20356 7.91147 9.28945 7.8007 9.37042 7.68609C9.45151 7.57165 9.52767 7.4539 9.59876 7.33285C9.66999 7.212 9.73575 7.0882 9.79644 6.96165C9.85726 6.83511 9.91234 6.70617 9.9621 6.57505C10.012 6.44373 10.056 6.31076 10.0945 6.17578C10.1331 6.0408 10.1659 5.90454 10.1928 5.76681C10.2198 5.62908 10.2409 5.49043 10.2561 5.35105C10.4041 3.99884 10.5 2.25342 10.5 0C10.5 2.25324 10.5958 3.99884 10.744 5.35105Z"
-                  fill="white"
+              <Image
+                  src="/assets/images/hero/star.svg"
+                  alt="Star"
+                  width={16}
+                  height={16}
+                  style={{ aspectRatio: "16/16" }}
                 />
-              </svg>
+              </div>
             </div>
           </div>
         </div>
           
-        {/* Stats Cards - 80px from button above */}
-        <div className="flex flex-row gap-6 mt-[80px] z-[5] px-4 md:px-12 lg:px-20 xl:pl-20">
+        {/* Stats Cards - 80px from button above on desktop, 40px on mobile */}
+        <div className="flex flex-col md:flex-row gap-4 md:gap-6 mt-[40px] md:mt-[80px] z-[5] w-full max-w-7xl mx-auto px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-0">
           {/* Total Value Locked Card */}
           <div
-            className="w-[255px] h-[118px] rounded-[20px] border border-white/20 relative"
+            className="w-full md:w-[255px] h-[118px] rounded-[20px] border border-white/20 relative"
             style={{
               background: "rgba(50, 2, 99, 0.65)",
               backdropFilter: "blur(4px)",
@@ -168,7 +168,7 @@ export default function HeroSection() {
   
           {/* Active Users Card */}
           <div
-            className="w-[255px] h-[118px] rounded-[20px] border border-white/20 relative"
+            className="w-full md:w-[255px] h-[118px] rounded-[20px] border border-white/20 relative"
             style={{
               background: "rgba(50, 2, 99, 0.65)",
               backdropFilter: "blur(4px)",
@@ -200,7 +200,7 @@ export default function HeroSection() {
               />
             </svg>
             <div className="absolute left-4 top-[58px] text-white font-cinzel text-[40px] font-normal leading-[110%]">
-              $210 M
+              50,000
             </div>
           </div>
         </div>

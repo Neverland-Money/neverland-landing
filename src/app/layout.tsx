@@ -47,11 +47,7 @@ export const metadata: Metadata = {
   description: "Discover the magic of Luna Voyage",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout() {
   return (
     <html lang="en">
       <body
@@ -59,7 +55,6 @@ export default function RootLayout({
       >
         <Header />
         <HeroSection />
-        {children}
       </body>
     </html>
   );
