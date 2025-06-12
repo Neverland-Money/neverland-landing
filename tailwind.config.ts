@@ -12,7 +12,7 @@ const config: Config = {
         merriweather: ["var(--font-merriweather)", "serif"],
         cinzel: ["var(--font-cinzel)", "serif"],
         inter: ["var(--font-inter)", "sans-serif"],
-        "cinzel-decorative": ['"Cinzel Decorative"', "cursive"],
+        cinzel_decorative: ["var(--font-cinzel-decorative)", "cursive"],
       },
       colors: {
         primary: "#942FFF",
