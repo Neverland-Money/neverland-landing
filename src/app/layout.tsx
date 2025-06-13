@@ -42,8 +42,45 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Neverland - Magic and the Luna Voyage",
-  description: "Discover the magic of Luna Voyage",
+  title: "Neverland Money",
+  description: "Revolutionizing Lending & Tokenomics",
+  metadataBase: new URL("https://neverland.money"),
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  openGraph: {
+    title: "Neverland Money",
+    description: "Revolutionizing Lending & Tokenomics",
+    url: "https://neverland.money",
+    siteName: "Neverland Money",
+    images: [
+      {
+        url: "/assets/images/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Neverland Money",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Neverland Money",
+    description: "Revolutionizing Lending & Tokenomics",
+    images: ["/assets/images/og-image.png"],
+  },
+  keywords: [
+    "decentralized finance",
+    "lending",
+    "crypto",
+    "interest",
+    "blockchain",
+  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

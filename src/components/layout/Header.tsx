@@ -18,7 +18,7 @@ const Header = () => {
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-1">
             <Image
-              loading="lazy"
+              loading="eager"
               src="/assets/images/header/logo.svg"
               alt="Logo"
               width={0}
@@ -68,7 +68,7 @@ const Header = () => {
             className="flex p-2 items-center rounded-full border border-white/20 hover:border-purple-400 transition-colors"
           >
             <Image
-              loading="lazy"
+              loading="eager"
               src="/assets/images/header/x.svg"
               alt="X"
               width={0}
@@ -84,7 +84,7 @@ const Header = () => {
             className="flex p-2 items-center rounded-full border border-white/20 hover:border-purple-400 transition-colors"
           >
             <Image
-             loading="lazy"
+             loading="eager"
               src="/assets/images/header/discord.svg"
               alt="Discord"
               width={0}
@@ -100,7 +100,7 @@ const Header = () => {
             className="flex p-2 items-center rounded-full border border-white/20 hover:border-purple-400 transition-colors"
           >
             <Image
-              loading="lazy"
+              loading="eager"
               src="/assets/images/header/telegram.svg"
               alt="Telegram"
               width={0}
@@ -116,7 +116,7 @@ const Header = () => {
           onClick={toggleMobileMenu}
         >
           <Image 
-            loading="lazy"
+            loading="eager"
             src="/assets/images/header/mobile-menu.svg"
             alt="Open Menu"
             width={24}
@@ -134,7 +134,7 @@ const Header = () => {
               {/* Logo Section */}
               <div className="flex items-center gap-1 w-[144px] h-[20px] flex-shrink-0">
                 <Image
-                  loading="lazy"
+                  loading="eager"
                   src="/assets/images/header/logo.svg"
                   alt="Logo"
                   width={0}
@@ -152,7 +152,7 @@ const Header = () => {
                 onClick={toggleMobileMenu}
               >
                 <Image 
-                  loading="lazy"
+                  loading="eager"
                   src="/assets/images/header/close.svg"
                   alt="Close Menu"
                   width={0}
@@ -201,7 +201,7 @@ const Header = () => {
                 className="flex justify-center items-center w-[80px] h-[80px] rounded-full border-[1.818px] border-[#942FFF] aspect-square flex-shrink-0"
               >
                 <Image
-                  loading="lazy"
+                  loading="eager"
                   src="/assets/images/header/x.svg"
                   alt="X"
                   width={0}
@@ -215,7 +215,7 @@ const Header = () => {
                 className="flex justify-center items-center w-[80px] h-[80px] rounded-full border-[1.818px] border-[#942FFF] aspect-square flex-shrink-0"
               >
                 <Image
-                  loading="lazy"
+                  loading="eager"
                   src="/assets/images/header/discord.svg"
                   alt="Discord"
                   width={0}
@@ -229,7 +229,7 @@ const Header = () => {
                 className="flex justify-center items-center w-[80px] h-[80px] rounded-full border-[1.818px] border-[#942FFF] aspect-square flex-shrink-0"
               >
                 <Image
-                  loading="lazy"
+                  loading="eager"
                   src="/assets/images/header/telegram.svg"
                   alt="Telegram"
                   width={0}
