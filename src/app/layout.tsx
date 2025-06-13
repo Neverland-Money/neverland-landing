@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Merriweather, Cinzel, Cinzel_Decorative, Inter, Geist, Geist_Mono } from "next/font/google";
-import Header from "../components/layout/Header";
-import HeroSection from "../components/sections/HeroSection";
+
 import "./globals.css";
 
 const merriweather = Merriweather({
@@ -47,14 +46,13 @@ export const metadata: Metadata = {
   description: "Discover the magic of Luna Voyage",
 };
 
-export default function RootLayout() {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body
         className={`${merriweather.variable} ${cinzel.variable} ${cinzel_decorative.variable} ${inter.variable} ${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white`}
       >
-        <Header />
-        <HeroSection />
+        {children}
       </body>
     </html>
   );

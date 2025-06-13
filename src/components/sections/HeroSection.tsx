@@ -1,42 +1,164 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+
+// Stardust Effect Component
+const StardustEffect = () => {
+  const [particles, setParticles] = useState<
+    {
+      id: number;
+      x: number;
+      y: number;
+      size: number;
+      rotation: number;
+      color: string;
+      delay: number;
+    }[]
+  >([]);
+
+  useEffect(() => {
+    const handleTrigger = () => {
+      // Create 15-40 particles for a more dramatic effect
+      const particleCount = Math.floor(Math.random() * 25) + 15;
+      const newParticles = [];
+
+      // Colors for the stars - purples and blues similar to the button gradient
+      const colors = [
+        "#d132e0",
+        "#9945FF",
+        "#7200d6",
+        "#530ee3",
+        "#ffffff",
+        "#ff9fff",
+      ];
+
+      for (let i = 0; i < particleCount; i++) {
+        // Calculate distance - some particles go further than others
+        const distance = Math.random() * 500 + 200; // 200px to 500px
+        const angle = Math.random() * Math.PI * 2; // 0 to 2π (full circle)
+
+        newParticles.push({
+          id: Date.now() + i,
+          x: Math.cos(angle) * distance, // Use trigonometry for better radial distribution
+          y: Math.sin(angle) * distance,
+          size: Math.random() * 12 + 6, // 6px to 18px (larger particles)
+          rotation: Math.random() * 360, // 0 to 360 degrees
+          color: colors[Math.floor(Math.random() * colors.length)],
+          delay: Math.random() * 0.2, // Stagger the animation starts slightly
+        });
+      }
+
+      setParticles(newParticles);
+
+      // Remove particles after animation completes (longer duration)
+      setTimeout(() => {
+        setParticles([]);
+      }, 3000);
+    };
+
+    // Listen for the custom event triggered by button click
+    document.addEventListener("triggerStardust", handleTrigger);
+
+    return () => {
+      document.removeEventListener("triggerStardust", handleTrigger);
+    };
+  }, []);
+
+  return (
+    <div className="absolute inset-0 pointer-events-none overflow-visible z-10">
+      {particles.map((particle) => (
+        <motion.div
+          key={particle.id}
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+          initial={{
+            x: 0,
+            y: 0,
+            opacity: 1,
+            scale: 0,
+            rotate: 0,
+          }}
+          animate={{
+            x: `${particle.x}px`,
+            y: `${particle.y}px`,
+            opacity: 0,
+            scale: 1,
+            rotate: particle.rotation,
+          }}
+          transition={{
+            duration: 1.2, // Longer animation
+            delay: particle.delay, // Staggered starts
+            ease: [0.1, 0.7, 0.1, 1.0], // More dramatic easing
+          }}
+        >
+          <div
+            className="absolute rounded-full"
+            style={{
+              width: `${particle.size}px`,
+              height: `${particle.size}px`,
+              backgroundColor: particle.color,
+              boxShadow: `0 0 ${particle.size}px ${particle.color}`, // Bigger glow effect
+              filter: "blur(0.5px)", // Slight blur for a more magical look
+            }}
+          />
+        </motion.div>
+      ))}
+    </div>
+  );
+};
 
 export default function HeroSection() {
-    return (
-      <div className="flex flex-col w-screen h-screen min-h-[1024px] relative overflow-hidden bg-[#01020D]">
-        {/* Background image layer */}
-        <div
-          className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
+  return (
+    <div className="flex flex-col w-full max-h-[1000px] min-h-[700px] md:max-h-[100vh] md:min-h-[944px] h-[100vh] relative overflow-hidden bg-[#01020D]">
+      {/* Background image layer - uses separate styles for mobile and desktop */}
+      <div className="absolute inset-0 w-full h-full transform scale-x-[-1] md:scale-x-100">
+        {/* Mobile background - positioned from bottom */}
+        <div 
+          className="absolute inset-0 md:hidden w-full h-full bg-lightgray"
           style={{
-            backgroundImage: "url('/assets/images/hero/background.png')",
+            backgroundImage: "url('/assets/images/hero/background.png')", 
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "-860px bottom", 
+            backgroundSize: "350% auto",
           }}
         />
-  
-        {/* Shadow bottom gradient */}
-        <div
-          className="absolute bottom-0 left-0 w-full h-full z-[1]"
+        
+        {/* Desktop background */}
+        <div 
+          className="absolute inset-0 hidden md:block w-full h-full"
           style={{
-            background:
-              "linear-gradient(0deg, #050212 0.96%, rgba(5, 2, 18, 0.00) 8.65%)",
+            background: "url('/assets/images/hero/background.png') lightgray -173px -274px / 124% 129% no-repeat",
           }}
         />
-  
-        {/* Shadow top gradient */}
-        <div
-          className="absolute top-0 left-0 w-full h-full z-[2]"
-          style={{
-            background:
-              "linear-gradient(0deg, rgba(5, 2, 18, 0.00) 48.56%, rgba(5, 2, 18, 0.60) 100%)",
-          }}
-        />
-  
-        {/* Main content container - exactly 248px from the bottom of header on desktop, less on mobile */}
-        <div className="relative z-[5] flex flex-col items-center md:items-start mt-[120px] md:mt-[248px]">
-          {/* Content wrapper with max width */}
-          <div className="w-full max-w-7xl mx-auto px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-0">
-            <div className="flex flex-col items-center md:items-start justify-center gap-6 md:gap-9 w-full max-w-[950px]">
-              {/* Title and description section */}
-              <div className="flex flex-col items-center md:items-start justify-center gap-2 w-full">
+      </div>
+
+      {/* Shadow bottom gradient */}
+      <div
+        className="absolute bottom-0 left-0 w-full h-full z-[1]"
+        style={{
+          background:
+            "linear-gradient(0deg, #050212 0.96%, rgba(5, 2, 18, 0.00) 8.65%)",
+        }}
+      />
+
+      {/* Shadow top gradient */}
+      <div
+        className="absolute top-0 left-0 w-full h-full z-[2]"
+        style={{
+          background:
+            "linear-gradient(0deg, rgba(5, 2, 18, 0.00) 48.56%, rgba(5, 2, 18, 0.60) 100%)",
+        }}
+      />
+
+      {/* Main content container - exactly 248px from the bottom of header on desktop, less on mobile */}
+      <div className="relative z-[5] flex flex-col items-center md:items-start mt-[120px] md:mt-[248px]">
+        {/* Content wrapper with max width */}
+        <div className="w-full max-w-7xl mx-auto px-4 xl:px-0">
+          <div className="flex flex-col items-center md:items-start justify-center gap-6 md:gap-9 w-full max-w-[950px]">
+            {/* Title and description section */}
+            <div className="flex flex-col items-center md:items-start justify-center gap-2 w-full">
               {/* Main title SVG - hidden on mobile, shown on md screens and above */}
               <div className="w-full max-w-[950px] hidden md:block">
                 <svg
@@ -72,139 +194,228 @@ export default function HeroSection() {
                   />
                 </svg>
               </div>
-              
+
               {/* Mobile title - shown on mobile, hidden on md screens and above */}
               <div className="w-full block md:hidden text-center">
-                <h1 className="text-white font-cinzel text-4xl leading-[130%] tracking-wide mb-2">
-                  MAGIC AND<br />PIXIE DUST<br />ON MONAD
+                <h1 className="text-white font-cinzel text-[44px] leading-[130%] tracking-wide mb-2">
+                  MAGIC AND
+                  <br />
+                  PIXIE DUST ON
+                  <br />
+                  MONAD
                 </h1>
               </div>
-  
-              {/* Description text */}
-              <div className="w-full max-w-[455px] mr-auto md:mr-auto mx-auto md:mx-0">
+
+              {/* Description text - hidden on mobile, shown on md screens and above */}
+              <div className="w-full max-w-[455px] hidden md:block mr-auto md:mr-auto mx-auto md:mx-0">
                 <p className="text-white font-merriweather text-base md:text-lg leading-[140%] text-center md:text-left">
-                  Neverland is a lending protocol built on Aave's secure system,
-                  governed by the community, and powered by Monad's fast
-                  blockchain.
+                  Neverland is a lending protocol built on Aave&apos;s secure
+                  system, governed by the community, and powered by Monad&apos;s
+                  fast blockchain.
+                </p>
+              </div>
+
+              {/* Mobile Description text */}
+              <div className="w-full max-w-[455px] block md:hidden mr-auto md:mr-auto mx-auto md:mx-0">
+                <p className="text-white font-merriweather text-[21px] md:text-lg leading-[140%] text-center md:text-left">
+                  Neverland is a lending protocol built on Aave&apos;s secure
+                  system, governed by the community, and powered by Monad&apos;s
+                  fast blockchain.
                 </p>
               </div>
             </div>
-  
+
             {/* CTA Button */}
-            <div
-              className="flex items-center justify-center w-[240px] px-6 py-4 gap-3 rounded-full cursor-pointer mx-auto md:mx-0 md:mr-auto"
-              style={{
-                background:
-                  "linear-gradient(0deg, #d132e0 -31%, #530ee3 111.63%)",
-                boxShadow: "0px 0px 36px #7200d6",
-              }}
-            >
-              {/* Star 1 */}
-              <Image
-                  src="/assets/images/hero/star.svg"
-                  alt="Star"
-                  width={16}
-                  height={16}
-                  style={{ aspectRatio: "16/16" }}
-                />
-  
-              {/* Button text */}
-              <span className="text-white text-center font-inter text-base font-medium leading-[110%]">
-                Enter Dapp
-              </span>
-  
-              {/* Star 2 */}
-              <Image
-                  src="/assets/images/hero/star.svg"
-                  alt="Star"
-                  width={16}
-                  height={16}
-                  style={{ aspectRatio: "16/16" }}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-          
-        {/* Stats Cards - 80px from button above on desktop, 40px on mobile */}
-        <div className="flex flex-col md:flex-row gap-4 md:gap-6 mt-[40px] md:mt-[80px] z-[5] w-full max-w-7xl mx-auto px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-0">
-          {/* Total Value Locked Card */}
-          <div
-            className="w-full md:w-[255px] h-[118px] rounded-[20px] border border-white/20 relative"
-            style={{
-              background: "rgba(50, 2, 99, 0.65)",
-              backdropFilter: "blur(4px)",
-            }}
-          >
-            <div className="absolute left-4 top-4 text-[#ead5ff] font-cinzel text-sm font-normal leading-[110%] uppercase">
-              Total Value Locked
-            </div>
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 18 18"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="absolute top-[58px] right-4"
-            >
-              <rect
-                width="18"
-                height="18"
-                rx="9"
-                fill="#6B5390"
-                fillOpacity="0.6"
-              />
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M9.16667 5.75C9.6499 5.75 10.0417 5.35825 10.0417 4.875C10.0417 4.39175 9.6499 4 9.16667 4C8.68343 4 8.29167 4.39175 8.29167 4.875C8.29167 5.35825 8.68343 5.75 9.16667 5.75ZM8.58333 6.91667C8.26116 6.91667 8 7.17784 8 7.5C8 7.82217 8.26116 8.08333 8.58333 8.08333V12.75C8.58333 13.0722 8.84449 13.3333 9.16667 13.3333C9.48884 13.3333 9.75 13.0722 9.75 12.75V7.5C9.75 7.17784 9.48884 6.91667 9.16667 6.91667H8.58333Z"
-                fill="white"
-              />
-            </svg>
-            <div className="absolute left-4 top-[58px] text-white font-cinzel text-[40px] font-normal leading-[110%]">
-              $210 M
-            </div>
-          </div>
-  
-          {/* Active Users Card */}
-          <div
-            className="w-full md:w-[255px] h-[118px] rounded-[20px] border border-white/20 relative"
-            style={{
-              background: "rgba(50, 2, 99, 0.65)",
-              backdropFilter: "blur(4px)",
-            }}
-          >
-            <div className="absolute left-4 top-4 text-[#ead5ff] font-cinzel text-sm font-normal leading-[110%] uppercase">
-              Active Users
-            </div>
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 18 18"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="absolute top-[58px] right-4"
-            >
-              <rect
-                width="18"
-                height="18"
-                rx="9"
-                fill="#6B5390"
-                fillOpacity="0.6"
-              />
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M9.16667 5.75C9.6499 5.75 10.0417 5.35825 10.0417 4.875C10.0417 4.39175 9.6499 4 9.16667 4C8.68343 4 8.29167 4.39175 8.29167 4.875C8.29167 5.35825 8.68343 5.75 9.16667 5.75ZM8.58333 6.91667C8.26116 6.91667 8 7.17784 8 7.5C8 7.82217 8.26116 8.08333 8.58333 8.08333V12.75C8.58333 13.0722 8.84449 13.3333 9.16667 13.3333C9.48884 13.3333 9.75 13.0722 9.75 12.75V7.5C9.75 7.17784 9.48884 6.91667 9.16667 6.91667H8.58333Z"
-                fill="white"
-              />
-            </svg>
-            <div className="absolute left-4 top-[58px] text-white font-cinzel text-[40px] font-normal leading-[110%]">
-              50,000
+            <div className="relative">
+              {/* Stardust particles */}
+              <StardustEffect />
+
+              <Link
+                href="#"
+                className="cursor-pointer"
+                aria-disabled="true"
+                passHref
+              >
+                <motion.div
+                  className="flex items-center justify-center w-[240px] px-6 py-4 gap-3 rounded-full mx-auto md:mx-0 md:mr-auto relative group"
+                  style={{
+                    background:
+                      "linear-gradient(0deg, #d132e0 -31%, #530ee3 111.63%)",
+                    boxShadow: "0px 0px 36px #7200d6",
+                  }}
+                  whileTap={{
+                    scale: 0.95,
+                    y: 4,
+                    boxShadow: "0px 0px 18px #7200d6",
+                  }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 500,
+                    damping: 15,
+                  }}
+                  onClick={() =>
+                    document.dispatchEvent(new CustomEvent("triggerStardust"))
+                  }
+                >
+                  {/* Disabled overlay */}
+                  {/* <div className="absolute inset-0 bg-black bg-opacity-20 rounded-full flex items-center justify-center">
+                  <span className="text-white text-xs font-inter">
+                    Testnet Coming Soon
+                  </span>
+                </div> */}
+
+                  {/* Star 1 */}
+                  <Image
+                    src="/assets/images/hero/star.svg"
+                    alt="Star"
+                    width={16}
+                    height={16}
+                    style={{ aspectRatio: "16/16" }}
+                  />
+
+                  {/* Button text */}
+                  <span className="text-white text-center font-inter text-base font-medium leading-[110%]">
+                    Enter Dapp
+                  </span>
+
+                  {/* Star 2 */}
+                  <Image
+                    src="/assets/images/hero/star.svg"
+                    alt="Star"
+                    width={16}
+                    height={16}
+                    style={{ aspectRatio: "16/16" }}
+                  />
+                </motion.div>
+              </Link>
             </div>
           </div>
         </div>
       </div>
-    );
-  }
-  
+
+      {/* Stats Cards - 80px from button above on desktop, 40px on mobile */}
+      <div className="flex flex-col md:flex-row gap-4 md:gap-6 mt-[40px] md:mt-[80px] z-[5] w-full max-w-7xl mx-auto px-4 xl:px-0">
+        {/* Total Value Locked Card - Desktop version */}
+        <div
+          className="hidden md:block w-[255px] h-[118px] rounded-[20px] border border-white/20 relative"
+          style={{
+            background: "rgba(50, 2, 99, 0.65)",
+            backdropFilter: "blur(4px)",
+          }}
+        >
+          <div className="absolute left-4 top-4 text-[#ead5ff] font-cinzel text-sm font-normal leading-[110%] uppercase">
+            Total Value Locked
+          </div>
+
+          {/* Value */}
+          <div className="absolute left-4 top-[58px]">
+            <span className="text-white font-cinzel text-[40px] font-normal leading-[110%]">
+              $210 M
+            </span>
+          </div>
+
+          {/* Info icon positioned 16px from bottom and right */}
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 18 18"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="absolute bottom-4 right-4"
+          >
+            <rect
+              width="18"
+              height="18"
+              rx="9"
+              fill="#6B5390"
+              fillOpacity="0.6"
+            />
+            <path
+              fillRule="evenodd"
+              clipRule="evenodd"
+              d="M9.16667 5.75C9.6499 5.75 10.0417 5.35825 10.0417 4.875C10.0417 4.39175 9.6499 4 9.16667 4C8.68343 4 8.29167 4.39175 8.29167 4.875C8.29167 5.35825 8.68343 5.75 9.16667 5.75ZM8.58333 6.91667C8.26116 6.91667 8 7.17784 8 7.5C8 7.82217 8.26116 8.08333 8.58333 8.08333V12.75C8.58333 13.0722 8.84449 13.3333 9.16667 13.3333C9.48884 13.3333 9.75 13.0722 9.75 12.75V7.5C9.75 7.17784 9.48884 6.91667 9.16667 6.91667H8.58333Z"
+              fill="white"
+            />
+          </svg>
+        </div>
+
+        {/* Active Users Card - Desktop version */}
+        <div
+          className="hidden md:block w-[255px] h-[118px] rounded-[20px] border border-white/20 relative"
+          style={{
+            background: "rgba(50, 2, 99, 0.65)",
+            backdropFilter: "blur(4px)",
+          }}
+        >
+          <div className="absolute left-4 top-4 text-[#ead5ff] font-cinzel text-sm font-normal leading-[110%] uppercase">
+            Active Users
+          </div>
+
+          {/* Value */}
+          <div className="absolute left-4 top-[58px]">
+            <span className="text-white font-cinzel text-[40px] font-normal leading-[110%]">
+              50,000
+            </span>
+          </div>
+
+          {/* Info icon positioned 16px from bottom and right */}
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 18 18"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="absolute bottom-4 right-4"
+          >
+            <rect
+              width="18"
+              height="18"
+              rx="9"
+              fill="#6B5390"
+              fillOpacity="0.6"
+            />
+            <path
+              fillRule="evenodd"
+              clipRule="evenodd"
+              d="M9.16667 5.75C9.6499 5.75 10.0417 5.35825 10.0417 4.875C10.0417 4.39175 9.6499 4 9.16667 4C8.68343 4 8.29167 4.39175 8.29167 4.875C8.29167 5.35825 8.68343 5.75 9.16667 5.75ZM8.58333 6.91667C8.26116 6.91667 8 7.17784 8 7.5C8 7.82217 8.26116 8.08333 8.58333 8.08333V12.75C8.58333 13.0722 8.84449 13.3333 9.16667 13.3333C9.48884 13.3333 9.75 13.0722 9.75 12.75V7.5C9.75 7.17784 9.48884 6.91667 9.16667 6.91667H8.58333Z"
+              fill="white"
+            />
+          </svg>
+        </div>
+        
+        {/* Mobile Stats Layout - Fixed to bottom of viewport */}
+        <div className="md:hidden absolute bottom-[40px] left-0 right-0 w-full flex flex-row justify-center gap-16 z-[5]">
+          {/* Total Value Locked */}
+          <div className="flex w-[126px] flex-col justify-center items-start gap-1">
+            <span className="text-white font-cinzel text-[40px] font-normal leading-[110%]">
+              $210 M
+            </span>
+            <div className="w-full text-[#ead5ff] font-cinzel text-sm font-normal leading-[110%] uppercase">
+              <div className="flex justify-between w-full">
+                <span>&#123; TOTAL VALUE</span>
+              </div>
+              <div className="flex justify-end w-full">
+                <span>LOCKED &#125;</span>
+              </div>
+            </div>
+          </div>
+          
+          {/* Active Users */}
+          <div className="flex w-[126px] flex-col justify-center items-start gap-1">
+            <span className="text-white font-cinzel text-[40px] font-normal leading-[110%]">
+              50,000
+            </span>
+            <div className="w-full text-[#ead5ff] font-cinzel text-sm font-normal leading-[110%] uppercase">
+              <div className="flex justify-between w-full">
+                <span>&#123; ACTIVE</span>
+              </div>
+              <div className="flex justify-end w-full">
+                <span>USERS &#125;</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

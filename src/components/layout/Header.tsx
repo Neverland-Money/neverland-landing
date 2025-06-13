@@ -13,16 +13,17 @@ const Header = () => {
 
   return (
     <header className="absolute top-0 left-0 right-0 z-50 bg-transparent">
-      <nav className="mx-auto w-full max-w-7xl h-20 flex justify-between items-center px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-0">
+      <nav className="mx-auto w-full max-w-7xl h-20 flex justify-between items-center px-4 xl:px-0">
         {/* Logo Section - Left */}
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-1">
             <Image
+              loading="lazy"
               src="/assets/images/header/logo.svg"
               alt="Logo"
-              width={40}
-              height={17}
-              className="text-white"
+              width={0}
+              height={0}
+              className="text-white w-[40px] h-[auto]"
             />
             <span className="text-white font-cinzel-decorative text-xl font-normal tracking-wider">
               Neverland
@@ -62,40 +63,49 @@ const Header = () => {
         <div className="hidden md:flex items-center gap-3">
           {/* X/Twitter Icon */}
           <Link
-            href="#"
+            href="https://x.com/neverland_money"
+            target="_blank noreferrer noopener"
             className="flex p-2 items-center rounded-full border border-white/20 hover:border-purple-400 transition-colors"
           >
             <Image
+              loading="lazy"
               src="/assets/images/header/x.svg"
               alt="X"
-              width={20}
-              height={20}
+              width={0}
+              height={0}
+              className="text-white w-[20px] h-[auto]"
             />
           </Link>
 
           {/* Discord Icon */}
           <Link
-            href="#"
+            href="https://discord.com/invite/neverland-money"
+            target="_blank noreferrer noopener"
             className="flex p-2 items-center rounded-full border border-white/20 hover:border-purple-400 transition-colors"
           >
             <Image
+             loading="lazy"
               src="/assets/images/header/discord.svg"
               alt="Discord"
-              width={20}
-              height={20}
+              width={0}
+              height={0}
+              className="text-white w-[20px] h-[auto]"
             />
           </Link>
 
           {/* Telegram Icon */}
           <Link
-            href="#"
+            href="https://t.me/neverland_money"
+            target="_blank noreferrer noopener"
             className="flex p-2 items-center rounded-full border border-white/20 hover:border-purple-400 transition-colors"
           >
             <Image
+              loading="lazy"
               src="/assets/images/header/telegram.svg"
               alt="Telegram"
-              width={20}
-              height={20}
+              width={0}
+              height={0}
+              className="text-white w-[20px] h-[auto]"
             />
           </Link>
         </div>
@@ -106,6 +116,7 @@ const Header = () => {
           onClick={toggleMobileMenu}
         >
           <Image 
+            loading="lazy"
             src="/assets/images/header/mobile-menu.svg"
             alt="Open Menu"
             width={24}
@@ -123,13 +134,14 @@ const Header = () => {
               {/* Logo Section */}
               <div className="flex items-center gap-1 w-[144px] h-[20px] flex-shrink-0">
                 <Image
+                  loading="lazy"
                   src="/assets/images/header/logo.svg"
                   alt="Logo"
-                  width={40}
-                  height={17}
-                  className="text-white"
+                  width={0}
+                  height={0}
+                  className="text-white w-[40px] h-[auto]"
                 />
-                <span className="text-white font-cinzel-decorative text-[18.182px] font-normal leading-[110%]">
+                <span className="text-white font-cinzel-decorative text-[18px] font-normal leading-[110%]">
                   Neverland
                 </span>
               </div>
@@ -140,15 +152,17 @@ const Header = () => {
                 onClick={toggleMobileMenu}
               >
                 <Image 
+                  loading="lazy"
                   src="/assets/images/header/close.svg"
                   alt="Close Menu"
-                  width={16}
-                  height={16}
+                  width={0}
+                  height={0}
+                  className="w-[16px] h-[auto]"
                 />
               </button>
             </div>
             {/* Mobile Navigation Links */}
-            <div className="flex flex-col items-start justify-center gap-[20px] w-[328px] mb-auto">
+            <div className="flex flex-col gap-5 mt-12">
               <Link
                 href="#about"
                 className="text-white font-cinzel text-[56px] font-normal leading-[100%] hover:text-purple-400 self-stretch text-left uppercase"
@@ -179,39 +193,48 @@ const Header = () => {
               </Link>
             </div>
             
-            {/* Mobile Social Links */}
-            <div className="flex items-center gap-6 my-10">
+            {/* Mobile Social Links - positioned at the bottom and centered */}
+            <div className="absolute bottom-12 left-0 right-0 flex justify-center gap-7">
               <Link
-                href="#"
+                href="https://x.com/neverland_money"
+                target="_blank noreferrer noopener"
                 className="flex justify-center items-center w-[80px] h-[80px] rounded-full border-[1.818px] border-[#942FFF] aspect-square flex-shrink-0"
               >
                 <Image
+                  loading="lazy"
                   src="/assets/images/header/x.svg"
                   alt="X"
-                  width={24}
-                  height={24}
+                  width={0}
+                  height={0}
+                  className="text-white w-[24px] h-[auto]"
                 />
               </Link>
               <Link
-                href="#"
+                href="https://discord.com/invite/neverland-money"
+                target="_blank noreferrer noopener"
                 className="flex justify-center items-center w-[80px] h-[80px] rounded-full border-[1.818px] border-[#942FFF] aspect-square flex-shrink-0"
               >
                 <Image
+                  loading="lazy"
                   src="/assets/images/header/discord.svg"
                   alt="Discord"
-                  width={24}
-                  height={24}
+                  width={0}
+                  height={0}
+                  className="text-white w-[24px] h-[auto]"
                 />
               </Link>
               <Link
-                href="#"
+                href="https://t.me/neverland_money"
+                target="_blank noreferrer noopener"
                 className="flex justify-center items-center w-[80px] h-[80px] rounded-full border-[1.818px] border-[#942FFF] aspect-square flex-shrink-0"
               >
                 <Image
+                  loading="lazy"
                   src="/assets/images/header/telegram.svg"
                   alt="Telegram"
-                  width={24}
-                  height={24}
+                  width={0}
+                  height={0}
+                  className="text-white w-[24px] h-[auto]"
                 />
               </Link>
             </div>
