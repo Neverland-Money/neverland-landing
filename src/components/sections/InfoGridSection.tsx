@@ -36,7 +36,7 @@ const PurpleKeysCard: React.FC<{ title: string; description: string }> = ({
       transform: "scaleX(-1)",
     }}
   >
-    <div className="relative z-10 flex flex-col justify-start gap-2 h-full" style={{ transform: "scaleX(-1)" }}>
+    <div className="relative z-10 flex flex-col items-center justify-start gap-2 h-full" style={{ transform: "scaleX(-1)" }}>
       <h3 className="font-cinzel text-lg font-normal leading-[110%] uppercase text-white text-center">
         {title}
       </h3>
@@ -61,7 +61,7 @@ const PurpleSpeedCard: React.FC<{ title: string; description: string }> = ({
     }}
   >
     <div
-      className="relative z-10 flex flex-col justify-start gap-2 h-full"
+      className="relative z-10 flex flex-col items-center justify-start gap-2 h-full"
       style={{ transform: "scaleX(-1)" }}
     >
       <h3 className="font-cinzel text-lg font-normal leading-[110%] uppercase text-white text-center">
@@ -88,7 +88,7 @@ const PurpleSecurityCard: React.FC<{ title: string; description: string }> = ({
     }}
   >
     <div
-      className="relative z-10 flex flex-col justify-start gap-2 h-full"
+      className="relative z-10 flex flex-col items-center justify-start gap-2 h-full"
       style={{ transform: "scaleX(-1)" }}
     >
       <h3 className="font-cinzel text-lg font-normal leading-[110%] uppercase text-white text-center">
@@ -119,7 +119,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
   >
     {/* Card content with higher z-index to appear above overlay */}
     <div 
-      className="relative z-10 flex flex-col justify-start gap-2 h-full"
+      className="relative z-10 flex flex-col items-center justify-start gap-2 h-full"
       style={{ transform: "scaleX(-1)" }}
     >
       <h3 className="font-cinzel text-lg font-normal leading-[110%] uppercase text-white text-center">
@@ -172,7 +172,7 @@ const InfoGridSection: React.FC = () => {
   ];
 
   return (
-    <section className="w-full bg-transparent py-[180px] px-5">
+    <section className="w-full bg-transparent py-20 md:py-44 px-5">
       <div className="max-w-screen-xl mx-auto flex flex-col items-center gap-[100px]">
         {/* Header Section */}
         <div className="w-full max-w-[678px] flex flex-col items-center gap-3 relative">
@@ -188,7 +188,7 @@ const InfoGridSection: React.FC = () => {
               <StarIcon />
             </div>
           </div>
-          <p className="w-full font-merriweather text-lg font-normal leading-[140%] text-white/60 text-center max-w-[678px] mt-4">
+          <p className="w-full font-merriweather text-lg font-normal leading-[140%] text-white text-center max-w-[678px] mt-4">
           Neverland Money is a decentralized, non-custodial lending platform governed by the community through vote-escrow tokenomics, unlocking capital on the high-performance Monad blockchain.
           </p>
         </div>

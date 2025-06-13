@@ -384,7 +384,7 @@ export default function HeroSection() {
         </div>
         
         {/* Mobile Stats Layout - Fixed to bottom of viewport */}
-        <div className="md:hidden absolute bottom-[40px] left-0 right-0 w-full flex flex-row justify-center gap-16 z-[5]">
+        <div className="md:hidden absolute bottom-[55px] left-0 right-0 w-full flex flex-row justify-center gap-16 z-[5]">
           {/* Total Value Locked */}
           <div className="flex w-[126px] flex-col justify-center items-start gap-1">
             <span className="text-white font-cinzel text-[40px] font-normal leading-[110%]">
