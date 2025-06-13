@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     siteName: "Neverland Money",
     images: [
       {
-        url: "/assets/images/og-image.png",
+        url: "/assets/images/og-banner.png",
         width: 1200,
         height: 630,
         alt: "Neverland Money",
@@ -72,7 +72,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Neverland Money",
     description: "Revolutionizing Lending & Tokenomics",
-    images: ["/assets/images/og-image.png"],
+    images: ["/assets/images/og-banner.png"],
   },
   keywords: [
     "decentralized finance",
