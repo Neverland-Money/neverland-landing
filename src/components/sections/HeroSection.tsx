@@ -118,7 +118,7 @@ export default function HeroSection() {
         <div 
           className="absolute inset-0 md:hidden w-full h-full bg-lightgray"
           style={{
-            backgroundImage: "url('/assets/images/hero/background.png')", 
+            backgroundImage: "url('/assets/images/hero/background.webp')", 
             backgroundRepeat: "no-repeat",
             backgroundPosition: "-860px bottom", 
             backgroundSize: "350% auto",
@@ -129,7 +129,7 @@ export default function HeroSection() {
         <div 
           className="absolute inset-0 hidden md:block w-full h-full"
           style={{
-            background: "url('/assets/images/hero/background.png') lightgray -173px -274px / 124% 129% no-repeat",
+            background: "url('/assets/images/hero/background.webp') lightgray -173px -274px / 124% 129% no-repeat",
           }}
         />
       </div>

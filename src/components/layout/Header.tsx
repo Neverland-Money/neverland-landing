@@ -18,12 +18,12 @@ const Header = () => {
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-1">
             <Image
-              loading="eager"
               src="/assets/images/header/logo.svg"
               alt="Logo"
               width={0}
               height={0}
               className="text-white w-[40px] h-[auto]"
+              priority
             />
             <span className="text-white font-cinzel-decorative text-xl font-normal tracking-wider">
               Neverland
@@ -128,20 +128,20 @@ const Header = () => {
       {/* Mobile Menu Overlay */}
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-50 bg-[rgba(5,2,18,0.40)] backdrop-filter backdrop-blur-[17px] md:hidden overflow-y-auto">
-          <div className="flex flex-col items-start justify-start pt-8 h-full w-full px-4">            
+          <div className="flex flex-col items-start justify-start h-full w-full px-4">            
             {/* Top row with Logo and Close button */}
-            <div className="flex w-full items-center justify-between mb-16">
+            <div className="flex w-full items-center justify-between h-[80px] mb-16">
               {/* Logo Section */}
               <div className="flex items-center gap-1 w-[144px] h-[20px] flex-shrink-0">
                 <Image
-                  loading="eager"
                   src="/assets/images/header/logo.svg"
                   alt="Logo"
                   width={0}
                   height={0}
                   className="text-white w-[40px] h-[auto]"
+                  priority
                 />
-                <span className="text-white font-cinzel-decorative text-[18px] font-normal leading-[110%]">
+                <span className="text-white font-cinzel-decorative text-xl font-normal tracking-wider">
                   Neverland
                 </span>
               </div>
