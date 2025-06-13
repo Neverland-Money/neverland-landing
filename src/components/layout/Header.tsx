@@ -15,7 +15,7 @@ const Header = () => {
     <header className="absolute top-0 left-0 right-0 z-50 bg-transparent">
       <nav className="mx-auto w-full max-w-7xl h-20 flex justify-between items-center px-4 xl:px-0">
         {/* Logo Section - Left */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center z-999 gap-2">
           <div className="flex items-center gap-1">
             <Image
               src="/assets/images/header/logo.svg"
@@ -131,24 +131,10 @@ const Header = () => {
           <div className="flex flex-col items-start justify-start h-full w-full px-4">            
             {/* Top row with Logo and Close button */}
             <div className="flex w-full items-center justify-between h-[80px] mb-16">
-              {/* Logo Section */}
-              <div className="flex items-center gap-1 w-[144px] h-[20px] flex-shrink-0">
-                <Image
-                  src="/assets/images/header/logo.svg"
-                  alt="Logo"
-                  width={0}
-                  height={0}
-                  className="text-white w-[40px] h-[auto]"
-                  priority
-                />
-                <span className="text-white font-cinzel-decorative text-xl font-normal tracking-wider">
-                  Neverland
-                </span>
-              </div>
               
               {/* Close button */}
               <button 
-                className="p-2"
+                className="absolute right-5 top-8"
                 onClick={toggleMobileMenu}
               >
                 <Image 
