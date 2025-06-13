@@ -23,6 +23,84 @@ interface FeatureCardProps {
   gradientOverlay: string;
 }
 
+const PurpleKeysCard: React.FC<{ title: string; description: string }> = ({
+  title,
+  description,
+}) => (
+  <div
+    className="relative w-full sm:w-60 h-60 p-5 flex flex-col justify-between rounded-2xl border border-white/20 overflow-hidden"
+    style={{
+      background:
+        "linear-gradient(0deg, rgba(0, 0, 0, 0.00) 53.85%, #040822 100%), linear-gradient(0deg, rgba(18, 3, 149, 0.25) 0%, rgba(18, 3, 149, 0.25) 100%), url('/assets/images/info/you-hold-keys-image.webp') black 50% / cover no-repeat",
+      backgroundBlendMode: "normal, color, normal",
+      transform: "scaleX(-1)",
+    }}
+  >
+    <div className="relative z-10 flex flex-col justify-start gap-2 h-full" style={{ transform: "scaleX(-1)" }}>
+      <h3 className="font-cinzel text-lg font-normal leading-[110%] uppercase text-white text-center">
+        {title}
+      </h3>
+      <p className="font-merriweather text-base font-normal w-[197px] leading-[140%] text-white/60 text-center">
+        {description}
+      </p>
+    </div>
+  </div>
+);
+
+const PurpleSpeedCard: React.FC<{ title: string; description: string }> = ({
+  title,
+  description,
+}) => (
+  <div
+    className="relative w-full sm:w-60 h-60 p-5 flex flex-col justify-between rounded-2xl border border-white/20 overflow-hidden"
+    style={{
+      background:
+        "linear-gradient(0deg, rgba(0, 0, 0, 0.00) 50%, rgba(5, 2, 18, 0.80) 100%), linear-gradient(0deg, rgba(97, 1, 140, 0.25) 0%, rgba(97, 1, 140, 0.25) 100%), url('/assets/images/info/optimization-image.webp') #040210 -58.367px -79.208px / 148.639% 166.525% no-repeat",
+      backgroundBlendMode: "normal, screen, normal",
+      transform: "scaleX(-1)",
+    }}
+  >
+    <div
+      className="relative z-10 flex flex-col justify-start gap-2 h-full"
+      style={{ transform: "scaleX(-1)" }}
+    >
+      <h3 className="font-cinzel text-lg font-normal leading-[110%] uppercase text-white text-center">
+        {title}
+      </h3>
+      <p className="font-merriweather text-base font-normal leading-[140%] text-white/60 text-center">
+        {description}
+      </p>
+    </div>
+  </div>
+);
+
+const PurpleSecurityCard: React.FC<{ title: string; description: string }> = ({
+  title,
+  description,
+}) => (
+  <div
+    className="relative w-full sm:w-60 h-60 p-5 flex flex-col justify-between rounded-2xl border border-white/20 overflow-hidden"
+    style={{
+      background:
+        "linear-gradient(0deg, rgba(0, 0, 0, 0.00) 50%, rgba(5, 2, 18, 0.80) 100%), linear-gradient(0deg, rgba(97, 1, 140, 0.25) 0%, rgba(97, 1, 140, 0.25) 100%), url('/assets/images/info/security-image.webp') #040210 50% / cover no-repeat",
+      backgroundBlendMode: "normal, screen, normal",
+      transform: "scaleX(-1)",
+    }}
+  >
+    <div
+      className="relative z-10 flex flex-col justify-start gap-2 h-full"
+      style={{ transform: "scaleX(-1)" }}
+    >
+      <h3 className="font-cinzel text-lg font-normal leading-[110%] uppercase text-white text-center">
+        {title}
+      </h3>
+      <p className="font-merriweather text-base font-normal leading-[140%] text-white/60 text-center">
+        {description}
+      </p>
+    </div>
+  </div>
+);
+
 const FeatureCard: React.FC<FeatureCardProps> = ({
   title,
   description,
@@ -36,58 +114,60 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
       backgroundSize: "cover",
       backgroundPosition: "center",
       backgroundRepeat: "no-repeat",
+      transform: "scaleX(-1)"
     }}
   >
-    <h3 className="font-cinzel text-lg font-normal leading-[110%] uppercase text-white text-center">
-      {title}
-    </h3>
-    <p className="font-merriweather text-base font-normal leading-[140%] text-white/60 text-center">
-      {description}
-    </p>
+    {/* Card content with higher z-index to appear above overlay */}
+    <div 
+      className="relative z-10 flex flex-col justify-start gap-2 h-full"
+      style={{ transform: "scaleX(-1)" }}
+    >
+      <h3 className="font-cinzel text-lg font-normal leading-[110%] uppercase text-white text-center">
+        {title}
+      </h3>
+      <p className="font-merriweather text-base font-normal leading-[140%] text-white/60 text-center">
+        {description}
+      </p>
+    </div>
   </div>
 );
 
 const InfoGridSection: React.FC = () => {
   const features = [
     {
-      title: "Security",
-      description: "Audited smart contracts. Your assets stay safe",
-      backgroundImage:
-        "https://cdn.builder.io/api/v1/image/assets%2F5ab9ff51260046dab6eba7f854d00a28%2Fb1c4468230d7410f9b131ad4b6683e73?format=webp&width=800",
+      title: "Community",
+      description: "Powered by vote-escrow community governance",
+      backgroundImage: "/assets/images/info/community-image.webp",
       gradientOverlay:
-        "linear-gradient(0deg, rgba(0,0,0,0.3) 0%, rgba(4,8,34,0.8) 100%)",
-    },
-    {
-      title: "Optimized for Speed",
-      description: "Fast, efficient, and seamless performance",
-      backgroundImage:
-        "https://cdn.builder.io/api/v1/image/assets%2F5ab9ff51260046dab6eba7f854d00a28%2Fb1c4468230d7410f9b131ad4b6683e73?format=webp&width=800",
-      gradientOverlay:
-        "linear-gradient(0deg, rgba(0,0,0,0.3) 0%, rgba(4,8,34,0.8) 100%)",
-    },
-    {
-      title: "You Hold the Keys",
-      description: "Full control of your assets at all times",
-      backgroundImage:
-        "https://cdn.builder.io/api/v1/image/assets%2F5ab9ff51260046dab6eba7f854d00a28%2Fb1c4468230d7410f9b131ad4b6683e73?format=webp&width=800",
-      gradientOverlay:
-        "linear-gradient(0deg, rgba(0,0,0,0.3) 0%, rgba(4,8,34,0.8) 100%)",
+        "linear-gradient(0deg, rgba(0,0,0,0.00) 20%, rgba(5,2,18,0.80) 100%)",
     },
     {
       title: "Instant Liquidity",
       description: "Instant access to capital on Monad",
-      backgroundImage:
-        "https://cdn.builder.io/api/v1/image/assets%2F5ab9ff51260046dab6eba7f854d00a28%2Fb1c4468230d7410f9b131ad4b6683e73?format=webp&width=800",
+      backgroundImage: "/assets/images/info/instant-liquidity-image.webp",
       gradientOverlay:
-        "linear-gradient(0deg, rgba(0,0,0,0.00) 53.85%, #040822 100%)",
+        "linear-gradient(0deg, rgba(0,0,0,0.00) 20%, rgba(4,8,34,0.8) 100%)",
     },
     {
-      title: "Community",
-      description: "Powered by vote-escrow community governance",
-      backgroundImage:
-        "https://cdn.builder.io/api/v1/image/assets%2F5ab9ff51260046dab6eba7f854d00a28%2Fb1c4468230d7410f9b131ad4b6683e73?format=webp&width=800",
-      gradientOverlay:
-        "linear-gradient(0deg, rgba(0,0,0,0.00) 50%, rgba(5,2,18,0.80) 100%)",
+      title: "You Hold the Keys",
+      description: "Full control of your assets at all times",
+      backgroundImage: "",
+      gradientOverlay: "",
+      isSpecialCard: true,
+    },
+    {
+      title: "Optimized Speed",
+      description: "Fast, efficient, and seamless performance",
+      backgroundImage: "",
+      gradientOverlay: "",
+      isSpeedCard: true,
+    },
+    {
+      title: "Security",
+      description: "Audited smart contracts. Your assets stay safe",
+      backgroundImage: "",
+      gradientOverlay: "",
+      isSecurityCard: true,
     },
   ];
 
@@ -108,24 +188,50 @@ const InfoGridSection: React.FC = () => {
               <StarIcon />
             </div>
           </div>
-          <p className="w-full max-w-[460px] font-merriweather text-base font-normal leading-[140%] text-white text-center">
-            Neverland Money is a decentralized, non-custodial lending platform
-            governed by the community through vote-escrow tokenomics, unlocking
-            capital on the high-performance Monad blockchain
+          <p className="w-full font-merriweather text-lg font-normal leading-[140%] text-white/60 text-center max-w-[678px] mt-4">
+          Neverland Money is a decentralized, non-custodial lending platform governed by the community through vote-escrow tokenomics, unlocking capital on the high-performance Monad blockchain.
           </p>
         </div>
 
-        {/* Feature Cards Grid */}
-        <div className="w-full flex flex-wrap items-center justify-center gap-5">
-          {features.map((feature, index) => (
-            <FeatureCard
-              key={index}
-              title={feature.title}
-              description={feature.description}
-              backgroundImage={feature.backgroundImage}
-              gradientOverlay={feature.gradientOverlay}
-            />
-          ))}
+        {/* Features Grid */}
+        <div className="grid grid-cols-1 sm:flex sm:flex-wrap justify-center gap-5 max-w-[320px] sm:max-w-none mx-auto">
+          {features.map((feature, index) => {
+            if (feature.title === "You Hold the Keys") {
+              return (
+                <PurpleKeysCard
+                  key={index}
+                  title={feature.title}
+                  description={feature.description}
+                />
+              );
+            } else if (feature.title === "Optimized Speed") {
+              return (
+                <PurpleSpeedCard
+                  key={index}
+                  title={feature.title}
+                  description={feature.description}
+                />
+              );
+            } else if (feature.title === "Security") {
+              return (
+                <PurpleSecurityCard
+                  key={index}
+                  title={feature.title}
+                  description={feature.description}
+                />
+              );
+            } else {
+              return (
+                <FeatureCard
+                  key={index}
+                  title={feature.title}
+                  description={feature.description}
+                  backgroundImage={feature.backgroundImage}
+                  gradientOverlay={feature.gradientOverlay}
+                />
+              );
+            }
+          })}
         </div>
       </div>
     </section>
