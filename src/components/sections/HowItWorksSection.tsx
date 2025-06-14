@@ -189,12 +189,11 @@ export default function HowItWorksSection() {
 
         {/* Timeline */}
         <div className="relative">
-          {steps.map((step, index) => (
-            <TimelineStep
-              key={step.number}
-              step={step}
-              isLast={index === steps.length - 1}
-            />
+          {/* Unified timeline line with fade effects */}
+          <div className="absolute left-1/2 top-0 w-0.5 h-full transform -translate-x-1/2 bg-gradient-to-b from-black via-white to-black z-0" />
+
+          {steps.map((step) => (
+            <TimelineStep key={step.number} step={step} />
           ))}
         </div>
       </div>
