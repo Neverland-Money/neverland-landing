@@ -9,6 +9,7 @@ export default function Home() {
       <Header />
       <HeroSection />
       <InfoGridSection />
+      <FeaturesSection />
       {/* Other sections like Features, Testimonials, etc. can be added here */}
     </main>
   );
