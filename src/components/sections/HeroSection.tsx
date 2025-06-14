@@ -5,6 +5,32 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
+// Blurred Loading Text Component
+interface BlurredLoadingTextProps {
+  text: string;
+  className?: string;
+  duration?: number;
+}
+
+const BlurredLoadingText = ({ text, className = "", duration = 1.8 }: BlurredLoadingTextProps) => {
+  return (
+    <motion.span
+      className={className}
+      animate={{
+        filter: ["blur(8px)", "blur(8px)", "blur(8px)"],
+        opacity: [0.8, 1, 0.8]
+      }}
+      transition={{
+        duration: duration,
+        repeat: Infinity,
+        ease: "easeInOut",
+      }}
+    >
+      {text}
+    </motion.span>
+  );
+};
+
 // Stardust Effect Component
 const StardustEffect = () => {
   const [particles, setParticles] = useState<
@@ -309,9 +335,10 @@ export default function HeroSection() {
 
           {/* Value */}
           <div className="absolute left-4 top-[58px]">
-            <span className="text-white font-cinzel text-[40px] font-normal leading-[110%]">
-              $210 M
-            </span>
+            <BlurredLoadingText
+              text="000.00M"
+              className="text-white font-cinzel text-[40px] font-normal leading-[110%]"
+            />
           </div>
 
           {/* Info icon positioned 16px from bottom and right */}
@@ -353,9 +380,10 @@ export default function HeroSection() {
 
           {/* Value */}
           <div className="absolute left-4 top-[58px]">
-            <span className="text-white font-cinzel text-[40px] font-normal leading-[110%]">
-              50,000
-            </span>
+            <BlurredLoadingText
+              text="900,000"
+              className="text-white font-cinzel text-[40px] font-normal leading-[110%]"
+            />
           </div>
 
           {/* Info icon positioned 16px from bottom and right */}
@@ -387,9 +415,10 @@ export default function HeroSection() {
         <div className="md:hidden absolute bottom-[55px] left-0 right-0 w-full flex flex-row justify-center gap-16 z-[5]">
           {/* Total Value Locked */}
           <div className="flex w-[126px] flex-col justify-center items-start gap-1">
-            <span className="text-white font-cinzel text-[40px] font-normal leading-[110%]">
-              $210 M
-            </span>
+            <BlurredLoadingText
+              text="$000.00M"
+              className="text-white font-cinzel text-[40px] font-normal leading-[110%]"
+            />
             <div className="w-full text-[#ead5ff] font-cinzel text-sm font-normal leading-[110%] uppercase">
               <div className="flex justify-between w-full">
                 <span>&#123; TOTAL VALUE</span>
@@ -402,9 +431,10 @@ export default function HeroSection() {
           
           {/* Active Users */}
           <div className="flex w-[126px] flex-col justify-center items-start gap-1">
-            <span className="text-white font-cinzel text-[40px] font-normal leading-[110%]">
-              50,000
-            </span>
+            <BlurredLoadingText
+              text="900,000"
+              className="text-white font-cinzel text-[40px] font-normal leading-[110%]"
+            />
             <div className="w-full text-[#ead5ff] font-cinzel text-sm font-normal leading-[110%] uppercase">
               <div className="flex justify-between w-full">
                 <span>&#123; ACTIVE</span>
