@@ -122,8 +122,8 @@ export default function HowItWorksSection() {
           <div
             className={`flex items-start gap-8 lg:gap-16 ${
               side === 'left'
-                ? 'flex-row-reverse text-right'
-                : 'flex-row text-left'
+                ? 'flex-row text-left'
+                : 'flex-row-reverse text-right'
             }`}
           >
             {/* Content */}
