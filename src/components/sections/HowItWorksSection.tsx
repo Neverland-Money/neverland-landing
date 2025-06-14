@@ -186,7 +186,7 @@ export default function HowItWorksSection() {
               rks?
             </h2>
           </div>
-          <p className="w-max[385px] font-inter text-lg font-normal text-white leading-relaxed">
+          <p className="max-w-[385px] font-inter text-lg font-normal text-white leading-relaxed">
             Navigate the magical world of DeFi with our simple step-by-step
             process.
           </p>
