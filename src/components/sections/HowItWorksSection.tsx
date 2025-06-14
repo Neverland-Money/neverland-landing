@@ -112,22 +112,11 @@ export default function HowItWorksSection() {
     </svg>
   );
 
-  const TimelineStep = ({
-    step,
-    isLast = false,
-  }: {
-    step: (typeof steps)[0];
-    isLast?: boolean;
-  }) => {
+  const TimelineStep = ({ step }: { step: (typeof steps)[0] }) => {
     const { number, title, description, isActive, side } = step;
 
     return (
       <div className="relative flex items-center justify-center min-h-[200px] lg:min-h-[240px]">
-        {/* Timeline line */}
-        {!isLast && (
-          <div className="absolute left-1/2 top-20 lg:top-24 w-0.5 h-[120px] lg:h-[160px] bg-gradient-to-b from-white via-white/80 to-black transform -translate-x-1/2" />
-        )}
-
         {/* Content container */}
         <div className="relative w-full max-w-4xl mx-auto">
           <div
@@ -148,7 +137,7 @@ export default function HowItWorksSection() {
             </div>
 
             {/* Number circle */}
-            <div className="relative flex-shrink-0">
+            <div className="relative flex-shrink-0 z-10">
               {isActive ? (
                 /* Active step with special styling */
                 <div className="relative">
