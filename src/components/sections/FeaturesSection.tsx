@@ -6,7 +6,7 @@ export default function FeaturesSection() {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="https://cdn.builder.io/api/v1/image/assets%2F5ab9ff51260046dab6eba7f854d00a28%2Fd30b7dc3c8ae4cd492c246014f0760df?format=webp&width=1920"
+          src=""
           alt="Mystical landscape with mountains and ship in purple twilight"
           fill
           className="object-cover"
