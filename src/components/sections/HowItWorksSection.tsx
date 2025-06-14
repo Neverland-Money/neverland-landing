@@ -1,13 +1,19 @@
 'use client';
 
+import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
+
 export default function HowItWorksSection() {
+  const [activeStep, setActiveStep] = useState(1);
+  const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const timelineRef = useRef<HTMLDivElement>(null);
+
   const steps = [
     {
       number: 1,
       title: 'Supply Assets',
       description:
         "Deposit your crypto to earn passive income. Add your assets to Neverland's liquidity pools and earn interest while supporting the platform's stability.",
-      isActive: true,
       side: 'right',
     },
     {
@@ -15,7 +21,6 @@ export default function HowItWorksSection() {
       title: 'Borrow Funds',
       description:
         'Get instant loans using your assets as collateral. Access funds without selling your crypto. Enjoy flexible terms and low rates.',
-      isActive: false,
       side: 'left',
     },
     {
@@ -23,7 +28,6 @@ export default function HowItWorksSection() {
       title: 'Earn Rewards',
       description:
         'Get Neverland tokens for your activity. Supply, borrow, or engage with the platform and earn valuable tokens in return.',
-      isActive: false,
       side: 'right',
     },
     {
@@ -31,138 +35,141 @@ export default function HowItWorksSection() {
       title: 'Governance',
       description:
         'Help shape the future of Neverland. Vote on proposals and take part in key decisions through decentralized governance.',
-      isActive: false,
       side: 'left',
     },
   ];
 
-  const SupplyAssetsIcon = () => (
-    <svg
-      width="26"
-      height="26"
-      viewBox="0 0 26 26"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="w-[26px] h-[26px]"
-    >
-      <path
-        d="M5.43816 17.5307C6.19054 17.6598 6.98765 17.7543 7.81422 17.8118V16.6269H8.5543V17.8529C8.94557 17.8693 9.34202 17.8778 9.74233 17.8778C10.1431 17.8778 10.5401 17.8693 10.9319 17.8528V16.6269H11.672V17.8117C12.4985 17.7542 13.2957 17.6597 14.048 17.5306V16.2389H14.7881V17.3895C15.4961 17.2402 16.1558 17.0584 16.7517 16.8459C16.895 16.7949 17.0327 16.7424 17.1657 16.6889V15.3505H17.9058V16.3517C18.907 15.8319 19.4608 15.2368 19.4608 14.6524V12.8608C18.9189 13.3829 18.0886 13.8518 17.0002 14.2398C15.0557 14.9329 12.4781 15.3146 9.74243 15.3146C7.00736 15.3146 4.43031 14.9329 2.48595 14.2398C1.3975 13.8518 0.567328 13.3829 0.0253906 12.8608V14.6524C0.0253906 15.2368 0.579262 15.832 1.58046 16.3518V15.3505H2.32055V16.689C2.45345 16.7425 2.59111 16.795 2.73432 16.846C3.33039 17.0585 3.99009 17.2403 4.69808 17.3896V16.2389H5.43816V17.5307Z"
-        fill="white"
-      />
-      <path
-        d="M9.7425 18.6181C8.97926 18.6181 8.22836 18.5884 7.5 18.5304C7.59816 18.7168 8.07093 19.1031 9.54557 19.4548C11.0341 19.8099 13.0189 20.0054 15.1343 20.0054C17.2503 20.0054 19.2352 19.8099 20.7235 19.4548C22.4186 19.0505 22.7898 18.6002 22.7898 18.4608C22.7898 18.1608 21.6178 17.3963 18.1482 17.0566C17.8053 17.2299 17.4226 17.3928 17.0003 17.5433C15.0557 18.2364 12.4782 18.6181 9.7425 18.6181Z"
-        fill="white"
-      />
-      <path
-        d="M6.97246 9.24056V8.23895H7.71255V9.57764C7.84509 9.63096 7.9823 9.68327 8.12504 9.7342C8.72101 9.94667 9.38066 10.1285 10.0887 10.2779V9.12732H10.8287V10.419C11.5815 10.5481 12.3791 10.6427 13.2063 10.7002V9.51539H13.9464V10.7414C14.3376 10.7579 14.7341 10.7663 15.1344 10.7663C15.5347 10.7663 15.9311 10.7579 16.3224 10.7414V9.51539H17.0625V10.7002C17.8896 10.6427 18.6873 10.5482 19.4401 10.419V9.12732H20.1802V10.2779C20.8881 10.1285 21.5477 9.94672 22.1437 9.7342C22.2865 9.68332 22.4237 9.63102 22.5562 9.57764V8.23895H23.2963V9.24056C24.2985 8.72036 24.8528 8.12449 24.8528 7.53929C24.852 6.94266 24.8523 6.34572 24.8526 5.74874C24.3106 6.27092 23.4805 6.73989 22.3923 7.12791C20.4479 7.82117 17.8704 8.203 15.1344 8.203C12.3985 8.203 9.82093 7.82117 7.87657 7.12791C6.78818 6.73984 5.95795 6.27077 5.41602 5.74854V7.53934C5.41591 8.12449 5.97029 8.72036 6.97246 9.24056Z"
-        fill="white"
-      />
-      <path
-        d="M22.3922 21.3513C20.4477 22.0444 17.8702 22.4262 15.1344 22.4262C12.3987 22.4262 9.82119 22.0444 7.87662 21.3513C6.78823 20.9634 5.958 20.4944 5.41602 19.9724V21.764C5.41602 22.3487 5.97039 22.9441 6.97256 23.4641V22.4636H7.71265V23.8011C7.84514 23.8544 7.98235 23.9067 8.12509 23.9576C8.72106 24.17 9.38076 24.3518 10.0887 24.5011V23.3506H10.8288V24.6423C11.5816 24.7713 12.3792 24.8659 13.2063 24.9234V23.7386H13.9464V24.9646C14.3377 24.981 14.7341 24.9895 15.1344 24.9895C15.5347 24.9895 15.9312 24.981 16.3225 24.9646V23.7386H17.0625V24.9234C17.8897 24.8659 18.6873 24.7714 19.4401 24.6423V23.3506H20.1802V24.5011C20.8881 24.3518 21.5478 24.17 22.1438 23.9576C22.2866 23.9067 22.4238 23.8544 22.5563 23.8011V22.4636H23.2963V23.4641C24.2985 22.9442 24.8529 22.3487 24.8529 21.764C24.8521 21.1671 24.8524 20.5699 24.8526 19.9727C24.3106 20.4946 23.4805 20.9634 22.3922 21.3513Z"
-        fill="white"
-      />
-      <path
-        d="M19.8812 15.6641C19.7074 15.9306 19.4644 16.1868 19.1553 16.4295C20.9711 16.6776 23.5299 17.2433 23.5299 18.4607C23.5299 19.1809 22.6436 19.7575 20.8954 20.1746C19.3525 20.5426 17.3065 20.7453 15.1344 20.7453C12.9629 20.7453 10.9171 20.5426 9.37401 20.1746C7.62546 19.7575 6.73887 19.1809 6.73887 18.4607C6.73887 18.46 6.73897 18.4593 6.73897 18.4586C6.2928 18.4099 5.85715 18.3501 5.4342 18.2801C5.42226 18.3404 5.41602 18.4005 5.41602 18.4607C5.41602 19.241 6.40346 20.0406 8.12509 20.6543C9.99191 21.3197 12.4812 21.6862 15.1344 21.6862C17.7876 21.6862 20.2769 21.3197 22.1437 20.6543C23.8654 20.0406 24.8528 19.2411 24.8528 18.4607C24.8528 17.3557 22.8661 16.2443 19.8812 15.6641Z"
-        fill="white"
-      />
-      <path
-        d="M2.73432 13.5428C4.60093 14.2082 7.08977 14.5746 9.74233 14.5746C12.3955 14.5746 14.8848 14.2082 16.7517 13.5428C18.4733 12.9291 19.4607 12.1296 19.4607 11.3492C19.4607 11.2886 19.4547 11.2286 19.443 11.1686C19.0199 11.2387 18.5841 11.2984 18.1378 11.3471C18.1378 11.3478 18.1379 11.3485 18.1379 11.3492C18.1379 12.0694 17.2515 12.6461 15.5033 13.0631C13.9604 13.4311 11.9144 13.6339 9.74233 13.6339C7.57077 13.6339 5.525 13.4311 3.98191 13.0631C2.23336 12.646 1.34677 12.0694 1.34677 11.3492C1.34677 10.1318 3.90599 9.56613 5.72234 9.31807C5.41313 9.07538 5.17004 8.81909 4.99616 8.55249C2.0118 9.13246 0.0253906 10.244 0.0253906 11.3492C0.0253906 12.1295 1.01278 12.9291 2.73432 13.5428Z"
-        fill="white"
-      />
-      <path
-        d="M8.12509 6.43084C9.99171 7.09638 12.481 7.46286 15.1344 7.46286C17.7877 7.46286 20.277 7.09638 22.1437 6.43084C23.8654 5.81694 24.8528 5.01694 24.8528 4.23592C24.8528 3.45556 23.8654 2.65601 22.1437 2.04237C20.2769 1.37694 17.7876 1.0105 15.1344 1.0105C12.4813 1.0105 9.99196 1.37694 8.12509 2.04237C6.40341 2.65606 5.41602 3.45556 5.41602 4.23592C5.41602 5.01688 6.40341 5.81694 8.12509 6.43084ZM9.37401 2.522C10.9171 2.15394 12.9629 1.95122 15.1344 1.95122C17.3065 1.95122 19.3525 2.15394 20.8954 2.522C22.6436 2.93902 23.5299 3.51569 23.5299 4.23587C23.5299 4.9561 22.6436 5.53297 20.8955 5.9505C19.3522 6.31907 17.3062 6.52204 15.1344 6.52204C12.9632 6.52204 10.9174 6.31907 9.37386 5.9505C7.62536 5.53303 6.73882 4.95615 6.73882 4.23587C6.73887 3.51569 7.62546 2.93912 9.37401 2.522Z"
-        fill="white"
-      />
-      <path
-        d="M7.87633 10.4312C7.45439 10.2807 7.07191 10.118 6.72929 9.94482C3.25905 10.2844 2.08691 11.0489 2.08691 11.349C2.08691 11.4883 2.45823 11.9385 4.15371 12.343C5.64221 12.698 7.627 12.8935 9.74244 12.8935C11.8584 12.8935 13.8434 12.698 15.3317 12.343C16.8059 11.9913 17.2785 11.605 17.3767 11.4186C16.6484 11.4765 15.8975 11.5063 15.1343 11.5063C12.3983 11.5063 9.8207 11.1245 7.87633 10.4312Z"
-        fill="white"
-      />
-      <path
-        d="M9.54536 5.23072C11.0342 5.58624 13.019 5.782 15.134 5.782C17.2495 5.782 19.2345 5.58624 20.7232 5.23072C22.4183 4.82595 22.7895 4.37541 22.7895 4.23597C22.7895 4.09662 22.4183 3.6463 20.7232 3.24198C19.2349 2.88691 17.2499 2.69141 15.134 2.69141C13.0185 2.69141 11.0338 2.88691 9.54526 3.24198C7.84978 3.6464 7.47852 4.09662 7.47852 4.23597C7.47846 4.37536 7.84978 4.82584 9.54536 5.23072Z"
-        fill="white"
-      />
-      <path
-        d="M25.2011 12.6884V11.9138H24.461V12.6884H23.6865V13.4285H24.461V14.2015H25.2011V13.4285H25.9742V12.6884H25.2011Z"
-        fill="white"
-      />
-      <path
-        d="M2.00288 19.77H1.26285V20.543H0.488281V21.2831H1.26285V22.0561H2.00288V21.2831H2.77593V20.543H2.00288V19.77Z"
-        fill="white"
-      />
-      <path
-        d="M1.26285 5.8853H2.00288V5.11078H2.77593V4.3707H2.00288V3.59766H1.26285V4.3707H0.488281V5.11078H1.26285V5.8853Z"
-        fill="white"
-      />
-    </svg>
-  );
-
   const StarIcon = () => (
-    <svg
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="w-6 h-6"
-    >
-      <path
-        d="M12.2928 6.42126C12.311 6.58852 12.3363 6.7549 12.3686 6.92017C12.401 7.08545 12.4402 7.24896 12.4864 7.41094C12.5325 7.57292 12.5857 7.7327 12.6452 7.89006C12.7051 8.04741 12.7713 8.20214 12.844 8.35398C12.9168 8.50585 12.9961 8.6544 13.0812 8.79942C13.1667 8.94468 13.2579 9.08597 13.3555 9.2233C13.4527 9.36084 13.5558 9.49377 13.6643 9.62252C13.7728 9.75127 13.8868 9.87517 14.0059 9.99424C14.1249 10.1133 14.2488 10.2271 14.3775 10.3358C14.506 10.4443 14.6392 10.5473 14.7765 10.6446C14.914 10.7419 15.0554 10.8334 15.2004 10.9186C15.3457 11.004 15.4942 11.0832 15.6461 11.156C15.7979 11.2287 15.9525 11.2949 16.11 11.3548C16.2673 11.4144 16.427 11.4674 16.589 11.5137C16.7508 11.5599 16.9146 11.5991 17.0799 11.6314C17.2451 11.6638 17.4112 11.6891 17.5788 11.7073C19.2015 11.8851 21.296 12 24 12C21.296 12 19.2015 12.1149 17.5788 12.2927C17.4112 12.311 17.2451 12.3363 17.0799 12.3686C16.9146 12.4009 16.7508 12.4405 16.589 12.4866C16.427 12.5327 16.2673 12.5857 16.11 12.6454C15.9525 12.7052 15.7979 12.7715 15.6461 12.8443C15.4942 12.9168 15.3457 12.996 15.2004 13.0815C15.0554 13.1668 14.914 13.2582 14.7765 13.3555C14.6392 13.4528 14.506 13.5558 14.3775 13.6643C14.2488 13.773 14.1249 13.8868 14.0059 14.0058C13.8868 14.1249 13.7728 14.2488 13.6643 14.3775C13.5558 14.5063 13.4527 14.6392 13.3555 14.7768C13.2579 14.9142 13.1667 15.0553 13.0812 15.2007C12.9959 15.3457 12.9168 15.4942 12.844 15.6461C12.7713 15.798 12.7049 15.9526 12.6452 16.11C12.5857 16.2673 12.5325 16.4272 12.4864 16.5892C12.4402 16.7512 12.401 16.9146 12.3686 17.0799C12.3363 17.2452 12.311 17.4115 12.2928 17.5788C12.1149 19.2015 12 21.296 12 24C12 21.2961 11.8849 19.2015 11.7073 17.5788C11.689 17.4115 11.6637 17.2452 11.6314 17.0799C11.5991 16.9146 11.5597 16.7512 11.5134 16.5892C11.4672 16.4272 11.4144 16.2673 11.3545 16.11C11.2948 15.9526 11.2287 15.798 11.1557 15.6461C11.0829 15.4942 11.004 15.3457 10.9185 15.2007C10.8332 15.0553 10.7418 14.9142 10.6445 14.7768C10.5473 14.6392 10.4443 14.5063 10.3357 14.3775C10.2271 14.2488 10.1133 14.1249 9.99419 14.0058C9.8751 13.8868 9.75122 13.773 9.62253 13.6643C9.49368 13.5558 9.36068 13.4528 9.22335 13.3555C9.08602 13.2582 8.94469 13.1668 8.79936 13.0815C8.65435 12.996 8.50581 12.9168 8.35392 12.8443C8.20218 12.7715 8.04741 12.7052 7.89007 12.6454C7.73242 12.5857 7.57284 12.5328 7.41086 12.4866C7.24888 12.4405 7.08546 12.4009 6.92013 12.3686C6.75495 12.3363 6.58849 12.311 6.42107 12.2927C4.79841 12.1149 2.7039 12 0 12C2.7039 12 4.79841 11.8851 6.42107 11.7073C6.58849 11.6891 6.75495 11.6638 6.92013 11.6314C7.08546 11.5991 7.24888 11.5599 7.41086 11.5137C7.57284 11.4674 7.73242 11.4144 7.89007 11.3548C8.04741 11.2949 8.20218 11.2287 8.35392 11.1558C8.50581 11.0832 8.65435 11.004 8.79936 10.9186C8.94469 10.8334 9.08602 10.7419 9.22335 10.6446C9.36068 10.5473 9.49368 10.4443 9.62253 10.3358C9.75122 10.2271 9.8751 10.1133 9.99419 9.99424C10.1133 9.87517 10.2271 9.75127 10.3356 9.62252C10.4443 9.49377 10.5473 9.36084 10.6445 9.2233C10.7418 9.08597 10.8332 8.94468 10.9185 8.79942C11.004 8.6544 11.0829 8.50585 11.1557 8.35398C11.2287 8.20214 11.2948 8.04741 11.3545 7.89006C11.4144 7.73248 11.4672 7.57292 11.5134 7.41094C11.5597 7.24896 11.5991 7.08545 11.6314 6.92017C11.6637 6.7549 11.689 6.58852 11.7073 6.42126C11.8849 4.79861 12 2.70411 12 0C12 2.70389 12.1149 4.79861 12.2928 6.42126Z"
-        fill="white"
-      />
-    </svg>
+    <Image
+      src="/assets/images/how-it-works/star.svg"
+      alt="Star"
+      width={26}
+      height={26}
+      className="h-6 w-6"
+    />
+  );
+  const SupplyAssetsIcon = () => (
+    <Image
+      src="/assets/images/how-it-works/supply.svg"
+      alt="Supply"
+      width={28}
+      height={28}
+      className="h-7 w-7"
+    />
+  );
+  const BorrowIcon = () => (
+    <Image
+      src="/assets/images/how-it-works/borrow.svg"
+      alt="Borrow"
+      width={28}
+      height={28}
+      className="h-7 w-7"
+    />
+  );
+  const GlobeIcon = () => (
+    <Image
+      src="/assets/images/how-it-works/globe.svg"
+      alt="Globe"
+      width={28}
+      height={28}
+      className="h-7 w-7"
+    />
   );
 
-  const TimelineStep = ({ step }: { step: (typeof steps)[0] }) => {
-    const { number, title, description, isActive, side } = step;
+  const getCurrentTravelingIcon = () => {
+    switch (activeStep) {
+      case 1:
+        return <SupplyAssetsIcon />;
+      case 2:
+        return <BorrowIcon />;
+      case 3:
+        return <GlobeIcon />;
+      default:
+        return <StarIcon />;
+    }
+  };
 
+  const getStepPosition = (index: number): number => {
+    const stepEl = stepRefs.current[index];
+    const tlEl = timelineRef.current;
+    if (!stepEl || !tlEl) return 0;
+
+    // getBoundingClientRect() is always relative to the viewport,
+    // so subtract the timeline’s top to get a container‐relative value.
+    const stepRect = stepEl.getBoundingClientRect();
+    const tlRect = tlEl.getBoundingClientRect();
+
+    // Compute vertical center of the step, relative to the top of timelineRef
+    const midOfStep = stepRect.top + stepRect.height / 2 - tlRect.top;
+
+    // Subtract half the icon height to truly center it
+    return midOfStep - 120;
+  };
+
+  // Snap activeStep to any step whose center crosses the viewport middle
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = stepRefs.current.indexOf(
+              entry.target as HTMLDivElement,
+            );
+            if (idx !== -1) {
+              setActiveStep(idx + 1);
+            }
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: '-50% 0px -50% 0px',
+        threshold: 0,
+      },
+    );
+
+    stepRefs.current.forEach((el) => el && observer.observe(el));
+    return () => {
+      stepRefs.current.forEach((el) => el && observer.unobserve(el));
+    };
+  }, []);
+
+  const TimelineStep = ({
+    step,
+    index,
+  }: {
+    step: (typeof steps)[0];
+    index: number;
+  }) => {
+    const { number, title, description, side } = step;
     return (
-      <div className="relative flex items-center justify-center min-h-[200px] lg:min-h-[240px]">
-        {/* Content container */}
-        <div className="relative w-full max-w-4xl mx-auto">
+      <div className="relative flex min-h-[200px] items-center justify-center lg:min-h-[240px]">
+        <div className="relative mx-auto w-full max-w-4xl">
           <div
-            className={`flex items-start gap-8 lg:gap-16 ${
+            className={`flex min-h-[200px] items-start gap-8 lg:gap-16 ${
               side === 'left' ? 'flex-row' : 'flex-row-reverse'
             }`}
           >
-            {/* Content */}
             <div
-              className={`flex-1 max-w-sm lg:max-w-md ${
+              className={`max-w-sm flex-1 lg:max-w-md ${
                 side === 'left' ? 'text-right' : 'text-left'
               }`}
             >
-              <h3 className="font-cinzel text-xl lg:text-2xl font-normal text-white uppercase mb-2 leading-tight">
+              <h3 className="font-cinzel mb-2 text-xl leading-tight font-normal text-white uppercase lg:text-2xl">
                 {title}
               </h3>
-              <p className="font-merriweather text-sm lg:text-base font-normal text-white/60 leading-relaxed">
+              <p className="font-merriweather text-sm leading-relaxed font-normal text-white/60 lg:text-base">
                 {description}
               </p>
             </div>
-
-            {/* Number circle */}
-            <div className="relative flex-shrink-0 z-10">
-              {isActive ? (
-                /* Active step with special styling */
-                <div className="relative">
-                  {/* Outer glow */}
-                  <div className="w-20 h-20 rounded-full border border-[#530ee3] bg-[#050212] shadow-[0_0_36px_#7200d6] relative">
-                    {/* Inner gradient circle */}
-                    <div className="absolute top-[18px] left-[18px] w-11 h-11 rounded-full bg-gradient-to-b from-[#d132e0] to-[#530ee3] shadow-[0_0_60px_rgba(114,0,214,0.60)] flex items-center justify-center">
-                      <SupplyAssetsIcon />
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                /* Regular numbered step */
-                <div className="w-8 h-8 rounded-full border border-white bg-[#050212] flex items-center justify-center">
-                  <span className="font-cinzel text-base font-normal text-white">
-                    {number}
-                  </span>
-                </div>
-              )}
+            <div className="relative z-10 flex-shrink-0">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full border border-white bg-[#050212]">
+                <span className="font-cinzel text-base font-normal text-white">
+                  {number}
+                </span>
+              </div>
             </div>
-
-            {/* Spacer for opposite side */}
-            <div className="flex-1 max-w-sm lg:max-w-md" />
+            <div className="max-w-sm flex-1 lg:max-w-md" />
           </div>
         </div>
       </div>
@@ -170,43 +177,72 @@ export default function HowItWorksSection() {
   };
 
   return (
-    <section className="relative py-[180px] px-4 lg:px-8 overflow-hidden">
-      <div className="max-w-6xl mx-auto">
+    <section className="relative overflow-hidden px-4 py-[180px] lg:px-8">
+      <div className="mx-auto max-w-6xl">
         {/* Header */}
-        <div className="text-center mb-16 lg:mb-20 relative max-w-[500px] mx-auto">
+        <div className="relative mx-auto mb-16 max-w-[500px] text-center lg:mb-40">
           <div className="relative inline-block">
-            <h2 className="font-cinzel text-4xl lg:text-6xl font-normal text-white uppercase leading-tight mb-3">
+            <h2 className="font-cinzel mb-3 text-4xl leading-tight font-normal text-white uppercase lg:text-6xl">
               How it w
               <span className="relative inline-block">
-                o{/* Star positioned exactly in the middle of the O */}
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                o
+                <div className="absolute top-[47%] left-[51%] -translate-x-1/2 -translate-y-1/2 transform">
                   <StarIcon />
                 </div>
               </span>
               rks?
             </h2>
           </div>
-          <p className="max-w-[385px] font-inter text-lg font-normal text-white leading-relaxed">
+          <p className="font-inter mx-auto max-w-[385px] text-lg leading-relaxed font-normal text-white">
             Navigate the magical world of DeFi with our simple step-by-step
             process.
           </p>
         </div>
 
         {/* Timeline */}
-        <div className="relative">
-          {/* Unified timeline line with fade effects - extends much more beyond icons */}
+        <div className="relative" ref={timelineRef}>
+          {/* Timeline line with fade effect */}
           <div
-            className="absolute left-1/2 -top-80 w-0.5 transform -translate-x-1/2 z-0"
-            style={{
-              height: 'calc(100% + 640px)',
-              background:
-                'linear-gradient(to bottom, transparent 0%, transparent 20%, white 35%, white 65%, transparent 80%, transparent 100%)',
-            }}
-          />
+            className="absolute -top-16 left-1/2 w-[6px] -translate-x-1/2 transform"
+            style={{ height: 'calc(100% + 64px)' }}
+          >
+            <div className="h-full w-full bg-white opacity-70" />
+            {/* Fade overlay at the top */}
+            <div className="absolute top-0 left-0 h-32 w-full bg-gradient-to-b from-[#050212] to-transparent" />
+            {/* Fade overlay at the bottom */}
+            <div className="absolute bottom-0 left-0 h-32 w-full bg-gradient-to-t from-[#050212] to-transparent" />
+          </div>
 
-          {steps.map((step) => (
-            <TimelineStep key={step.number} step={step} />
-          ))}
+          {/* Traveling icon */}
+          <div
+            className="absolute left-1/2 z-20"
+            style={{
+              top: `${getStepPosition(activeStep - 1)}px`,
+              transform: 'translateX(-50%)',
+              transition: 'top 0.3s ease',
+            }}
+          >
+            <div className="relative h-20 w-20 rounded-full border border-[#530ee3] bg-[#050212] shadow-[0_0_36px_#7200d6]">
+              <div className="absolute top-[18px] left-[18px] flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-b from-[#d132e0] to-[#530ee3] shadow-[0_0_60px_rgba(114,0,214,0.60)]">
+                {getCurrentTravelingIcon()}
+              </div>
+            </div>
+          </div>
+
+          {/* Steps */}
+          <div className="relative z-10 flex w-full flex-col items-center">
+            {steps.map((step, idx) => (
+              <div
+                key={step.number}
+                ref={(el) => {
+                  stepRefs.current[idx] = el;
+                }}
+                className="step-container"
+              >
+                <TimelineStep step={step} index={idx} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
