@@ -173,7 +173,7 @@ export default function HowItWorksSection() {
     <section className="relative py-[180px] px-4 lg:px-8 overflow-hidden">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-16 lg:mb-20 relative max-w-[480px] mx-auto">
+        <div className="text-center mb-16 lg:mb-20 relative max-w-[500px] mx-auto">
           <div className="relative inline-block">
             <h2 className="font-cinzel text-4xl lg:text-6xl font-normal text-white uppercase leading-tight mb-3">
               How it w
