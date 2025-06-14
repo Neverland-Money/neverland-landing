@@ -121,13 +121,15 @@ export default function HowItWorksSection() {
         <div className="relative w-full max-w-4xl mx-auto">
           <div
             className={`flex items-start gap-8 lg:gap-16 ${
-              side === 'left'
-                ? 'flex-row text-left'
-                : 'flex-row-reverse text-right'
+              side === 'left' ? 'flex-row' : 'flex-row-reverse'
             }`}
           >
             {/* Content */}
-            <div className="flex-1 max-w-sm lg:max-w-md">
+            <div
+              className={`flex-1 max-w-sm lg:max-w-md ${
+                side === 'left' ? 'text-right' : 'text-left'
+              }`}
+            >
               <h3 className="font-cinzel text-xl lg:text-2xl font-normal text-white uppercase mb-2 leading-tight">
                 {title}
               </h3>
