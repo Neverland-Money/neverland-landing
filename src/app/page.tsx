@@ -1,6 +1,6 @@
-import Header from "@/components/layout/Header";
-import HeroSection from "@/components/sections/HeroSection";
-import InfoGridSection from "@/components/sections/InfoGridSection";
+import Header from '@/components/layout/Header';
+import HeroSection from '@/components/sections/HeroSection';
+import InfoGridSection from '@/components/sections/InfoGridSection';
 
 export default function Home() {
   return (

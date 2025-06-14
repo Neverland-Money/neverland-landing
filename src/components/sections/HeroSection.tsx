@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import Link from "next/link";
-import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import Image from 'next/image';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
 
 // Blurred Loading Text Component
 interface BlurredLoadingTextProps {
@@ -12,18 +12,22 @@ interface BlurredLoadingTextProps {
   duration?: number;
 }
 
-const BlurredLoadingText = ({ text, className = "", duration = 1.8 }: BlurredLoadingTextProps) => {
+const BlurredLoadingText = ({
+  text,
+  className = '',
+  duration = 1.8,
+}: BlurredLoadingTextProps) => {
   return (
     <motion.span
       className={className}
       animate={{
-        filter: ["blur(8px)", "blur(8px)", "blur(8px)"],
-        opacity: [0.8, 1, 0.8]
+        filter: ['blur(8px)', 'blur(8px)', 'blur(8px)'],
+        opacity: [0.8, 1, 0.8],
       }}
       transition={{
         duration: duration,
         repeat: Infinity,
-        ease: "easeInOut",
+        ease: 'easeInOut',
       }}
     >
       {text}
@@ -53,12 +57,12 @@ const StardustEffect = () => {
 
       // Colors for the stars - purples and blues similar to the button gradient
       const colors = [
-        "#d132e0",
-        "#9945FF",
-        "#7200d6",
-        "#530ee3",
-        "#ffffff",
-        "#ff9fff",
+        '#d132e0',
+        '#9945FF',
+        '#7200d6',
+        '#530ee3',
+        '#ffffff',
+        '#ff9fff',
       ];
 
       for (let i = 0; i < particleCount; i++) {
@@ -86,19 +90,19 @@ const StardustEffect = () => {
     };
 
     // Listen for the custom event triggered by button click
-    document.addEventListener("triggerStardust", handleTrigger);
+    document.addEventListener('triggerStardust', handleTrigger);
 
     return () => {
-      document.removeEventListener("triggerStardust", handleTrigger);
+      document.removeEventListener('triggerStardust', handleTrigger);
     };
   }, []);
 
   return (
-    <div className="absolute inset-0 pointer-events-none overflow-visible z-10">
+    <div className="pointer-events-none absolute inset-0 z-10 overflow-visible">
       {particles.map((particle) => (
         <motion.div
           key={particle.id}
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
           initial={{
             x: 0,
             y: 0,
@@ -126,7 +130,7 @@ const StardustEffect = () => {
               height: `${particle.size}px`,
               backgroundColor: particle.color,
               boxShadow: `0 0 ${particle.size}px ${particle.color}`, // Bigger glow effect
-              filter: "blur(0.5px)", // Slight blur for a more magical look
+              filter: 'blur(0.5px)', // Slight blur for a more magical look
             }}
           />
         </motion.div>
@@ -137,74 +141,75 @@ const StardustEffect = () => {
 
 export default function HeroSection() {
   return (
-    <div className="flex flex-col w-full max-h-[1000px] min-h-[700px] md:max-h-[100vh] md:min-h-[944px] h-[100vh] relative overflow-hidden bg-[#01020D]">
+    <div className="relative flex h-[100vh] max-h-[1000px] min-h-[700px] w-full flex-col overflow-hidden bg-[#01020D] md:max-h-[100vh] md:min-h-[944px]">
       {/* Background image layer - uses separate styles for mobile and desktop */}
-      <div className="absolute inset-0 w-full h-full transform scale-x-[-1] md:scale-x-100">
+      <div className="absolute inset-0 h-full w-full scale-x-[-1] transform md:scale-x-100">
         {/* Mobile background - positioned from bottom */}
-        <div 
-          className="absolute inset-0 md:hidden w-full h-full bg-lightgray"
+        <div
+          className="bg-lightgray absolute inset-0 h-full w-full md:hidden"
           style={{
-            backgroundImage: "url('/assets/images/hero/background.webp')", 
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "-860px bottom", 
-            backgroundSize: "350% auto",
+            backgroundImage: "url('/assets/images/hero/background.webp')",
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: '-860px bottom',
+            backgroundSize: '350% auto',
           }}
         />
-        
+
         {/* Desktop background */}
-        <div 
-          className="absolute inset-0 hidden md:block w-full h-full"
+        <div
+          className="absolute inset-0 hidden h-full w-full md:block"
           style={{
-            background: "url('/assets/images/hero/background.webp') lightgray -173px -274px / 124% 129% no-repeat",
+            background:
+              "url('/assets/images/hero/background.webp') lightgray -173px -274px / 124% 129% no-repeat",
           }}
         />
       </div>
 
       {/* Shadow bottom gradient */}
       <div
-        className="absolute bottom-0 left-0 w-full h-full z-[1]"
+        className="absolute bottom-0 left-0 z-[1] h-full w-full"
         style={{
           background:
-            "linear-gradient(0deg, #050212 0.96%, rgba(5, 2, 18, 0.00) 8.65%)",
+            'linear-gradient(0deg, #050212 0.96%, rgba(5, 2, 18, 0.00) 8.65%)',
         }}
       />
 
       {/* Shadow top gradient */}
       <div
-        className="absolute top-0 left-0 w-full h-full z-[2]"
+        className="absolute top-0 left-0 z-[2] h-full w-full"
         style={{
           background:
-            "linear-gradient(0deg, rgba(5, 2, 18, 0.00) 48.56%, rgba(5, 2, 18, 0.60) 100%)",
+            'linear-gradient(0deg, rgba(5, 2, 18, 0.00) 48.56%, rgba(5, 2, 18, 0.60) 100%)',
         }}
       />
 
       {/* Main content container - exactly 248px from the bottom of header on desktop, less on mobile */}
-      <div className="relative z-[5] flex flex-col items-center md:items-start mt-[120px] md:mt-[248px]">
+      <div className="relative z-[5] mt-[120px] flex flex-col items-center md:mt-[248px] md:items-start">
         {/* Content wrapper with max width */}
-        <div className="w-full max-w-7xl mx-auto px-4 xl:px-0">
-          <div className="flex flex-col items-center md:items-start justify-center gap-6 md:gap-9 w-full max-w-[950px]">
+        <div className="mx-auto w-full max-w-7xl px-4 xl:px-0">
+          <div className="flex w-full max-w-[950px] flex-col items-center justify-center gap-6 md:items-start md:gap-9">
             {/* Title and description section */}
-            <div className="flex flex-col items-center md:items-start justify-center gap-2 w-full">
+            <div className="flex w-full flex-col items-center justify-center gap-2 md:items-start">
               {/* Main title SVG - hidden on mobile, shown on md screens and above */}
-              <div className="w-full max-w-[950px] hidden md:block">
+              <div className="hidden w-full max-w-[950px] md:block">
                 <svg
                   width="950"
                   height="160"
                   viewBox="0 0 950 160"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
-                  className="w-full h-auto max-w-[950px]"
-                  style={{ aspectRatio: "950/160" }}
+                  className="h-auto w-full max-w-[950px]"
+                  style={{ aspectRatio: '950/160' }}
                 >
                   <text
                     fill="white"
-                    style={{ whiteSpace: "pre" }}
+                    style={{ whiteSpace: 'pre' }}
                     fontFamily="var(--font-cinzel)"
                     fontSize="80"
                     letterSpacing="0em"
                   >
                     <tspan x="0" y="64.16">
-                      MAGIC AND PIXIE{" "}
+                      MAGIC AND PIXIE{' '}
                     </tspan>
                     <tspan x="0" y="144.16">
                       DUST ON MONAD
@@ -222,8 +227,8 @@ export default function HeroSection() {
               </div>
 
               {/* Mobile title - shown on mobile, hidden on md screens and above */}
-              <div className="w-full block md:hidden text-center">
-                <h1 className="text-white font-cinzel text-[44px] leading-[130%] tracking-wide mb-2">
+              <div className="block w-full text-center md:hidden">
+                <h1 className="font-cinzel mb-2 text-[44px] leading-[130%] tracking-wide text-white">
                   MAGIC AND
                   <br />
                   PIXIE DUST ON
@@ -233,8 +238,8 @@ export default function HeroSection() {
               </div>
 
               {/* Description text - hidden on mobile, shown on md screens and above */}
-              <div className="w-full max-w-[455px] hidden md:block mr-auto md:mr-auto mx-auto md:mx-0">
-                <p className="text-white font-merriweather text-base md:text-lg leading-[140%] text-center md:text-left">
+              <div className="mx-auto mr-auto hidden w-full max-w-[455px] md:mx-0 md:mr-auto md:block">
+                <p className="font-merriweather text-center text-base leading-[140%] text-white md:text-left md:text-lg">
                   Neverland is a lending protocol built on Aave&apos;s secure
                   system, governed by the community, and powered by Monad&apos;s
                   fast blockchain.
@@ -242,8 +247,8 @@ export default function HeroSection() {
               </div>
 
               {/* Mobile Description text */}
-              <div className="w-full max-w-[455px] block md:hidden mr-auto md:mr-auto mx-auto md:mx-0">
-                <p className="text-white font-merriweather text-[21px] md:text-lg leading-[140%] text-center md:text-left">
+              <div className="mx-auto mr-auto block w-full max-w-[455px] md:mx-0 md:mr-auto md:hidden">
+                <p className="font-merriweather text-center text-[21px] leading-[140%] text-white md:text-left md:text-lg">
                   Neverland is a lending protocol built on Aave&apos;s secure
                   system, governed by the community, and powered by Monad&apos;s
                   fast blockchain.
@@ -263,24 +268,24 @@ export default function HeroSection() {
                 passHref
               >
                 <motion.div
-                  className="flex items-center justify-center w-[240px] px-6 py-4 gap-3 rounded-full mx-auto md:mx-0 md:mr-auto relative group"
+                  className="group relative mx-auto flex w-[240px] items-center justify-center gap-3 rounded-full px-6 py-4 md:mx-0 md:mr-auto"
                   style={{
                     background:
-                      "linear-gradient(0deg, #d132e0 -31%, #530ee3 111.63%)",
-                    boxShadow: "0px 0px 36px #7200d6",
+                      'linear-gradient(0deg, #d132e0 -31%, #530ee3 111.63%)',
+                    boxShadow: '0px 0px 36px #7200d6',
                   }}
                   whileTap={{
                     scale: 0.95,
                     y: 4,
-                    boxShadow: "0px 0px 18px #7200d6",
+                    boxShadow: '0px 0px 18px #7200d6',
                   }}
                   transition={{
-                    type: "spring",
+                    type: 'spring',
                     stiffness: 500,
                     damping: 15,
                   }}
                   onClick={() =>
-                    document.dispatchEvent(new CustomEvent("triggerStardust"))
+                    document.dispatchEvent(new CustomEvent('triggerStardust'))
                   }
                 >
                   {/* Disabled overlay */}
@@ -296,11 +301,11 @@ export default function HeroSection() {
                     alt="Star"
                     width={16}
                     height={16}
-                    style={{ aspectRatio: "16/16" }}
+                    style={{ aspectRatio: '16/16' }}
                   />
 
                   {/* Button text */}
-                  <span className="text-white text-center font-inter text-base font-medium leading-[110%]">
+                  <span className="font-inter text-center text-base leading-[110%] font-medium text-white">
                     Enter Dapp
                   </span>
 
@@ -310,7 +315,7 @@ export default function HeroSection() {
                     alt="Star"
                     width={16}
                     height={16}
-                    style={{ aspectRatio: "16/16" }}
+                    style={{ aspectRatio: '16/16' }}
                   />
                 </motion.div>
               </Link>
@@ -320,24 +325,24 @@ export default function HeroSection() {
       </div>
 
       {/* Stats Cards - 80px from button above on desktop, 40px on mobile */}
-      <div className="flex flex-col md:flex-row gap-4 md:gap-6 mt-[40px] md:mt-[80px] z-[5] w-full max-w-7xl mx-auto px-4 xl:px-0">
+      <div className="z-[5] mx-auto mt-[40px] flex w-full max-w-7xl flex-col gap-4 px-4 md:mt-[80px] md:flex-row md:gap-6 xl:px-0">
         {/* Total Value Locked Card - Desktop version */}
         <div
-          className="hidden md:block w-[255px] h-[118px] rounded-[20px] border border-white/20 relative"
+          className="relative hidden h-[118px] w-[255px] rounded-[20px] border border-white/20 md:block"
           style={{
-            background: "rgba(50, 2, 99, 0.65)",
-            backdropFilter: "blur(4px)",
+            background: 'rgba(50, 2, 99, 0.65)',
+            backdropFilter: 'blur(4px)',
           }}
         >
-          <div className="absolute left-4 top-4 text-[#ead5ff] font-cinzel text-sm font-normal leading-[110%] uppercase">
+          <div className="font-cinzel absolute top-4 left-4 text-sm leading-[110%] font-normal text-[#ead5ff] uppercase">
             Total Value Locked
           </div>
 
           {/* Value */}
-          <div className="absolute left-4 top-[58px]">
+          <div className="absolute top-[58px] left-4">
             <BlurredLoadingText
               text="000.00M"
-              className="text-white font-cinzel text-[40px] font-normal leading-[110%]"
+              className="font-cinzel text-[40px] leading-[110%] font-normal text-white"
             />
           </div>
 
@@ -348,7 +353,7 @@ export default function HeroSection() {
             viewBox="0 0 18 18"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="absolute bottom-4 right-4"
+            className="absolute right-4 bottom-4"
           >
             <rect
               width="18"
@@ -368,21 +373,21 @@ export default function HeroSection() {
 
         {/* Active Users Card - Desktop version */}
         <div
-          className="hidden md:block w-[255px] h-[118px] rounded-[20px] border border-white/20 relative"
+          className="relative hidden h-[118px] w-[255px] rounded-[20px] border border-white/20 md:block"
           style={{
-            background: "rgba(50, 2, 99, 0.65)",
-            backdropFilter: "blur(4px)",
+            background: 'rgba(50, 2, 99, 0.65)',
+            backdropFilter: 'blur(4px)',
           }}
         >
-          <div className="absolute left-4 top-4 text-[#ead5ff] font-cinzel text-sm font-normal leading-[110%] uppercase">
+          <div className="font-cinzel absolute top-4 left-4 text-sm leading-[110%] font-normal text-[#ead5ff] uppercase">
             Active Users
           </div>
 
           {/* Value */}
-          <div className="absolute left-4 top-[58px]">
+          <div className="absolute top-[58px] left-4">
             <BlurredLoadingText
               text="900,000"
-              className="text-white font-cinzel text-[40px] font-normal leading-[110%]"
+              className="font-cinzel text-[40px] leading-[110%] font-normal text-white"
             />
           </div>
 
@@ -393,7 +398,7 @@ export default function HeroSection() {
             viewBox="0 0 18 18"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="absolute bottom-4 right-4"
+            className="absolute right-4 bottom-4"
           >
             <rect
               width="18"
@@ -410,36 +415,36 @@ export default function HeroSection() {
             />
           </svg>
         </div>
-        
+
         {/* Mobile Stats Layout - Fixed to bottom of viewport */}
-        <div className="md:hidden absolute bottom-[55px] left-0 right-0 w-full flex flex-row justify-center gap-16 z-[5]">
+        <div className="absolute right-0 bottom-[55px] left-0 z-[5] flex w-full flex-row justify-center gap-16 md:hidden">
           {/* Total Value Locked */}
-          <div className="flex w-[126px] flex-col justify-center items-start gap-1">
+          <div className="flex w-[126px] flex-col items-start justify-center gap-1">
             <BlurredLoadingText
               text="$000.00M"
-              className="text-white font-cinzel text-[40px] font-normal leading-[110%]"
+              className="font-cinzel text-[40px] leading-[110%] font-normal text-white"
             />
-            <div className="w-full text-[#ead5ff] font-cinzel text-sm font-normal leading-[110%] uppercase">
-              <div className="flex justify-between w-full">
+            <div className="font-cinzel w-full text-sm leading-[110%] font-normal text-[#ead5ff] uppercase">
+              <div className="flex w-full justify-between">
                 <span>&#123; TOTAL VALUE</span>
               </div>
-              <div className="flex justify-end w-full">
+              <div className="flex w-full justify-end">
                 <span>LOCKED &#125;</span>
               </div>
             </div>
           </div>
-          
+
           {/* Active Users */}
-          <div className="flex w-[126px] flex-col justify-center items-start gap-1">
+          <div className="flex w-[126px] flex-col items-start justify-center gap-1">
             <BlurredLoadingText
               text="900,000"
-              className="text-white font-cinzel text-[40px] font-normal leading-[110%]"
+              className="font-cinzel text-[40px] leading-[110%] font-normal text-white"
             />
-            <div className="w-full text-[#ead5ff] font-cinzel text-sm font-normal leading-[110%] uppercase">
-              <div className="flex justify-between w-full">
+            <div className="font-cinzel w-full text-sm leading-[110%] font-normal text-[#ead5ff] uppercase">
+              <div className="flex w-full justify-between">
                 <span>&#123; ACTIVE</span>
               </div>
-              <div className="flex justify-end w-full">
+              <div className="flex w-full justify-end">
                 <span>USERS &#125;</span>
               </div>
             </div>

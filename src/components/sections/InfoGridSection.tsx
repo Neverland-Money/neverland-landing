@@ -1,5 +1,5 @@
-import React from "react";
-import Image from "next/image";
+import React from 'react';
+import Image from 'next/image';
 
 const StarIcon = () => (
   <Image
@@ -7,7 +7,7 @@ const StarIcon = () => (
     alt="Star"
     width={26}
     height={26}
-    className="w-6 h-6"
+    className="h-6 w-6"
   />
 );
 
@@ -23,16 +23,14 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
   backgroundImage,
 }) => (
   <div
-    className="relative w-full sm:w-60 h-60 p-5 flex flex-col justify-between rounded-2xl border border-white/20 overflow-hidden bg-black -scale-x-100 bg-center bg-cover bg-no-repeat"
+    className="relative flex h-60 w-full -scale-x-100 flex-col justify-between overflow-hidden rounded-2xl border border-white/20 bg-black bg-cover bg-center bg-no-repeat p-5 sm:w-60"
     style={{ backgroundImage: `url('${backgroundImage}')` }}
   >
-    <div 
-      className="relative z-10 flex flex-col items-center justify-start gap-2 h-full -scale-x-100"
-    >
-      <h3 className="font-cinzel text-lg font-normal leading-[110%] uppercase text-white text-center">
+    <div className="relative z-10 flex h-full -scale-x-100 flex-col items-center justify-start gap-2">
+      <h3 className="font-cinzel text-center text-lg leading-[110%] font-normal text-white uppercase">
         {title}
       </h3>
-      <p className="font-merriweather text-base font-normal leading-[140%] text-white/60 text-center">
+      <p className="font-merriweather text-center text-base leading-[140%] font-normal text-white/60">
         {description}
       </p>
     </div>
@@ -42,56 +40,58 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
 const InfoGridSection: React.FC = () => {
   const features = [
     {
-      title: "Community",
-      description: "Powered by vote-escrow community governance",
-      backgroundImage: "/assets/images/info/community-image.webp",
+      title: 'Community',
+      description: 'Powered by vote-escrow community governance',
+      backgroundImage: '/assets/images/info/community-image.webp',
     },
     {
-      title: "Instant Liquidity",
-      description: "Instant access to capital on Monad",
-      backgroundImage: "/assets/images/info/instant-liquidity-image.webp",
+      title: 'Instant Liquidity',
+      description: 'Instant access to capital on Monad',
+      backgroundImage: '/assets/images/info/instant-liquidity-image.webp',
     },
     {
-      title: "You Hold the Keys",
-      description: "Full control of your assets at all times",
-      backgroundImage: "/assets/images/info/you-hold-keys-image.webp",
+      title: 'You Hold the Keys',
+      description: 'Full control of your assets at all times',
+      backgroundImage: '/assets/images/info/you-hold-keys-image.webp',
     },
     {
-      title: "Optimized Speed",
-      description: "Fast, efficient, and seamless performance",
-      backgroundImage: "/assets/images/info/optimization-image.webp",
+      title: 'Optimized Speed',
+      description: 'Fast, efficient, and seamless performance',
+      backgroundImage: '/assets/images/info/optimization-image.webp',
     },
     {
-      title: "Security",
-      description: "Audited smart contracts: Your assets stay safe",
-      backgroundImage: "/assets/images/info/security-image.webp",
+      title: 'Security',
+      description: 'Audited smart contracts: Your assets stay safe',
+      backgroundImage: '/assets/images/info/security-image.webp',
     },
   ];
 
   return (
-    <section className="w-full bg-transparent py-20 md:py-44 px-5">
-      <div className="max-w-screen-xl mx-auto flex flex-col items-center gap-[100px]">
+    <section className="w-full bg-transparent px-5 py-20 md:py-44">
+      <div className="mx-auto flex max-w-screen-xl flex-col items-center gap-[100px]">
         {/* Header Section */}
-        <div className="w-full max-w-[678px] flex flex-col items-center gap-3 relative">
+        <div className="relative flex w-full max-w-[678px] flex-col items-center gap-3">
           <div className="relative w-full">
-            <h2 className="font-cinzel text-4xl sm:text-5xl lg:text-6xl font-normal leading-[110%] uppercase text-white text-center">
+            <h2 className="font-cinzel text-center text-4xl leading-[110%] font-normal text-white uppercase sm:text-5xl lg:text-6xl">
               What is Neverland?
             </h2>
             {/* Decorative Stars */}
-            <div className="hidden lg:block absolute top-5 left-[-40px]">
+            <div className="absolute top-5 left-[-40px] hidden lg:block">
               <StarIcon />
             </div>
-            <div className="hidden lg:block absolute top-5 right-[-40px]">
+            <div className="absolute top-5 right-[-40px] hidden lg:block">
               <StarIcon />
             </div>
           </div>
-          <p className="w-full font-merriweather text-lg font-normal leading-[140%] text-white text-center max-w-[550px] mt-4">
-          Neverland is a decentralized, non-custodial lending platform governed by the community through vote-escrow tokenomics, unlocking capital on the high-performance Monad blockchain.
+          <p className="font-merriweather mt-4 w-full max-w-[550px] text-center text-lg leading-[140%] font-normal text-white">
+            Neverland is a decentralized, non-custodial lending platform
+            governed by the community through vote-escrow tokenomics, unlocking
+            capital on the high-performance Monad blockchain.
           </p>
         </div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 sm:flex sm:flex-wrap justify-center gap-5 max-w-full sm:max-w-none mx-auto">
+        <div className="mx-auto grid max-w-full grid-cols-1 justify-center gap-5 sm:flex sm:max-w-none sm:flex-wrap">
           {features.map((feature, index) => (
             <FeatureCard
               key={index}
