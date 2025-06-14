@@ -190,12 +190,11 @@ export default function HowItWorksSection() {
         {/* Timeline */}
         <div className="relative">
           {/* Unified timeline line with fade effects - extends beyond icons */}
-          <div
-            className="absolute left-1/2 -top-20 w-0.5 transform -translate-x-1/2 z-0"
-            style={{
-              height: 'calc(100% + 160px)',
-              background:
-                'linear-gradient(to bottom, transparent 0%, transparent 10%, white 25%, white 75%, transparent 90%, transparent 100%)',
+          <div className="absolute left-1/2 -top-40 w-0.5 transform -translate-x-1/2 z-0"
+               style={{
+                 height: 'calc(100% + 240px)',
+                 background: 'linear-gradient(to bottom, transparent 0%, transparent 15%, white 30%, white 70%, transparent 85%, transparent 100%)'
+               }} />
             }}
           />
 
