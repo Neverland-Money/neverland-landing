@@ -173,17 +173,20 @@ export default function HowItWorksSection() {
     <section className="relative py-[180px] px-4 lg:px-8 overflow-hidden">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-16 lg:mb-20 relative">
+        <div className="text-center mb-16 lg:mb-20 relative max-w-[480px] mx-auto">
           <div className="relative inline-block">
             <h2 className="font-cinzel text-4xl lg:text-6xl font-normal text-white uppercase leading-tight mb-3">
-              How it works?
+              How it w
+              <span className="relative inline-block">
+                o{/* Star positioned exactly in the middle of the O */}
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                  <StarIcon />
+                </div>
+              </span>
+              rks?
             </h2>
-            {/* Star decoration */}
-            <div className="absolute -right-8 lg:-right-12 top-4 lg:top-6">
-              <StarIcon />
-            </div>
           </div>
-          <p className="font-inter text-lg font-normal text-white leading-relaxed max-w-md mx-auto">
+          <p className="font-inter text-lg font-normal text-white leading-relaxed">
             Navigate the magical world of DeFi with our simple step-by-step
             process.
           </p>
