@@ -282,7 +282,7 @@ export default function HowItWorksSection() {
                   <StarIcon />
                 </div>
               </span>
-              rks?
+              rks
             </h2>
           </div>
           <p className="font-inter mx-auto max-w-[385px] text-lg leading-relaxed font-normal text-white">
