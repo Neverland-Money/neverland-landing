@@ -16,7 +16,7 @@ function SecurityCard({
   disabled = false,
 }: SecurityCardProps) {
   return (
-    <div className='relative flex aspect-[588/394] w-[280px] flex-col items-center justify-center gap-2.5 overflow-hidden rounded-2xl border border-[#402262] p-4 backdrop-blur-sm sm:w-[350px] sm:p-6 lg:w-[480px] lg:p-14 xl:w-[588px]'>
+    <div className='relative flex aspect-[588/394] w-[280px] flex-col items-center justify-center gap-2.5 overflow-hidden rounded-2xl border border-[#402262] p-4 backdrop-blur-sm sm:w-[350px] sm:p-13 lg:w-[480px] lg:p-28 xl:w-[588px]'>
       {/* Security background image */}
       <div
         className='absolute inset-0 z-0 bg-cover bg-center bg-no-repeat'
