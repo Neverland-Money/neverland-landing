@@ -37,6 +37,7 @@ export default function FeaturesSection() {
               <Image
                 src="/assets/images/features/frame.webp"
                 alt="Feature card frame"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 fill
                 className="object-cover"
               />
@@ -61,8 +62,9 @@ export default function FeaturesSection() {
               <Image
                 src="/assets/images/features/frame.webp"
                 alt="Feature card frame"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 fill
-                className="object-cover"
+                className="scale-x-[-1] object-cover"
               />
             </div>
 
