@@ -273,7 +273,7 @@ export default function LunarCircleSection() {
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true, amount: 1 }}
+                viewport={{ once: true, amount: 0.9 }}
                 transition={{ duration: 0.8, delay: 1.0 }}
                 className='absolute inset-0 z-40 flex items-center justify-center'
               >
@@ -546,7 +546,7 @@ export default function LunarCircleSection() {
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1, delay: 1 }}
-                viewport={{ once: true, amount: 1 }}
+                viewport={{ once: true, amount: 0.9 }}
                 className='absolute inset-0 z-40 flex items-center justify-center'
               >
                 <div className='font-cinzel relative bottom-10 flex min-w-[300px] flex-col gap-1 text-3xl leading-[110%] font-normal tracking-[2px] text-white md:bottom-14 md:min-w-[512px] md:text-6xl'>
