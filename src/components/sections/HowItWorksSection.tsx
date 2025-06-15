@@ -40,7 +40,7 @@ export default function HowItWorksSection() {
       number: 4,
       title: 'Governance',
       description:
-        'Help shape the future of Neverland. Vote on proposals and take part in key decisions through decentralized governance.',
+        'Help shape the future of Neverland. Vote on proposals and take part in the decision making process.',
       side: 'left',
     },
   ];
