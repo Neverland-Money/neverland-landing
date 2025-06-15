@@ -3,6 +3,7 @@ import FeaturesSection from '@/components/sections/FeaturesSection';
 import HeroSection from '@/components/sections/HeroSection';
 import HowItWorksSection from '@/components/sections/HowItWorksSection';
 import InfoGridSection from '@/components/sections/InfoGridSection';
+import LunarCircleSection from '@/components/sections/LunarCircleSection';
 
 export default function Home() {
   return (
@@ -12,7 +13,7 @@ export default function Home() {
       <InfoGridSection />
       <FeaturesSection />
       <HowItWorksSection />
-      {/* Other sections like Features, Testimonials, etc. can be added here */}
+      <LunarCircleSection />
     </main>
   );
 }

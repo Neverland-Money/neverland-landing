@@ -266,7 +266,7 @@ export default function HowItWorksSection() {
   };
 
   return (
-    <section className='relative overflow-hidden px-4 py-[180px] pb-[600px] lg:px-8'>
+    <section className='relative overflow-hidden px-4 py-[180px] pb-[180px] lg:px-8'>
       <div className='mx-auto max-w-6xl'>
         {/* Header */}
         <div className='relative mx-auto mb-16 max-w-[500px] text-center lg:mb-40'>
