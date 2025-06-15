@@ -89,9 +89,9 @@ export default function HowItWorksSection() {
       case 2:
         return <BorrowIcon />;
       case 3:
-        return <GlobeIcon />;
-      default:
         return <StarIcon />;
+      default:
+        return <GlobeIcon />;
     }
   };
 
@@ -315,7 +315,7 @@ export default function HowItWorksSection() {
             }}
           >
             <div className="relative h-20 w-20 rounded-full border border-[#530ee3] bg-[#050212] shadow-[0_0_36px_#7200d6]">
-              <div className="absolute top-[18px] left-[18px] flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-b from-[#d132e0] to-[#530ee3] shadow-[0_0_60px_rgba(114,0,214,0.60)]">
+              <div className="absolute top-[17px] left-[17px] flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-b from-[#d132e0] to-[#530ee3] shadow-[0_0_60px_rgba(114,0,214,0.60)]">
                 {getCurrentTravelingIcon()}
               </div>
             </div>
