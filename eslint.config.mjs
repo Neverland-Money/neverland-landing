@@ -16,6 +16,11 @@ const compat = new FlatCompat({
 });
 
 export default defineConfig([
+  // Global ignores for flat config format
+  {
+    ignores: ['.next/', 'node_modules/', 'out/', 'build/', 'coverage/'],
+  },
+
   // bring in Next.js & TS defaults along with shared plugins
   ...compat.extends(
     'next/core-web-vitals',
@@ -79,6 +84,5 @@ export default defineConfig([
         },
       ],
     },
-    ignorePatterns: ['.next/', 'node_modules/', 'out/', 'build/', 'coverage/'],
   },
 ]);
