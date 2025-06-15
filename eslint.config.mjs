@@ -4,6 +4,7 @@ import { fileURLToPath } from 'url';
 import { defineConfig } from 'eslint/config';
 import { FlatCompat } from '@eslint/eslintrc';
 import js from '@eslint/js';
+import tsParser from '@typescript-eslint/parser';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -39,14 +40,14 @@ export default defineConfig([
   {
     files: ['**/*.{js,jsx,ts,tsx}'],
     languageOptions: {
-      parser: '@typescript-eslint/parser',
+      parser: tsParser,
       parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
         project: join(__dirname, 'tsconfig.json'),
         tsconfigRootDir: __dirname,
+        ecmaFeatures: { jsx: true },
       },
-      ecmaFeatures: { jsx: true },
     },
     settings: {
       react: { version: 'detect' },
