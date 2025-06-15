@@ -19,7 +19,7 @@ export default function HowItWorksSection() {
       number: 1,
       title: 'Supply Assets',
       description:
-        "Deposit your crypto to earn passive income. Add your assets to Neverland's liquidity pools and earn interest and rewards.",
+        "Deposit your crypto to earn passive income. Add your assets to Neverland's lending pools and earn interest and rewards.",
       side: 'right',
     },
     {
@@ -33,7 +33,7 @@ export default function HowItWorksSection() {
       number: 3,
       title: 'Earn Rewards',
       description:
-        'Get Neverland tokens for your activity. Supply, borrow, or engage with the platform and earn valuable tokens in return.',
+        'Get DUST rewards for your activity. Supply, borrow, or engage with the platform and earn valuable tokens in return.',
       side: 'right',
     },
     {
