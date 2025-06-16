@@ -67,7 +67,7 @@ const InfoGridSection: React.FC = () => {
   ];
 
   return (
-    <section className='w-full bg-transparent px-5 py-20 md:py-44'>
+    <section id='about' className='w-full bg-transparent px-5 py-20 md:py-44'>
       <div className='mx-auto flex max-w-screen-xl flex-col items-center gap-[100px]'>
         {/* Header Section */}
         <div className='relative flex w-full max-w-[678px] flex-col items-center gap-3'>

@@ -1,6 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
+import React from 'react';
 
 export interface FAQItem {
   id: number;
@@ -31,6 +32,104 @@ interface AccordionItemProps {
   isOpen: boolean;
   onToggle: () => void;
 }
+
+// Simple markdown parser for FAQ answers
+const parseMarkdown = (text: string): React.ReactNode[] => {
+  if (!text) return [];
+
+  const lines = text.split('\n');
+  const elements: React.ReactNode[] = [];
+
+  lines.forEach((line, lineIndex) => {
+    if (line.trim() === '') {
+      elements.push(<br key={`br-${lineIndex}`} />);
+      return;
+    }
+
+    const parts: React.ReactNode[] = [];
+    let currentText = line;
+    let partIndex = 0;
+
+    // Process the line for markdown formatting
+    while (currentText.length > 0) {
+      // Find the first occurrence of any markdown pattern
+      const patterns = [
+        { type: 'bold', regex: /(\*\*|__)(.+?)\1/, tag: 'strong' },
+        {
+          type: 'italic',
+          regex: /(?<!\*)(\*)(?!\*)([^*]+?)\1(?!\*)/,
+          tag: 'em',
+        },
+        { type: 'italic', regex: /(?<!_)(_)(?!_)([^_]+?)\1(?!_)/, tag: 'em' },
+        { type: 'underline', regex: /(~)(.+?)\1/, tag: 'u' },
+        { type: 'code', regex: /(`)(.+?)\1/, tag: 'code' },
+      ];
+
+      let earliestMatch = null;
+      let earliestIndex = currentText.length;
+
+      // Find the earliest pattern match
+      for (const pattern of patterns) {
+        const match = currentText.match(pattern.regex);
+        if (match && match.index !== undefined && match.index < earliestIndex) {
+          earliestMatch = { ...pattern, match, index: match.index };
+          earliestIndex = match.index;
+        }
+      }
+
+      if (!earliestMatch) {
+        // No more patterns found, add remaining text
+        parts.push(currentText);
+        break;
+      }
+
+      const { match, type } = earliestMatch;
+
+      // Add text before the match
+      if (match.index! > 0) {
+        parts.push(currentText.substring(0, match.index!));
+      }
+
+      // Add the formatted element
+      if (type === 'code') {
+        parts.push(
+          <code
+            key={`${type}-${lineIndex}-${partIndex++}`}
+            className='rounded bg-white/10 px-1 py-0.5 font-mono text-sm text-purple-200'
+          >
+            {match[2]}
+          </code>,
+        );
+      } else if (type === 'underline') {
+        parts.push(
+          <u key={`${type}-${lineIndex}-${partIndex++}`}>{match[2]}</u>,
+        );
+      } else if (type === 'italic') {
+        parts.push(
+          <em key={`${type}-${lineIndex}-${partIndex++}`}>{match[2]}</em>,
+        );
+      } else if (type === 'bold') {
+        parts.push(
+          <strong key={`${type}-${lineIndex}-${partIndex++}`}>
+            {match[2]}
+          </strong>,
+        );
+      }
+
+      // Continue with text after the match
+      currentText = currentText.substring(match.index! + match[0].length);
+    }
+
+    elements.push(
+      <span key={`line-${lineIndex}`}>
+        {parts}
+        {lineIndex < lines.length - 1 && <br />}
+      </span>,
+    );
+  });
+
+  return elements;
+};
 
 export default function AccordionItem({
   item,
@@ -73,9 +172,9 @@ export default function AccordionItem({
           >
             <div className='px-4 pb-4 md:px-8 md:pb-6'>
               <div className='flex items-center justify-center'>
-                <p className='font-merriweather max-w-[364px] text-sm leading-[140%] whitespace-pre-line text-white md:max-w-[600px] md:text-base'>
-                  {item.answer}
-                </p>
+                <div className='font-merriweather max-w-[364px] text-sm leading-[140%] whitespace-pre-line text-white md:max-w-[600px] md:text-base'>
+                  {parseMarkdown(item.answer)}
+                </div>
               </div>
             </div>
           </motion.div>

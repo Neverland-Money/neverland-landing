@@ -4,11 +4,29 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
-const Header = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+export default function Header() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen);
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const handleSmoothScroll = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    targetId: string,
+  ) => {
+    e.preventDefault();
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+      targetElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }
+    // Close mobile menu if open
+    if (isMobileMenuOpen) {
+      setIsMobileMenuOpen(false);
+    }
   };
 
   return (
@@ -35,24 +53,28 @@ const Header = () => {
         <div className='hidden items-center gap-8 md:flex'>
           <Link
             href='#about'
+            onClick={(e) => handleSmoothScroll(e, 'about')}
             className='font-merriweather text-base font-normal text-white transition-colors hover:text-purple-300'
           >
             About
           </Link>
           <Link
-            href='#services'
+            href='#stats'
+            onClick={(e) => handleSmoothScroll(e, 'stats')}
             className='font-merriweather text-base font-normal text-white transition-colors hover:text-purple-300'
           >
-            Services
+            Stats
           </Link>
           <Link
-            href='#projects'
+            href='#faq'
+            onClick={(e) => handleSmoothScroll(e, 'faq')}
             className='font-merriweather text-base font-normal text-white transition-colors hover:text-purple-300'
           >
-            Projects
+            FAQ
           </Link>
           <Link
             href='#contacts'
+            onClick={(e) => handleSmoothScroll(e, 'contacts')}
             className='font-merriweather text-base font-normal text-white transition-colors hover:text-purple-300'
           >
             Contacts
@@ -126,7 +148,7 @@ const Header = () => {
       </nav>
 
       {/* Mobile Menu Overlay */}
-      {mobileMenuOpen && (
+      {isMobileMenuOpen && (
         <div className='fixed inset-0 z-50 overflow-y-auto bg-[rgba(5,2,18,0.40)] backdrop-blur-[17px] backdrop-filter md:hidden'>
           <div className='flex h-full w-full flex-col items-start justify-start px-4'>
             {/* Top row with Logo and Close button */}
@@ -150,29 +172,29 @@ const Header = () => {
             <div className='mt-12 flex flex-col gap-5'>
               <Link
                 href='#about'
+                onClick={(e) => handleSmoothScroll(e, 'about')}
                 className='font-cinzel self-stretch text-left text-[56px] leading-[100%] font-normal text-white uppercase hover:text-purple-400'
-                onClick={toggleMobileMenu}
               >
                 ABOUT
               </Link>
               <Link
-                href='#services'
+                href='#stats'
+                onClick={(e) => handleSmoothScroll(e, 'stats')}
                 className='font-cinzel self-stretch text-left text-[56px] leading-[100%] font-normal text-white uppercase hover:text-purple-400'
-                onClick={toggleMobileMenu}
               >
-                SERVICES
+                STATS
               </Link>
               <Link
-                href='#projects'
+                href='#faq'
+                onClick={(e) => handleSmoothScroll(e, 'faq')}
                 className='font-cinzel self-stretch text-left text-[56px] leading-[100%] font-normal text-white uppercase hover:text-purple-400'
-                onClick={toggleMobileMenu}
               >
-                PROJECTS
+                FAQ
               </Link>
               <Link
                 href='#contacts'
+                onClick={(e) => handleSmoothScroll(e, 'contacts')}
                 className='font-cinzel self-stretch text-left text-[56px] leading-[100%] font-normal text-white uppercase hover:text-purple-400'
-                onClick={toggleMobileMenu}
               >
                 CONTACTS
               </Link>
@@ -228,6 +250,4 @@ const Header = () => {
       )}
     </header>
   );
-};
-
-export default Header;
+}

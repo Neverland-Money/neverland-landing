@@ -1,4 +1,5 @@
 import Header from '@/components/layout/Header';
+import ContactSection from '@/components/sections/ContactSection';
 import FAQSection from '@/components/sections/FAQSection';
 import FeaturesSection from '@/components/sections/FeaturesSection';
 import HeroSection from '@/components/sections/HeroSection';
@@ -20,6 +21,7 @@ export default function Home() {
       <SecuritySection />
       <FAQSection />
       <PartnersSection />
+      <ContactSection />
     </main>
   );
 }

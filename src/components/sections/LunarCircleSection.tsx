@@ -7,7 +7,10 @@ import { BlurredLoadingText } from '@/components/ui/BlurredLoadingText';
 
 export default function LunarCircleSection() {
   return (
-    <section className='relative h-[968px] overflow-hidden md:min-h-screen'>
+    <section
+      id='stats'
+      className='relative h-[968px] overflow-hidden md:min-h-screen'
+    >
       {/* Background image */}
       <div className='absolute inset-0'>
         <Image

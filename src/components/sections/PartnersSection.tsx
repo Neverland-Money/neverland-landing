@@ -65,6 +65,18 @@ export default function PartnersSection() {
     { name: 'Partner 6', logo: <PartnerLogos.LLogo /> },
     { name: 'Partner 7', logo: <PartnerLogos.ILogo /> },
     { name: 'Partner 8', logo: <PartnerLogos.GLogo /> },
+    { name: 'Partner 9', logo: <PartnerLogos.SLogo /> },
+    { name: 'Partner 10', logo: <PartnerLogos.LLogo /> },
+    { name: 'Partner 11', logo: <PartnerLogos.ILogo /> },
+    { name: 'Partner 12', logo: <PartnerLogos.GLogo /> },
+    { name: 'Partner 13', logo: <PartnerLogos.SLogo /> },
+    { name: 'Partner 14', logo: <PartnerLogos.LLogo /> },
+    { name: 'Partner 15', logo: <PartnerLogos.ILogo /> },
+    { name: 'Partner 16', logo: <PartnerLogos.GLogo /> },
+    { name: 'Partner 17', logo: <PartnerLogos.SLogo /> },
+    { name: 'Partner 18', logo: <PartnerLogos.LLogo /> },
+    { name: 'Partner 19', logo: <PartnerLogos.ILogo /> },
+    { name: 'Partner 20', logo: <PartnerLogos.GLogo /> },
   ];
 
   const [movementDistance, setMovementDistance] = useState('-400px');
@@ -111,7 +123,7 @@ export default function PartnersSection() {
             className='flex min-h-[300px] items-center gap-20 md:gap-5'
             animate={{ x: ['0px', movementDistance] }}
             transition={{
-              duration: 30,
+              duration: 150,
               repeat: Infinity,
               repeatType: 'loop',
               ease: 'linear',

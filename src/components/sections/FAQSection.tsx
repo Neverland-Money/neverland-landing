@@ -9,31 +9,31 @@ const faqData: FAQItem[] = [
     id: 1,
     question: 'What is Neverland Money?',
     answer:
-      "Neverland is a next-generation DeFi lending protocol combining Aave V3's battle-tested security with sustainable vote escrow tokenomics. Featuring self-repaying loans, deflationary token mechanics and advanced automated yield strategies to maximize capital efficiency. Users can supply or borrow assets while earning rewards through governance participation or liquidity provision.",
+      "**Neverland** is a *next-generation* DeFi lending protocol combining **Aave V3's** battle-tested security with sustainable vote escrow tokenomics. Featuring ~self-repaying loans~, deflationary token mechanics and advanced automated yield strategies to maximize capital efficiency.\n\nUsers can supply or borrow assets while earning rewards through governance participation or liquidity provision.",
   },
   {
     id: 2,
-    question: 'How do I interact with Neverland?',
+    question: 'Why is Neverland building on Monad?',
     answer:
-      "Neverland is a decentralized, non-custodial liquidity protocol. Users can interact with Neverland through a user-friendly interface or directly with its smart contracts on the Monad blockchain.\n\nTo interact with the Neverland Protocol, simply connect your crypto wallet and supply your preferred asset and amount. Once supplied, you'll earn passive income based on market borrowing demand. Additionally, your supplied assets can be used as collateral, enabling you to borrow other assets.",
+      '**Monad** offers **ultra-low latency, high throughput, and EVM compatibility**, making it ideal for scaling advanced DeFi strategies like automated yield loops and self-repaying loans. Its parallel execution and low gas fees unlock greater efficiency, accessibility, and composability. By building on Monad, Neverland can deliver a faster, cheaper, and more powerful lending experience.',
   },
   {
     id: 3,
-    question: 'Do I need a wallet to interact with Neverland?',
+    question: 'What is veDUST?',
     answer:
-      'We need short replies! We need short replies! We need short replies! We need short replies! We need short replies! We need short replies! We need short replies! We need short replies! We need short replies! We need short replies!',
+      '**veDUST** is the *vote-escrowed* version of Neverland\'s native token, "DUST". Users can lock their DUST to receive veDUST, which grants them:\n\n• **Voting power**\n• **Governance rewards**\n• **Access to self-repaying loan features**\n\nThe longer the lock, the more veDUST that is received - encouraging long-term alignment and active participation in the protocol\'s future.',
   },
   {
     id: 4,
-    question: 'What is the cost of interacting with Neverland?',
+    question: 'What are self-repaying loans on Neverland?',
     answer:
-      'We need short replies! We need short replies! We need short replies! We need short replies! We need short replies! We need short replies! We need short replies! We need short replies! We need short replies! We need short replies!',
+      'Neverland lets users earn **DUST rewards** for depositing assets and taking loan positions. By locking "DUST" as **veDUST**, users can choose the option to have their *governance rewards* automatically directed to pay down their debt over time - creating a ~self-repaying loan~.\n\nThis system helps reduce debt passively, without requiring users to manually repay their loans.',
   },
   {
     id: 5,
-    question: 'What are the risks involved in using Neverland?',
+    question: 'How do the automated yield strategies work?',
     answer:
-      'We need short replies! We need short replies! We need short replies! We need short replies! We need short replies! We need short replies! We need short replies! We need short replies! We need short replies! We need short replies!',
+      'Neverland\'s **automated strategies** optimize yield by looping assets from low-utilization *pools* into higher-yielding ones. By borrowing an asset at **low interest rates** and redepositing them into pools offering higher "APR" or emissions, users amplify their returns.\n\nThe system self-balances liquidity across markets - maximizing yield with minimal manual effort.',
   },
 ];
 
@@ -45,7 +45,10 @@ export default function FAQSection() {
   };
 
   return (
-    <section className='relative h-[620px] min-h-screen w-full overflow-hidden bg-gradient-to-b from-[#1a0b2e] via-[#2d1b69] to-[#1a0b2e] md:h-[1220px]'>
+    <section
+      id='faq'
+      className='relative h-[620px] min-h-screen w-full overflow-hidden bg-gradient-to-b from-[#1a0b2e] via-[#2d1b69] to-[#1a0b2e] md:h-[1220px]'
+    >
       {/* Background Image */}
       <div
         className='absolute inset-0 h-full w-full'
