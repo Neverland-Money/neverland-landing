@@ -1,4 +1,4 @@
-import { ChatButton } from '@/components/assistant-ui/chat-button';
+import { ChatButton } from '@/components/assistant-ui/ChatButton';
 import Header from '@/components/layout/Header';
 import ContactSection from '@/components/sections/ContactSection';
 import FAQSection from '@/components/sections/FAQSection';

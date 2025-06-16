@@ -17,8 +17,8 @@ import {
 } from 'lucide-react';
 import type { FC } from 'react';
 
-import { MarkdownText } from '@/components/assistant-ui/markdown-text';
-import { TooltipIconButton } from '@/components/assistant-ui/tooltip-icon-button';
+import { MarkdownText } from '@/components/assistant-ui/MarkdownText';
+import { TooltipIconButton } from '@/components/assistant-ui/TooltipIconButton';
 import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
 

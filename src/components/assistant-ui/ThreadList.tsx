@@ -5,7 +5,7 @@ import {
 import { ArchiveIcon, PlusIcon } from 'lucide-react';
 import type { FC } from 'react';
 
-import { TooltipIconButton } from '@/components/assistant-ui/tooltip-icon-button';
+import { TooltipIconButton } from '@/components/assistant-ui/TooltipIconButton';
 import { Button } from '@/components/ui/Button';
 
 export const ThreadList: FC = () => {

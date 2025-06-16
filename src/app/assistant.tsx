@@ -7,7 +7,7 @@ import { MinusIcon, Sparkles, XIcon } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
 
-import { Thread } from '@/components/assistant-ui/thread';
+import { Thread } from '@/components/assistant-ui/Thread';
 import { StarIcon } from '@/components/ui/StarIcon';
 
 interface AssistantProps {
