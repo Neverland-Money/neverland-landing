@@ -6,6 +6,8 @@ import { useEffect, useRef, useState } from 'react';
 
 import { Assistant } from '@/app/assistant';
 
+import { ConfirmEndDialog } from './ConfirmEndDialog';
+
 interface ChatButtonProps {
   isInMenu?: boolean;
   isStyled?: boolean;
@@ -15,6 +17,7 @@ export const ChatButton = ({
   isInMenu = false,
   isStyled = false,
 }: ChatButtonProps) => {
+  const [showConfirmClose, setShowConfirmClose] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [key, setKey] = useState(Date.now()); // Unique key for each conversation
@@ -117,12 +120,21 @@ export const ChatButton = ({
     }
   };
 
-  const handleMinimize = () => {
-    setIsMinimized(true);
+  const handleCloseWithConfirm = () => {
+    setShowConfirmClose(true);
   };
 
-  const handleClose = () => {
+  const handleConfirmClose = () => {
+    setShowConfirmClose(false);
     setIsOpen(false);
+  };
+
+  const handleCancelClose = () => {
+    setShowConfirmClose(false);
+  };
+
+  const handleMinimize = () => {
+    setIsMinimized(true);
   };
 
   return (
@@ -218,30 +230,69 @@ export const ChatButton = ({
       )}
 
       {/* Full Chat Interface - Always mounted when open, just visually hidden when minimized */}
-      {isOpen && (
+      {isOpen && !isMinimized && (
         <div
-          ref={chatRef}
-          className={`fixed z-40 h-[83vh] w-[90vw] max-w-[450px] rounded-lg shadow-xl lg:w-[40vw] lg:max-w-[900px] ${isMinimized ? 'pointer-events-none -translate-y-4 scale-95 opacity-0' : 'translate-y-0 scale-100 opacity-100'} ${isInMenu ? 'bottom-1/2 left-24 translate-y-1/2' : 'bottom-20 left-6'} `}
-          style={{
-            fontFamily: 'var(--font-merriweather)',
-            background:
-              'linear-gradient(145deg, rgba(22, 0, 43, 0.95) 0%, rgba(10, 0, 21, 0.95) 100%)',
-            borderColor: 'rgba(209, 50, 224, 0.3)',
-            backdropFilter: 'blur(20px)',
-            boxShadow:
-              '0px 0px 40px rgba(114, 0, 214, 0.4), inset 0px 1px 0px rgba(255, 255, 255, 0.1)',
+          className='fixed inset-0 z-30 bg-black/30 backdrop-blur-sm transition-opacity'
+          role='button'
+          tabIndex={0}
+          aria-label='Minimize chat window'
+          onClick={handleMinimize}
+          onKeyDown={(event) => {
+            if (
+              event.key === 'Escape' ||
+              event.key === 'Enter' ||
+              event.key === ' '
+            ) {
+              handleMinimize();
+            }
           }}
-        >
-          <div className='flex h-full flex-col overflow-hidden rounded-lg'>
-            <Assistant
-              key={
-                currentKey
-              } /* Use currentKey which only changes when fully closing and reopening */
-              onMinimize={handleMinimize}
-              onClose={handleClose}
-            />
+        />
+      )}
+      {isOpen && (
+        <>
+          {/* Confirmation Modal for Closing Chat */}
+          <ConfirmEndDialog
+            open={showConfirmClose}
+            onConfirm={handleConfirmClose}
+            onCancel={handleCancelClose}
+          />
+          {/* Intentionally using keyboard/mouse handlers on a div with role="dialog" for accessibility. */}
+          {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+          <div
+            ref={chatRef}
+            role='dialog'
+            aria-modal='true'
+            tabIndex={-1}
+            onKeyDown={(e) => {
+              if (e.key === 'Escape') {
+                e.stopPropagation();
+                handleMinimize();
+              }
+            }}
+            onMouseDown={(e) => e.stopPropagation()}
+            className={`fixed z-40 h-[83vh] w-[90vw] max-w-[450px] rounded-lg lg:w-[40vw] lg:max-w-[900px] ${
+              isMinimized
+                ? 'pointer-events-none -translate-y-4 scale-95 opacity-0'
+                : 'font-merriweather translate-y-0 scale-100 bg-[linear-gradient(145deg,rgba(22,0,43,0.95),rgba(10,0,21,0.95))] opacity-100 backdrop-blur-sm'
+            } ${isInMenu ? 'bottom-1/2 left-24 translate-y-1/2' : 'bottom-20 left-6'}`}
+            style={
+              !isMinimized
+                ? {
+                    boxShadow:
+                      '0px 0px 40px rgba(114,0,214,0.4), inset 0px 1px 0px rgba(255,255,255,0.1)',
+                  }
+                : undefined
+            }
+          >
+            <div className='flex h-full flex-col overflow-hidden rounded-lg'>
+              <Assistant
+                key={currentKey}
+                onMinimize={handleMinimize}
+                onClose={handleCloseWithConfirm}
+              />
+            </div>
           </div>
-        </div>
+        </>
       )}
     </>
   );

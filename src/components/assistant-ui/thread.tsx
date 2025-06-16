@@ -60,7 +60,7 @@ const ThreadScrollToBottom: FC = () => {
       <Button
         variant='outline'
         size='icon'
-        className='text-accent border-accent/30 hover:text-accent/90 hover:border-accent/50 absolute -top-10 rounded-full border bg-[#16002b] hover:bg-[#220041] disabled:invisible'
+        className='text-accent hover:text-accent/90 hover:border-accent/50 absolute -top-12 rounded-full border border-[#38234d] hover:bg-[#220041] disabled:invisible'
       >
         <ArrowDownIcon className='h-4 w-4' />
       </Button>
@@ -73,8 +73,19 @@ const ThreadWelcome: FC = () => {
     <ThreadPrimitive.Empty>
       <div className='flex w-full max-w-[var(--thread-max-width)] flex-grow flex-col'>
         <div className='flex w-full flex-grow flex-col items-center justify-center'>
-          <p className='text-accent mt-4 font-serif font-medium'>
-            Welcome to Neverland. How can I assist you?
+          <p className='text-accent font-merriweather mt-4 text-center font-medium'>
+            <span className='block md:hidden'>
+              Welcome to Neverland. <br />
+              How can I assist you?
+            </span>
+            <span className='hidden md:block lg:hidden'>
+              Welcome to Neverland! <br />
+              Need help?
+            </span>
+            <span className='hidden lg:block'>
+              Welcome to Neverland Money, I&apos;m Nadette! <br />
+              How can I help you today?
+            </span>
           </p>
         </div>
         <ThreadWelcomeSuggestions />
@@ -87,7 +98,7 @@ const ThreadWelcomeSuggestions: FC = () => {
   return (
     <div className='mt-3 flex w-full items-stretch justify-center gap-4'>
       <ThreadPrimitive.Suggestion
-        className='flex max-w-sm grow basis-0 cursor-pointer flex-col items-center justify-center rounded-lg border p-3 transition-colors ease-in hover:bg-[#38234d]'
+        className='flex max-w-sm grow basis-0 cursor-pointer flex-col items-center justify-center rounded-lg border border-[#38234d] p-3 transition-colors ease-in hover:border-[#623f85]'
         prompt='What is Neverland?'
         method='replace'
         autoSend
@@ -97,7 +108,7 @@ const ThreadWelcomeSuggestions: FC = () => {
         </span>
       </ThreadPrimitive.Suggestion>
       <ThreadPrimitive.Suggestion
-        className='flex max-w-sm grow basis-0 cursor-pointer flex-col items-center justify-center rounded-lg border p-3 transition-colors ease-in hover:bg-[#38234d]'
+        className='flex max-w-sm grow basis-0 cursor-pointer flex-col items-center justify-center rounded-lg border border-[#38234d] p-3 transition-colors ease-in hover:border-[#623f85]'
         prompt='What the self-repaying loans are?'
         method='replace'
         autoSend
@@ -112,7 +123,7 @@ const ThreadWelcomeSuggestions: FC = () => {
 
 const Composer: FC = () => {
   return (
-    <ComposerPrimitive.Root className='focus-within:border-accent/40 border-accent/20 flex w-full flex-wrap items-end rounded-lg border bg-black px-2.5 shadow-sm transition-colors ease-in'>
+    <ComposerPrimitive.Root className='flex w-full flex-wrap items-end rounded-lg border border-[#38234d] bg-black/93 px-2.5 shadow-sm transition-colors ease-in focus-within:border-[#623f85]'>
       <ComposerPrimitive.Input
         rows={1}
         placeholder='Ask about Neverland...'
@@ -131,7 +142,7 @@ const ComposerAction: FC = () => {
           <TooltipIconButton
             tooltip='Send'
             variant='default'
-            className='bg-accent/20 text-accent hover:bg-accent/30 border-accent/20 my-2.5 size-8 border p-2 transition-opacity ease-in'
+            className='my-2.5 size-8 border border-[#38234d] bg-[#38234d]/20 p-2 text-[#cfbcff] transition-opacity ease-in hover:bg-[#38234d]/30'
           >
             <SendHorizontalIcon />
           </TooltipIconButton>
@@ -202,7 +213,7 @@ const EditComposer: FC = () => {
 const AssistantMessage: FC = () => {
   return (
     <MessagePrimitive.Root className='relative grid w-full max-w-[var(--thread-max-width)] grid-cols-[auto_auto_1fr] grid-rows-[auto_1fr] py-4'>
-      <div className='col-span-2 col-start-2 row-start-1 my-1.5 max-w-[calc(var(--thread-max-width)*0.8)] rounded-3xl border border-none px-5 py-2.5 leading-7 break-words text-white/90 backdrop-blur-sm'>
+      <div className='col-span-2 col-start-2 row-start-1 my-1.5 max-w-[calc(var(--thread-max-width)*0.8)] rounded-3xl border border-none px-5 py-2.5 leading-7 break-words text-white/90'>
         <MessagePrimitive.Content components={{ Text: MarkdownText }} />
       </div>
 

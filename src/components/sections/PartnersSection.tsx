@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
 import PartnerCard from '@/components/ui/PartnerCard';
+import { StarIcon } from '@/components/ui/StarIcon';
 
 // Partner logo SVG components
 const PartnerLogos = {
@@ -109,9 +110,15 @@ export default function PartnersSection() {
         {/* Header Section */}
         <div className='flex w-full max-w-[641px] flex-col items-center gap-3'>
           <h2 className='font-cinzel text-center text-[60px] leading-[110%] font-normal text-white uppercase'>
-            Our Partners
+            <span className='relative inline-block'>
+              O
+              <div className='absolute top-[47%] left-[51%] -translate-x-1/2 -translate-y-1/2 transform'>
+                <StarIcon />
+              </div>
+            </span>
+            ur Partners
           </h2>
-          <p className='font-inter w-full max-w-[493px] text-center text-lg leading-[140%] font-normal text-white'>
+          <p className='font-merriweather w-full max-w-[493px] text-center text-lg leading-[140%] font-normal text-white'>
             We collaborate with leading partners to build innovative solutions
             and grow the Neverland ecosystem.
           </p>

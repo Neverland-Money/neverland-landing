@@ -1,12 +1,12 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import Link from 'next/link';
 
 import { BlurredLoadingText } from '@/components/ui/BlurredLoadingText';
 import { StardustEffect } from '@/components/ui/StardustEffect';
-import { Tooltip } from '@/components/ui/Tooltip';
+import { StarIcon } from '@/components/ui/StarIcon';
+// import { Tooltip } from '@/components/ui/Tooltip';
 
 export default function HeroSection() {
   return (
@@ -165,13 +165,7 @@ export default function HeroSection() {
                 </div> */}
 
                   {/* Star 1 */}
-                  <Image
-                    src='/assets/images/hero/star.svg'
-                    alt='Star'
-                    width={16}
-                    height={16}
-                    style={{ aspectRatio: '16/16' }}
-                  />
+                  <StarIcon />
 
                   {/* Button text */}
                   <span className='font-inter text-center text-base leading-[110%] font-medium text-white'>
@@ -179,13 +173,7 @@ export default function HeroSection() {
                   </span>
 
                   {/* Star 2 */}
-                  <Image
-                    src='/assets/images/hero/star.svg'
-                    alt='Star'
-                    width={16}
-                    height={16}
-                    style={{ aspectRatio: '16/16' }}
-                  />
+                  <StarIcon />
                 </motion.div>
               </Link>
             </div>
@@ -216,7 +204,7 @@ export default function HeroSection() {
           </div>
 
           {/* Tooltip */}
-          <Tooltip
+          {/* <Tooltip
             content={
               <div className='text-[14px] leading-[140%] text-white'>
                 Total value of assets locked in the protocol.
@@ -247,7 +235,7 @@ export default function HeroSection() {
                 fill='white'
               />
             </svg>
-          </Tooltip>
+          </Tooltip> */}
         </div>
 
         {/* Active Users Card - Desktop version */}
@@ -271,7 +259,7 @@ export default function HeroSection() {
           </div>
 
           {/* Tooltip */}
-          <Tooltip
+          {/* <Tooltip
             content={
               <div className='text-[14px] leading-[140%] text-white'>
                 Number of users actively interacting with the protocol.
@@ -302,7 +290,7 @@ export default function HeroSection() {
                 fill='white'
               />
             </svg>
-          </Tooltip>
+          </Tooltip> */}
         </div>
 
         {/* Mobile Stats Layout - Fixed to bottom of viewport */}

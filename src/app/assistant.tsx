@@ -25,13 +25,7 @@ export const Assistant = ({ onMinimize, onClose }: AssistantProps) => {
 
   return (
     <AssistantRuntimeProvider runtime={runtime}>
-      <div
-        className='flex h-full flex-col'
-        style={{
-          fontFamily: 'var(--font-merriweather)',
-          background: 'linear-gradient(145deg, #16002b 0%, #0a0015 100%)',
-        }}
-      >
+      <div className='font-merriweather flex h-full flex-col bg-transparent'>
         <div
           className='flex h-14 items-center justify-between border-b px-4'
           style={{
@@ -40,11 +34,11 @@ export const Assistant = ({ onMinimize, onClose }: AssistantProps) => {
           }}
         >
           <div className='flex items-center space-x-3'>
-            <div className='relative h-9 w-9 overflow-hidden rounded-full border border-white/20 bg-white/10'>
+            <div className='border-primary bg-primary/80 relative h-9 w-9 overflow-hidden rounded-full border'>
               {/* Show image if it exists, otherwise show a fallback */}
               {!imageError ? (
                 <Image
-                  src='/assets/images/tinkerbell-profile.png'
+                  src='/assets/images/nadette.webp'
                   alt='Nadette'
                   width={36}
                   height={36}
@@ -58,8 +52,20 @@ export const Assistant = ({ onMinimize, onClose }: AssistantProps) => {
                 </div>
               )}
             </div>
-            <h2 className='font-serif text-lg font-semibold text-white'>
+            <h2 className='font-cinzel-decorative text-md flex items-center gap-2 text-white'>
+              <Image
+                src='/assets/images/hero/star.svg'
+                alt='Star'
+                width={24}
+                height={24}
+              />
               Nadette
+              <Image
+                src='/assets/images/hero/star.svg'
+                alt='Star'
+                width={24}
+                height={24}
+              />
             </h2>
           </div>
           <div className='flex items-center space-x-2'>

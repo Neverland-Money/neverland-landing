@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 
+import { StarIcon } from '@/components/ui/StarIcon';
+
 import AccordionItem, { type FAQItem } from '../ui/AccordionItem';
 
 const faqData: FAQItem[] = [
@@ -65,7 +67,14 @@ export default function FAQSection() {
           {/* Title */}
           <div className='flex w-full justify-center'>
             <h2 className='font-cinzel max-w-[641px] text-center text-4xl leading-[110%] font-normal text-white uppercase md:text-[60px]'>
-              Frequently Asked Questions
+              Frequently Asked{' '}
+              <span className='relative inline-block'>
+                Q
+                <div className='absolute top-[47%] left-[51%] -translate-x-1/2 -translate-y-1/2 transform'>
+                  <StarIcon />
+                </div>
+              </span>
+              uestions
             </h2>
           </div>
 

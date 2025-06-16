@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 import { StardustEffect } from '@/components/ui/StardustEffect';
+import { StarIcon } from '@/components/ui/StarIcon';
 
 export default function ContactSection() {
   const [showScrollButton, setShowScrollButton] = useState(false);
@@ -114,33 +115,21 @@ export default function ContactSection() {
               >
                 {/* Disabled overlay */}
                 {/* <div className="absolute inset-0 bg-black bg-opacity-20 rounded-full flex items-center justify-center">
-                  <span className="text-white text-xs font-inter">
+                  <span className="text-white text-xs font-merriweather">
                     Testnet Coming Soon
                   </span>
                 </div> */}
 
                 {/* Star 1 */}
-                <Image
-                  src='/assets/images/hero/star.svg'
-                  alt='Star'
-                  width={16}
-                  height={16}
-                  style={{ aspectRatio: '16/16' }}
-                />
+                <StarIcon />
 
                 {/* Button text */}
-                <span className='font-inter text-center text-base leading-[110%] font-medium text-white'>
+                <span className='font-merriweather text-center text-base leading-[110%] font-medium text-white'>
                   Enter Dapp
                 </span>
 
                 {/* Star 2 */}
-                <Image
-                  src='/assets/images/hero/star.svg'
-                  alt='Star'
-                  width={16}
-                  height={16}
-                  style={{ aspectRatio: '16/16' }}
-                />
+                <StarIcon />
               </motion.div>
             </Link>
           </div>
@@ -153,21 +142,21 @@ export default function ContactSection() {
           <Link
             href='#about'
             onClick={(e) => handleSmoothScroll(e, 'about')}
-            className='font-inter text-base leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70'
+            className='font-merriweather text-base leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70'
           >
             About
           </Link>
           <Link
             href='#stats'
             onClick={(e) => handleSmoothScroll(e, 'stats')}
-            className='font-inter text-base leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70'
+            className='font-merriweather text-base leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70'
           >
             Stats
           </Link>
           <Link
             href='#faq'
             onClick={(e) => handleSmoothScroll(e, 'faq')}
-            className='font-inter text-base leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70'
+            className='font-merriweather text-base leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70'
           >
             FAQ
           </Link>
@@ -179,7 +168,7 @@ export default function ContactSection() {
             href='https://x.com/neverland_money'
             target='_blank'
             rel='noopener noreferrer'
-            className='font-inter text-base leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70'
+            className='font-merriweather text-base leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70'
           >
             {`{ X }`}
           </Link>
@@ -187,7 +176,7 @@ export default function ContactSection() {
             href='https://discord.gg/neverland-money'
             target='_blank'
             rel='noopener noreferrer'
-            className='font-inter text-base leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70'
+            className='font-merriweather text-base leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70'
           >
             {`{ Discord }`}
           </Link>
@@ -195,7 +184,7 @@ export default function ContactSection() {
             href='https://t.me/neverland_money'
             target='_blank'
             rel='noopener noreferrer'
-            className='font-inter text-base leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70'
+            className='font-merriweather text-base leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70'
           >
             {`{ Telegram }`}
           </Link>
@@ -207,7 +196,7 @@ export default function ContactSection() {
             href='/'
             target='_blank'
             rel='noopener noreferrer'
-            className='font-inter text-base leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70'
+            className='font-merriweather text-base leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70'
           >
             License
           </Link>
@@ -215,7 +204,7 @@ export default function ContactSection() {
             href='/'
             target='_blank'
             rel='noopener noreferrer'
-            className='font-inter text-base leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70'
+            className='font-merriweather text-base leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70'
           >
             Terms & conditions
           </Link>

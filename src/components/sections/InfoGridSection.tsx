@@ -1,15 +1,6 @@
-import Image from 'next/image';
 import React from 'react';
 
-const StarIcon = () => (
-  <Image
-    src='/assets/images/info/star.svg'
-    alt='Star'
-    width={26}
-    height={26}
-    className='h-6 w-6'
-  />
-);
+import { StarIcon } from '@/components/ui/StarIcon';
 
 interface FeatureCardProps {
   title: string;

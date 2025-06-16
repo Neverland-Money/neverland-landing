@@ -16,7 +16,7 @@ function SecurityCard({
   disabled = false,
 }: SecurityCardProps) {
   return (
-    <div className='relative flex aspect-[588/394] w-[280px] flex-col items-center justify-center gap-2.5 overflow-hidden rounded-2xl border border-[#402262] p-4 backdrop-blur-sm sm:w-[350px] sm:p-13 lg:w-[480px] lg:p-28 xl:w-[588px]'>
+    <div className='relative flex aspect-[588/394] w-[340px] flex-col items-center justify-center gap-2.5 overflow-hidden rounded-2xl border border-[#402262] p-12 backdrop-blur-sm sm:w-[350px] sm:p-13 lg:w-[480px] lg:p-28 xl:w-[588px]'>
       {/* Security background image */}
       <div
         className='absolute inset-0 z-0 bg-cover bg-center bg-no-repeat'
@@ -76,7 +76,7 @@ function SecurityCard({
 export default function SecuritySection() {
   return (
     <section className='mx-auto flex w-full max-w-[1280px] flex-col items-center gap-16 px-10 py-[100px] md:py-[120px] lg:gap-[100px]'>
-      <div className='flex w-full max-w-[539px] flex-col items-center gap-3'>
+      <div className='flex w-full max-w-[539px] flex-col items-center gap-3 px-2'>
         <h2 className='font-cinzel w-full text-center text-4xl leading-[110%] font-normal text-white uppercase lg:text-[60px]'>
           Lost Boys&apos; Safeguard
         </h2>
