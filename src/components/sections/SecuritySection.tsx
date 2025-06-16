@@ -75,7 +75,7 @@ function SecurityCard({
 
 export default function SecuritySection() {
   return (
-    <section className='mx-auto flex w-full max-w-[1280px] flex-col items-center gap-16 px-10 py-[180px] lg:gap-[100px]'>
+    <section className='mx-auto flex w-full max-w-[1280px] flex-col items-center gap-16 px-10 py-[100px] md:py-[120px] lg:gap-[100px]'>
       <div className='flex w-full max-w-[539px] flex-col items-center gap-3'>
         <h2 className='font-cinzel w-full text-center text-4xl leading-[110%] font-normal text-white uppercase lg:text-[60px]'>
           Lost Boys&apos; Safeguard
