@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+// import Link from 'next/link';
 
 interface SecurityCardProps {
   title: string;
@@ -12,7 +12,9 @@ interface SecurityCardProps {
 function SecurityCard({
   title,
   description,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   href,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   disabled = false,
 }: SecurityCardProps) {
   return (
@@ -33,7 +35,7 @@ function SecurityCard({
             {description}
           </p>
         </div>
-        <Link
+        {/* <Link
           href={disabled ? '#' : href}
           className={`flex h-4 w-[100px] items-center justify-center transition-all duration-300 hover:scale-110 hover:brightness-125 sm:h-5 sm:w-[140px] ${disabled ? 'cursor-not-allowed' : 'cursor-pointer'}`}
           onClick={disabled ? (e) => e.preventDefault() : undefined}
@@ -67,7 +69,7 @@ function SecurityCard({
               fill='white'
             />
           </svg>
-        </Link>
+        </Link> */}
       </div>
     </div>
   );

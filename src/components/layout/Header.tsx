@@ -130,6 +130,22 @@ export default function Header() {
               className='h-[auto] w-[20px] text-white'
             />
           </Link>
+
+          {/* Medium Icon */}
+          <Link
+            href='https://news.neverland.money/'
+            target='_blank noreferrer noopener'
+            className='flex items-center rounded-full border border-white/20 p-2 transition-colors hover:border-purple-400'
+          >
+            <Image
+              loading='eager'
+              src='/assets/images/header/medium.svg'
+              alt='Medium'
+              width={0}
+              height={0}
+              className='h-[auto] w-[20px] text-white invert'
+            />
+          </Link>
         </div>
 
         {/* Mobile Menu Button */}
@@ -205,7 +221,7 @@ export default function Header() {
               <Link
                 href='https://x.com/neverland_money'
                 target='_blank noreferrer noopener'
-                className='border-primary flex aspect-square h-[80px] w-[80px] flex-shrink-0 items-center justify-center rounded-full border-[1.818px]'
+                className='flex aspect-square h-[60px] w-[60px] flex-shrink-0 items-center justify-center rounded-full border-[1.818px] border-[#942ffe]'
               >
                 <Image
                   loading='eager'
@@ -219,7 +235,7 @@ export default function Header() {
               <Link
                 href='https://discord.com/invite/neverland-money'
                 target='_blank noreferrer noopener'
-                className='border-primary flex aspect-square h-[80px] w-[80px] flex-shrink-0 items-center justify-center rounded-full border-[1.818px]'
+                className='flex aspect-square h-[60px] w-[60px] flex-shrink-0 items-center justify-center rounded-full border-[1.818px] border-[#942ffe]'
               >
                 <Image
                   loading='eager'
@@ -233,7 +249,7 @@ export default function Header() {
               <Link
                 href='https://t.me/neverland_money'
                 target='_blank noreferrer noopener'
-                className='border-primary flex aspect-square h-[80px] w-[80px] flex-shrink-0 items-center justify-center rounded-full border-[1.818px]'
+                className='flex aspect-square h-[60px] w-[60px] flex-shrink-0 items-center justify-center rounded-full border-[1.818px] border-[#942ffe]'
               >
                 <Image
                   loading='eager'
@@ -242,6 +258,20 @@ export default function Header() {
                   width={0}
                   height={0}
                   className='h-[auto] w-[24px] text-white'
+                />
+              </Link>
+              <Link
+                href='https://news.neverland.money/'
+                target='_blank noreferrer noopener'
+                className='flex aspect-square h-[60px] w-[60px] flex-shrink-0 items-center justify-center rounded-full border-[1.818px] border-[#942ffe]'
+              >
+                <Image
+                  loading='eager'
+                  src='/assets/images/header/medium.svg'
+                  alt='Medium'
+                  width={0}
+                  height={0}
+                  className='h-[auto] w-[24px] text-white invert'
                 />
               </Link>
             </div>

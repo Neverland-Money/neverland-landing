@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 import { Thread } from '@/components/assistant-ui/thread';
+import { StarIcon } from '@/components/ui/StarIcon';
 
 interface AssistantProps {
   onMinimize?: () => void;
@@ -53,19 +54,9 @@ export const Assistant = ({ onMinimize, onClose }: AssistantProps) => {
               )}
             </div>
             <h2 className='font-cinzel-decorative text-md flex items-center gap-2 text-white'>
-              <Image
-                src='/assets/images/hero/star.svg'
-                alt='Star'
-                width={24}
-                height={24}
-              />
+              <StarIcon />
               Nadette
-              <Image
-                src='/assets/images/hero/star.svg'
-                alt='Star'
-                width={24}
-                height={24}
-              />
+              <StarIcon />
             </h2>
           </div>
           <div className='flex items-center space-x-2'>

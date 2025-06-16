@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 import PartnerCard from '@/components/ui/PartnerCard';
@@ -8,76 +9,98 @@ import { StarIcon } from '@/components/ui/StarIcon';
 
 // Partner logo SVG components
 const PartnerLogos = {
-  // P Logo
-  PLogo: () => (
-    <div className='flex h-12 w-12 items-center justify-center text-3xl font-bold text-white'>
-      P
+  // Aave
+  AaveLogo: () => (
+    <div className='flex h-24 w-24 items-center justify-center text-3xl font-bold text-white'>
+      <Image
+        src='/assets/images/partners/aave.svg'
+        alt='Aave'
+        width={120}
+        height={120}
+        className='object-cover'
+        priority
+      />
     </div>
   ),
-
-  // S Logo
-  SLogo: () => (
-    <div className='flex h-12 w-12 items-center justify-center text-3xl font-bold text-white'>
-      S
+  // Solidly
+  SolidlyLogo: () => (
+    <div className='flex h-24 w-24 items-center justify-center text-3xl font-bold text-white'>
+      <Image
+        src='/assets/images/partners/solidly.svg'
+        alt='Solidly'
+        width={120}
+        height={120}
+        className='object-cover'
+        priority
+      />
     </div>
   ),
-
-  // I Logo
-  ILogo: () => (
-    <div className='flex h-12 w-12 items-center justify-center text-3xl font-bold text-white'>
-      I
+  // Chainlink
+  ChainlinkLogo: () => (
+    <div className='flex h-24 w-24 items-center justify-center text-3xl font-bold text-white'>
+      <Image
+        src='/assets/images/partners/chainlink.svg'
+        alt='Chainlink'
+        width={120}
+        height={120}
+        className='object-cover'
+        priority
+      />
     </div>
   ),
-
-  // L Logo
-  LLogo: () => (
-    <div className='flex h-12 w-12 items-center justify-center text-3xl font-bold text-white'>
-      L
+  // Monad
+  MonadLogo: () => (
+    <div className='flex h-24 w-24 items-center justify-center text-3xl font-bold text-white'>
+      <Image
+        src='/assets/images/partners/monad.svg'
+        alt='Monad'
+        width={120}
+        height={120}
+        className='object-cover'
+        priority
+      />
     </div>
   ),
-
-  // G Logo
-  GLogo: () => (
-    <div className='flex h-12 w-12 items-center justify-center text-3xl font-bold text-white'>
-      G
-    </div>
-  ),
-  // A Logo
-  ALogo: () => (
-    <div className='flex h-12 w-12 items-center justify-center text-3xl font-bold text-white'>
-      A
-    </div>
-  ),
-  // N Logo
-  NLogo: () => (
-    <div className='flex h-12 w-12 items-center justify-center text-3xl font-bold text-white'>
-      N
+  // Aerodrome
+  AerodromeLogo: () => (
+    <div className='flex h-24 w-24 items-center justify-center text-3xl font-bold text-white'>
+      <Image
+        src='/assets/images/partners/aerodrome.svg'
+        alt='Aerodrome'
+        width={120}
+        height={120}
+        className='object-cover'
+        priority
+      />
     </div>
   ),
 };
 
 export default function PartnersSection() {
   const partners = [
-    { name: 'Partner 1', logo: <PartnerLogos.SLogo /> },
-    { name: 'Partner 2', logo: <PartnerLogos.LLogo /> },
-    { name: 'Partner 3', logo: <PartnerLogos.ILogo /> },
-    { name: 'Partner 4', logo: <PartnerLogos.GLogo /> },
-    { name: 'Partner 5', logo: <PartnerLogos.SLogo /> },
-    { name: 'Partner 6', logo: <PartnerLogos.LLogo /> },
-    { name: 'Partner 7', logo: <PartnerLogos.ILogo /> },
-    { name: 'Partner 8', logo: <PartnerLogos.GLogo /> },
-    { name: 'Partner 9', logo: <PartnerLogos.SLogo /> },
-    { name: 'Partner 10', logo: <PartnerLogos.LLogo /> },
-    { name: 'Partner 11', logo: <PartnerLogos.ILogo /> },
-    { name: 'Partner 12', logo: <PartnerLogos.GLogo /> },
-    { name: 'Partner 13', logo: <PartnerLogos.SLogo /> },
-    { name: 'Partner 14', logo: <PartnerLogos.LLogo /> },
-    { name: 'Partner 15', logo: <PartnerLogos.ILogo /> },
-    { name: 'Partner 16', logo: <PartnerLogos.GLogo /> },
-    { name: 'Partner 17', logo: <PartnerLogos.SLogo /> },
-    { name: 'Partner 18', logo: <PartnerLogos.LLogo /> },
-    { name: 'Partner 19', logo: <PartnerLogos.ILogo /> },
-    { name: 'Partner 20', logo: <PartnerLogos.GLogo /> },
+    { name: 'Partner 1', logo: <PartnerLogos.MonadLogo /> },
+    { name: 'Partner 2', logo: <PartnerLogos.SolidlyLogo /> },
+    { name: 'Partner 3', logo: <PartnerLogos.ChainlinkLogo /> },
+    { name: 'Partner 4', logo: <PartnerLogos.AaveLogo /> },
+    { name: 'Partner 5', logo: <PartnerLogos.AerodromeLogo /> },
+
+    { name: 'Partner 6', logo: <PartnerLogos.MonadLogo /> },
+    { name: 'Partner 7', logo: <PartnerLogos.SolidlyLogo /> },
+    { name: 'Partner 8', logo: <PartnerLogos.ChainlinkLogo /> },
+    { name: 'Partner 9', logo: <PartnerLogos.AaveLogo /> },
+    { name: 'Partner 10', logo: <PartnerLogos.AerodromeLogo /> },
+
+    { name: 'Partner 11', logo: <PartnerLogos.MonadLogo /> },
+    { name: 'Partner 12', logo: <PartnerLogos.SolidlyLogo /> },
+    { name: 'Partner 13', logo: <PartnerLogos.ChainlinkLogo /> },
+    { name: 'Partner 14', logo: <PartnerLogos.AaveLogo /> },
+    { name: 'Partner 15', logo: <PartnerLogos.AerodromeLogo /> },
+
+    { name: 'Partner 16', logo: <PartnerLogos.MonadLogo /> },
+    { name: 'Partner 17', logo: <PartnerLogos.SolidlyLogo /> },
+    { name: 'Partner 18', logo: <PartnerLogos.ChainlinkLogo /> },
+    { name: 'Partner 19', logo: <PartnerLogos.AaveLogo /> },
+    { name: 'Partner 20', logo: <PartnerLogos.AerodromeLogo /> },
   ];
 
   const [movementDistance, setMovementDistance] = useState('-400px');
@@ -109,18 +132,17 @@ export default function PartnersSection() {
       <div className='mx-auto flex max-w-[1540px] flex-col items-center gap-4 px-[50px] md:gap-24'>
         {/* Header Section */}
         <div className='flex w-full max-w-[641px] flex-col items-center gap-3'>
-          <h2 className='font-cinzel text-center text-[60px] leading-[110%] font-normal text-white uppercase'>
+          <h2 className='font-cinzel text-center text-[44px] leading-[110%] font-normal text-white uppercase'>
             <span className='relative inline-block'>
               O
               <div className='absolute top-[47%] left-[51%] -translate-x-1/2 -translate-y-1/2 transform'>
                 <StarIcon />
               </div>
             </span>
-            ur Partners
+            ur Foundations
           </h2>
           <p className='font-merriweather w-full max-w-[493px] text-center text-lg leading-[140%] font-normal text-white'>
-            We collaborate with leading partners to build innovative solutions
-            and grow the Neverland ecosystem.
+            We’re building Neverland on the shoulders of giants.
           </p>
         </div>
 
@@ -130,7 +152,7 @@ export default function PartnersSection() {
             className='flex min-h-[300px] items-center gap-20 md:gap-5'
             animate={{ x: ['0px', movementDistance] }}
             transition={{
-              duration: 150,
+              duration: 120,
               repeat: Infinity,
               repeatType: 'loop',
               ease: 'linear',

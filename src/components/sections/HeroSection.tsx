@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Link from 'next/link';
+// import Link from 'next/link';
 
 import { BlurredLoadingText } from '@/components/ui/BlurredLoadingText';
 import { StardustEffect } from '@/components/ui/StardustEffect';
@@ -130,52 +130,45 @@ export default function HeroSection() {
               {/* Stardust particles */}
               <StardustEffect />
 
-              <Link
-                href='#'
-                className='cursor-pointer'
-                aria-disabled='true'
-                passHref
+              <motion.div
+                className='group relative mx-auto flex w-[240px] cursor-pointer items-center justify-center gap-3 rounded-full px-6 py-4 md:mx-0 md:mr-auto'
+                style={{
+                  background:
+                    'linear-gradient(0deg, #d132e0 -31%, #530ee3 111.63%)',
+                  boxShadow: '0px 0px 36px #7200d6',
+                }}
+                whileTap={{
+                  scale: 0.95,
+                  y: 4,
+                  boxShadow: '0px 0px 18px #7200d6',
+                }}
+                transition={{
+                  type: 'spring',
+                  stiffness: 500,
+                  damping: 15,
+                }}
+                onClick={() =>
+                  document.dispatchEvent(new CustomEvent('triggerStardust'))
+                }
               >
-                <motion.div
-                  className='group relative mx-auto flex w-[240px] items-center justify-center gap-3 rounded-full px-6 py-4 md:mx-0 md:mr-auto'
-                  style={{
-                    background:
-                      'linear-gradient(0deg, #d132e0 -31%, #530ee3 111.63%)',
-                    boxShadow: '0px 0px 36px #7200d6',
-                  }}
-                  whileTap={{
-                    scale: 0.95,
-                    y: 4,
-                    boxShadow: '0px 0px 18px #7200d6',
-                  }}
-                  transition={{
-                    type: 'spring',
-                    stiffness: 500,
-                    damping: 15,
-                  }}
-                  onClick={() =>
-                    document.dispatchEvent(new CustomEvent('triggerStardust'))
-                  }
-                >
-                  {/* Disabled overlay */}
-                  {/* <div className="absolute inset-0 bg-black bg-opacity-20 rounded-full flex items-center justify-center">
+                {/* Disabled overlay */}
+                {/* <div className="absolute inset-0 bg-black bg-opacity-20 rounded-full flex items-center justify-center">
                   <span className="text-white text-xs font-inter">
                     Testnet Coming Soon
                   </span>
                 </div> */}
 
-                  {/* Star 1 */}
-                  <StarIcon />
+                {/* Star 1 */}
+                <StarIcon />
 
-                  {/* Button text */}
-                  <span className='font-inter text-center text-base leading-[110%] font-medium text-white'>
-                    Enter Dapp
-                  </span>
+                {/* Button text */}
+                <span className='font-inter text-center text-base leading-[110%] font-medium text-white'>
+                  Soon™
+                </span>
 
-                  {/* Star 2 */}
-                  <StarIcon />
-                </motion.div>
-              </Link>
+                {/* Star 2 */}
+                <StarIcon />
+              </motion.div>
             </div>
           </div>
         </div>
