@@ -1,26 +1,21 @@
 'use client';
 
-import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 
-interface FAQItem {
-  id: number;
-  question: string;
-  answer: string;
-}
+import AccordionItem, { type FAQItem } from '../ui/AccordionItem';
 
 const faqData: FAQItem[] = [
   {
     id: 1,
     question: 'What is Neverland Money?',
     answer:
-      'We need short replies! We need short replies! We need short replies! We need short replies! We need short replies! We need short replies! We need short replies! We need short replies! We need short replies! We need short replies!',
+      "Neverland is a next-generation DeFi lending protocol combining Aave V3's battle-tested security with sustainable vote escrow tokenomics. Featuring self-repaying loans, deflationary token mechanics and advanced automated yield strategies to maximize capital efficiency. Users can supply or borrow assets while earning rewards through governance participation or liquidity provision.",
   },
   {
     id: 2,
     question: 'How do I interact with Neverland?',
     answer:
-      'We need short replies! We need short replies! We need short replies! We need short replies! We need short replies! We need short replies! We need short replies! We need short replies! We need short replies! We need short replies!',
+      "Neverland is a decentralized, non-custodial liquidity protocol. Users can interact with Neverland through a user-friendly interface or directly with its smart contracts on the Monad blockchain.\n\nTo interact with the Neverland Protocol, simply connect your crypto wallet and supply your preferred asset and amount. Once supplied, you'll earn passive income based on market borrowing demand. Additionally, your supplied assets can be used as collateral, enabling you to borrow other assets.",
   },
   {
     id: 3,
@@ -42,86 +37,11 @@ const faqData: FAQItem[] = [
   },
 ];
 
-const StarIcon = ({ isOpen }: { isOpen: boolean }) => (
-  <motion.svg
-    width='34'
-    height='34'
-    viewBox='0 0 34 34'
-    fill='none'
-    xmlns='http://www.w3.org/2000/svg'
-    className='h-[25px] w-[25px] flex-shrink-0 md:h-[34px] md:w-[34px]'
-    animate={{ rotate: isOpen ? 45 : 0 }}
-    transition={{ duration: 0.3, ease: 'easeInOut' }}
-  >
-    <path
-      d='M17.4148 9.09678C17.4406 9.33373 17.4764 9.56944 17.5222 9.80358C17.568 10.0377 17.6236 10.2694 17.6891 10.4988C17.7544 10.7283 17.8297 10.9547 17.9141 11.1776C17.9989 11.4005 18.0927 11.6197 18.1957 11.8348C18.2988 12.0499 18.4111 12.2604 18.5317 12.4659C18.6528 12.6716 18.782 12.8718 18.9204 13.0663C19.058 13.2612 19.204 13.4495 19.3578 13.6319C19.5115 13.8143 19.6729 13.9898 19.8416 14.1585C20.0103 14.3272 20.1858 14.4884 20.3681 14.6424C20.5502 14.7961 20.7389 14.942 20.9334 15.0798C21.1282 15.2176 21.3284 15.3473 21.5339 15.468C21.7397 15.5889 21.9502 15.7012 22.1653 15.8044C22.3803 15.9073 22.5993 16.0011 22.8225 16.0859C23.0454 16.1704 23.2717 16.2455 23.5011 16.311C23.7304 16.3765 23.9623 16.432 24.1966 16.4778C24.4306 16.5236 24.6659 16.5595 24.9033 16.5854C27.2021 16.8372 30.1693 17 34 17C30.1693 17 27.2021 17.1628 24.9033 17.4147C24.6659 17.4406 24.4306 17.4764 24.1966 17.5222C23.9623 17.568 23.7304 17.624 23.5011 17.6893C23.2717 17.7546 23.0454 17.8297 22.8225 17.9142C22.5993 17.9991 22.3803 18.0929 22.1653 18.1961C21.9502 18.2988 21.7397 18.4111 21.5339 18.5321C21.3284 18.653 21.1282 18.7825 20.9334 18.9203C20.7389 19.0582 20.5502 19.204 20.3681 19.3577C20.1858 19.5117 20.0103 19.6729 19.8416 19.8416C19.6729 20.0103 19.5115 20.1858 19.3578 20.3681C19.204 20.5507 19.058 20.7389 18.9204 20.9339C18.782 21.1284 18.6528 21.3284 18.5317 21.5343C18.4109 21.7397 18.2988 21.9501 18.1957 22.1653C18.0927 22.3805 17.9986 22.5996 17.9141 22.8224C17.8297 23.0453 17.7544 23.2719 17.6891 23.5013C17.6236 23.7308 17.568 23.9623 17.5222 24.1965C17.4764 24.4308 17.4406 24.6664 17.4148 24.9033C17.1628 27.2021 17 30.1693 17 34C17 30.1695 16.837 27.2021 16.5853 24.9033C16.5595 24.6664 16.5236 24.4308 16.4778 24.1965C16.432 23.9623 16.3763 23.7308 16.3107 23.5013C16.2452 23.2719 16.1704 23.0453 16.0856 22.8224C16.001 22.5996 15.9073 22.3805 15.8039 22.1653C15.7008 21.9501 15.589 21.7397 15.4679 21.5343C15.347 21.3284 15.2176 21.1284 15.0797 20.9339C14.9421 20.7389 14.796 20.5507 14.6423 20.3681C14.4883 20.1858 14.3271 20.0103 14.1584 19.8416C13.9897 19.6729 13.8142 19.5117 13.6319 19.3577C13.4494 19.204 13.261 19.0582 13.0664 18.9203C12.8719 18.7825 12.6716 18.653 12.4658 18.5321C12.2603 18.4111 12.0499 18.2988 11.8347 18.1961C11.6198 18.0929 11.4005 17.9991 11.1776 17.9142C10.9543 17.8297 10.7282 17.7548 10.4987 17.6893C10.2693 17.624 10.0377 17.568 9.80351 17.5222C9.56951 17.4764 9.33369 17.4406 9.09651 17.4147C6.79774 17.1628 3.83052 17 0 17C3.83052 17 6.79774 16.8372 9.09651 16.5854C9.33369 16.5595 9.56951 16.5236 9.80351 16.4778C10.0377 16.432 10.2693 16.3765 10.4987 16.311C10.7282 16.2455 10.9543 16.1704 11.1776 16.0859C11.4005 16.0011 11.6198 15.9073 11.8347 15.8041C12.0499 15.7012 12.2603 15.5889 12.4658 15.468C12.6716 15.3473 12.8719 15.2176 13.0664 15.0798C13.261 14.942 13.4494 14.7961 13.6319 14.6424C13.8142 14.4884 13.9897 14.3272 14.1584 14.1585C14.3271 13.9898 14.4883 13.8143 14.6421 13.6319C14.796 13.4495 14.9421 13.2612 15.0797 13.0663C15.2176 12.8718 15.347 12.6716 15.4679 12.4659C15.589 12.2604 15.7008 12.0499 15.8039 11.8348C15.9073 11.6197 16.001 11.4005 16.0856 11.1776C16.1704 10.9543 16.2452 10.7283 16.3107 10.4988C16.3763 10.2694 16.432 10.0377 16.4778 9.80358C16.5236 9.56944 16.5595 9.33373 16.5853 9.09678C16.837 6.79803 17 3.83082 17 0C17 3.8305 17.1628 6.79803 17.4148 9.09678Z'
-      fill='white'
-    />
-  </motion.svg>
-);
-
-interface FAQAccordionItemProps {
-  item: FAQItem;
-  isOpen: boolean;
-  onToggle: () => void;
-}
-
-function FAQAccordionItem({ item, isOpen, onToggle }: FAQAccordionItemProps) {
-  const Icon = StarIcon;
-
-  return (
-    <div
-      className='w-full rounded-2xl border border-white/20 backdrop-blur-[10px]'
-      style={{
-        background: 'rgba(50, 2, 99, 0.6)',
-      }}
-    >
-      <button
-        onClick={onToggle}
-        className={`flex w-full items-center justify-between gap-3 rounded-2xl p-4 transition-all duration-200 md:px-8 md:py-6 ${
-          isOpen ? 'cursor-default' : 'cursor-pointer'
-        }`}
-        aria-expanded={isOpen}
-        aria-controls={`faq-answer-${item.id}`}
-      >
-        <div className='font-cinzel flex-shrink-0 text-lg leading-[110%] font-normal text-white uppercase md:text-xl'>
-          {item.id}
-        </div>
-        <h3 className='font-cinzel flex-1 text-center text-lg leading-[110%] font-normal text-white uppercase md:text-xl'>
-          {item.question}
-        </h3>
-        <Icon isOpen={isOpen} />
-      </button>
-
-      <AnimatePresence>
-        {isOpen && item.answer && (
-          <motion.div
-            id={`faq-answer-${item.id}`}
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className='overflow-hidden'
-          >
-            <div className='px-4 pb-4 md:px-8 md:pb-6'>
-              <div className='flex items-center justify-center'>
-                <p className='font-merriweather max-w-[364px] text-center text-sm leading-[140%] text-white md:max-w-[600px] md:text-base'>
-                  {item.answer}
-                </p>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-}
-
 export default function FAQSection() {
-  const [activeItem, setActiveItem] = useState<number | null>(1); // Question 1 is open by default
+  const [activeItem, setActiveItem] = useState<number>(1); // First item open by default
 
   const toggleItem = (id: number) => {
-    setActiveItem(id);
+    setActiveItem(id); // Only switch to the clicked item, no closing
   };
 
   return (
@@ -149,7 +69,7 @@ export default function FAQSection() {
           {/* FAQ Items */}
           <div className='flex w-full flex-col gap-2'>
             {faqData.map((item) => (
-              <FAQAccordionItem
+              <AccordionItem
                 key={item.id}
                 item={item}
                 isOpen={activeItem === item.id}

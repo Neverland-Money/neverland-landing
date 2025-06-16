@@ -5,6 +5,7 @@ import HeroSection from '@/components/sections/HeroSection';
 import HowItWorksSection from '@/components/sections/HowItWorksSection';
 import InfoGridSection from '@/components/sections/InfoGridSection';
 import LunarCircleSection from '@/components/sections/LunarCircleSection';
+import PartnersSection from '@/components/sections/PartnersSection';
 import SecuritySection from '@/components/sections/SecuritySection';
 
 export default function Home() {
@@ -18,6 +19,7 @@ export default function Home() {
       <LunarCircleSection />
       <SecuritySection />
       <FAQSection />
+      <PartnersSection />
     </main>
   );
 }
