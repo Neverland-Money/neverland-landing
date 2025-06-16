@@ -3,7 +3,7 @@
 :root {
   --background: #040211; /* Dark background for our theme */
   --foreground: #ffffff; /* Light text for dark background */
-  --primary: #942fff;
+  --primary: #350a44;
   --primary-dark: #7c27d9;
   --primary-light: #ab5fff;
 }
@@ -18,6 +18,39 @@
   --font-cinzel: var(--font-cinzel);
   --font-cinzel-decorative: var(--font-cinzel-decorative);
   --font-inter: var(--font-inter);
+}
+
+/* Custom Scrollbar Styling */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(22, 0, 43, 0.3);
+  border-radius: 10px;
+  border: 1px solid rgba(209, 50, 224, 0.1);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #d132e0 0%, #530ee3 100%);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0px 0px 8px rgba(114, 0, 214, 0.3);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #e142f0 0%, #6318f3 100%);
+  box-shadow: 0px 0px 12px rgba(114, 0, 214, 0.5);
+}
+
+.custom-scrollbar::-webkit-scrollbar-corner {
+  background: rgba(22, 0, 43, 0.3);
+}
+
+/* Firefox scrollbar styling */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #d132e0 rgba(22, 0, 43, 0.3);
 }
 
 body {

@@ -47,7 +47,7 @@ export default function FAQSection() {
   return (
     <section
       id='faq'
-      className='relative h-[620px] min-h-screen w-full overflow-hidden bg-gradient-to-b from-[#1a0b2e] via-[#2d1b69] to-[#1a0b2e] md:h-[1220px]'
+      className='relative h-[1100px] min-h-screen w-full overflow-hidden bg-gradient-to-b from-[#1a0b2e] via-[#2d1b69] to-[#1a0b2e] md:h-[1220px]'
     >
       {/* Background Image */}
       <div

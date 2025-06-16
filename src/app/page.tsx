@@ -1,3 +1,4 @@
+import { ChatButton } from '@/components/assistant-ui/chat-button';
 import Header from '@/components/layout/Header';
 import ContactSection from '@/components/sections/ContactSection';
 import FAQSection from '@/components/sections/FAQSection';
@@ -22,6 +23,7 @@ export default function Home() {
       <FAQSection />
       <PartnersSection />
       <ContactSection />
+      <ChatButton />
     </main>
   );
 }

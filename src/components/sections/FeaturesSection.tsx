@@ -16,7 +16,7 @@ export default function FeaturesSection() {
       />
 
       {/* Content */}
-      <div className='relative z-10 flex min-h-screen w-full flex-col items-center px-4 py-16 sm:px-6 lg:px-8'>
+      <div className='relative z-10 flex min-h-screen w-full flex-col items-center px-4 pt-28 pb-16 sm:px-6 lg:px-8 lg:pt-36'>
         {/* Header Section */}
         <div className='mb-16 flex w-[329px] max-w-sm flex-col items-center gap-3 text-center lg:mb-25'>
           <h2 className='font-cinzel text-4xl leading-[110%] font-normal text-white uppercase sm:text-5xl lg:text-6xl'>
@@ -31,15 +31,24 @@ export default function FeaturesSection() {
         {/* Feature Cards */}
         <div className='flex w-full max-w-6xl flex-col items-center gap-5 lg:flex-row lg:justify-center'>
           {/* Capital Efficiency Card */}
-          <div className='group relative flex h-[370px] w-[370px] flex-col items-center gap-2 rounded-[16px] border border-white/20 px-[45px] py-[122px] backdrop-blur-[6px] transition-all duration-300 hover:border-white/30'>
+          <div className='group relative flex h-[250px] w-[375px] flex-col items-center gap-2 rounded-[16px] border border-white/20 px-[45px] py-[75px] backdrop-blur-[6px] transition-all duration-300 hover:border-white/30 lg:h-[370px] lg:w-[370px] lg:py-[122px]'>
             {/* Card Background Frame */}
             <div className='absolute inset-0 overflow-hidden rounded-[16px]'>
+              {/* Mobile Frame */}
+              <Image
+                src='/assets/images/features/frame-wide.webp'
+                alt='Feature card frame'
+                sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+                fill
+                className='object-cover lg:hidden'
+              />
+              {/* Desktop Frame */}
               <Image
                 src='/assets/images/features/frame.webp'
                 alt='Feature card frame'
                 sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                 fill
-                className='object-cover'
+                className='hidden object-cover lg:block'
               />
             </div>
 
@@ -56,15 +65,24 @@ export default function FeaturesSection() {
           </div>
 
           {/* Self-Repaying Loans Card */}
-          <div className='group relative flex h-[370px] w-[370px] flex-col items-center gap-2 rounded-[16px] border border-white/20 px-[45px] py-[122px] backdrop-blur-[6px] transition-all duration-300 hover:border-white/30'>
+          <div className='group relative flex h-[250px] w-[375px] flex-col items-center gap-2 rounded-[16px] border border-white/20 px-[45px] py-[75px] backdrop-blur-[6px] transition-all duration-300 hover:border-white/30 lg:h-[370px] lg:w-[370px] lg:py-[122px]'>
             {/* Card Background Frame */}
             <div className='absolute inset-0 overflow-hidden rounded-[16px]'>
+              {/* Mobile Frame */}
+              <Image
+                src='/assets/images/features/frame-wide.webp'
+                alt='Feature card frame'
+                sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+                fill
+                className='scale-x-[-1] object-cover lg:hidden'
+              />
+              {/* Desktop Frame */}
               <Image
                 src='/assets/images/features/frame.webp'
                 alt='Feature card frame'
                 sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                 fill
-                className='scale-x-[-1] object-cover'
+                className='hidden scale-x-[-1] object-cover lg:block'
               />
             </div>
 

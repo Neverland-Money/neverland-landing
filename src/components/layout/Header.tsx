@@ -205,7 +205,7 @@ export default function Header() {
               <Link
                 href='https://x.com/neverland_money'
                 target='_blank noreferrer noopener'
-                className='flex aspect-square h-[80px] w-[80px] flex-shrink-0 items-center justify-center rounded-full border-[1.818px] border-[#942FFF]'
+                className='border-primary flex aspect-square h-[80px] w-[80px] flex-shrink-0 items-center justify-center rounded-full border-[1.818px]'
               >
                 <Image
                   loading='eager'
@@ -219,7 +219,7 @@ export default function Header() {
               <Link
                 href='https://discord.com/invite/neverland-money'
                 target='_blank noreferrer noopener'
-                className='flex aspect-square h-[80px] w-[80px] flex-shrink-0 items-center justify-center rounded-full border-[1.818px] border-[#942FFF]'
+                className='border-primary flex aspect-square h-[80px] w-[80px] flex-shrink-0 items-center justify-center rounded-full border-[1.818px]'
               >
                 <Image
                   loading='eager'
@@ -233,7 +233,7 @@ export default function Header() {
               <Link
                 href='https://t.me/neverland_money'
                 target='_blank noreferrer noopener'
-                className='flex aspect-square h-[80px] w-[80px] flex-shrink-0 items-center justify-center rounded-full border-[1.818px] border-[#942FFF]'
+                className='border-primary flex aspect-square h-[80px] w-[80px] flex-shrink-0 items-center justify-center rounded-full border-[1.818px]'
               >
                 <Image
                   loading='eager'
