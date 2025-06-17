@@ -205,179 +205,27 @@ export const ChatButton = ({
         </>
       )}
 
-      {/* Stardust Effect - Shows when chat is minimized and there's activity */}
+      {/* Pulsing glow effect */}
       {isOpen && isMinimized && (
         <div
-          className={`absolute ${isInMenu ? 'relative' : 'fixed bottom-6 left-6'} pointer-events-none`}
+          className={`absolute ${isInMenu ? 'relative' : 'fixed bottom-6 left-6'} pointer-events-none z-20`}
         >
-          {/* Main dust particles flowing from button center */}
-          {[...Array(16)].map((_, i) => {
-            const randomX1 = (Math.random() - 0.5) * 40;
-            const randomX2 = (Math.random() - 0.5) * 80;
-            const randomX3 = (Math.random() - 0.5) * 120;
-            const randomY1 = -Math.random() * 30 - 10;
-            const randomY2 = -Math.random() * 40 - 30;
-            const randomY3 = Math.random() * 60 - 20;
-            const randomDelay = Math.random() * 2;
-            const randomDuration = 2.5 + Math.random() * 2;
-
-            return (
-              <motion.div
-                key={i}
-                className={`absolute rounded-full ${
-                  i % 4 === 0
-                    ? 'h-0.5 w-0.5 bg-purple-200'
-                    : i % 4 === 1
-                      ? 'h-1 w-1 bg-purple-300'
-                      : i % 4 === 2
-                        ? 'h-1 w-1 bg-purple-400'
-                        : 'h-0.5 w-0.5 bg-white'
-                }`}
-                initial={{
-                  x: 20,
-                  y: 20,
-                  opacity: 0,
-                  scale: 0,
-                }}
-                animate={{
-                  x: [20, 20 + randomX1, 20 + randomX2, 20 + randomX3],
-                  y: [20, 20 + randomY1, 20 + randomY2, 20 + randomY3],
-                  opacity: [0, 0.9, 0.6, 0],
-                  scale: [0, 1.5, 1, 0.2],
-                }}
-                transition={{
-                  duration: randomDuration,
-                  repeat: Infinity,
-                  delay: randomDelay,
-                  ease: 'easeInOut',
-                }}
-              />
-            );
-          })}
-
-          {/* Additional upward flowing particles */}
-          {[...Array(12)].map((_, i) => {
-            const randomX1 = (Math.random() - 0.5) * 30;
-            const randomX2 = (Math.random() - 0.5) * 50;
-            const randomY1 = -Math.random() * 40 - 20;
-            const randomY2 = -Math.random() * 60 - 40;
-            const randomY3 = -Math.random() * 80 - 60;
-            const randomDelay = Math.random() * 3 + 0.5;
-            const randomDuration = 2 + Math.random() * 2;
-
-            return (
-              <motion.div
-                key={`upward-${i}`}
-                className={`absolute rounded-full ${
-                  i % 3 === 0
-                    ? 'h-0.5 w-0.5 bg-purple-300'
-                    : i % 3 === 1
-                      ? 'h-0.5 w-0.5 bg-white'
-                      : 'h-1 w-1 bg-purple-200'
-                }`}
-                initial={{
-                  x: 20,
-                  y: 20,
-                  opacity: 0,
-                  scale: 0,
-                }}
-                animate={{
-                  x: [20, 20 + randomX1, 20 + randomX2],
-                  y: [20, 20 + randomY1, 20 + randomY2, 20 + randomY3],
-                  opacity: [0, 1, 0.5, 0],
-                  scale: [0, 1.2, 0.8, 0.1],
-                }}
-                transition={{
-                  duration: randomDuration,
-                  repeat: Infinity,
-                  delay: randomDelay,
-                  ease: 'easeOut',
-                }}
-              />
-            );
-          })}
-
-          {/* Cascading particles that fall from sides */}
-          {[...Array(14)].map((_, i) => {
-            const randomX1 = (Math.random() - 0.5) * 80;
-            const randomX2 = (Math.random() - 0.5) * 120;
-            const randomY1 = Math.random() * 30;
-            const randomY2 = Math.random() * 60 + 20;
-            const randomY3 = Math.random() * 40 + 60;
-            const randomDelay = Math.random() * 4 + 1;
-            const randomDuration = 3 + Math.random() * 3;
-
-            return (
-              <motion.div
-                key={`cascade-${i}`}
-                className={`absolute rounded-full ${
-                  i % 5 === 0
-                    ? 'h-0.5 w-0.5 bg-purple-100'
-                    : i % 5 === 1
-                      ? 'h-0.5 w-0.5 bg-purple-200'
-                      : i % 5 === 2
-                        ? 'h-1 w-1 bg-purple-300'
-                        : i % 5 === 3
-                          ? 'h-0.5 w-0.5 bg-white'
-                          : 'h-1 w-1 bg-purple-400'
-                }`}
-                initial={{
-                  x: 20,
-                  y: -20,
-                  opacity: 0,
-                }}
-                animate={{
-                  x: [20, 20 + randomX1, 20 + randomX2],
-                  y: [-20, -20 + randomY1, -20 + randomY2, -20 + randomY3],
-                  opacity: [0, 0.8, 0.4, 0],
-                }}
-                transition={{
-                  duration: randomDuration,
-                  repeat: Infinity,
-                  delay: randomDelay,
-                  ease: 'easeIn',
-                }}
-              />
-            );
-          })}
-
-          {/* Fine glowing center particles */}
-          {[...Array(8)].map((_, i) => {
-            const randomX1 = (Math.random() - 0.5) * 24;
-            const randomY1 = -Math.random() * 30 - 15;
-            const randomY2 = -Math.random() * 35 - 25;
-            const randomDelay = Math.random() * 2;
-            const randomDuration = 2 + Math.random() * 1.5;
-
-            return (
-              <motion.div
-                key={`glow-${i}`}
-                className={`absolute rounded-full blur-sm ${
-                  i % 2 === 0
-                    ? 'h-1 w-1 bg-purple-400'
-                    : 'h-1 w-1 bg-purple-300'
-                }`}
-                initial={{
-                  x: 18,
-                  y: 18,
-                  opacity: 0,
-                  scale: 0,
-                }}
-                animate={{
-                  x: [18, 18 + randomX1],
-                  y: [18, 18 + randomY1, 18 + randomY2],
-                  opacity: [0, 0.9, 0],
-                  scale: [0, 1.8, 0],
-                }}
-                transition={{
-                  duration: randomDuration,
-                  repeat: Infinity,
-                  delay: randomDelay,
-                  ease: 'easeOut',
-                }}
-              />
-            );
-          })}
+          <motion.div
+            className='absolute -bottom-5 left-5 h-10 w-10 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#891de1]'
+            style={{
+              filter: 'blur(12px)',
+              boxShadow: '0px 0px 26px #891de1',
+            }}
+            animate={{
+              opacity: [0.3, 0.8, 0.3],
+              scale: [1.2, 1.4, 1.2],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+          />
         </div>
       )}
 

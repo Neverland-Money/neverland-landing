@@ -6,54 +6,69 @@ import { motion } from 'framer-motion';
 import { BlurredLoadingText } from '@/components/ui/BlurredLoadingText';
 import { StardustEffect } from '@/components/ui/StardustEffect';
 import { StarIcon } from '@/components/ui/StarIcon';
+import StarrySky from '@/components/ui/StarrySky';
 // import { Tooltip } from '@/components/ui/Tooltip';
 
 export default function HeroSection() {
   return (
     <div className='relative flex h-[100vh] max-h-[1000px] min-h-[700px] w-full flex-col overflow-hidden bg-[#01020D] md:max-h-[100vh] md:min-h-[944px]'>
-      {/* Background image layer - uses separate styles for mobile and desktop */}
-      <div className='absolute inset-0 h-full w-full scale-x-[-1] transform md:scale-x-100'>
-        {/* Mobile background - positioned from bottom */}
+      {/* Starry sky background */}
+      <div className='absolute top-0 left-0 z-[4] h-[100vh] w-full'>
         <div
-          className='bg-lightgray absolute inset-0 h-full w-full md:hidden'
+          className='absolute inset-0 h-full w-full md:hidden'
+          style={{
+            backgroundImage:
+              "url('/assets/images/hero/background-gradient.webp')",
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: '-860px bottom',
+            backgroundSize: '350% auto',
+            transform: 'scaleX(-1)',
+          }}
+        />
+        <StarrySky />
+        <div
+          className='absolute inset-0 hidden h-full w-full md:block'
+          style={{
+            background:
+              "url('/assets/images/hero/background-gradient.webp') center bottom / cover no-repeat",
+          }}
+        />
+        <div
+          className='absolute inset-0 z-[8] h-full w-full md:hidden'
           style={{
             backgroundImage: "url('/assets/images/hero/background.webp')",
             backgroundRepeat: 'no-repeat',
             backgroundPosition: '-860px bottom',
             backgroundSize: '350% auto',
+            transform: 'scaleX(-1)',
           }}
         />
-
-        {/* Desktop background */}
         <div
-          className='absolute inset-0 hidden h-full w-full md:block'
+          className='absolute inset-0 z-[9] hidden h-full w-full md:block'
           style={{
             background:
-              "url('/assets/images/hero/background.webp') lightgray -173px -274px / 124% 129% no-repeat",
+              "url('/assets/images/hero/background.webp') center bottom / cover no-repeat",
           }}
         />
       </div>
-
       {/* Shadow bottom gradient */}
       <div
-        className='absolute bottom-0 left-0 z-[1] h-full w-full'
+        className='absolute bottom-0 left-0 z-[4] h-full w-full'
         style={{
           background:
             'linear-gradient(0deg, #050212 0.96%, rgba(5, 2, 18, 0.00) 8.65%)',
         }}
       />
-
       {/* Shadow top gradient */}
       <div
-        className='absolute top-0 left-0 z-[2] h-full w-full'
+        className='absolute top-0 left-0 z-[4] h-full w-full'
         style={{
           background:
             'linear-gradient(0deg, rgba(5, 2, 18, 0.00) 48.56%, rgba(5, 2, 18, 0.60) 100%)',
         }}
       />
-
       {/* Main content container - exactly 248px from the bottom of header on desktop, less on mobile */}
-      <div className='relative z-[5] mt-[120px] flex flex-col items-center md:mt-[248px] md:items-start'>
+      <div className='relative z-[6] mt-[120px] flex flex-col items-center md:mt-[248px] md:items-start'>
         {/* Content wrapper with max width */}
         <div className='mx-auto w-full max-w-7xl px-4 xl:px-0'>
           <div className='flex w-full max-w-[950px] flex-col items-center justify-center gap-6 md:items-start md:gap-9'>
@@ -173,9 +188,8 @@ export default function HeroSection() {
           </div>
         </div>
       </div>
-
       {/* Stats Cards - 80px from button above on desktop, 40px on mobile */}
-      <div className='z-[5] mx-auto mt-[40px] flex w-full max-w-7xl flex-col gap-4 px-4 md:mt-[80px] md:flex-row md:gap-6 xl:px-0'>
+      <div className='z-[7] mx-auto mt-[40px] flex w-full max-w-7xl flex-col gap-4 px-4 md:mt-[80px] md:flex-row md:gap-6 xl:px-0'>
         {/* Total Value Locked Card - Desktop version */}
         <div
           className='relative hidden h-[118px] w-[255px] rounded-[20px] border border-white/20 md:block'
@@ -199,33 +213,33 @@ export default function HeroSection() {
           {/* Tooltip */}
           {/* <Tooltip
             content={
-              <div className='text-[14px] leading-[140%] text-white'>
+              <div className="text-[14px] leading-[140%] text-white">
                 Total value of assets locked in the protocol.
               </div>
             }
-            position='top'
-            className='absolute top-22 left-56 cursor-pointer'
+            position="top"
+            className="absolute top-22 left-56 cursor-pointer"
             zIndex={99999}
           >
             <svg
-              width='18'
-              height='18'
-              viewBox='0 0 18 18'
-              fill='none'
-              xmlns='http://www.w3.org/2000/svg'
+              width="18"
+              height="18"
+              viewBox="0 0 18 18"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
             >
               <rect
-                width='18'
-                height='18'
-                rx='9'
-                fill='#6B5390'
-                fillOpacity='0.6'
+                width="18"
+                height="18"
+                rx="9"
+                fill="#6B5390"
+                fillOpacity="0.6"
               />
               <path
-                fillRule='evenodd'
-                clipRule='evenodd'
-                d='M9.16667 5.75C9.6499 5.75 10.0417 5.35825 10.0417 4.875C10.0417 4.39175 9.6499 4 9.16667 4C8.68343 4 8.29167 4.39175 8.29167 4.875C8.29167 5.35825 8.68343 5.75 9.16667 5.75ZM8.58333 6.91667C8.26116 6.91667 8 7.17784 8 7.5C8 7.82217 8.26116 8.08333 8.58333 8.08333V12.75C8.58333 13.0722 8.84449 13.3333 9.16667 13.3333C9.48884 13.3333 9.75 13.0722 9.75 12.75V7.5C9.75 7.17784 9.48884 6.91667 9.16667 6.91667H8.58333Z'
-                fill='white'
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M9.16667 5.75C9.6499 5.75 10.0417 5.35825 10.0417 4.875C10.0417 4.39175 9.6499 4 9.16667 4C8.68343 4 8.29167 4.39175 8.29167 4.875C8.29167 5.35825 8.68343 5.75 9.16667 5.75ZM8.58333 6.91667C8.26116 6.91667 8 7.17784 8 7.5C8 7.82217 8.26116 8.08333 8.58333 8.08333V12.75C8.58333 13.0722 8.84449 13.3333 9.16667 13.3333C9.48884 13.3333 9.75 13.0722 9.75 12.75V7.5C9.75 7.17784 9.48884 6.91667 9.16667 6.91667H8.58333Z"
+                fill="white"
               />
             </svg>
           </Tooltip> */}
@@ -254,33 +268,33 @@ export default function HeroSection() {
           {/* Tooltip */}
           {/* <Tooltip
             content={
-              <div className='text-[14px] leading-[140%] text-white'>
+              <div className="text-[14px] leading-[140%] text-white">
                 Number of users actively interacting with the protocol.
               </div>
             }
-            position='top'
-            className='absolute top-22 left-56 cursor-pointer'
+            position="top"
+            className="absolute top-22 left-56 cursor-pointer"
             zIndex={99999}
           >
             <svg
-              width='18'
-              height='18'
-              viewBox='0 0 18 18'
-              fill='none'
-              xmlns='http://www.w3.org/2000/svg'
+              width="18"
+              height="18"
+              viewBox="0 0 18 18"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
             >
               <rect
-                width='18'
-                height='18'
-                rx='9'
-                fill='#6B5390'
-                fillOpacity='0.6'
+                width="18"
+                height="18"
+                rx="9"
+                fill="#6B5390"
+                fillOpacity="0.6"
               />
               <path
-                fillRule='evenodd'
-                clipRule='evenodd'
-                d='M9.16667 5.75C9.6499 5.75 10.0417 5.35825 10.0417 4.875C10.0417 4.39175 9.6499 4 9.16667 4C8.68343 4 8.29167 4.39175 8.29167 4.875C8.29167 5.35825 8.68343 5.75 9.16667 5.75ZM8.58333 6.91667C8.26116 6.91667 8 7.17784 8 7.5C8 7.82217 8.26116 8.08333 8.58333 8.08333V12.75C8.58333 13.0722 8.84449 13.3333 9.16667 13.3333C9.48884 13.3333 9.75 13.0722 9.75 12.75V7.5C9.75 7.17784 9.48884 6.91667 9.16667 6.91667H8.58333Z'
-                fill='white'
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M9.16667 5.75C9.6499 5.75 10.0417 5.35825 10.0417 4.875C10.0417 4.39175 9.6499 4 9.16667 4C8.68343 4 8.29167 4.39175 8.29167 4.875C8.29167 5.35825 8.68343 5.75 9.16667 5.75ZM8.58333 6.91667C8.26116 6.91667 8 7.17784 8 7.5C8 7.82217 8.26116 8.08333 8.58333 8.08333V12.75C8.58333 13.0722 8.84449 13.3333 9.16667 13.3333C9.48884 13.3333 9.75 13.0722 9.75 12.75V7.5C9.75 7.17784 9.48884 6.91667 9.16667 6.91667H8.58333Z"
+                fill="white"
               />
             </svg>
           </Tooltip> */}
