@@ -109,12 +109,12 @@ const ThreadWelcomeSuggestions: FC = () => {
       </ThreadPrimitive.Suggestion>
       <ThreadPrimitive.Suggestion
         className='flex max-w-sm grow basis-0 cursor-pointer flex-col items-center justify-center rounded-lg border border-[#38234d] p-3 transition-colors ease-in hover:border-[#623f85]'
-        prompt='What the self-repaying loans are?'
+        prompt='How do self-repaying loans work?'
         method='replace'
         autoSend
       >
         <span className='line-clamp-2 text-xs font-semibold text-ellipsis'>
-          What is the self-repaying loan feature?
+          How do self-repaying loans work?
         </span>
       </ThreadPrimitive.Suggestion>
     </div>
