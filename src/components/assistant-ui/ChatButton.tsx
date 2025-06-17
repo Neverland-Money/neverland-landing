@@ -1,10 +1,11 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { MinusIcon, SparklesIcon, XIcon } from 'lucide-react';
+import { MinusIcon, XIcon } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
 import { Assistant } from '@/app/assistant';
+import { StarIcon } from '@/components/ui/StarIcon';
 
 import { ConfirmEndDialog } from './ConfirmEndDialog';
 
@@ -140,11 +141,11 @@ export const ChatButton = ({
   return (
     <>
       {/* Chat Button - either fixed at bottom left or within menu */}
-      {!isStyled ? (
+      {!isStyled && (!isOpen || isMinimized) ? (
         <motion.button
           ref={buttonRef}
           onClick={toggleChat}
-          className={`flex h-10 w-10 cursor-pointer items-center justify-center rounded-full text-white ${isNudging ? 'animate-button-nudge cursor-pointer ring-2 ring-purple-400/50' : 'cursor-pointer'} ${isInMenu ? '' : 'fixed bottom-6 left-6 z-40'} `}
+          className={`flex h-10 w-10 cursor-pointer items-center justify-center rounded-full text-white ${isNudging ? 'animate-button-nudge cursor-pointer ring-2 ring-purple-400/50' : 'cursor-pointer'} ${isInMenu ? '' : 'fixed bottom-6 left-6 z-40'}`}
           aria-label={
             isOpen ? (isMinimized ? 'Restore chat' : 'Close chat') : 'Open chat'
           }
@@ -170,72 +171,225 @@ export const ChatButton = ({
           {isOpen && !isMinimized ? (
             <MinusIcon size={20} />
           ) : (
-            <SparklesIcon size={20} />
+            <StarIcon width={28} height={28} />
           )}
         </motion.button>
       ) : (
-        // When styled externally, just render the icon for clicking
-        <div
-          ref={divRef}
-          onClick={toggleChat}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault();
-              toggleChat();
-            }
-          }}
-          tabIndex={0}
-          role='button'
-          aria-label={isOpen && !isMinimized ? 'Close chat' : 'Open chat'}
-          className='flex h-full w-full cursor-pointer items-center justify-center'
-        >
-          {isOpen && !isMinimized ? (
-            <XIcon size={24} />
-          ) : (
-            <SparklesIcon size={24} />
-          )}
-        </div>
+        <>
+          {!isOpen ||
+            (isMinimized && (
+              // When styled externally, just render the icon for clicking
+              <div
+                ref={divRef}
+                onClick={toggleChat}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggleChat();
+                  }
+                }}
+                tabIndex={0}
+                role={'button'}
+                aria-label={isOpen && !isMinimized ? 'Close chat' : 'Open chat'}
+                className={
+                  'flex h-full w-full cursor-pointer items-center justify-center'
+                }
+              >
+                {isOpen && !isMinimized ? (
+                  <XIcon size={24} />
+                ) : (
+                  <div className={'h-6 w-6 rounded-full bg-purple-400'} />
+                )}
+              </div>
+            ))}
+        </>
       )}
 
-      {/* Minimized Chat Indicator - Only shown when minimized */}
+      {/* Stardust Effect - Shows when chat is minimized and there's activity */}
       {isOpen && isMinimized && (
-        <motion.div
-          onClick={() => setIsMinimized(false)}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault();
-              setIsMinimized(false);
-            }
-          }}
-          tabIndex={0}
-          role='button'
-          aria-label='Restore chat window'
-          className={`absolute flex h-10 animate-pulse cursor-pointer items-center justify-center rounded-full px-4 text-white shadow-md ${isInMenu ? 'left-full z-40 ml-4 whitespace-nowrap' : 'fixed bottom-6 left-20 z-50'} hover:animate-none`}
-          style={{
-            fontFamily: 'var(--font-merriweather)',
-            background: 'linear-gradient(0deg, #d132e0 -31%, #530ee3 111.63%)',
-            boxShadow: '0px 0px 24px #7200d6',
-          }}
-          whileHover={{
-            boxShadow: '0px 0px 18px #7200d6',
-          }}
-          transition={{
-            type: 'spring',
-            stiffness: 500,
-            damping: 15,
-          }}
+        <div
+          className={`absolute ${isInMenu ? 'relative' : 'fixed bottom-6 left-6'} pointer-events-none`}
         >
-          <span className='text-base'>Nadette is waiting...</span>
-        </motion.div>
+          {/* Main dust particles flowing from button center */}
+          {[...Array(16)].map((_, i) => {
+            const randomX1 = (Math.random() - 0.5) * 40;
+            const randomX2 = (Math.random() - 0.5) * 80;
+            const randomX3 = (Math.random() - 0.5) * 120;
+            const randomY1 = -Math.random() * 30 - 10;
+            const randomY2 = -Math.random() * 40 - 30;
+            const randomY3 = Math.random() * 60 - 20;
+            const randomDelay = Math.random() * 2;
+            const randomDuration = 2.5 + Math.random() * 2;
+
+            return (
+              <motion.div
+                key={i}
+                className={`absolute rounded-full ${
+                  i % 4 === 0
+                    ? 'h-0.5 w-0.5 bg-purple-200'
+                    : i % 4 === 1
+                      ? 'h-1 w-1 bg-purple-300'
+                      : i % 4 === 2
+                        ? 'h-1 w-1 bg-purple-400'
+                        : 'h-0.5 w-0.5 bg-white'
+                }`}
+                initial={{
+                  x: 20,
+                  y: 20,
+                  opacity: 0,
+                  scale: 0,
+                }}
+                animate={{
+                  x: [20, 20 + randomX1, 20 + randomX2, 20 + randomX3],
+                  y: [20, 20 + randomY1, 20 + randomY2, 20 + randomY3],
+                  opacity: [0, 0.9, 0.6, 0],
+                  scale: [0, 1.5, 1, 0.2],
+                }}
+                transition={{
+                  duration: randomDuration,
+                  repeat: Infinity,
+                  delay: randomDelay,
+                  ease: 'easeInOut',
+                }}
+              />
+            );
+          })}
+
+          {/* Additional upward flowing particles */}
+          {[...Array(12)].map((_, i) => {
+            const randomX1 = (Math.random() - 0.5) * 30;
+            const randomX2 = (Math.random() - 0.5) * 50;
+            const randomY1 = -Math.random() * 40 - 20;
+            const randomY2 = -Math.random() * 60 - 40;
+            const randomY3 = -Math.random() * 80 - 60;
+            const randomDelay = Math.random() * 3 + 0.5;
+            const randomDuration = 2 + Math.random() * 2;
+
+            return (
+              <motion.div
+                key={`upward-${i}`}
+                className={`absolute rounded-full ${
+                  i % 3 === 0
+                    ? 'h-0.5 w-0.5 bg-purple-300'
+                    : i % 3 === 1
+                      ? 'h-0.5 w-0.5 bg-white'
+                      : 'h-1 w-1 bg-purple-200'
+                }`}
+                initial={{
+                  x: 20,
+                  y: 20,
+                  opacity: 0,
+                  scale: 0,
+                }}
+                animate={{
+                  x: [20, 20 + randomX1, 20 + randomX2],
+                  y: [20, 20 + randomY1, 20 + randomY2, 20 + randomY3],
+                  opacity: [0, 1, 0.5, 0],
+                  scale: [0, 1.2, 0.8, 0.1],
+                }}
+                transition={{
+                  duration: randomDuration,
+                  repeat: Infinity,
+                  delay: randomDelay,
+                  ease: 'easeOut',
+                }}
+              />
+            );
+          })}
+
+          {/* Cascading particles that fall from sides */}
+          {[...Array(14)].map((_, i) => {
+            const randomX1 = (Math.random() - 0.5) * 80;
+            const randomX2 = (Math.random() - 0.5) * 120;
+            const randomY1 = Math.random() * 30;
+            const randomY2 = Math.random() * 60 + 20;
+            const randomY3 = Math.random() * 40 + 60;
+            const randomDelay = Math.random() * 4 + 1;
+            const randomDuration = 3 + Math.random() * 3;
+
+            return (
+              <motion.div
+                key={`cascade-${i}`}
+                className={`absolute rounded-full ${
+                  i % 5 === 0
+                    ? 'h-0.5 w-0.5 bg-purple-100'
+                    : i % 5 === 1
+                      ? 'h-0.5 w-0.5 bg-purple-200'
+                      : i % 5 === 2
+                        ? 'h-1 w-1 bg-purple-300'
+                        : i % 5 === 3
+                          ? 'h-0.5 w-0.5 bg-white'
+                          : 'h-1 w-1 bg-purple-400'
+                }`}
+                initial={{
+                  x: 20,
+                  y: -20,
+                  opacity: 0,
+                }}
+                animate={{
+                  x: [20, 20 + randomX1, 20 + randomX2],
+                  y: [-20, -20 + randomY1, -20 + randomY2, -20 + randomY3],
+                  opacity: [0, 0.8, 0.4, 0],
+                }}
+                transition={{
+                  duration: randomDuration,
+                  repeat: Infinity,
+                  delay: randomDelay,
+                  ease: 'easeIn',
+                }}
+              />
+            );
+          })}
+
+          {/* Fine glowing center particles */}
+          {[...Array(8)].map((_, i) => {
+            const randomX1 = (Math.random() - 0.5) * 24;
+            const randomY1 = -Math.random() * 30 - 15;
+            const randomY2 = -Math.random() * 35 - 25;
+            const randomDelay = Math.random() * 2;
+            const randomDuration = 2 + Math.random() * 1.5;
+
+            return (
+              <motion.div
+                key={`glow-${i}`}
+                className={`absolute rounded-full blur-sm ${
+                  i % 2 === 0
+                    ? 'h-1 w-1 bg-purple-400'
+                    : 'h-1 w-1 bg-purple-300'
+                }`}
+                initial={{
+                  x: 18,
+                  y: 18,
+                  opacity: 0,
+                  scale: 0,
+                }}
+                animate={{
+                  x: [18, 18 + randomX1],
+                  y: [18, 18 + randomY1, 18 + randomY2],
+                  opacity: [0, 0.9, 0],
+                  scale: [0, 1.8, 0],
+                }}
+                transition={{
+                  duration: randomDuration,
+                  repeat: Infinity,
+                  delay: randomDelay,
+                  ease: 'easeOut',
+                }}
+              />
+            );
+          })}
+        </div>
       )}
 
       {/* Full Chat Interface - Always mounted when open, just visually hidden when minimized */}
       {isOpen && !isMinimized && (
         <div
-          className='fixed inset-0 z-30 bg-black/30 backdrop-blur-sm transition-opacity'
-          role='button'
+          className={
+            'fixed inset-0 z-[55] bg-black/30 backdrop-blur-sm transition-opacity'
+          }
+          role={'button'}
           tabIndex={0}
-          aria-label='Minimize chat window'
+          aria-label={'Minimize chat window'}
           onClick={handleMinimize}
           onKeyDown={(event) => {
             if (
@@ -260,8 +414,8 @@ export const ChatButton = ({
           {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
           <div
             ref={chatRef}
-            role='dialog'
-            aria-modal='true'
+            role={'dialog'}
+            aria-modal={'true'}
             tabIndex={-1}
             onKeyDown={(e) => {
               if (e.key === 'Escape') {
@@ -270,11 +424,11 @@ export const ChatButton = ({
               }
             }}
             onMouseDown={(e) => e.stopPropagation()}
-            className={`fixed z-40 h-[83vh] w-[90vw] max-w-[450px] rounded-lg lg:w-[40vw] lg:max-w-[900px] ${
+            className={`fixed z-[1000] h-[75vh] w-[90vw] max-w-[450px] rounded-lg lg:h-[83vh] lg:w-[40vw] lg:max-w-[715px] ${
               isMinimized
                 ? 'pointer-events-none -translate-y-4 scale-95 opacity-0'
                 : 'font-merriweather translate-y-0 scale-100 bg-[linear-gradient(145deg,rgba(22,0,43,0.95),rgba(10,0,21,0.95))] opacity-100 backdrop-blur-sm'
-            } ${isInMenu ? 'bottom-1/2 left-24 translate-y-1/2' : 'bottom-20 left-6'}`}
+            } ${isInMenu ? 'bottom-1/2 left-24 translate-y-1/2' : 'bottom-10 left-6'}`}
             style={
               !isMinimized
                 ? {
@@ -284,7 +438,7 @@ export const ChatButton = ({
                 : undefined
             }
           >
-            <div className='flex h-full flex-col overflow-hidden rounded-lg'>
+            <div className={'flex h-full flex-col overflow-hidden rounded-lg'}>
               <Assistant
                 key={currentKey}
                 onMinimize={handleMinimize}

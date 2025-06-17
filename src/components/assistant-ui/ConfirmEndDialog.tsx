@@ -17,7 +17,7 @@ export const ConfirmEndDialog: React.FC<ConfirmEndDialogProps> = ({
   <AnimatePresence>
     {open && (
       <motion.div
-        className='fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm'
+        className='fixed inset-0 z-[1100] flex items-center justify-center bg-black/40 backdrop-blur-sm'
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -25,7 +25,7 @@ export const ConfirmEndDialog: React.FC<ConfirmEndDialogProps> = ({
         role='dialog'
       >
         <motion.div
-          className='max-w-[90vw] min-w-[320px] rounded-xl border-1 border-white/30 bg-gradient-to-br from-[#220041] to-[#530ee3]/90 p-8 shadow-2xl'
+          className='z-[1110] max-w-[90vw] min-w-[320px] rounded-xl border-1 border-white/30 bg-gradient-to-br from-[#220041] to-[#530ee3]/90 p-8 shadow-2xl'
           initial={{ scale: 0.95, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.95, opacity: 0 }}

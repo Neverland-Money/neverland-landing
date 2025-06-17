@@ -1,8 +1,13 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import {
+  motion,
+  useMotionValue,
+  animate,
+  AnimationPlaybackControls,
+} from 'framer-motion';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 import PartnerCard from '@/components/ui/PartnerCard';
 import { StarIcon } from '@/components/ui/StarIcon';
@@ -11,7 +16,7 @@ import { StarIcon } from '@/components/ui/StarIcon';
 const PartnerLogos = {
   // Aave
   AaveLogo: () => (
-    <div className='flex h-24 w-24 items-center justify-center text-3xl font-bold text-white'>
+    <div className='flex h-16 w-16 items-center justify-center text-3xl font-bold text-white lg:h-24 lg:w-24'>
       <Image
         src='/assets/images/partners/aave.svg'
         alt='Aave'
@@ -24,7 +29,7 @@ const PartnerLogos = {
   ),
   // Solidly
   SolidlyLogo: () => (
-    <div className='flex h-24 w-24 items-center justify-center text-3xl font-bold text-white'>
+    <div className='flex h-16 w-16 items-center justify-center text-3xl font-bold text-white lg:h-24 lg:w-24'>
       <Image
         src='/assets/images/partners/solidly.svg'
         alt='Solidly'
@@ -37,7 +42,7 @@ const PartnerLogos = {
   ),
   // Chainlink
   ChainlinkLogo: () => (
-    <div className='flex h-24 w-24 items-center justify-center text-3xl font-bold text-white'>
+    <div className='flex h-16 w-16 items-center justify-center text-3xl font-bold text-white lg:h-24 lg:w-24'>
       <Image
         src='/assets/images/partners/chainlink.svg'
         alt='Chainlink'
@@ -50,7 +55,7 @@ const PartnerLogos = {
   ),
   // Monad
   MonadLogo: () => (
-    <div className='flex h-24 w-24 items-center justify-center text-3xl font-bold text-white'>
+    <div className='flex h-16 w-16 items-center justify-center text-3xl font-bold text-white lg:h-24 lg:w-24'>
       <Image
         src='/assets/images/partners/monad.svg'
         alt='Monad'
@@ -63,7 +68,7 @@ const PartnerLogos = {
   ),
   // Aerodrome
   AerodromeLogo: () => (
-    <div className='flex h-24 w-24 items-center justify-center text-3xl font-bold text-white'>
+    <div className='flex h-16 w-16 items-center justify-center text-3xl font-bold text-white lg:h-24 lg:w-24'>
       <Image
         src='/assets/images/partners/aerodrome.svg'
         alt='Aerodrome'
@@ -78,32 +83,35 @@ const PartnerLogos = {
 
 export default function PartnersSection() {
   const partners = [
-    { name: 'Partner 1', logo: <PartnerLogos.MonadLogo /> },
-    { name: 'Partner 2', logo: <PartnerLogos.SolidlyLogo /> },
-    { name: 'Partner 3', logo: <PartnerLogos.ChainlinkLogo /> },
-    { name: 'Partner 4', logo: <PartnerLogos.AaveLogo /> },
-    { name: 'Partner 5', logo: <PartnerLogos.AerodromeLogo /> },
+    { name: 'Monad', logo: <PartnerLogos.MonadLogo /> },
+    { name: 'Solidly', logo: <PartnerLogos.SolidlyLogo /> },
+    { name: 'Chainlink', logo: <PartnerLogos.ChainlinkLogo /> },
+    { name: 'Aave', logo: <PartnerLogos.AaveLogo /> },
+    { name: 'Aerodrome', logo: <PartnerLogos.AerodromeLogo /> },
 
-    { name: 'Partner 6', logo: <PartnerLogos.MonadLogo /> },
-    { name: 'Partner 7', logo: <PartnerLogos.SolidlyLogo /> },
-    { name: 'Partner 8', logo: <PartnerLogos.ChainlinkLogo /> },
-    { name: 'Partner 9', logo: <PartnerLogos.AaveLogo /> },
-    { name: 'Partner 10', logo: <PartnerLogos.AerodromeLogo /> },
+    { name: 'Monad', logo: <PartnerLogos.MonadLogo /> },
+    { name: 'Solidly', logo: <PartnerLogos.SolidlyLogo /> },
+    { name: 'Chainlink', logo: <PartnerLogos.ChainlinkLogo /> },
+    { name: 'Aave', logo: <PartnerLogos.AaveLogo /> },
+    { name: 'Aerodrome', logo: <PartnerLogos.AerodromeLogo /> },
 
-    { name: 'Partner 11', logo: <PartnerLogos.MonadLogo /> },
-    { name: 'Partner 12', logo: <PartnerLogos.SolidlyLogo /> },
-    { name: 'Partner 13', logo: <PartnerLogos.ChainlinkLogo /> },
-    { name: 'Partner 14', logo: <PartnerLogos.AaveLogo /> },
-    { name: 'Partner 15', logo: <PartnerLogos.AerodromeLogo /> },
+    { name: 'Monad', logo: <PartnerLogos.MonadLogo /> },
+    { name: 'Solidly', logo: <PartnerLogos.SolidlyLogo /> },
+    { name: 'Chainlink', logo: <PartnerLogos.ChainlinkLogo /> },
+    { name: 'Aave', logo: <PartnerLogos.AaveLogo /> },
+    { name: 'Aerodrome', logo: <PartnerLogos.AerodromeLogo /> },
 
-    { name: 'Partner 16', logo: <PartnerLogos.MonadLogo /> },
-    { name: 'Partner 17', logo: <PartnerLogos.SolidlyLogo /> },
-    { name: 'Partner 18', logo: <PartnerLogos.ChainlinkLogo /> },
-    { name: 'Partner 19', logo: <PartnerLogos.AaveLogo /> },
-    { name: 'Partner 20', logo: <PartnerLogos.AerodromeLogo /> },
+    { name: 'Monad', logo: <PartnerLogos.MonadLogo /> },
+    { name: 'Solidly', logo: <PartnerLogos.SolidlyLogo /> },
+    { name: 'Chainlink', logo: <PartnerLogos.ChainlinkLogo /> },
+    { name: 'Aave', logo: <PartnerLogos.AaveLogo /> },
+    { name: 'Aerodrome', logo: <PartnerLogos.AerodromeLogo /> },
   ];
 
   const [movementDistance, setMovementDistance] = useState('-400px');
+  const x = useMotionValue(0);
+  const animationRef = useRef<AnimationPlaybackControls | null>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -126,6 +134,65 @@ export default function PartnersSection() {
 
     return () => window.removeEventListener('resize', checkScreenSize);
   }, [partners.length]);
+
+  // Start initial animation
+  useEffect(() => {
+    if (movementDistance !== '-400px') {
+      animationRef.current = animate(x, parseFloat(movementDistance), {
+        duration: 120,
+        repeat: Infinity,
+        repeatType: 'loop',
+        ease: 'linear',
+      });
+    }
+
+    return () => {
+      if (animationRef.current) {
+        animationRef.current.stop();
+      }
+    };
+  }, [movementDistance, x]);
+
+  const handleInteractionStart = () => {
+    // Clear any pending resume timeout
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+
+    // Immediately capture position and stop animation
+    const currentPosition = x.get();
+    if (animationRef.current) {
+      animationRef.current.stop();
+    }
+    x.set(currentPosition);
+  };
+
+  const handleInteractionEnd = () => {
+    // Clear any existing timeout
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
+    // Resume animation after 2 seconds
+    timeoutRef.current = setTimeout(() => {
+      if (movementDistance !== '-400px') {
+        const currentX = x.get();
+        const targetX = parseFloat(movementDistance);
+        const remainingDistance = targetX - currentX;
+        const fullDistance = Math.abs(targetX);
+        const remainingProgress = Math.abs(remainingDistance) / fullDistance;
+        const remainingDuration = remainingProgress * 120;
+
+        animationRef.current = animate(x, targetX, {
+          duration: remainingDuration,
+          repeat: Infinity,
+          repeatType: 'loop',
+          ease: 'linear',
+        });
+      }
+    }, 500);
+  };
 
   return (
     <section className='w-full py-[100px]'>
@@ -150,14 +217,11 @@ export default function PartnersSection() {
         <div className='relative w-full overflow-hidden'>
           <motion.div
             className='flex min-h-[300px] items-center gap-20 md:gap-5'
-            animate={{ x: ['0px', movementDistance] }}
-            transition={{
-              duration: 120,
-              repeat: Infinity,
-              repeatType: 'loop',
-              ease: 'linear',
-            }}
-            style={{ width: 'fit-content' }}
+            style={{ width: 'fit-content', x }}
+            onMouseEnter={handleInteractionStart}
+            onMouseLeave={handleInteractionEnd}
+            onTouchStart={handleInteractionStart}
+            onTouchEnd={handleInteractionEnd}
           >
             {/* First set of partners */}
             {partners.map((partner, index) => (

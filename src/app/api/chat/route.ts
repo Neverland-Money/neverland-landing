@@ -39,17 +39,17 @@ Additional Reminders: When faced with uncertainty, let your fairy intuition guid
 
 // Function to search Pinecone for relevant context
 async function searchPinecone(query: string): Promise<string> {
-  console.log('Starting Pinecone search for query:', query);
+  // console.log('Starting Pinecone search for query:', query);
   try {
     const pineconeApiKey = process.env.PINECONE_API_KEY;
     const pineconeIndex = process.env.PINECONE_INDEX;
     const openaiApiKey = process.env.OPENAI_API_KEY;
 
-    console.log('Environment variables loaded:', {
-      hasPineconeKey: !!pineconeApiKey,
-      pineconeIndex,
-      hasOpenAIKey: !!openaiApiKey,
-    });
+    // console.log('Environment variables loaded:', {
+    //   hasPineconeKey: !!pineconeApiKey,
+    //   pineconeIndex,
+    //   hasOpenAIKey: !!openaiApiKey,
+    // });
 
     if (!pineconeApiKey || !pineconeIndex || !openaiApiKey) {
       console.error('Missing required environment variables for vector search');
@@ -57,28 +57,28 @@ async function searchPinecone(query: string): Promise<string> {
     }
 
     // Generate embeddings for the query
-    console.log('Generating embeddings for query...');
+    // console.log('Generating embeddings for query...');
     const embeddings = new OpenAIEmbeddings({
       openAIApiKey: openaiApiKey,
       model: 'text-embedding-3-small',
     });
     const queryEmbedding = await embeddings.embedQuery(query);
-    console.log('Generated embedding vector of size:', queryEmbedding.length);
+    // console.log('Generated embedding vector of size:', queryEmbedding.length);
 
     // Initialize Pinecone client
-    console.log('Initializing Pinecone client for index:', pineconeIndex);
+    // console.log('Initializing Pinecone client for index:', pineconeIndex);
     const pinecone = new Pinecone({ apiKey: pineconeApiKey });
     const index = pinecone.index(pineconeIndex);
 
     // Check if index exists and has vectors
     try {
       const indexStats = await index.describeIndexStats();
-      console.log('Pinecone index stats:', indexStats);
+      // console.log('Pinecone index stats:', indexStats);
 
       if (indexStats.totalRecordCount === 0) {
-        console.warn(
-          'No vectors found in the Pinecone index. Is your data indexed?',
-        );
+        // console.warn(
+        //   'No vectors found in the Pinecone index. Is your data indexed?',
+        // );
         return '';
       }
     } catch (statsError) {
@@ -86,7 +86,7 @@ async function searchPinecone(query: string): Promise<string> {
     }
 
     // Search vectors
-    console.log('Querying Pinecone...');
+    // console.log('Querying Pinecone...');
     const results = await index.query({
       vector: queryEmbedding,
       // Request more results so we can filter by score later
@@ -95,28 +95,28 @@ async function searchPinecone(query: string): Promise<string> {
       includeValues: false,
     });
 
-    console.log('Query results:', {
-      matchCount: results.matches?.length || 0,
-      hasMatches: !!results.matches && results.matches.length > 0,
-      firstMatchScore: results.matches?.[0]?.score,
-    });
+    // console.log('Query results:', {
+    //   matchCount: results.matches?.length || 0,
+    //   hasMatches: !!results.matches && results.matches.length > 0,
+    //   firstMatchScore: results.matches?.[0]?.score,
+    // });
 
     // Log scores of all matches for debugging
-    if (results.matches && results.matches.length > 0) {
-      console.log(
-        'All match scores:',
-        results.matches.map((match, i) => {
-          return {
-            index: i,
-            score: match.score,
-            hasText: !!match.metadata?.text,
-          };
-        }),
-      );
-    }
+    // if (results.matches && results.matches.length > 0) {
+    //   console.log(
+    //     'All match scores:',
+    //     results.matches.map((match, i) => {
+    //       return {
+    //         index: i,
+    //         score: match.score,
+    //         hasText: !!match.metadata?.text,
+    //       };
+    //     }),
+    //   );
+    // }
 
     if (!results.matches || results.matches.length === 0) {
-      console.log('No matches found in Pinecone');
+      // console.log('No matches found in Pinecone');
       return '';
     }
 
@@ -130,34 +130,34 @@ async function searchPinecone(query: string): Promise<string> {
     });
 
     // Log the score ranges to understand what's being included/excluded
-    console.log('Score ranges - min positive:', MIN_RELEVANCE_SCORE);
+    // console.log('Score ranges - min positive:', MIN_RELEVANCE_SCORE);
 
-    console.log(
-      `Filtered from ${results.matches.length} to ${relevantMatches.length} relevant matches`,
-    );
+    // console.log(
+    //   `Filtered from ${results.matches.length} to ${relevantMatches.length} relevant matches`,
+    // );
 
     if (relevantMatches.length === 0) {
-      console.log('No sufficiently relevant matches found.');
+      // console.log('No sufficiently relevant matches found.');
       return '';
     }
 
     // Count how many matches get filtered due to missing metadata/text
-    const missingMetadataCount = 0;
-    const missingTextCount = 0;
+    // const missingMetadataCount = 0;
+    // const missingTextCount = 0;
 
     const formattedResults = relevantMatches
       .filter((match) => !!match.metadata?.text)
       .map((match, i) => `[Document ${i + 1}]: ${match.metadata?.text}`)
       .join('\n\n');
 
-    console.log('Metadata filtering stats:', {
-      totalRelevantMatches: relevantMatches.length,
-      missingMetadataCount,
-      missingTextCount,
-      remainingMatches:
-        relevantMatches.length - missingMetadataCount - missingTextCount,
-    });
-    console.log('Formatted results length:', formattedResults.length);
+    // console.log('Metadata filtering stats:', {
+    //   totalRelevantMatches: relevantMatches.length,
+    //   missingMetadataCount,
+    //   missingTextCount,
+    //   remainingMatches:
+    //     relevantMatches.length - missingMetadataCount - missingTextCount,
+    // });
+    // console.log('Formatted results length:', formattedResults.length);
     return formattedResults;
   } catch (error) {
     console.error('Error searching Pinecone:', error);
@@ -207,7 +207,7 @@ export async function POST(req: Request) {
       contextResults = await searchPinecone(userMessage);
     }
 
-    console.log('Retrieved Pinecone context:', contextResults);
+    // console.log('Retrieved Pinecone context:', contextResults);
 
     if (contextResults) {
       // Make the context more prominent and directive to ensure AI uses it

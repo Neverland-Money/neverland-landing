@@ -69,12 +69,11 @@ export default function FAQSection() {
             <h2 className='font-cinzel max-w-[641px] text-center text-4xl leading-[110%] font-normal text-white uppercase md:text-[60px]'>
               Frequently Asked{' '}
               <span className='relative inline-block'>
-                Q
-                <div className='absolute top-[47%] left-[51%] -translate-x-1/2 -translate-y-1/2 transform'>
+                Questions
+                <div className='absolute top-[35%] left-[7%] h-4 w-4 -translate-x-1/2 -translate-y-1/2 transform md:top-[45%] md:left-[7.5%] md:h-6 md:w-6'>
                   <StarIcon />
                 </div>
               </span>
-              uestions
             </h2>
           </div>
 

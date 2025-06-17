@@ -132,8 +132,6 @@ export default function HowItWorksSection() {
       const targetStepHeight = activeStep === index + 1 ? 300 : 80;
       cumulativeHeight += targetStepHeight / 4;
 
-      console.log(cumulativeHeight);
-
       // Apply a small offset for visual centering
       return cumulativeHeight - 40;
     } else {

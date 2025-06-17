@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
 interface PartnerCardProps {
   icon: React.ReactNode;
@@ -8,15 +9,49 @@ interface PartnerCardProps {
 }
 
 export default function PartnerCard({ icon, name }: PartnerCardProps) {
+  const [isInteracting, setIsInteracting] = useState(false);
+  const [animationsPaused, setAnimationsPaused] = useState(false);
+
+  useEffect(() => {
+    let timeout: NodeJS.Timeout;
+
+    if (isInteracting) {
+      setAnimationsPaused(true);
+    } else {
+      // Restart animations 2 seconds after interaction ends
+      timeout = setTimeout(() => {
+        setAnimationsPaused(false);
+      }, 2000);
+    }
+
+    return () => {
+      if (timeout) clearTimeout(timeout);
+    };
+  }, [isInteracting]);
+
+  const handleInteractionStart = () => {
+    setIsInteracting(true);
+  };
+
+  const handleInteractionEnd = () => {
+    setIsInteracting(false);
+  };
+
   return (
-    <div className='relative h-[120px] w-[120px] flex-shrink-0 md:h-60 md:w-60'>
+    <div
+      className='relative h-[120px] w-[120px] flex-shrink-0 md:h-60 md:w-60'
+      onMouseEnter={handleInteractionStart}
+      onMouseLeave={handleInteractionEnd}
+      onTouchStart={handleInteractionStart}
+      onTouchEnd={handleInteractionEnd}
+    >
       {/* Radiating Lines - Rotating */}
       <motion.div
         className='absolute inset-0 [--transform-origin:60px] md:[--transform-origin:120px]'
-        animate={{ rotate: 360 }}
+        animate={{ rotate: animationsPaused ? 0 : 360 }}
         transition={{
           duration: 8,
-          repeat: Infinity,
+          repeat: animationsPaused ? 0 : Infinity,
           ease: 'linear',
         }}
       >
@@ -143,13 +178,18 @@ export default function PartnerCard({ icon, name }: PartnerCardProps) {
       </motion.div>
 
       {/* Central Circle */}
-      <div className='absolute top-1/2 left-1/2 flex h-[120px] w-[120px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[#530ee3] bg-black shadow-[0px_0px_16px_#7200d6_inset,0px_0px_90px_rgba(114,0,214,0.50)] md:h-[160px] md:w-[160px]'>
+      <div className='absolute top-1/2 left-1/2 flex h-[120px] w-[120px] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border border-[#530ee3] bg-black shadow-[0px_0px_16px_#7200d6_inset,0px_0px_90px_rgba(114,0,214,0.50)] md:h-[160px] md:w-[160px]'>
         <div
-          className='w-0.55 flex h-15 items-center justify-center md:h-20 md:w-20'
+          className='flex h-10 w-10 items-center justify-center md:h-16 md:w-16'
           aria-label={name}
         >
           {icon}
         </div>
+
+        {/* Partner Name Label */}
+        <p className='font-merriweather mt-1 text-xs font-medium text-[#d6cfff] md:mt-2 md:text-sm'>
+          {name}
+        </p>
       </div>
     </div>
   );
