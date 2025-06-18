@@ -1,36 +1,212 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Neverland Money - Landing Page
 
-## Getting Started
+A Next.js 15 landing page with TypeScript, Tailwind CSS, and AI chat integration. Features animated starfield backgrounds, responsive design, and vector-powered knowledge base using OpenAI + Pinecone.
 
-First, run the development server:
+## Quick Start
+
+### Prerequisites
+
+- Node.js 20+
+- pnpm (package manager)
+- OpenAI API key (for chat functionality)
+- Pinecone API key (for vector search)
+
+### Install pnpm
+
+If you don't have pnpm installed:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Using npm
+npm install -g pnpm
+
+# Using Homebrew (macOS)
+brew install pnpm
+
+# Using Scoop (Windows)
+scoop install pnpm
+
+# Or using the installation script
+curl -fsSL https://get.pnpm.io/install.sh | sh -
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Clone the repository**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+   ```bash
+   git clone <repository-url>
+   cd neverland-landing-v2
+   ```
 
-## Learn More
+2. **Install dependencies**
 
-To learn more about Next.js, take a look at the following resources:
+   ```bash
+   pnpm install
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. **Set up environment variables**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   ```bash
+   cp .env.example .env
+   ```
 
-## Deploy on Vercel
+   Edit `.env` and add your API keys:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   ```env
+   OPENAI_API_KEY=your_openai_api_key_here
+   PINECONE_API_KEY=your_pinecone_api_key_here
+   PINECONE_INDEX=your_pinecone_index_name_here
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+4. **Run the development server**
+
+   ```bash
+   pnpm dev
+   ```
+
+5. **Open your browser**
+   Navigate to [http://localhost:3000](http://localhost:3000)
+
+## Development Commands
+
+- `pnpm dev` - Start development server with Turbopack
+- `pnpm build` - Build for production
+- `pnpm start` - Start production server
+- `pnpm lint` - Run ESLint
+- `pnpm format` - Format code with Prettier
+
+## Project Structure
+
+```
+src/
+├── app/                     # Next.js App Router pages
+│   ├── api/chat/            # AI chat API endpoint
+│   ├── privacy-policy/      # Privacy policy page
+│   ├── terms-of-service/    # Terms of service page
+│   ├── globals.css          # Global styles
+│   ├── layout.tsx           # Root layout
+│   └── page.tsx             # Homepage
+├── components/
+│   ├── assistant-ui/        # AI chat components
+│   ├── layout/              # Layout components (Header, Footer)
+│   ├── sections/            # Page sections (Hero, Features, etc.)
+│   └── ui/                  # Reusable UI components
+└── lib/                     # Utility functions
+```
+
+## Key Components
+
+### StarrySky Component
+
+Dynamic animated starfield with customizable:
+
+- Star count and density
+- Shooting star effects
+- Glow effects
+- Full page vs viewport sizing
+- Z-index layering
+
+### AI Chat System
+
+- OpenAI GPT integration
+- Pinecone vector database
+- Context-aware responses
+- Real-time streaming
+- Knowledge base search
+
+### Responsive Design
+
+- Mobile-first approach
+- Tailwind CSS utility classes
+- Custom breakpoints
+- Smooth animations
+
+## API Setup
+
+### Required API Keys
+
+1. **OpenAI API Key**
+
+   - Visit [OpenAI Platform](https://platform.openai.com/api-keys)
+   - Create a new API key
+   - Add billing information (pay-per-use)
+
+2. **Pinecone API Key**
+
+   - Visit [Pinecone](https://www.pinecone.io/)
+   - Create a new project
+   - Create an index for vector storage
+   - Copy your API key and index name
+
+## Configuration
+
+### Tailwind CSS
+
+Custom configuration with:
+
+- Extended color palette
+- Custom fonts (Cinzel, Lexend)
+- Animation utilities
+- Responsive breakpoints
+
+### Next.js Config
+
+- Image optimization for external sources
+- TypeScript strict mode
+- ESLint integration
+- Path aliases (@/\*)
+
+### ESLint & Prettier
+
+- Strict TypeScript rules
+- Import ordering
+- Tailwind class sorting
+- Auto-formatting on save
+
+## Deployment
+
+### Vercel
+
+1. Connect your GitHub repository to Vercel
+2. Add environment variables in Vercel dashboard
+3. Deploy automatically on push to main branch
+
+### Other Platforms
+
+The app can be deployed to any platform supporting Node.js:
+
+- Netlify
+- Railway
+- DigitalOcean App Platform
+- AWS Amplify
+
+### Environment Variables for Production
+
+Ensure all required environment variables are set:
+
+```env
+OPENAI_API_KEY=your_production_openai_key
+PINECONE_API_KEY=your_production_pinecone_key
+PINECONE_INDEX=your_production_index_name
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is private and proprietary to Neverland Money.
+
+## Acknowledgments
+
+- Built with [Next.js](https://nextjs.org/)
+- Styled with [Tailwind CSS](https://tailwindcss.com/)
+- Animated with [Framer Motion](https://www.framer.com/motion/)
+- AI powered by [OpenAI](https://openai.com/)
+- Vector search by [Pinecone](https://www.pinecone.io/)
+- Icons by [Lucide](https://lucide.dev/)
