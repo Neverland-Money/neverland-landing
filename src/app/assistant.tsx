@@ -45,6 +45,7 @@ export const Assistant = ({ onMinimize, onClose }: AssistantProps) => {
                   height={36}
                   className='object-cover'
                   priority
+                  unoptimized
                   onError={() => setImageError(true)}
                 />
               ) : (

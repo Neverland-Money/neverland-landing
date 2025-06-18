@@ -3,6 +3,8 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
+import { trackEvent, EventNames } from '@/utils/analytics';
+
 export default function ScrollToTopButton() {
   const [showScrollButton, setShowScrollButton] = useState(false);
   const [isScrolling, setIsScrolling] = useState(false);
@@ -23,6 +25,12 @@ export default function ScrollToTopButton() {
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
+    });
+
+    // Track scroll to top button click
+    trackEvent(EventNames.BUTTON_CLICK, {
+      button_name: 'scroll_to_top',
+      location: 'floating_button',
     });
 
     // Hide button with delay after reaching top

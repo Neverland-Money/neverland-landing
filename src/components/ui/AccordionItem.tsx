@@ -3,6 +3,8 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import React from 'react';
 
+import { trackEvent, EventNames } from '@/utils/analytics';
+
 export interface FAQItem {
   id: number;
   question: string;
@@ -144,7 +146,15 @@ export default function AccordionItem({
       }}
     >
       <button
-        onClick={onToggle}
+        onClick={() => {
+          onToggle();
+          trackEvent(EventNames.BUTTON_CLICK, {
+            element_type: 'accordion',
+            action: isOpen ? 'collapse' : 'expand',
+            item_id: `faq-${item.id}`,
+            item_question: item.question,
+          });
+        }}
         className={`flex w-full items-center justify-between gap-3 rounded-2xl p-4 transition-all duration-200 md:px-8 md:py-6 ${
           isOpen ? 'cursor-default' : 'cursor-pointer'
         }`}

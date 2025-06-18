@@ -26,10 +26,10 @@ export default defineConfig([
   // Add Storybook plugin in flat config format
   {
     plugins: {
-      storybook: storybookPlugin
+      storybook: storybookPlugin,
     },
     rules: {
-      ...storybookPlugin.configs.recommended.rules
+      ...storybookPlugin.configs.recommended.rules,
     },
   },
 

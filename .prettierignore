@@ -4,3 +4,4 @@ out/
 build/
 coverage/
 public/fonts/
+pnpm-lock.yaml

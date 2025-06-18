@@ -65,7 +65,6 @@ export default function StarrySky({
             windowHeight,
           );
           setDocumentHeight(maxHeight);
-          console.log(`StarrySky: Document height updated to ${maxHeight}px`);
         }, 100); // Small delay to allow content rendering
       }
     };
@@ -203,7 +202,7 @@ export default function StarrySky({
           Math.min(1, (width - minWidth) / (maxWidth - minWidth)),
         );
         const scaledStarCount = Math.floor(baseStarCount * scaleFactor);
-        console.log(scaledStarCount);
+
         return scaledStarCount;
       }
     };

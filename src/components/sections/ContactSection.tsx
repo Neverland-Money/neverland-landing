@@ -6,6 +6,7 @@ import Link from 'next/link';
 
 import { StardustEffect } from '@/components/ui/StardustEffect';
 import { StarIcon } from '@/components/ui/StarIcon';
+import { trackEvent, EventNames } from '@/utils/analytics';
 
 export default function ContactSection() {
   const handleSmoothScroll = (
@@ -18,6 +19,12 @@ export default function ContactSection() {
       targetElement.scrollIntoView({
         behavior: 'smooth',
         block: 'start',
+      });
+
+      // Track footer navigation click
+      trackEvent(EventNames.BUTTON_CLICK, {
+        menu_item: targetId,
+        location: 'footer_navigation',
       });
     }
   };
@@ -74,9 +81,14 @@ export default function ContactSection() {
                 stiffness: 500,
                 damping: 15,
               }}
-              onClick={() =>
-                document.dispatchEvent(new CustomEvent('triggerStardust'))
-              }
+              onClick={() => {
+                document.dispatchEvent(new CustomEvent('triggerStardust'));
+                trackEvent(EventNames.BUTTON_CLICK, {
+                  button_name: 'enter_dapp',
+                  button_text: 'Soon™',
+                  location: 'footer',
+                });
+              }}
             >
               {/* Disabled overlay */}
               {/* <div className="absolute inset-0 bg-black bg-opacity-20 rounded-full flex items-center justify-center">
@@ -133,6 +145,13 @@ export default function ContactSection() {
             target='_blank'
             rel='noopener noreferrer'
             className='font-merriweather text-base leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70'
+            onClick={() => {
+              trackEvent(EventNames.EXTERNAL_LINK_CLICK, {
+                link_name: 'x',
+                location: 'footer_social',
+                url: 'https://x.com/neverland_money',
+              });
+            }}
           >
             {`{ X }`}
           </Link>
@@ -141,6 +160,13 @@ export default function ContactSection() {
             target='_blank'
             rel='noopener noreferrer'
             className='font-merriweather text-base leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70'
+            onClick={() => {
+              trackEvent(EventNames.EXTERNAL_LINK_CLICK, {
+                link_name: 'discord',
+                location: 'footer_social',
+                url: 'https://discord.gg/neverland-money',
+              });
+            }}
           >
             {`{ Discord }`}
           </Link>
@@ -149,6 +175,13 @@ export default function ContactSection() {
             target='_blank'
             rel='noopener noreferrer'
             className='font-merriweather text-base leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70'
+            onClick={() => {
+              trackEvent(EventNames.EXTERNAL_LINK_CLICK, {
+                link_name: 'telegram',
+                location: 'footer_social',
+                url: 'https://t.me/neverland_money',
+              });
+            }}
           >
             {`{ Telegram }`}
           </Link>
@@ -157,6 +190,13 @@ export default function ContactSection() {
             target='_blank'
             rel='noopener noreferrer'
             className='font-merriweather text-base leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70'
+            onClick={() => {
+              trackEvent(EventNames.EXTERNAL_LINK_CLICK, {
+                link_name: 'news',
+                location: 'footer_social',
+                url: 'https://news.neverland.money',
+              });
+            }}
           >
             {`{ Medium }`}
           </Link>

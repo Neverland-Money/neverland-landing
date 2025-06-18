@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
+import { trackEvent, EventNames } from '@/utils/analytics';
+
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
@@ -24,6 +26,12 @@ export default function Header() {
       targetElement.scrollIntoView({
         behavior: 'smooth',
         block: 'start',
+      });
+
+      // Track navigation click
+      trackEvent(EventNames.BUTTON_CLICK, {
+        menu_item: targetId,
+        location: 'header_navigation',
       });
     }
     // Close mobile menu if open
@@ -95,6 +103,13 @@ export default function Header() {
             href='https://x.com/neverland_money'
             target='_blank noreferrer noopener'
             className='flex items-center rounded-full border border-white/20 p-2 transition-colors hover:border-purple-400'
+            onClick={() => {
+              trackEvent(EventNames.EXTERNAL_LINK_CLICK, {
+                link_name: 'x',
+                location: 'header_social',
+                url: 'https://x.com/neverland_money',
+              });
+            }}
           >
             <Image
               loading='eager'
@@ -111,6 +126,13 @@ export default function Header() {
             href='https://discord.com/invite/neverland-money'
             target='_blank noreferrer noopener'
             className='flex items-center rounded-full border border-white/20 p-2 transition-colors hover:border-purple-400'
+            onClick={() => {
+              trackEvent(EventNames.EXTERNAL_LINK_CLICK, {
+                link_name: 'discord',
+                location: 'header_social',
+                url: 'https://discord.com/invite/neverland-money',
+              });
+            }}
           >
             <Image
               loading='eager'
@@ -127,6 +149,13 @@ export default function Header() {
             href='https://t.me/neverland_money'
             target='_blank noreferrer noopener'
             className='flex items-center rounded-full border border-white/20 p-2 transition-colors hover:border-purple-400'
+            onClick={() => {
+              trackEvent(EventNames.EXTERNAL_LINK_CLICK, {
+                link_name: 'telegram',
+                location: 'header_social',
+                url: 'https://t.me/neverland_money',
+              });
+            }}
           >
             <Image
               loading='eager'

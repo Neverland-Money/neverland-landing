@@ -40,29 +40,36 @@ const injectAnimationFix = () => {
 if (typeof window !== 'undefined') {
   // Run immediately
   injectAnimationFix();
-  
+
   // Create an observer to detect when the Storybook UI changes
   const observer = new MutationObserver(() => {
     // Dispatch stardust event periodically
     document.dispatchEvent(new CustomEvent('triggerStardust'));
-    
+
     // Find and force stop any animations
-    document.querySelectorAll('[style*="animation"], [style*="filter: blur"]').forEach(element => {
-      if (element instanceof HTMLElement) {
-        element.style.animation = 'none';
-        element.style.filter = 'blur(0px)';
-        element.style.opacity = '1';
-      }
-    });
+    document
+      .querySelectorAll('[style*="animation"], [style*="filter: blur"]')
+      .forEach((element) => {
+        if (element instanceof HTMLElement) {
+          element.style.animation = 'none';
+          element.style.filter = 'blur(0px)';
+          element.style.opacity = '1';
+        }
+      });
   });
-  
+
   // Start observing once the document is loaded
   window.addEventListener('load', () => {
     observer.observe(document.body, { childList: true, subtree: true });
-    
+
     // Also inject the fix every time story changes
-    // Use type assertion to avoid TypeScript errors with Storybook's global variables
-    const win = window as any;
+    // Create proper interface for Storybook's global variables
+    interface StorybookWindow extends Window {
+      __STORYBOOK_ADDONS_CHANNEL__?: {
+        on: (event: string, callback: () => void) => void;
+      };
+    }
+    const win = window as StorybookWindow;
     if (win.__STORYBOOK_ADDONS_CHANNEL__) {
       win.__STORYBOOK_ADDONS_CHANNEL__.on('storyRendered', () => {
         setTimeout(injectAnimationFix, 100);
@@ -84,27 +91,27 @@ const preview: Preview = {
         // Standard device sizes
         iphone5: {
           name: 'iPhone 5',
-          styles: { width: '320px', height: '568px' }
+          styles: { width: '320px', height: '568px' },
         },
         iphone6: {
           name: 'iPhone 6/7/8',
-          styles: { width: '375px', height: '667px' }
+          styles: { width: '375px', height: '667px' },
         },
         iphonex: {
           name: 'iPhone X',
-          styles: { width: '375px', height: '812px' }
+          styles: { width: '375px', height: '812px' },
         },
         iphone12: {
           name: 'iPhone 12 Pro',
-          styles: { width: '390px', height: '844px' }
+          styles: { width: '390px', height: '844px' },
         },
         ipad: {
           name: 'iPad',
-          styles: { width: '768px', height: '1024px' }
+          styles: { width: '768px', height: '1024px' },
         },
         ipadPro: {
           name: 'iPad Pro',
-          styles: { width: '1024px', height: '1366px' }
+          styles: { width: '1024px', height: '1366px' },
         },
         // Custom sizes
         mobile: {

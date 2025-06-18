@@ -1,14 +1,14 @@
+import { Analytics } from '@vercel/analytics/react';
 import type { Metadata } from 'next';
 import {
-  Merriweather,
   Cinzel,
   Cinzel_Decorative,
-  Inter,
   Geist,
   Geist_Mono,
+  Inter,
   Lexend,
+  Merriweather,
 } from 'next/font/google';
-import Script from 'next/script';
 
 import './globals.css';
 
@@ -106,23 +106,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <head>
-        {/* Matomo Tag Manager */}
-        <Script id='matomo-tag-manager' strategy='afterInteractive'>
-          {`
-            var _mtm = window._mtm = window._mtm || [];
-            _mtm.push({'mtm.startTime': (new Date().getTime()), 'event': 'mtm.Start'});
-            (function() {
-              var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-              g.async=true; g.src='https://cdn.matomo.cloud/neverland.matomo.cloud/container_bWIgkw9c.js'; s.parentNode.insertBefore(g,s);
-            })();
-          `}
-        </Script>
-      </head>
+      <head></head>
       <body
         className={`${merriweather.variable} ${cinzel.variable} ${cinzel_decorative.variable} ${inter.variable} ${geistSans.variable} ${geistMono.variable} ${lexend.variable} bg-black text-white antialiased`}
       >
         {children}
+        <Analytics />
       </body>
     </html>
   );

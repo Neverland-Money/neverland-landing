@@ -76,6 +76,27 @@ curl -fsSL https://get.pnpm.io/install.sh | sh -
 - `pnpm format` - Format code with Prettier
 - `pnpm storybook` - Start Storybook component library
 - `pnpm build-storybook` - Build Storybook for production
+- `pnpm clean` - Clean .next and node_modules directories, then reinstall dependencies
+
+## Analytics
+
+This project uses Vercel Analytics for tracking user interactions and engagement:
+
+### Implemented Tracking Features
+
+- **Page Tracking**: Automatic page view tracking via Vercel Analytics
+- **User Interaction Tracking**:
+  - Header navigation and social icon clicks
+  - Footer navigation and social link clicks
+  - Hero and Footer section CTA button interactions
+  - Scroll to Top button interactions
+  - Chat assistant interactions (open, minimize, close)
+  - FAQ accordion expand/collapse actions
+- **Section Time Tracking**: Measures how long users spend viewing each section of the page using the `SectionTracker` component
+
+### Analytics Component
+
+The `SectionTracker` component uses the Intersection Observer API (via `react-intersection-observer`) to monitor user engagement with different page sections. It sends periodic analytics events with section ID, name, and accumulated view duration.
 
 ## Project Structure
 

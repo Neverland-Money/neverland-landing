@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import { Assistant } from '@/app/assistant';
 import { StarIcon } from '@/components/ui/StarIcon';
+import { trackEvent, EventNames } from '@/utils/analytics';
 
 import { ConfirmEndDialog } from './ConfirmEndDialog';
 
@@ -117,7 +118,7 @@ export const ChatButton = ({
       setIsMinimized(true);
     } else {
       // If closed, open it
-      setIsOpen(true);
+      handleOpenChat(); // Use the handleOpenChat function instead
     }
   };
 
@@ -126,16 +127,44 @@ export const ChatButton = ({
   };
 
   const handleConfirmClose = () => {
-    setShowConfirmClose(false);
-    setIsOpen(false);
+    handleEndChat(); // Use the existing handleEndChat function
   };
 
   const handleCancelClose = () => {
     setShowConfirmClose(false);
   };
 
+  const handleEndChat = () => {
+    setIsOpen(false);
+    setIsMinimized(false);
+    setShowConfirmClose(false);
+    // Generate a new key to reset the conversation
+    setKey(Date.now());
+    setCurrentKey(Date.now());
+    trackEvent(EventNames.BUTTON_CLICK, {
+      button_name: 'nadette_chat',
+      action: 'close',
+      location: 'assistant_ui',
+    });
+  };
+
+  const handleOpenChat = () => {
+    setIsOpen(true);
+    setIsMinimized(false);
+    trackEvent(EventNames.BUTTON_CLICK, {
+      button_name: 'nadette_chat',
+      action: 'open',
+      location: 'assistant_ui',
+    });
+  };
+
   const handleMinimize = () => {
     setIsMinimized(true);
+    trackEvent(EventNames.BUTTON_CLICK, {
+      button_name: 'nadette_chat',
+      action: 'minimize',
+      location: 'assistant_ui',
+    });
   };
 
   return (

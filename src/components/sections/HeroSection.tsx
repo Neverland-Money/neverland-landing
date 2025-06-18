@@ -7,6 +7,7 @@ import { BlurredLoadingText } from '@/components/ui/BlurredLoadingText';
 import { StardustEffect } from '@/components/ui/StardustEffect';
 import { StarIcon } from '@/components/ui/StarIcon';
 import StarrySky from '@/components/ui/StarrySky';
+import { trackEvent, EventNames } from '@/utils/analytics';
 // import { Tooltip } from '@/components/ui/Tooltip';
 
 export default function HeroSection() {
@@ -162,9 +163,14 @@ export default function HeroSection() {
                   stiffness: 500,
                   damping: 15,
                 }}
-                onClick={() =>
-                  document.dispatchEvent(new CustomEvent('triggerStardust'))
-                }
+                onClick={() => {
+                  document.dispatchEvent(new CustomEvent('triggerStardust'));
+                  trackEvent(EventNames.BUTTON_CLICK, {
+                    button_name: 'enter_dapp',
+                    button_text: 'Soon™',
+                    button_location: 'hero_section',
+                  });
+                }}
               >
                 {/* Disabled overlay */}
                 {/* <div className="absolute inset-0 bg-black bg-opacity-20 rounded-full flex items-center justify-center">

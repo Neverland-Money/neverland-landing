@@ -10,20 +10,45 @@ import LunarCircleSection from '@/components/sections/LunarCircleSection';
 import PartnersSection from '@/components/sections/PartnersSection';
 import SecuritySection from '@/components/sections/SecuritySection';
 import ScrollToTopButton from '@/components/ui/ScrollToTopButton';
+import { SectionTracker } from '@/utils/sectionTracker';
 
 export default function Home() {
   return (
     <main>
       <Header />
-      <HeroSection />
-      <InfoGridSection />
-      <FeaturesSection />
-      <HowItWorksSection />
-      <LunarCircleSection />
-      <SecuritySection />
-      <FAQSection />
-      <PartnersSection />
-      <ContactSection />
+      <SectionTracker sectionId='hero' sectionName='Hero Section'>
+        <HeroSection />
+      </SectionTracker>
+      <SectionTracker sectionId='info' sectionName='Info Grid Section'>
+        <InfoGridSection />
+      </SectionTracker>
+      <SectionTracker sectionId='features' sectionName='Features Section'>
+        <FeaturesSection />
+      </SectionTracker>
+      <SectionTracker
+        sectionId='how-it-works'
+        sectionName='How It Works Section'
+      >
+        <HowItWorksSection />
+      </SectionTracker>
+      <SectionTracker
+        sectionId='lunar-circle'
+        sectionName='Lunar Circle Section'
+      >
+        <LunarCircleSection />
+      </SectionTracker>
+      <SectionTracker sectionId='security' sectionName='Security Section'>
+        <SecuritySection />
+      </SectionTracker>
+      <SectionTracker sectionId='faq' sectionName='FAQ Section'>
+        <FAQSection />
+      </SectionTracker>
+      <SectionTracker sectionId='partners' sectionName='Partners Section'>
+        <PartnersSection />
+      </SectionTracker>
+      <SectionTracker sectionId='contacts' sectionName='Contact Section'>
+        <ContactSection />
+      </SectionTracker>
       <ChatButton />
       <ScrollToTopButton />
     </main>
