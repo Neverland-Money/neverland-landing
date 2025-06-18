@@ -80,7 +80,7 @@ export default function TermsOfService() {
                   fundamentals of the decentralized non-custodial liquidity
                   protocol called the Neverland Protocol, comprised of
                   open-source self-executing smart contracts that are deployed
-                  on various permissionless public blockchains, such as Ethereum
+                  on various permissionless public blockchains, such as Monad
                   (the &quot;Neverland Protocol&quot; or the
                   &quot;Protocol&quot;). Neverland Money does not control or
                   operate any version of the Neverland Protocol on any
