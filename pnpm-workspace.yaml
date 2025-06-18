@@ -1,5 +1,7 @@
 onlyBuiltDependencies:
   - '@tailwindcss/oxide'
+  - core-js-pure
+  - esbuild
   - protobufjs
   - sharp
   - unrs-resolver

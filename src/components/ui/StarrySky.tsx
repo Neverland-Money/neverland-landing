@@ -22,7 +22,7 @@ interface Offset {
   y: number;
 }
 
-interface StarrySkyProps {
+export interface StarrySkyProps {
   /** Number of stars to render. Scales based on screen width with this value as maximum for 4K screens. Defaults to responsive values: 100 on mobile, 500 on desktop */
   starCount?: number;
   /** Number of shooting stars to render. Set to 0 to disable shooting stars. Defaults to responsive values: 3 on mobile, 5 on desktop */

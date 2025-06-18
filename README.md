@@ -74,6 +74,8 @@ curl -fsSL https://get.pnpm.io/install.sh | sh -
 - `pnpm start` - Start production server
 - `pnpm lint` - Run ESLint
 - `pnpm format` - Format code with Prettier
+- `pnpm storybook` - Start Storybook component library
+- `pnpm build-storybook` - Build Storybook for production
 
 ## Project Structure
 
@@ -162,6 +164,36 @@ Custom configuration with:
 - Import ordering
 - Tailwind class sorting
 - Auto-formatting on save
+
+## Storybook Component Library
+
+This project includes a comprehensive Storybook setup for developing and testing UI components in isolation.
+
+### Features
+
+- **Component Documentation**: Auto-generated docs for all components
+- **Interactive Controls**: Live editing of component props
+- **Accessibility Testing**: Built-in a11y testing with @storybook/addon-a11y
+- **Visual Testing**: Component testing with Vitest integration
+- **Responsive Design**: Test components across different viewport sizes
+
+### Available Stories
+
+- **UI Components**: Button, StarrySky, StarIcon, Tooltip, etc.
+- **Layout Components**: Header, sections, and page layouts
+- **Assistant Components**: ChatButton, Thread, and AI chat interface
+
+### Running Storybook
+
+```bash
+# Start Storybook development server
+pnpm storybook
+
+# Build static Storybook for deployment
+pnpm build-storybook
+```
+
+Access Storybook at [http://localhost:6006](http://localhost:6006)
 
 ## Deployment
 

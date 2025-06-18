@@ -1,3 +1,6 @@
+// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
+import storybook from 'eslint-plugin-storybook';
+
 // eslint.config.mjs
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
@@ -21,6 +24,9 @@ export default defineConfig([
   {
     ignores: ['.next/', 'node_modules/', 'out/', 'build/', 'coverage/'],
   },
+
+  // Add Storybook plugin configuration
+  storybook.configs.recommended,
 
   // bring in Next.js & TS defaults along with shared plugins
   ...compat.extends(

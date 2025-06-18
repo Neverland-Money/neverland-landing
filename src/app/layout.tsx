@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import {
   Merriweather,
   Cinzel,
@@ -105,6 +106,19 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
+      <head>
+        {/* Matomo Tag Manager */}
+        <Script id="matomo-tag-manager" strategy="afterInteractive">
+          {`
+            var _mtm = window._mtm = window._mtm || [];
+            _mtm.push({'mtm.startTime': (new Date().getTime()), 'event': 'mtm.Start'});
+            (function() {
+              var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+              g.async=true; g.src='https://cdn.matomo.cloud/neverland.matomo.cloud/container_bWIgkw9c.js'; s.parentNode.insertBefore(g,s);
+            })();
+          `}
+        </Script>
+      </head>
       <body
         className={`${merriweather.variable} ${cinzel.variable} ${cinzel_decorative.variable} ${inter.variable} ${geistSans.variable} ${geistMono.variable} ${lexend.variable} bg-black text-white antialiased`}
       >
