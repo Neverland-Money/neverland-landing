@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Script from 'next/script';
 import {
   Merriweather,
   Cinzel,
@@ -9,6 +8,7 @@ import {
   Geist_Mono,
   Lexend,
 } from 'next/font/google';
+import Script from 'next/script';
 
 import './globals.css';
 
@@ -108,7 +108,7 @@ export default function RootLayout({
     <html lang='en'>
       <head>
         {/* Matomo Tag Manager */}
-        <Script id="matomo-tag-manager" strategy="afterInteractive">
+        <Script id='matomo-tag-manager' strategy='afterInteractive'>
           {`
             var _mtm = window._mtm = window._mtm || [];
             _mtm.push({'mtm.startTime': (new Date().getTime()), 'event': 'mtm.Start'});
