@@ -13,6 +13,7 @@ const config: Config = {
         cinzel: ['var(--font-cinzel)', 'serif'],
         inter: ['var(--font-inter)', 'sans-serif'],
         cinzel_decorative: ['var(--font-cinzel-decorative)', 'cursive'],
+        lexend: ['var(--font-lexend)', 'sans-serif'],
       },
       colors: {
         primary: '#942FFF',

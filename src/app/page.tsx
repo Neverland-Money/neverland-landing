@@ -9,6 +9,7 @@ import InfoGridSection from '@/components/sections/InfoGridSection';
 import LunarCircleSection from '@/components/sections/LunarCircleSection';
 import PartnersSection from '@/components/sections/PartnersSection';
 import SecuritySection from '@/components/sections/SecuritySection';
+import ScrollToTopButton from '@/components/ui/ScrollToTopButton';
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
       <PartnersSection />
       <ContactSection />
       <ChatButton />
+      <ScrollToTopButton />
     </main>
   );
 }

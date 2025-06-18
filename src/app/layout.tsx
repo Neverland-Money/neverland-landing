@@ -6,6 +6,7 @@ import {
   Inter,
   Geist,
   Geist_Mono,
+  Lexend,
 } from 'next/font/google';
 
 import './globals.css';
@@ -46,6 +47,13 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
   subsets: ['latin'],
+});
+
+const lexend = Lexend({
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  subsets: ['latin'],
+  variable: '--font-lexend',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -98,7 +106,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body
-        className={`${merriweather.variable} ${cinzel.variable} ${cinzel_decorative.variable} ${inter.variable} ${geistSans.variable} ${geistMono.variable} bg-black text-white antialiased`}
+        className={`${merriweather.variable} ${cinzel.variable} ${cinzel_decorative.variable} ${inter.variable} ${geistSans.variable} ${geistMono.variable} ${lexend.variable} bg-black text-white antialiased`}
       >
         {children}
       </body>

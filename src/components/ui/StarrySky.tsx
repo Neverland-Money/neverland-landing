@@ -22,17 +22,57 @@ interface Offset {
   y: number;
 }
 
-export default function StarrySky() {
+interface StarrySkyProps {
+  /** Number of stars to render. Scales based on screen width with this value as maximum for 4K screens. Defaults to responsive values: 100 on mobile, 500 on desktop */
+  starCount?: number;
+  /** Number of shooting stars to render. Set to 0 to disable shooting stars. Defaults to responsive values: 3 on mobile, 5 on desktop */
+  shootingStarCount?: number;
+  /** Whether to extend stars to full scrollable page height instead of just viewport. Defaults to false */
+  fullPage?: boolean;
+  /** Custom z-index for layering control. Defaults to 2 */
+  zIndex?: number;
+  /** Percentage of stars that have glow effects (0.0 to 1.0). Defaults to 0.02 (2%) */
+  glowPercentage?: number;
+}
+
+export default function StarrySky({
+  starCount,
+  shootingStarCount,
+  fullPage = false,
+  zIndex = 2,
+  glowPercentage = 0.02,
+}: StarrySkyProps = {}) {
   const [stars, setStars] = useState<Star[]>([]);
   const [shootingStars, setShootingStars] = useState<ShootingStar[]>([]);
   const [mounted, setMounted] = useState(false);
   const [offset, setOffset] = useState<Offset>({ x: 0, y: 0 });
   const [isMobile, setIsMobile] = useState(false);
+  const [documentHeight, setDocumentHeight] = useState(0);
 
   useEffect(() => {
     setMounted(true);
 
+    const calculateDocumentHeight = () => {
+      if (fullPage) {
+        // Wait for content to render
+        setTimeout(() => {
+          const bodyHeight = document.body.scrollHeight; // Use scrollHeight for full content
+          const documentElementHeight = document.documentElement.scrollHeight;
+          const windowHeight = window.innerHeight;
+          const maxHeight = Math.max(
+            bodyHeight,
+            documentElementHeight,
+            windowHeight,
+          );
+          setDocumentHeight(maxHeight);
+          console.log(`StarrySky: Document height updated to ${maxHeight}px`);
+        }, 100); // Small delay to allow content rendering
+      }
+    };
+
     const updateDimensions = () => {
+      calculateDocumentHeight();
+
       // More comprehensive mobile detection including Samsung devices
       const userAgent =
         navigator.userAgent ||
@@ -58,7 +98,24 @@ export default function StarrySky() {
           isSmallScreen,
       );
     };
+
     updateDimensions();
+
+    // Set up ResizeObserver for dynamic height changes
+    let resizeObserver: ResizeObserver | null = null;
+    if (fullPage && typeof ResizeObserver !== 'undefined') {
+      resizeObserver = new ResizeObserver(() => {
+        calculateDocumentHeight();
+      });
+      // Observe both body and documentElement for height changes
+      resizeObserver.observe(document.body);
+      resizeObserver.observe(document.documentElement);
+    }
+
+    // Additional timeout for late-loading content
+    const lateUpdateTimeout = setTimeout(() => {
+      calculateDocumentHeight();
+    }, 1000);
 
     // Function to update star positions based on pointer position
     const updateStarPositions = (
@@ -108,23 +165,70 @@ export default function StarrySky() {
       window.addEventListener('mousemove', handleMouseMove);
     }
 
-    // Significantly reduce star counts for better performance
-    const starCount = window.innerWidth < 768 ? 100 : 500;
-    const shootingStarCount = window.innerWidth < 768 ? 3 : 5;
+    window.addEventListener('resize', updateDimensions);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('resize', updateDimensions);
+      if (resizeObserver) {
+        resizeObserver.disconnect();
+      }
+      clearTimeout(lateUpdateTimeout);
+    };
+  }, [isMobile, starCount, shootingStarCount, fullPage]);
+
+  // Separate effect for star generation that runs when documentHeight changes
+  useEffect(() => {
+    if (!mounted) return;
+
+    // Wait until we have proper dimensions
+    const effectiveHeight = fullPage ? documentHeight : window.innerHeight;
+    if (fullPage && documentHeight === 0) return; // Wait for height calculation
+
+    // Scale star count based on screen width - only for default responsive behavior
+    const getScaledStarCount = () => {
+      if (starCount) {
+        // Use the provided starCount exactly as given
+        return starCount;
+      } else {
+        // Scale default responsive behavior based on screen width
+        const width = window.innerWidth;
+        const maxWidth = 2560; // 4K width
+        const minWidth = 0; // Minimum mobile width
+        const baseStarCount = 500;
+
+        const scaleFactor = Math.max(
+          0.1,
+          Math.min(1, (width - minWidth) / (maxWidth - minWidth)),
+        );
+        const scaledStarCount = Math.floor(baseStarCount * scaleFactor);
+        console.log(scaledStarCount);
+        return scaledStarCount;
+      }
+    };
+
+    const responsiveStarCount = getScaledStarCount();
+    const responsiveShootingStarCount =
+      shootingStarCount ?? (window.innerWidth < 768 ? 3 : 5);
+    const starCountValue = responsiveStarCount;
+    const shootingStarCountValue = responsiveShootingStarCount;
 
     // Generate random stars data
-    const newStars: Star[] = [...Array(starCount)].map(() => ({
+    const newStars: Star[] = [...Array(starCountValue)].map(() => ({
       cx: Math.floor(Math.random() * window.innerWidth),
-      cy: Math.floor(Math.random() * window.innerHeight),
+      cy: Math.floor(Math.random() * effectiveHeight),
       r: Math.random() * 0.7 + 0.1,
-      hasGlow: Math.random() < 0.02, // 2% of stars have glow
+      hasGlow: Math.random() < glowPercentage, // Use glowPercentage prop
     }));
+
     setStars(newStars);
-    console.log(`StarrySky: Generated ${starCount} stars`);
 
     // Generate random shooting stars data
-    const newShootingStars: ShootingStar[] = [...Array(shootingStarCount)].map(
-      () => {
+    if (shootingStarCountValue > 0) {
+      const newShootingStars: ShootingStar[] = [
+        ...Array(shootingStarCountValue),
+      ].map(() => {
         const direction = Math.random() > 0.5 ? 1 : -1;
         const buffer = 300;
         const left =
@@ -134,21 +238,24 @@ export default function StarrySky() {
 
         return {
           left,
-          top: Math.floor(Math.random() * (window.innerHeight * 0.5)),
-          delay: Math.random() * 30, // Random delays (0-30s) for natural timing
-          duration: 2 + Math.random() * 3, // 2-5s duration
+          top: Math.floor(Math.random() * (effectiveHeight * 0.5)),
+          delay: Math.random() * 30,
+          duration: 2 + Math.random() * 3,
         };
-      },
-    );
+      });
 
-    setShootingStars(newShootingStars);
-    console.log(`StarrySky: Generated ${shootingStarCount} shooting stars`);
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('touchmove', handleTouchMove);
-    };
-  }, [isMobile]); // Add isMobile as a dependency
+      setShootingStars(newShootingStars);
+    } else {
+      setShootingStars([]);
+    }
+  }, [
+    mounted,
+    documentHeight,
+    starCount,
+    shootingStarCount,
+    fullPage,
+    glowPercentage,
+  ]);
 
   // Prevent SSR/client mismatch
   if (!mounted) return null;
@@ -158,13 +265,13 @@ export default function StarrySky() {
       <motion.svg
         id='sky'
         width='100%'
-        height='100%'
+        height={fullPage ? `${documentHeight}px` : '100%'}
         style={{
           position: 'absolute',
           top: 0,
           left: 0,
           pointerEvents: 'none',
-          zIndex: 2,
+          zIndex,
         }}
         animate={{
           x: offset.x,
@@ -189,7 +296,9 @@ export default function StarrySky() {
           // Calculate opacity based on position - stars less visible towards bottom (brighter area)
           const baseOpacity = Math.max(
             0.4,
-            1 - (star.cy / window.innerHeight) * 0.8,
+            1 -
+              (star.cy / (fullPage ? documentHeight : window.innerHeight)) *
+                0.8,
           );
 
           return (
@@ -201,6 +310,7 @@ export default function StarrySky() {
                   cy={star.cy}
                   r={star.r + 8}
                   fill='url(#starGlow)'
+                  initial={{ opacity: baseOpacity * 0.4 }} // Start with initial opacity
                   animate={{
                     opacity: [
                       baseOpacity * 0.4,
@@ -223,6 +333,7 @@ export default function StarrySky() {
                 r={star.r + (star.hasGlow ? 1 : 0.5)}
                 stroke='none'
                 fill='white'
+                initial={{ opacity: baseOpacity * 0.3 }} // Start with initial opacity
                 animate={{
                   opacity: [baseOpacity * 0.3, baseOpacity, baseOpacity * 0.3],
                 }}
@@ -238,54 +349,56 @@ export default function StarrySky() {
         })}
       </motion.svg>
 
-      <motion.div
-        id='shootingstars'
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          pointerEvents: 'none',
-          zIndex: 2,
-        }}
-        animate={{
-          x: offset.x,
-          y: `calc(10vh - 70% + ${offset.y * 0.5}px)`,
-          rotate: 120,
-        }}
-        transition={{
-          type: 'spring',
-          stiffness: 150,
-          damping: 60,
-        }}
-      >
-        {shootingStars.map((star, i) => (
-          <motion.div
-            key={i}
-            style={{
-              position: 'absolute',
-              left: `${star.left}px`,
-              top: `${star.top}px`,
-              height: '2px',
-              background: 'linear-gradient(-45deg, white, rgba(0,0,255,0))',
-              filter: 'drop-shadow(0 0 6px white)',
-            }}
-            animate={{
-              opacity: [0, 0.5, 0],
-              width: ['0px', '120px', '0px'],
-              x: [0, 300],
-            }}
-            transition={{
-              duration: star.duration,
-              repeat: Infinity,
-              delay: star.delay,
-              repeatDelay: Math.random() * 10 + 5, // 5-15s pause between repetitions
-              ease: 'linear',
-            }}
-          />
-        ))}
-      </motion.div>
+      {shootingStars.length > 0 && (
+        <motion.div
+          id='shootingstars'
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: fullPage ? `${documentHeight}px` : '100%',
+            pointerEvents: 'none',
+            zIndex,
+          }}
+          animate={{
+            x: offset.x,
+            y: `calc(10vh - 70% + ${offset.y * 0.5}px)`,
+            rotate: 120,
+          }}
+          transition={{
+            type: 'spring',
+            stiffness: 150,
+            damping: 60,
+          }}
+        >
+          {shootingStars.map((star, i) => (
+            <motion.div
+              key={i}
+              style={{
+                position: 'absolute',
+                left: `${star.left}px`,
+                top: `${star.top}px`,
+                height: '2px',
+                background: 'linear-gradient(-45deg, white, rgba(0,0,255,0))',
+                filter: 'drop-shadow(0 0 6px white)',
+              }}
+              animate={{
+                opacity: [0, 0.5, 0],
+                width: ['0px', '120px', '0px'],
+                x: [0, 300],
+              }}
+              transition={{
+                duration: star.duration,
+                repeat: Infinity,
+                delay: star.delay,
+                repeatDelay: Math.random() * 10 + 5, // 5-15s pause between repetitions
+                ease: 'linear',
+              }}
+            />
+          ))}
+        </motion.div>
+      )}
     </div>
   );
 }
