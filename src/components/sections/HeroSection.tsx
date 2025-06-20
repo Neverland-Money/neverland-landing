@@ -1,14 +1,12 @@
 'use client';
 
-import { motion } from 'framer-motion';
+// import { motion } from 'framer-motion';
 // import Link from 'next/link';
 
+import ActionButton from '@/components/ui/ActionButton';
 import { BlurredLoadingText } from '@/components/ui/BlurredLoadingText';
-import { StardustEffect } from '@/components/ui/StardustEffect';
-import { StarIcon } from '@/components/ui/StarIcon';
 import StarrySky from '@/components/ui/StarrySky';
-import { trackEvent, EventNames } from '@/utils/analytics';
-// import { Tooltip } from '@/components/ui/Tooltip';
+import { Tooltip } from '@/components/ui/Tooltip';
 
 export default function HeroSection() {
   return (
@@ -142,168 +140,177 @@ export default function HeroSection() {
             </div>
 
             {/* CTA Button */}
-            <div className='relative'>
-              {/* Stardust particles */}
-              <StardustEffect />
-
-              <motion.div
-                className='group relative mx-auto flex w-[240px] cursor-pointer items-center justify-center gap-3 rounded-full px-6 py-4 md:mx-0 md:mr-auto'
-                style={{
-                  background:
-                    'linear-gradient(0deg, #d132e0 -31%, #530ee3 111.63%)',
-                  boxShadow: '0px 0px 36px #7200d6',
-                }}
-                whileTap={{
-                  scale: 0.95,
-                  y: 4,
-                  boxShadow: '0px 0px 18px #7200d6',
-                }}
-                transition={{
-                  type: 'spring',
-                  stiffness: 500,
-                  damping: 15,
-                }}
-                onClick={() => {
-                  document.dispatchEvent(new CustomEvent('triggerStardust'));
-                  trackEvent(EventNames.BUTTON_CLICK, {
-                    button_name: 'enter_dapp',
-                    button_text: 'Soon™',
-                    button_location: 'hero_section',
-                  });
-                }}
-              >
-                {/* Disabled overlay */}
-                {/* <div className="absolute inset-0 bg-black bg-opacity-20 rounded-full flex items-center justify-center">
-                  <span className="text-white text-xs font-inter">
-                    Testnet Coming Soon
-                  </span>
-                </div> */}
-
-                {/* Star 1 */}
-                <StarIcon />
-
-                {/* Button text */}
-                <span className='font-inter text-center text-base leading-[110%] font-medium text-white'>
-                  Soon™
-                </span>
-
-                {/* Star 2 */}
-                <StarIcon />
-              </motion.div>
-            </div>
+            <ActionButton
+              text='Soon'
+              className='w-[240px] md:mx-0 md:mr-auto'
+              buttonName='enter_dapp'
+              buttonLocation='hero_section'
+            />
           </div>
         </div>
       </div>
       {/* Stats Cards - 80px from button above on desktop, 40px on mobile */}
       <div className='z-[7] mx-auto mt-[40px] flex w-full max-w-7xl flex-col gap-4 px-4 md:mt-[80px] md:flex-row md:gap-6 xl:px-0'>
         {/* Total Value Locked Card - Desktop version */}
-        <div
-          className='relative hidden h-[118px] w-[255px] rounded-[20px] border border-white/20 md:block'
-          style={{
-            background: 'rgba(50, 2, 99, 0.65)',
-            backdropFilter: 'blur(4px)',
-          }}
-        >
-          <div className='font-cinzel absolute top-4 left-4 text-sm leading-[110%] font-normal text-[#ead5ff] uppercase'>
-            Total Value Locked
-          </div>
+        <div className='relative hidden h-[118px] w-[255px] rounded-[20px] backdrop-blur-sm md:block'>
+          {/* Dark overlay with subtle background-blur matching */}
+          <div className='absolute inset-0 rounded-[20px] bg-[#14143a]/25' />
 
-          {/* Value */}
-          <div className='absolute top-[58px] left-4'>
-            <BlurredLoadingText
-              text='000.00M'
-              className='font-cinzel text-[28px] leading-[110%] font-normal text-white md:text-[40px]'
+          {/* Variable thickness border container */}
+          <div
+            className='absolute inset-0 overflow-hidden rounded-[20px] border border-white/20'
+            style={{
+              borderRadius: '20px',
+            }}
+          >
+            {/* Ultra-subtle top-left edge highlight */}
+            <div
+              className='absolute top-0 left-0 h-full w-full'
+              style={{
+                boxShadow: 'inset 1px 1px 0 0 rgba(255, 255, 255, 0.15)',
+                background:
+                  'linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 40%)',
+              }}
             />
+
+            {/* Almost imperceptible bottom-right edge */}
+            <div
+              className='absolute right-0 bottom-0 h-full w-full'
+              style={{
+                boxShadow: 'inset -1px -1px 0 0 rgba(255, 255, 255, 0.08)',
+                background:
+                  'linear-gradient(315deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 40%)',
+              }}
+            />
+          </div>
+          {/* Content inside glass container */}
+          <div className='relative z-10 p-4'>
+            <div className='font-cinzel text-sm leading-[110%] font-normal text-[#ead5ff] uppercase'>
+              Total Value Locked
+            </div>
+
+            {/* Value */}
+            <div className='mt-[38px]'>
+              <BlurredLoadingText
+                text='000.00M'
+                className='font-cinzel text-[28px] leading-[110%] font-normal text-white md:text-[40px]'
+              />
+            </div>
           </div>
 
           {/* Tooltip */}
-          {/* <Tooltip
+          <Tooltip
             content={
-              <div className="text-[14px] leading-[140%] text-white">
+              <div className='text-[14px] leading-[140%] text-white'>
                 Total value of assets locked in the protocol.
               </div>
             }
-            position="top"
-            className="absolute top-22 left-56 cursor-pointer"
-            zIndex={99999}
+            position='top'
+            className='absolute -top-10 left-56 z-[99999] cursor-pointer'
           >
             <svg
-              width="18"
-              height="18"
-              viewBox="0 0 18 18"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+              width='18'
+              height='18'
+              viewBox='0 0 18 18'
+              fill='none'
+              xmlns='http://www.w3.org/2000/svg'
             >
               <rect
-                width="18"
-                height="18"
-                rx="9"
-                fill="#6B5390"
-                fillOpacity="0.6"
+                width='18'
+                height='18'
+                rx='9'
+                fill='#6B5390'
+                fillOpacity='0.6'
               />
               <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M9.16667 5.75C9.6499 5.75 10.0417 5.35825 10.0417 4.875C10.0417 4.39175 9.6499 4 9.16667 4C8.68343 4 8.29167 4.39175 8.29167 4.875C8.29167 5.35825 8.68343 5.75 9.16667 5.75ZM8.58333 6.91667C8.26116 6.91667 8 7.17784 8 7.5C8 7.82217 8.26116 8.08333 8.58333 8.08333V12.75C8.58333 13.0722 8.84449 13.3333 9.16667 13.3333C9.48884 13.3333 9.75 13.0722 9.75 12.75V7.5C9.75 7.17784 9.48884 6.91667 9.16667 6.91667H8.58333Z"
-                fill="white"
+                fillRule='evenodd'
+                clipRule='evenodd'
+                d='M9.16667 5.75C9.6499 5.75 10.0417 5.35825 10.0417 4.875C10.0417 4.39175 9.6499 4 9.16667 4C8.68343 4 8.29167 4.39175 8.29167 4.875C8.29167 5.35825 8.68343 5.75 9.16667 5.75ZM8.58333 6.91667C8.26116 6.91667 8 7.17784 8 7.5C8 7.82217 8.26116 8.08333 8.58333 8.08333V12.75C8.58333 13.0722 8.84449 13.3333 9.16667 13.3333C9.48884 13.3333 9.75 13.0722 9.75 12.75V7.5C9.75 7.17784 9.48884 6.91667 9.16667 6.91667H8.58333Z'
+                fill='white'
               />
             </svg>
-          </Tooltip> */}
+          </Tooltip>
         </div>
 
         {/* Active Users Card - Desktop version */}
-        <div
-          className='relative hidden h-[118px] w-[255px] rounded-[20px] border border-white/20 md:block'
-          style={{
-            background: 'rgba(50, 2, 99, 0.65)',
-            backdropFilter: 'blur(4px)',
-          }}
-        >
-          <div className='font-cinzel absolute top-4 left-4 text-sm leading-[110%] font-normal text-[#ead5ff] uppercase'>
-            Active Users
-          </div>
+        <div className='relative hidden h-[118px] w-[255px] rounded-[20px] backdrop-blur-sm md:block'>
+          {/* Dark overlay with subtle background-blur matching */}
+          <div className='absolute inset-0 rounded-[20px] bg-[#14143a]/25' />
 
-          {/* Value */}
-          <div className='absolute top-[58px] left-4'>
-            <BlurredLoadingText
-              text='900,000'
-              className='font-cinzel text-[28px] leading-[110%] font-normal text-white md:text-[40px]'
+          {/* Variable thickness border container */}
+          <div
+            className='absolute inset-0 overflow-hidden rounded-[20px] border border-white/20'
+            style={{
+              borderRadius: '20px',
+            }}
+          >
+            {/* Ultra-subtle top-left edge highlight */}
+            <div
+              className='absolute top-0 left-0 h-full w-full'
+              style={{
+                boxShadow: 'inset 1px 1px 0 0 rgba(255, 255, 255, 0.15)',
+                background:
+                  'linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 40%)',
+              }}
             />
+
+            {/* Almost imperceptible bottom-right edge */}
+            <div
+              className='absolute right-0 bottom-0 h-full w-full'
+              style={{
+                boxShadow: 'inset -1px -1px 0 0 rgba(255, 255, 255, 0.08)',
+                background:
+                  'linear-gradient(315deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 40%)',
+              }}
+            />
+          </div>
+          {/* Content inside glass container */}
+          <div className='relative z-10 p-4'>
+            <div className='font-cinzel text-sm leading-[110%] font-normal text-[#ead5ff] uppercase'>
+              Active Users
+            </div>
+
+            {/* Value */}
+            <div className='mt-[38px]'>
+              <BlurredLoadingText
+                text='900,000'
+                className='font-cinzel text-[28px] leading-[110%] font-normal text-white md:text-[40px]'
+              />
+            </div>
           </div>
 
           {/* Tooltip */}
-          {/* <Tooltip
+          <Tooltip
             content={
-              <div className="text-[14px] leading-[140%] text-white">
+              <div className='text-[14px] leading-[140%] text-white'>
                 Number of users actively interacting with the protocol.
               </div>
             }
-            position="top"
-            className="absolute top-22 left-56 cursor-pointer"
-            zIndex={99999}
+            position='top'
+            className='absolute -top-10 left-56 z-[99999] cursor-pointer'
           >
             <svg
-              width="18"
-              height="18"
-              viewBox="0 0 18 18"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+              width='18'
+              height='18'
+              viewBox='0 0 18 18'
+              fill='none'
+              xmlns='http://www.w3.org/2000/svg'
             >
               <rect
-                width="18"
-                height="18"
-                rx="9"
-                fill="#6B5390"
-                fillOpacity="0.6"
+                width='18'
+                height='18'
+                rx='9'
+                fill='#6B5390'
+                fillOpacity='0.6'
               />
               <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M9.16667 5.75C9.6499 5.75 10.0417 5.35825 10.0417 4.875C10.0417 4.39175 9.6499 4 9.16667 4C8.68343 4 8.29167 4.39175 8.29167 4.875C8.29167 5.35825 8.68343 5.75 9.16667 5.75ZM8.58333 6.91667C8.26116 6.91667 8 7.17784 8 7.5C8 7.82217 8.26116 8.08333 8.58333 8.08333V12.75C8.58333 13.0722 8.84449 13.3333 9.16667 13.3333C9.48884 13.3333 9.75 13.0722 9.75 12.75V7.5C9.75 7.17784 9.48884 6.91667 9.16667 6.91667H8.58333Z"
-                fill="white"
+                fillRule='evenodd'
+                clipRule='evenodd'
+                d='M9.16667 5.75C9.6499 5.75 10.0417 5.35825 10.0417 4.875C10.0417 4.39175 9.6499 4 9.16667 4C8.68343 4 8.29167 4.39175 8.29167 4.875C8.29167 5.35825 8.68343 5.75 9.16667 5.75ZM8.58333 6.91667C8.26116 6.91667 8 7.17784 8 7.5C8 7.82217 8.26116 8.08333 8.58333 8.08333V12.75C8.58333 13.0722 8.84449 13.3333 9.16667 13.3333C9.48884 13.3333 9.75 13.0722 9.75 12.75V7.5C9.75 7.17784 9.48884 6.91667 9.16667 6.91667H8.58333Z'
+                fill='white'
               />
             </svg>
-          </Tooltip> */}
+          </Tooltip>
         </div>
 
         {/* Mobile Stats Layout - Fixed to bottom of viewport */}

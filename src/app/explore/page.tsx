@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 
 import LiquidGlass from '@/components/ui/LiquidGlass';
 
-export default function HowItWorksPage() {
+export default function ExplorePage() {
   const router = useRouter();
 
   useEffect(() => {

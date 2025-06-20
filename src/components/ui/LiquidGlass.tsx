@@ -15,8 +15,6 @@ interface LiquidGlassProps {
 export default function LiquidGlass({
   children,
   className = '',
-  width = 'auto',
-  height = 'auto',
   padding = 'p-10',
   borderRadius = 'rounded-3xl',
   blur = 'sm',
@@ -32,7 +30,6 @@ export default function LiquidGlass({
   return (
     <div
       className={`relative flex flex-col items-center justify-center ${borderRadius} ${padding} ${blurClass} ${className}`}
-      style={{ width, height }}
     >
       {/* Dark overlay with subtle background-blur matching */}
       <div className={`absolute inset-0 ${borderRadius} ${bgColorClass}`} />

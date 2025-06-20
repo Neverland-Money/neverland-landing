@@ -1,12 +1,10 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 
 import Header from '@/components/layout/Header';
-import { StardustEffect } from '@/components/ui/StardustEffect';
-import { StarIcon } from '@/components/ui/StarIcon';
+import ActionButton from '@/components/ui/ActionButton';
 
 export default function NotFound() {
   return (
@@ -73,46 +71,16 @@ export default function NotFound() {
               </button>
 
               {/* Enter App Button with Stars and Stardust */}
-              <div className='relative'>
-                {/* Stardust particles */}
-                <StardustEffect />
-
-                <motion.div
-                  className='group relative mx-auto flex w-[240px] cursor-pointer items-center justify-center gap-3 rounded-full px-6 py-4'
-                  style={{
-                    background:
-                      'linear-gradient(0deg, #d132e0 -31%, #530ee3 111.63%)',
-                    boxShadow: '0px 0px 36px #7200d6',
-                  }}
-                  whileTap={{
-                    scale: 0.95,
-                    y: 4,
-                    boxShadow: '0px 0px 18px #7200d6',
-                  }}
-                  transition={{
-                    type: 'spring',
-                    stiffness: 500,
-                    damping: 15,
-                  }}
-                  onClick={() =>
-                    document.dispatchEvent(new CustomEvent('triggerStardust'))
-                  }
-                >
-                  {/* Star 1 */}
-                  <StarIcon />
-
-                  {/* Button text */}
-                  <Link
-                    href='/'
-                    className='font-inter text-base leading-[110%] font-medium text-white'
-                  >
-                    Enter App
-                  </Link>
-
-                  {/* Star 2 */}
-                  <StarIcon />
-                </motion.div>
-              </div>
+              <Link href='/'>
+                <ActionButton
+                  text='Soon'
+                  className='mx-auto w-[240px]'
+                  buttonName='enter_app'
+                  buttonLocation='404_page'
+                  showStars={true}
+                  showStardust={true}
+                />
+              </Link>
             </div>
 
             {/* Footer Message */}

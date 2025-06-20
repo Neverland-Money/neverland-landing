@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
+import LiquidGlass from '@/components/ui/LiquidGlass';
 import { trackEvent, EventNames } from '@/utils/analytics';
 
 export default function Header() {
@@ -64,53 +65,37 @@ export default function Header() {
 
   return (
     <header>
-      {/* Fixed Header with permanent blur effect */}
-      <nav className='fixed top-0 right-0 left-0 z-50 flex items-center justify-between px-4 py-4 transition-all duration-500'>
-        {/* Main liquid glass effect container */}
-        <div className='liquid-glass-container absolute inset-0 -z-10'></div>
+      {/* Fixed Header with LiquidGlass effect */}
+      <nav className='fixed top-4 right-4 left-4 z-50 flex items-center justify-between px-6 py-4 transition-all duration-500'>
+        {/* LiquidGlass Header Background */}
+        <div className='absolute inset-0 -z-10 overflow-hidden rounded-xl border border-white/[0.06] shadow-lg'>
+          <LiquidGlass
+            className='h-full w-full'
+            blur='md'
+            overlayColor='#050212'
+            overlayOpacity={0.2}
+            padding='p-0'
+            borderRadius='rounded-xl'
+          >
+            {/* Empty div as children (required by LiquidGlass) */}
+            <div></div>
+          </LiquidGlass>
 
-        {/* Bottom edge glass effect */}
-        <div className='liquid-glass-edge absolute right-0 -bottom-[2px] left-0 -z-10 h-[2px]'></div>
+          {/* Shimmer effect added separately since it's not in LiquidGlass props */}
+          <div
+            className='absolute inset-0 overflow-hidden'
+            style={{
+              background:
+                'linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent)',
+              animation: 'shimmer 5s infinite',
+            }}
+          />
+        </div>
 
-        {/* Bottom liquid pooling effect */}
-        <div className='liquid-glass-pool absolute right-0 -bottom-2 left-0 -z-10 h-4'></div>
-
-        {/* Animated shimmer effect */}
-        <div className='liquid-glass-shimmer absolute inset-x-0 top-0 -z-10 h-full overflow-hidden'></div>
-
-        {/* Light refraction effect */}
-        <div className='liquid-glass-glow absolute inset-0 -z-10'></div>
-
-        {/* CSS for liquid glass styling */}
+        {/* Animation for shimmer */}
         <style
           dangerouslySetInnerHTML={{
             __html: `
-              .liquid-glass-container {
-                background-color: rgba(5,2,18,0.2);
-                backdrop-filter: blur(8px);
-                -webkit-backdrop-filter: blur(8px);
-                border-bottom: 1px solid rgba(255,255,255,0.06);
-                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-              }
-              
-              .liquid-glass-fade {
-                background: linear-gradient(to bottom, rgba(5,2,18,0.2), transparent);
-                backdrop-filter: blur(1px);
-                -webkit-backdrop-filter: blur(1px);
-              }
-              
-              .liquid-glass-glow {
-                background: radial-gradient(ellipse at top, rgba(255,255,255,0.1), transparent 70%);
-                opacity: 0.6;
-              }
-              
-              .liquid-glass-shimmer {
-                background: linear-gradient(90deg, transparent, rgba(255,255,255,0.02), transparent);
-                transform: translateX(-100%);
-                animation: shimmer 5s infinite;
-                animation-delay: 1s;
-              }
-              
               @keyframes shimmer {
                 0% { transform: translateX(-100%); }
                 100% { transform: translateX(100%); }
@@ -303,12 +288,9 @@ export default function Header() {
         <div className='fixed inset-0 z-[60] overflow-y-auto bg-[rgba(5,2,18,0.85)] backdrop-blur-[17px] backdrop-filter md:hidden'>
           <div className='flex h-full w-full flex-col items-start justify-start px-4'>
             {/* Top row with Logo and Close button */}
-            <div className='mb-6 flex h-[80px] w-full items-center justify-between'>
+            <div className='flex h-[80px] w-full items-center justify-end'>
               {/* Close button */}
-              <button
-                className='absolute top-8 right-5'
-                onClick={toggleMobileMenu}
-              >
+              <button className='top-8 right-5' onClick={toggleMobileMenu}>
                 <Image
                   loading='eager'
                   src='/assets/images/header/close.svg'
@@ -321,7 +303,7 @@ export default function Header() {
             </div>
             {/* Mobile Navigation Links */}
             {isMainPage && (
-              <div className='mt-12 flex flex-col gap-5'>
+              <div className='mb-12 flex h-full flex-col justify-center gap-5'>
                 <Link
                   href='#about'
                   onClick={(e) => handleSmoothScroll(e, 'about')}
@@ -368,7 +350,7 @@ export default function Header() {
             )}
 
             {/* Mobile Social Links - positioned at the bottom and centered */}
-            <div className='absolute right-0 bottom-12 left-0 flex justify-center gap-7'>
+            <div className='flex w-full justify-center gap-7 pb-12'>
               <Link
                 href='https://x.com/neverland_money'
                 target='_blank noreferrer noopener'
