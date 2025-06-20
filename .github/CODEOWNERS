@@ -1,0 +1,26 @@
+# These owners will be the default owners for everything in the repo.
+# Unless a later match takes precedence, these owners will be requested for
+# review when someone opens a pull request.
+* @0xCatalyst
+
+# UI/UX related files
+*.css @0xCatalyst
+*.scss @0xCatalyst
+/public/assets/ @0xCatalyst
+
+# Core components
+/src/components/ @0xCatalyst
+/src/pages/ @0xCatalyst
+
+# API and server-side code
+/src/api/ @0xCatalyst
+/src/lib/ @0xCatalyst
+
+# Build configuration
+*.json @0xCatalyst
+*.yml @0xCatalyst
+/next.config.js @0xCatalyst
+
+# Documentation
+*.md @0xCatalyst
+/docs/ @0xCatalyst
