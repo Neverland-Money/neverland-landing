@@ -46,7 +46,7 @@ export default function Home() {
       <SectionTracker sectionId='partners' sectionName='Partners Section'>
         <PartnersSection />
       </SectionTracker>
-      <SectionTracker sectionId='contacts' sectionName='Contact Section'>
+      <SectionTracker sectionId='contact' sectionName='Contact Section'>
         <ContactSection />
       </SectionTracker>
       <ChatButton />
