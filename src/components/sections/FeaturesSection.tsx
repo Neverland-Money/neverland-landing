@@ -2,7 +2,10 @@ import Image from 'next/image';
 
 export default function FeaturesSection() {
   return (
-    <section className='relative min-h-screen w-full overflow-hidden'>
+    <section
+      id='features'
+      className='relative min-h-screen w-full overflow-hidden'
+    >
       {/* Background Image with Gradients */}
       <div
         className='absolute inset-0 z-0'

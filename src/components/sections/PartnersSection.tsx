@@ -195,7 +195,7 @@ export default function PartnersSection() {
   };
 
   return (
-    <section className='w-full py-[100px]'>
+    <section id='partners' className='w-full py-[100px]'>
       <div className='mx-auto flex max-w-[1540px] flex-col items-center gap-4 px-[50px] md:gap-24'>
         {/* Header Section */}
         <div className='flex w-full max-w-[641px] flex-col items-center gap-3'>

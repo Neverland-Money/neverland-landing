@@ -25,16 +25,10 @@ export default function Home() {
       <SectionTracker sectionId='features' sectionName='Features Section'>
         <FeaturesSection />
       </SectionTracker>
-      <SectionTracker
-        sectionId='how-it-works'
-        sectionName='How It Works Section'
-      >
+      <SectionTracker sectionId='explore' sectionName='How It Works Section'>
         <HowItWorksSection />
       </SectionTracker>
-      <SectionTracker
-        sectionId='lunar-circle'
-        sectionName='Lunar Circle Section'
-      >
+      <SectionTracker sectionId='stats' sectionName='Lunar Circle Section'>
         <LunarCircleSection />
       </SectionTracker>
       <SectionTracker sectionId='security' sectionName='Security Section'>

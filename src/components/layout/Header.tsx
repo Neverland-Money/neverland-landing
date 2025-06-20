@@ -155,8 +155,8 @@ export default function Header() {
                 Features
               </Link>
               <Link
-                href='#how-it-works'
-                onClick={(e) => handleSmoothScroll(e, 'how-it-works')}
+                href='#explore'
+                onClick={(e) => handleSmoothScroll(e, 'explore')}
                 className='font-merriweather text-base font-normal text-white transition-colors hover:text-purple-300'
               >
                 Explore
@@ -337,8 +337,8 @@ export default function Header() {
                   FEATURES
                 </Link>
                 <Link
-                  href='#how-it-works'
-                  onClick={(e) => handleSmoothScroll(e, 'how-it-works')}
+                  href='#explore'
+                  onClick={(e) => handleSmoothScroll(e, 'explore')}
                   className='font-cinzel self-stretch text-left text-[56px] leading-[100%] font-normal text-white uppercase hover:text-purple-400'
                 >
                   EXPLORE
