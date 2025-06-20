@@ -8,9 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write .",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
     "clean": "rm -rf .next node_modules && pnpm install",
+    "build-storybook": "storybook build",
+    "storybook": "storybook dev -p 6006",
     "prepare": "husky"
   },
   "dependencies": {

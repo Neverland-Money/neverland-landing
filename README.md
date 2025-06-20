@@ -38,11 +38,13 @@ curl -fsSL https://get.pnpm.io/install.sh | sh -
    cd neverland-landing-v2
    ```
 
-2. **Install dependencies**
+2. **Install dependencies and initialize Husky**
 
    ```bash
    pnpm install
    ```
+
+   The installation automatically initializes Husky via the `prepare` script in package.json.
 
 3. **Set up environment variables**
 
@@ -65,6 +67,7 @@ curl -fsSL https://get.pnpm.io/install.sh | sh -
    ```
 
 5. **Open your browser**
+
    Navigate to [http://localhost:3000](http://localhost:3000)
 
 ## Development Commands
@@ -74,9 +77,9 @@ curl -fsSL https://get.pnpm.io/install.sh | sh -
 - `pnpm start` - Start production server
 - `pnpm lint` - Run ESLint
 - `pnpm format` - Format code with Prettier
-- `pnpm storybook` - Start Storybook component library
-- `pnpm build-storybook` - Build Storybook for production
 - `pnpm clean` - Clean .next and node_modules directories, then reinstall dependencies
+- `pnpm build-storybook` - Build Storybook for production
+- `pnpm storybook` - Start Storybook component library
 
 ## Analytics
 
@@ -101,20 +104,21 @@ The `SectionTracker` component uses the Intersection Observer API (via `react-in
 ## Project Structure
 
 ```
-src/
+src/                         # Source code directory
 ├── app/                     # Next.js App Router pages
 │   ├── api/chat/            # AI chat API endpoint
 │   ├── privacy-policy/      # Privacy policy page
 │   ├── terms-of-service/    # Terms of service page
 │   ├── globals.css          # Global styles
-│   ├── layout.tsx           # Root layout
-│   └── page.tsx             # Homepage
-├── components/
-│   ├── assistant-ui/        # AI chat components
-│   ├── layout/              # Layout components (Header, Footer)
-│   ├── sections/            # Page sections (Hero, Features, etc.)
-│   └── ui/                  # Reusable UI components
-└── lib/                     # Utility functions
+│   ├── layout.tsx           # Root layout with metadata and fonts
+│   └── page.tsx             # Homepage component
+├── components/              # Reusable component directory
+│   ├── assistant-ui/        # AI chat interface components
+│   ├── layout/              # Structural layout components (Header, Footer)
+│   ├── sections/            # Page-specific content sections
+│   └── ui/                  # Core UI primitives and elements
+├── lib/                     # Core utility functions
+└── utils/                   # Helper utilities for specific features
 ```
 
 ## Key Components
@@ -179,12 +183,15 @@ Custom configuration with:
 - ESLint integration
 - Path aliases (@/\*)
 
-### ESLint & Prettier
+### ESLint, Prettier & Husky
 
 - Strict TypeScript rules
 - Import ordering
 - Tailwind class sorting
 - Auto-formatting on save
+- Git hooks with Husky to enforce code quality:
+  - Pre-commit hook runs linting and formatting on staged files
+  - Prevents committing code that doesn't meet quality standards
 
 ## Storybook Component Library
 
@@ -207,11 +214,11 @@ This project includes a comprehensive Storybook setup for developing and testing
 ### Running Storybook
 
 ```bash
-# Start Storybook development server
-pnpm storybook
-
 # Build static Storybook for deployment
 pnpm build-storybook
+
+# Start Storybook development server
+pnpm storybook
 ```
 
 Access Storybook at [http://localhost:6006](http://localhost:6006)

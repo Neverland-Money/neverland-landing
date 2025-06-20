@@ -23,8 +23,8 @@ export default function FeaturesSection() {
             Key Features
           </h2>
           <p className='font-merriweather text-base leading-[140%] text-white sm:text-lg'>
-            Discover the magical features that make Neverland Money the perfect
-            DeFi experience.
+            Discover the magical features that make Neverland the perfect DeFi
+            experience.
           </p>
         </div>
 
@@ -93,7 +93,7 @@ export default function FeaturesSection() {
               </h3>
               <p className='font-merriweather max-w-[299px] text-sm leading-[140%] text-white/80 sm:text-base'>
                 Set-and-forget feature to automatically leverage platform
-                incentives into loan repayments, providing a care-free magic
+                incentives into loan repayments, providing a carefree, magical
                 experience.
               </p>
             </div>

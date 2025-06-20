@@ -29,34 +29,41 @@ export const ChatButton = ({
   const buttonRef = useRef<HTMLButtonElement>(null); // Reference to the button element
   const divRef = useRef<HTMLDivElement>(null); // Reference to the div element when using isStyled
 
+  // Function to trigger Framer-Motion nudge animation
+  const performNudge = () => {
+    setIsNudging(true);
+    // Reset after animation duration
+    setTimeout(() => setIsNudging(false), 1500);
+  };
+
   // Periodically nudge the chat button to draw attention
   useEffect(() => {
-    // Don't nudge if chat is open or minimized
     if (isOpen || isMinimized) {
       setIsNudging(false);
       return;
     }
 
-    // Set up periodic nudging every 15 seconds
-    const nudgeInterval = setInterval(() => {
-      // Start the nudge animation
-      setIsNudging(true);
-
-      // Stop the nudge animation after 1.5 seconds
-      setTimeout(() => {
-        setIsNudging(false);
-      }, 1500);
-    }, 5000); // Repeat every 5 seconds
-
-    // Initial nudge after 5 seconds
-    const initialNudgeTimer = setTimeout(() => {
-      setIsNudging(true);
-      setTimeout(() => setIsNudging(false), 1500);
-    }, 5000);
+    const nudgeInterval = setInterval(performNudge, 5000);
 
     return () => {
       clearInterval(nudgeInterval);
-      clearTimeout(initialNudgeTimer);
+    };
+  }, [isOpen, isMinimized]);
+
+  // Periodically nudge the chat button to draw attention
+  useEffect(() => {
+    // Don't nudge if chat is open or minimized
+    if (isOpen || isMinimized) {
+      console.log('Chat is open or minimized');
+      setIsNudging(false);
+      return;
+    }
+
+    // Set up periodic nudging every 10 seconds
+    const nudgeInterval = setInterval(performNudge, 5000); // Repeat every 10 seconds
+
+    return () => {
+      clearInterval(nudgeInterval);
     };
   }, [isOpen, isMinimized]);
 
@@ -174,11 +181,35 @@ export const ChatButton = ({
         <motion.button
           ref={buttonRef}
           onClick={toggleChat}
-          className={`flex h-10 w-10 cursor-pointer items-center justify-center rounded-full text-white ${isNudging ? 'animate-button-nudge cursor-pointer ring-2 ring-purple-400/50' : 'cursor-pointer'} ${isInMenu ? '' : 'fixed bottom-6 left-6 z-40'}`}
+          className={`flex h-10 w-10 cursor-pointer items-center justify-center rounded-full text-white ${isNudging ? 'cursor-pointer ring-2 ring-purple-400/50' : 'cursor-pointer'} ${isInMenu ? '' : 'fixed bottom-6 left-6 z-40'}`}
           aria-label={
             isOpen ? (isMinimized ? 'Restore chat' : 'Close chat') : 'Open chat'
           }
           initial={{ opacity: 1, scale: 1 }}
+          animate={
+            isNudging
+              ? {
+                  x: [
+                    // first circle (0° → 360°) then second (360° → 720°)
+                    5, 3.54, 0, -3.54, -5, -3.54, 0, 3.54, 5, 3.54, 0, -3.54,
+                    -5, -3.54, 0, 3.54, 5,
+                  ],
+                  y: [
+                    0, 3.54, 5, 3.54, 0, -3.54, -5, -3.54, 0, 3.54, 5, 3.54, 0,
+                    -3.54, -5, -3.54, 0,
+                  ],
+                  transition: {
+                    duration: 0.6, // two loops in 0.6 s
+                    ease: 'linear',
+                    times: [
+                      0, 0.0625, 0.125, 0.1875, 0.25, 0.3125, 0.375, 0.4375,
+                      0.5, 0.5625, 0.625, 0.6875, 0.75, 0.8125, 0.875, 0.9375,
+                      1,
+                    ],
+                  },
+                }
+              : {}
+          }
           whileHover={{
             scale: 1.05,
             boxShadow: '0px 0px 18px #7200d6',
@@ -235,12 +266,12 @@ export const ChatButton = ({
       )}
 
       {/* Pulsing glow effect */}
-      {isOpen && isMinimized && (
+      {((isOpen && isMinimized) || isNudging) && (
         <div
           className={`absolute ${isInMenu ? 'relative' : 'fixed bottom-6 left-6'} pointer-events-none z-20`}
         >
           <motion.div
-            className='absolute -bottom-5 left-5 h-10 w-10 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#891de1]'
+            className='absolute -bottom-6 left-6 h-10 w-10 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#891de1]'
             style={{
               filter: 'blur(12px)',
               boxShadow: '0px 0px 26px #891de1',
