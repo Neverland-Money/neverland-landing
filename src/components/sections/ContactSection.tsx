@@ -92,80 +92,17 @@ export default function ContactSection() {
         </div>
       </div>
       {/* Footer navigation */}
-      <div className='absolute bottom-6 z-10 flex h-23 w-full flex-col justify-evenly gap-6 px-4 sm:px-20 lg:h-10 lg:flex-row'>
-        {/* Social links */}
-        <div className='flex flex-wrap items-center justify-center gap-4 sm:gap-8'>
-          <Link
-            href='https://x.com/neverland_money'
-            target='_blank'
-            rel='noopener noreferrer'
-            className='font-merriweather text-base leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70'
-            onClick={() => {
-              trackEvent(EventNames.EXTERNAL_LINK_CLICK, {
-                link_name: 'x',
-                location: 'footer_social',
-                url: 'https://x.com/neverland_money',
-              });
-            }}
-          >
-            {`{ X }`}
-          </Link>
-          <Link
-            href='https://discord.gg/neverland-money'
-            target='_blank'
-            rel='noopener noreferrer'
-            className='font-merriweather text-base leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70'
-            onClick={() => {
-              trackEvent(EventNames.EXTERNAL_LINK_CLICK, {
-                link_name: 'discord',
-                location: 'footer_social',
-                url: 'https://discord.gg/neverland-money',
-              });
-            }}
-          >
-            {`{ Discord }`}
-          </Link>
-          <Link
-            href='https://t.me/neverland_money'
-            target='_blank'
-            rel='noopener noreferrer'
-            className='font-merriweather text-base leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70'
-            onClick={() => {
-              trackEvent(EventNames.EXTERNAL_LINK_CLICK, {
-                link_name: 'telegram',
-                location: 'footer_social',
-                url: 'https://t.me/neverland_money',
-              });
-            }}
-          >
-            {`{ Telegram }`}
-          </Link>
-          <Link
-            href='https://news.neverland.money'
-            target='_blank'
-            rel='noopener noreferrer'
-            className='font-merriweather text-base leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70'
-            onClick={() => {
-              trackEvent(EventNames.EXTERNAL_LINK_CLICK, {
-                link_name: 'news',
-                location: 'footer_social',
-                url: 'https://news.neverland.money',
-              });
-            }}
-          >
-            {`{ Medium }`}
-          </Link>
-        </div>
-
+      <div className='absolute bottom-6 z-10 flex h-10 w-full flex-col justify-evenly gap-6 px-4 sm:px-20 lg:h-10 lg:flex-row'>
         {/* Legal links */}
         <div className='flex items-center justify-center gap-4 sm:gap-9'>
           <Link
             href='https://whitepaper.neverland.money'
             target='_blank'
             rel='noopener noreferrer'
-            className='font-merriweather hidden leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70 lg:block lg:text-base'
+            className='font-merriweather text-sm leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70 lg:text-base'
           >
-            Whitepaper
+            <span className='hidden lg:inline'>Whitepaper</span>
+            <span className='lg:hidden'>Docs</span>
           </Link>
           <Link
             href='/privacy-policy'
@@ -173,7 +110,8 @@ export default function ContactSection() {
             rel='noopener noreferrer'
             className='font-merriweather text-sm leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70 lg:text-base'
           >
-            Privacy Policy
+            <span className='hidden lg:inline'>Privacy Policy</span>
+            <span className='lg:hidden'>Privacy</span>
           </Link>
           <Link
             href='/terms-of-service'
@@ -181,7 +119,8 @@ export default function ContactSection() {
             rel='noopener noreferrer'
             className='font-merriweather text-sm leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70 lg:text-base'
           >
-            Terms of Service
+            <span className='hidden lg:inline'>Terms of Service</span>
+            <span className='lg:hidden'>Terms</span>
           </Link>
         </div>
       </div>

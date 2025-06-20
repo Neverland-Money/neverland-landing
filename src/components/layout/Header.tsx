@@ -69,6 +69,12 @@ export default function Header() {
         {/* Main liquid glass effect container */}
         <div className='liquid-glass-container absolute inset-0 -z-10'></div>
 
+        {/* Bottom edge glass effect */}
+        <div className='liquid-glass-edge absolute right-0 -bottom-[2px] left-0 -z-10 h-[2px]'></div>
+
+        {/* Bottom liquid pooling effect */}
+        <div className='liquid-glass-pool absolute right-0 -bottom-2 left-0 -z-10 h-4'></div>
+
         {/* Animated shimmer effect */}
         <div className='liquid-glass-shimmer absolute inset-x-0 top-0 -z-10 h-full overflow-hidden'></div>
 
@@ -81,25 +87,25 @@ export default function Header() {
             __html: `
               .liquid-glass-container {
                 background-color: rgba(5,2,18,0.2);
-                backdrop-filter: blur(12px);
-                -webkit-backdrop-filter: blur(12px);
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
                 border-bottom: 1px solid rgba(255,255,255,0.06);
                 box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
               }
               
               .liquid-glass-fade {
                 background: linear-gradient(to bottom, rgba(5,2,18,0.2), transparent);
-                backdrop-filter: blur(2px);
-                -webkit-backdrop-filter: blur(2px);
+                backdrop-filter: blur(1px);
+                -webkit-backdrop-filter: blur(1px);
               }
               
               .liquid-glass-glow {
-                background: radial-gradient(ellipse at top, rgba(255,255,255,0.05), transparent 70%);
+                background: radial-gradient(ellipse at top, rgba(255,255,255,0.1), transparent 70%);
                 opacity: 0.6;
               }
               
               .liquid-glass-shimmer {
-                background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+                background: linear-gradient(90deg, transparent, rgba(255,255,255,0.02), transparent);
                 transform: translateX(-100%);
                 animation: shimmer 5s infinite;
                 animation-delay: 1s;
@@ -140,6 +146,20 @@ export default function Header() {
                 className='font-merriweather text-base font-normal text-white transition-colors hover:text-purple-300'
               >
                 About
+              </Link>
+              <Link
+                href='#features'
+                onClick={(e) => handleSmoothScroll(e, 'features')}
+                className='font-merriweather text-base font-normal text-white transition-colors hover:text-purple-300'
+              >
+                Features
+              </Link>
+              <Link
+                href='#how-it-works'
+                onClick={(e) => handleSmoothScroll(e, 'how-it-works')}
+                className='font-merriweather text-base font-normal text-white transition-colors hover:text-purple-300'
+              >
+                Explore
               </Link>
               <Link
                 href='#stats'
@@ -283,7 +303,7 @@ export default function Header() {
         <div className='fixed inset-0 z-[60] overflow-y-auto bg-[rgba(5,2,18,0.85)] backdrop-blur-[17px] backdrop-filter md:hidden'>
           <div className='flex h-full w-full flex-col items-start justify-start px-4'>
             {/* Top row with Logo and Close button */}
-            <div className='mb-16 flex h-[80px] w-full items-center justify-between'>
+            <div className='mb-6 flex h-[80px] w-full items-center justify-between'>
               {/* Close button */}
               <button
                 className='absolute top-8 right-5'
@@ -308,6 +328,20 @@ export default function Header() {
                   className='font-cinzel self-stretch text-left text-[56px] leading-[100%] font-normal text-white uppercase hover:text-purple-400'
                 >
                   ABOUT
+                </Link>
+                <Link
+                  href='#features'
+                  onClick={(e) => handleSmoothScroll(e, 'features')}
+                  className='font-cinzel self-stretch text-left text-[56px] leading-[100%] font-normal text-white uppercase hover:text-purple-400'
+                >
+                  FEATURES
+                </Link>
+                <Link
+                  href='#how-it-works'
+                  onClick={(e) => handleSmoothScroll(e, 'how-it-works')}
+                  className='font-cinzel self-stretch text-left text-[56px] leading-[100%] font-normal text-white uppercase hover:text-purple-400'
+                >
+                  EXPLORE
                 </Link>
                 <Link
                   href='#stats'
