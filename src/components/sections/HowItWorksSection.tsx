@@ -21,14 +21,14 @@ export default function HowItWorksSection() {
       number: 1,
       title: 'Supply Assets',
       description:
-        "Deposit your crypto to earn passive income. Add your assets to Neverland's lending pools and earn interest and rewards.",
+        "Deposit your crypto assets to Neverland's lending pools and earn interest and rewards passively.",
       side: 'right',
     },
     {
       number: 2,
       title: 'Borrow Funds',
       description:
-        'Get instant loans using your assets as collateral. Access funds without selling your crypto. Enjoy flexible terms and low rates.',
+        'Unlock instant loans using your crypto assets as collateral, with no set repayment terms, low rates, and full liquidity access as long as your position remains healthy.',
       side: 'left',
     },
     {

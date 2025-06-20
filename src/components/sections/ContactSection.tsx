@@ -9,26 +9,6 @@ import { StarIcon } from '@/components/ui/StarIcon';
 import { trackEvent, EventNames } from '@/utils/analytics';
 
 export default function ContactSection() {
-  const handleSmoothScroll = (
-    e: React.MouseEvent<HTMLAnchorElement>,
-    targetId: string,
-  ) => {
-    e.preventDefault();
-    const targetElement = document.getElementById(targetId);
-    if (targetElement) {
-      targetElement.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      });
-
-      // Track footer navigation click
-      trackEvent(EventNames.BUTTON_CLICK, {
-        menu_item: targetId,
-        location: 'footer_navigation',
-      });
-    }
-  };
-
   return (
     <section
       id='contacts'
@@ -55,7 +35,7 @@ export default function ContactSection() {
               READY TO EMBARK ON YOUR DEFI ADVENTURE?
             </h1>
             <p className='font-merriweather w-full max-w-[362px] text-lg leading-[140%] font-normal text-white'>
-              Join thousands of users experiencing the magic of Neverland Money
+              Join thousands of users experiencing the magic of Neverland
             </p>
           </div>
 
@@ -112,34 +92,9 @@ export default function ContactSection() {
         </div>
       </div>
       {/* Footer navigation */}
-      <div className='absolute right-0 bottom-7 left-0 z-10 flex flex-col items-center justify-between gap-6 px-4 sm:px-20 lg:flex-row lg:gap-0'>
-        {/* Navigation links */}
-        <nav className='hidden flex-wrap items-center justify-center gap-4 sm:gap-8 md:flex'>
-          <Link
-            href='#about'
-            onClick={(e) => handleSmoothScroll(e, 'about')}
-            className='font-merriweather text-base leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70'
-          >
-            About
-          </Link>
-          <Link
-            href='#stats'
-            onClick={(e) => handleSmoothScroll(e, 'stats')}
-            className='font-merriweather text-base leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70'
-          >
-            Stats
-          </Link>
-          <Link
-            href='#faq'
-            onClick={(e) => handleSmoothScroll(e, 'faq')}
-            className='font-merriweather text-base leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70'
-          >
-            FAQ
-          </Link>
-        </nav>
-
+      <div className='absolute bottom-6 z-10 flex h-23 w-full flex-col justify-evenly gap-6 px-4 sm:px-20 lg:h-10 lg:flex-row'>
         {/* Social links */}
-        <div className='mb-2.5 flex flex-wrap items-center justify-center gap-4 sm:gap-8'>
+        <div className='flex flex-wrap items-center justify-center gap-4 sm:gap-8'>
           <Link
             href='https://x.com/neverland_money'
             target='_blank'
@@ -203,12 +158,20 @@ export default function ContactSection() {
         </div>
 
         {/* Legal links */}
-        <div className='flex flex-wrap items-center justify-center gap-4 pb-1.5 sm:gap-9 lg:pb-0'>
+        <div className='flex items-center justify-center gap-4 sm:gap-9'>
+          <Link
+            href='https://whitepaper.neverland.money'
+            target='_blank'
+            rel='noopener noreferrer'
+            className='font-merriweather hidden leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70 lg:block lg:text-base'
+          >
+            Whitepaper
+          </Link>
           <Link
             href='/privacy-policy'
             target='_blank'
             rel='noopener noreferrer'
-            className='font-merriweather text-base leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70'
+            className='font-merriweather text-sm leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70 lg:text-base'
           >
             Privacy Policy
           </Link>
@@ -216,7 +179,7 @@ export default function ContactSection() {
             href='/terms-of-service'
             target='_blank'
             rel='noopener noreferrer'
-            className='font-merriweather text-base leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70'
+            className='font-merriweather text-sm leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70 lg:text-base'
           >
             Terms of Service
           </Link>

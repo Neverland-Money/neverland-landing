@@ -212,7 +212,7 @@ export default function HeroSection() {
           <div className='absolute top-[58px] left-4'>
             <BlurredLoadingText
               text='000.00M'
-              className='font-cinzel text-[40px] leading-[110%] font-normal text-white'
+              className='font-cinzel text-[28px] leading-[110%] font-normal text-white md:text-[40px]'
             />
           </div>
 
@@ -267,7 +267,7 @@ export default function HeroSection() {
           <div className='absolute top-[58px] left-4'>
             <BlurredLoadingText
               text='900,000'
-              className='font-cinzel text-[40px] leading-[110%] font-normal text-white'
+              className='font-cinzel text-[28px] leading-[110%] font-normal text-white md:text-[40px]'
             />
           </div>
 
@@ -312,7 +312,7 @@ export default function HeroSection() {
           <div className='flex w-[126px] flex-col items-start justify-center gap-1'>
             <BlurredLoadingText
               text='$000.00M'
-              className='font-cinzel text-[40px] leading-[110%] font-normal text-white'
+              className='font-cinzel w-full text-center text-[28px] leading-[110%] font-normal text-white md:text-[40px]'
             />
             <div className='font-cinzel w-full text-sm leading-[110%] font-normal text-[#ead5ff] uppercase'>
               <div className='flex w-full justify-between'>
@@ -328,7 +328,7 @@ export default function HeroSection() {
           <div className='flex w-[126px] flex-col items-start justify-center gap-1'>
             <BlurredLoadingText
               text='900,000'
-              className='font-cinzel text-[40px] leading-[110%] font-normal text-white'
+              className='font-cinzel w-full text-center text-[28px] leading-[110%] font-normal text-white md:text-[40px]'
             />
             <div className='font-cinzel w-full text-sm leading-[110%] font-normal text-[#ead5ff] uppercase'>
               <div className='flex w-full justify-between'>
