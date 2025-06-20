@@ -11,7 +11,7 @@ import { trackEvent, EventNames } from '@/utils/analytics';
 export default function ContactSection() {
   return (
     <section
-      id='contacts'
+      id='contact'
       className='relative h-screen w-full overflow-hidden pb-6'
     >
       {/* Background gradient */}
@@ -34,7 +34,7 @@ export default function ContactSection() {
             <h1 className='font-cinzel w-full text-4xl leading-[110%] font-normal text-white sm:text-5xl lg:text-6xl xl:text-[60px]'>
               READY TO EMBARK ON YOUR DEFI ADVENTURE?
             </h1>
-            <p className='font-merriweather w-full max-w-[362px] text-lg leading-[140%] font-normal text-white'>
+            <p className='font-merriweather w-full max-w-[750px] text-lg leading-[140%] font-normal text-white'>
               Join thousands of users experiencing the magic of Neverland
             </p>
           </div>

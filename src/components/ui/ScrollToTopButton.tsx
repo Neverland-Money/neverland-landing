@@ -43,7 +43,7 @@ export default function ScrollToTopButton() {
   return (
     <motion.button
       onClick={scrollToTop}
-      className='fixed right-6 bottom-6 z-50000 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full'
+      className='fixed right-6 bottom-6 z-50 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full'
       aria-label='Scroll to top'
       initial={{ opacity: 0, scale: 0 }}
       animate={{
