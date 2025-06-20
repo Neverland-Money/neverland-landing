@@ -83,7 +83,7 @@ const ThreadWelcome: FC = () => {
               Need help?
             </span>
             <span className='hidden lg:block'>
-              Welcome to Neverland Money, I&apos;m Nadette! <br />
+              Welcome to Neverland, I&apos;m Nadette! <br />
               How can I help you today?
             </span>
           </p>
@@ -104,7 +104,7 @@ const ThreadWelcomeSuggestions: FC = () => {
         autoSend
       >
         <span className='line-clamp-2 text-xs font-semibold text-ellipsis'>
-          What is Neverland Money?
+          What is Neverland?
         </span>
       </ThreadPrimitive.Suggestion>
       <ThreadPrimitive.Suggestion

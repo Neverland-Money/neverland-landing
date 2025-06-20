@@ -9,7 +9,7 @@ import AccordionItem, { type FAQItem } from '../ui/AccordionItem';
 const faqData: FAQItem[] = [
   {
     id: 1,
-    question: 'What is Neverland Money?',
+    question: 'What is Neverland?',
     answer:
       "**Neverland** is a *next-generation* DeFi lending protocol combining **Aave V3's** battle-tested security with sustainable vote escrow tokenomics. Featuring ~self-repaying loans~, deflationary token mechanics and advanced automated yield strategies to maximize capital efficiency.\n\nUsers can supply or borrow assets while earning rewards through governance participation or liquidity provision.",
   },
