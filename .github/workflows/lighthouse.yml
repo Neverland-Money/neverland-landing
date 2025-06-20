@@ -2,7 +2,7 @@ name: Lighthouse CI
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: [main]
     paths:
       - '**.js'
       - '**.jsx'
@@ -15,81 +15,81 @@ on:
 jobs:
   lighthouse:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - uses: actions/checkout@v3
-    
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '20'
-    
-    - name: Install pnpm
-      uses: pnpm/action-setup@v2
-      with:
-        version: 10
-        run_install: false
-    
-    - name: Get pnpm store directory
-      id: pnpm-cache
-      shell: bash
-      run: |
-        echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-    
-    - name: Setup pnpm cache
-      uses: actions/cache@v3
-      with:
-        path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-        key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-        restore-keys: |
-          ${{ runner.os }}-pnpm-store-
-    
-    - name: Install dependencies
-      run: pnpm install
-    
-    - name: Build
-      run: pnpm build
-    
-    - name: Run Lighthouse CI
-      uses: treosh/lighthouse-ci-action@v9
-      with:
-        runs: 3
-        uploadArtifacts: true
-        temporaryPublicStorage: true
-        configPath: './.github/lighthouse-config.json'
-        
-    - name: Format lighthouse score
-      id: format_lighthouse_score
-      uses: actions/github-script@v6
-      with:
-        script: |
-          const fs = require('fs');
-          const results = JSON.parse(fs.readFileSync('./lhci_reports/manifest.json', 'utf8'));
-          const links = results.links;
-          
-          let comment = '## ⚡️ Lighthouse Report\n\n';
-          comment += '| Category | Score |\n| --- | --- |\n';
-          
-          const categories = ['performance', 'accessibility', 'best-practices', 'seo'];
-          categories.forEach(category => {
-            const score = Math.round(results.summary[category] * 100);
-            const emoji = score >= 90 ? '🟢' : score >= 50 ? '🟠' : '🔴';
-            comment += `| ${category} | ${emoji} ${score} |\n`;
-          });
-          
-          comment += `\nView the full report [here](${links.html}).`;
-          
-          return comment;
-          
-    - name: Comment PR
-      uses: actions/github-script@v6
-      if: github.event_name == 'pull_request'
-      with:
-        script: |
-          const output = `${{ steps.format_lighthouse_score.outputs.result }}`;
-          github.rest.issues.createComment({
-            issue_number: context.issue.number,
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            body: output
-          })
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 10
+          run_install: false
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build
+        run: pnpm build
+
+      - name: Run Lighthouse CI
+        uses: treosh/lighthouse-ci-action@v9
+        with:
+          runs: 3
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+          configPath: './.github/lighthouse-config.json'
+
+      - name: Format lighthouse score
+        id: format_lighthouse_score
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const results = JSON.parse(fs.readFileSync('./lhci_reports/manifest.json', 'utf8'));
+            const links = results.links;
+
+            let comment = '## ⚡️ Lighthouse Report\n\n';
+            comment += '| Category | Score |\n| --- | --- |\n';
+
+            const categories = ['performance', 'accessibility', 'best-practices', 'seo'];
+            categories.forEach(category => {
+              const score = Math.round(results.summary[category] * 100);
+              const emoji = score >= 90 ? '🟢' : score >= 50 ? '🟠' : '🔴';
+              comment += `| ${category} | ${emoji} ${score} |\n`;
+            });
+
+            comment += `\nView the full report [here](${links.html}).`;
+
+            return comment;
+
+      - name: Comment PR
+        uses: actions/github-script@v6
+        if: github.event_name == 'pull_request'
+        with:
+          script: |
+            const output = `${{ steps.format_lighthouse_score.outputs.result }}`;
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: output
+            })
