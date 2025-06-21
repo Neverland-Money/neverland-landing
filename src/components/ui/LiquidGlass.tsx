@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useMemo } from 'react';
 
 interface LiquidGlassProps {
   children: ReactNode;
@@ -10,7 +10,23 @@ interface LiquidGlassProps {
   blur?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
   overlayColor?: string;
   overlayOpacity?: number;
+  borderColor?: string;
+  borderOpacity?: number;
 }
+
+// Map Tailwind rounded classes to their pixel values
+const borderRadiusMap: Record<string, string> = {
+  'rounded-none': '0px',
+  'rounded-sm': '0.125rem', // 2px
+  rounded: '0.25rem', // 4px
+  'rounded-md': '0.375rem', // 6px
+  'rounded-lg': '0.5rem', // 8px
+  'rounded-xl': '0.75rem', // 12px
+  'rounded-2xl': '1rem', // 16px
+  'rounded-3xl': '1.5rem', // 24px
+  'rounded-4xl': '2rem', // 32px
+  'rounded-full': '9999px',
+};
 
 export default function LiquidGlass({
   children,
@@ -20,6 +36,8 @@ export default function LiquidGlass({
   blur = 'sm',
   overlayColor = '#14143a',
   overlayOpacity = 0.25,
+  borderColor = '#ffffff',
+  borderOpacity = 0.1,
 }: LiquidGlassProps) {
   // Generate the CSS class for backdrop blur
   const blurClass = `backdrop-blur-${blur}`;
@@ -27,17 +45,42 @@ export default function LiquidGlass({
   // Generate the background color with opacity
   const bgColorClass = `bg-[${overlayColor}]/${Math.floor(overlayOpacity * 100)}`;
 
+  // Convert borderRadius class to pixel value
+  const radiusValue = useMemo(() => {
+    // First check if it's already a pixel or rem value
+    if (
+      borderRadius.includes('px') ||
+      borderRadius.includes('rem') ||
+      borderRadius.includes('%')
+    ) {
+      return borderRadius;
+    }
+
+    // Check if it's a Tailwind class in our map
+    for (const [className, value] of Object.entries(borderRadiusMap)) {
+      if (borderRadius === className) {
+        return value;
+      }
+    }
+
+    // Default fallback
+    return '1.5rem'; // 24px
+  }, [borderRadius]);
+
   return (
     <div
       className={`relative flex flex-col items-center justify-center ${borderRadius} ${padding} ${blurClass} ${className}`}
     >
       {/* Dark overlay with subtle background-blur matching */}
       <div className={`absolute inset-0 ${borderRadius} ${bgColorClass}`} />
-      {/* Variable thickness border container */}
+      {/* Border with consistent rendering */}
       <div
         className={`absolute inset-0 overflow-hidden ${borderRadius}`}
         style={{
-          borderRadius: borderRadius.includes('rounded-') ? '24px' : undefined,
+          borderRadius: radiusValue,
+          border: `1px solid ${borderColor}${Math.round(borderOpacity * 100)
+            .toString(16)
+            .padStart(2, '0')}`,
         }}
       >
         {/* Ultra-subtle top-left edge highlight */}
@@ -54,7 +97,6 @@ export default function LiquidGlass({
         <div
           className='absolute right-0 bottom-0 h-full w-full'
           style={{
-            boxShadow: 'inset -1px -1px 0 0 rgba(255, 255, 255, 0.08)',
             background:
               'linear-gradient(315deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 40%)',
           }}

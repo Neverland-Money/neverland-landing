@@ -152,22 +152,16 @@ export default function HeroSection() {
       {/* Stats Cards - 80px from button above on desktop, 40px on mobile */}
       <div className='z-[7] mx-auto mt-[40px] flex w-full max-w-7xl flex-col gap-4 px-4 md:mt-[80px] md:flex-row md:gap-6 xl:px-0'>
         {/* Total Value Locked Card - Desktop version */}
-        <div className='relative hidden h-[118px] w-[255px] rounded-[20px] backdrop-blur-sm md:block'>
+        <div className='relative hidden h-[118px] w-[255px] rounded-3xl backdrop-blur-sm md:block'>
           {/* Dark overlay with subtle background-blur matching */}
-          <div className='absolute inset-0 rounded-[20px] bg-[#14143a]/25' />
+          <div className='absolute inset-0 rounded-3xl bg-[#14143a]/25' />
 
           {/* Variable thickness border container */}
-          <div
-            className='absolute inset-0 overflow-hidden rounded-[20px] border border-white/20'
-            style={{
-              borderRadius: '20px',
-            }}
-          >
+          <div className='absolute inset-0 overflow-hidden rounded-3xl border border-white/20'>
             {/* Ultra-subtle top-left edge highlight */}
             <div
               className='absolute top-0 left-0 h-full w-full'
               style={{
-                boxShadow: 'inset 1px 1px 0 0 rgba(255, 255, 255, 0.15)',
                 background:
                   'linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 40%)',
               }}
@@ -202,7 +196,7 @@ export default function HeroSection() {
           <Tooltip
             content={
               <div className='text-[14px] leading-[140%] text-white'>
-                Total value of assets locked in the protocol.
+                Total value of deposited assets in the protocol.
               </div>
             }
             position='top'
@@ -233,22 +227,16 @@ export default function HeroSection() {
         </div>
 
         {/* Active Users Card - Desktop version */}
-        <div className='relative hidden h-[118px] w-[255px] rounded-[20px] backdrop-blur-sm md:block'>
+        <div className='relative hidden h-[118px] w-[255px] rounded-3xl backdrop-blur-sm md:block'>
           {/* Dark overlay with subtle background-blur matching */}
-          <div className='absolute inset-0 rounded-[20px] bg-[#14143a]/25' />
+          <div className='absolute inset-0 rounded-3xl bg-[#14143a]/25' />
 
           {/* Variable thickness border container */}
-          <div
-            className='absolute inset-0 overflow-hidden rounded-[20px] border border-white/20'
-            style={{
-              borderRadius: '20px',
-            }}
-          >
+          <div className='absolute inset-0 overflow-hidden rounded-3xl border border-white/20'>
             {/* Ultra-subtle top-left edge highlight */}
             <div
               className='absolute top-0 left-0 h-full w-full'
               style={{
-                boxShadow: 'inset 1px 1px 0 0 rgba(255, 255, 255, 0.15)',
                 background:
                   'linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 40%)',
               }}

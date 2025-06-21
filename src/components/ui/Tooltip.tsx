@@ -48,7 +48,7 @@ const sizeStyles = {
 
 const maxWidthStyles = {
   sm: 'w-[100px] h-[100px]',
-  md: 'w-[200px] h-[200px]',
+  md: 'w-[200px] h-[120px]',
   lg: 'w-[300px] h-[300px]',
   xl: 'w-[400px] h-[400px]',
 };

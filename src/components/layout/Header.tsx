@@ -68,14 +68,14 @@ export default function Header() {
       {/* Fixed Header with LiquidGlass effect */}
       <nav className='fixed top-4 right-4 left-4 z-50 flex items-center justify-between px-6 py-4 transition-all duration-500'>
         {/* LiquidGlass Header Background */}
-        <div className='absolute inset-0 -z-10 overflow-hidden rounded-xl border border-white/[0.06] shadow-lg'>
+        <div className='absolute inset-0 -z-10 overflow-hidden rounded-2xl border border-white/[0.06] shadow-lg'>
           <LiquidGlass
             className='h-full w-full'
             blur='md'
             overlayColor='#050212'
             overlayOpacity={0.2}
             padding='p-0'
-            borderRadius='rounded-xl'
+            borderRadius='rounded-2xl'
           >
             {/* Empty div as children (required by LiquidGlass) */}
             <div></div>
