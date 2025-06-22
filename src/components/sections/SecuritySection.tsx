@@ -1,5 +1,9 @@
 'use client';
 
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+
+import FadeInWhenVisible from '@/components/ui/FadeInWhenVisible';
+
 // import Link from 'next/link';
 
 interface SecurityCardProps {
@@ -16,16 +20,49 @@ function SecurityCard({
   href,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   disabled = false,
-}: SecurityCardProps) {
+  glarePosition,
+  glareOpacity,
+  invertGlare = false,
+}: SecurityCardProps & {
+  glarePosition?: { x: number; y: number };
+  glareOpacity?: number;
+  invertGlare?: boolean;
+}) {
   return (
-    <div className='relative flex aspect-[588/394] w-[340px] flex-col items-center justify-center gap-2.5 overflow-hidden rounded-2xl border border-[#402262] p-12 backdrop-blur-sm sm:w-[350px] sm:p-13 lg:w-[480px] lg:p-28 xl:w-[588px]'>
+    <div
+      className='relative flex aspect-[588/394] w-[340px] flex-col items-center justify-center gap-2.5 overflow-hidden rounded-2xl border border-[#402262] p-12 backdrop-blur-sm sm:w-[350px] sm:p-13 lg:w-[480px] lg:p-28 xl:w-[588px]'
+      style={
+        glarePosition && glareOpacity
+          ? ({
+              '--glare-x-position': `${(invertGlare ? 1 - glarePosition.x : glarePosition.x) * 100}%`,
+              '--glare-y-position': `${glarePosition.y * 100}%`,
+              '--glare-opacity': glareOpacity,
+            } as React.CSSProperties)
+          : undefined
+      }
+    >
       {/* Security background image */}
       <div
-        className='absolute inset-0 z-0 bg-cover bg-center bg-no-repeat'
+        className='absolute inset-0 z-0 overflow-hidden bg-cover bg-center bg-no-repeat'
         style={{
           backgroundImage: 'url(/assets/images/security/security-frame.webp)',
         }}
-      />
+      >
+        {/* Dynamic Glare */}
+        {glarePosition && glareOpacity && (
+          <div
+            className='pointer-events-none absolute z-10 rounded-2xl transition-all duration-500 ease-out'
+            style={{
+              top: '-50%',
+              left: '-50%',
+              width: '200%',
+              height: '200%',
+              background: `radial-gradient(circle at var(--glare-x-position) var(--glare-y-position), rgba(255, 255, 255, var(--glare-opacity)) 0%, ${invertGlare ? 'rgba(0, 217, 255, 0.05)' : 'rgba(190, 122, 246, 0.05)'} 40%, transparent 80%)`,
+              mixBlendMode: 'overlay',
+            }}
+          />
+        )}
+      </div>
       <div className='relative z-10 flex h-full w-full flex-col items-center justify-center gap-4 lg:gap-8'>
         <div className='flex w-full flex-col items-center gap-2'>
           <h3 className='font-cinzel w-full text-center text-lg leading-[110%] font-normal text-white uppercase sm:text-xl lg:text-[26px]'>
@@ -76,31 +113,110 @@ function SecurityCard({
 }
 
 export default function SecuritySection() {
+  // Track scroll position for glare effect
+  const sectionRef = useRef<HTMLElement>(null);
+  const scrollYRef = useRef(0);
+  const [sectionTop, setSectionTop] = useState(0);
+  const [sectionHeight, setSectionHeight] = useState(0);
+  const [glarePosition, setGlarePosition] = useState({ x: 0.2, y: 0.2 });
+  const [glareOpacity, setGlareOpacity] = useState(0);
+
+  // Update glare effect based on current scroll position
+  const updateGlareEffect = useCallback(() => {
+    if (sectionTop && sectionHeight) {
+      const currentScrollY = scrollYRef.current;
+
+      // Calculate how far through the section we've scrolled (0 to 1)
+      const scrollProgress = Math.max(
+        0,
+        Math.min(
+          1,
+          (currentScrollY - sectionTop + window.innerHeight / 2) /
+            (sectionHeight + window.innerHeight / 2),
+        ),
+      );
+
+      // Update glare position based on scroll progress
+      setGlarePosition({
+        x: 0.3 + scrollProgress * 0.4, // Move horizontally from 0.3 to 0.7
+        y: 0.2 + scrollProgress * 0.6, // Move vertically from 0.2 to 0.8
+      });
+
+      // Pulse the glare opacity based on scroll
+      setGlareOpacity(0.2 + Math.sin(scrollProgress * Math.PI) * 0.1); // Varies between 0.4 and 0.9
+    }
+  }, [sectionTop, sectionHeight]);
+
+  // Calculate section position once on mount and set up scroll listener
+  useEffect(() => {
+    // Measure the section position only once on mount
+    if (sectionRef.current) {
+      const rect = sectionRef.current.getBoundingClientRect();
+      setSectionTop(rect.top + window.scrollY);
+      setSectionHeight(rect.height);
+    }
+
+    // Initialize scroll position
+    if (typeof window !== 'undefined') {
+      scrollYRef.current = window.scrollY;
+    }
+
+    // Initial update of glare effect
+    updateGlareEffect();
+
+    // Add scroll listener
+    const handleScrollEvent = () => {
+      if (typeof window !== 'undefined') {
+        scrollYRef.current = window.scrollY;
+        // Request animation frame to throttle updates
+        requestAnimationFrame(updateGlareEffect);
+      }
+    };
+
+    window.addEventListener('scroll', handleScrollEvent);
+
+    return () => {
+      window.removeEventListener('scroll', handleScrollEvent);
+    };
+  }, [updateGlareEffect]);
+
   return (
-    <section className='mx-auto flex w-full max-w-[1280px] flex-col items-center gap-16 px-10 py-[100px] md:py-[120px] lg:gap-[100px]'>
-      <div className='flex w-full max-w-[539px] flex-col items-center gap-3 px-2'>
-        <h2 className='font-cinzel w-full text-center text-4xl leading-[110%] font-normal text-white uppercase lg:text-[60px]'>
-          Lost Boys&apos; Safeguard
-        </h2>
-        <p className='font-merriweather w-full max-w-[326px] text-center text-base leading-[140%] text-white lg:text-lg'>
-          Our smart contracts have undergone rigorous audits to ensure the
-          highest level of security
-        </p>
-      </div>
-      <div className='flex w-full flex-col items-center justify-center gap-8 lg:flex-row lg:gap-12 xl:gap-16'>
-        <SecurityCard
-          title='AUDITS'
-          description='Our smart contracts are audited by top-tier security firms to maintain platform integrity and ensure user confidence.'
-          href='/audits'
-          disabled={true}
-        />
-        <SecurityCard
-          title='BUG BOUNTY PROGRAM'
-          description='Help us maintain the highest security standards. Report vulnerabilities and earn rewards for responsible disclosure.'
-          href='/bounty'
-          disabled={true}
-        />
-      </div>
+    <section
+      ref={sectionRef}
+      className='mx-auto flex w-full max-w-[1280px] flex-col items-center gap-16 px-10 py-[100px] md:py-[120px] lg:gap-[100px]'
+    >
+      <FadeInWhenVisible delay={0} y={20}>
+        <div className='flex w-full max-w-[539px] flex-col items-center gap-3 px-2'>
+          <h2 className='font-cinzel w-full text-center text-4xl leading-[110%] font-normal text-white uppercase lg:text-[60px]'>
+            Lost Boys&apos; Safeguard
+          </h2>
+          <p className='font-merriweather w-full max-w-[326px] text-center text-base leading-[140%] text-white lg:text-lg'>
+            Our smart contracts have undergone rigorous audits to ensure the
+            highest level of security
+          </p>
+        </div>
+      </FadeInWhenVisible>
+      <FadeInWhenVisible delay={0} y={20}>
+        <div className='flex w-full flex-col items-center justify-center gap-8 lg:flex-row lg:gap-12 xl:gap-16'>
+          <SecurityCard
+            title='AUDITS'
+            description='Our smart contracts are audited by top-tier security firms to maintain platform integrity and ensure user confidence.'
+            href='/audits'
+            disabled={true}
+            glarePosition={glarePosition}
+            glareOpacity={glareOpacity}
+          />
+          <SecurityCard
+            title='BUG BOUNTY PROGRAM'
+            description='Help us maintain the highest security standards. Report vulnerabilities and earn rewards for responsible disclosure.'
+            href='/bounty'
+            disabled={true}
+            glarePosition={glarePosition}
+            glareOpacity={glareOpacity}
+            invertGlare={true}
+          />
+        </div>
+      </FadeInWhenVisible>
     </section>
   );
 }
