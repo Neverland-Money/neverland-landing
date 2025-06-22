@@ -101,7 +101,7 @@ export default function Header() {
                 background-color: rgba(5,2,18,0.2);
                 backdrop-filter: blur(8px);
                 -webkit-backdrop-filter: blur(8px);
-                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+                box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
               }
               
               .liquid-glass-fade {
