@@ -57,7 +57,7 @@ jobs:
           uploadArtifacts: true
           temporaryPublicStorage: true
           configPath: './.github/lighthouse-config.json'
-          artifactName: 'lighthouse-report'
+          artifactName: 'lighthouse-report-${{ github.run_id }}'
 
       - name: Format lighthouse score
         id: format_lighthouse_score
