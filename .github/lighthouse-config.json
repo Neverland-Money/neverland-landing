@@ -1,9 +1,8 @@
 {
   "ci": {
     "collect": {
-      "startServerCommand": "npm run start",
-      "startServerReadyPattern": "ready started server",
-      "url": ["http://localhost:3000/", "http://localhost:3000/about"],
+      "staticDistDir": ".next",
+      "url": ["http://localhost:3000"],
       "numberOfRuns": 3
     },
     "assert": {
