@@ -276,7 +276,10 @@ export default function HowItWorksSection() {
   };
 
   return (
-    <section className='relative overflow-hidden px-4 py-[80px] pb-[80px] lg:px-8 lg:py-[180px] lg:pb-[180px]'>
+    <section
+      id='explore'
+      className='relative overflow-hidden px-4 py-[80px] pb-[80px] lg:px-8 lg:py-[180px] lg:pb-[180px]'
+    >
       <div className='mx-auto max-w-6xl'>
         {/* Header */}
         <FadeInWhenVisible delay={0} y={20}>

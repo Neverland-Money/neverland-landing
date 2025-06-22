@@ -1,9 +1,9 @@
 'use client';
 
-import { motion, AnimatePresence } from 'framer-motion';
-import Image from 'next/image';
 import { ReactNode, useState, useRef, useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
+
+import LiquidGlass from './LiquidGlass';
 
 type TooltipPosition =
   | 'top'
@@ -47,23 +47,9 @@ const sizeStyles = {
 
 const maxWidthStyles = {
   sm: 'w-[100px] h-[100px]',
-  md: 'w-[200px] h-[200px]',
+  md: 'w-[260px] h-[120px]',
   lg: 'w-[300px] h-[300px]',
   xl: 'w-[400px] h-[400px]',
-};
-
-const centerOffsets = {
-  sm: 50, // 100px / 2
-  md: 100, // 200px / 2
-  lg: 150, // 300px / 2
-  xl: 200, // 400px / 2
-};
-
-const topOffsets = {
-  sm: 110, // 200px + 10px margin
-  md: 210, // 300px + 10px margin
-  lg: 310, // 400px + 10px margin
-  xl: 410, // 500px + 10px margin
 };
 
 export const Tooltip = ({
@@ -121,6 +107,51 @@ export const Tooltip = ({
 
     setActualPosition(newPosition);
   }, [position, offset]);
+
+  const getTooltipPosition = useCallback(() => {
+    if (!triggerRef.current) return { left: 0, top: 0 };
+    const triggerRect = triggerRef.current.getBoundingClientRect();
+    let positionStyles = {};
+    // Calculate position based on actualPosition
+    switch (actualPosition) {
+      case 'top':
+        positionStyles = {
+          left: triggerRect.left + triggerRect.width / 2,
+          top: triggerRect.top - offset,
+          transform: 'translate(-50%, -100%)',
+        };
+        break;
+      case 'bottom':
+        positionStyles = {
+          left: triggerRect.left + triggerRect.width / 2,
+          top: triggerRect.bottom + offset,
+          transform: 'translateX(-50%)',
+        };
+        break;
+      case 'left':
+        positionStyles = {
+          left: triggerRect.left - offset,
+          top: triggerRect.top + triggerRect.height / 2,
+          transform: 'translate(-100%, -50%)',
+        };
+        break;
+      case 'right':
+        positionStyles = {
+          left: triggerRect.right + offset,
+          top: triggerRect.top + triggerRect.height / 2,
+          transform: 'translateY(-50%)',
+        };
+        break;
+      default:
+        positionStyles = {
+          left: triggerRect.left + triggerRect.width / 2,
+          top: triggerRect.top - offset,
+          transform: 'translate(-50%, -100%)',
+        };
+    }
+
+    return positionStyles;
+  }, [triggerRef, actualPosition, offset]);
 
   const showTooltip = useCallback(() => {
     if (!shouldShow) return;
@@ -185,6 +216,21 @@ export const Tooltip = ({
   useEffect(() => {
     if (isVisible) {
       calculatePosition();
+
+      // Add scroll and resize event listeners to update tooltip position
+      const handlePositionUpdate = () => {
+        calculatePosition();
+        // Force a re-render to update tooltip position
+        setIsVisible(true);
+      };
+
+      window.addEventListener('scroll', handlePositionUpdate);
+      window.addEventListener('resize', handlePositionUpdate);
+
+      return () => {
+        window.removeEventListener('scroll', handlePositionUpdate);
+        window.removeEventListener('resize', handlePositionUpdate);
+      };
     }
   }, [isVisible, calculatePosition]);
 
@@ -248,56 +294,28 @@ export const Tooltip = ({
 
       {typeof document !== 'undefined' &&
         createPortal(
-          <AnimatePresence>
-            {isVisible && shouldShow && (
-              <motion.div
-                ref={tooltipRef}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.3, ease: 'easeOut' }}
-                className={`fixed ${sizeStyles[size]} ${
-                  maxWidth || maxWidthStyles[size]
-                } flex rounded-[16px] border border-[rgba(100,35,180,0.6)] text-white shadow-lg backdrop-blur-[6px] transition-all duration-300 ${contentClassName}`}
-                style={{
-                  zIndex: 99999,
-                  left: triggerRef.current
-                    ? triggerRef.current.getBoundingClientRect().left +
-                      window.scrollX +
-                      triggerRef.current.getBoundingClientRect().width / 2 -
-                      centerOffsets[size]
-                    : 0,
-                  top: triggerRef.current
-                    ? triggerRef.current.getBoundingClientRect().top +
-                      window.scrollY -
-                      topOffsets[size]
-                    : 0,
-                }}
-                onMouseEnter={() => trigger.includes('hover') && showTooltip()}
-                onMouseLeave={() => trigger.includes('hover') && hideTooltip()}
+          isVisible && shouldShow && (
+            <div
+              ref={tooltipRef}
+              className={`fixed ${contentClassName}`}
+              style={{
+                zIndex: 99999,
+                position: 'fixed',
+                ...getTooltipPosition(),
+              }}
+              onMouseEnter={() => trigger.includes('hover') && showTooltip()}
+              onMouseLeave={() => trigger.includes('hover') && hideTooltip()}
+            >
+              <LiquidGlass
+                className={`${sizeStyles[size]} ${maxWidth || maxWidthStyles[size]}`}
+                overlayColor='#30016d'
+                overlayOpacity={0.7}
               >
-                {/* Background Layer */}
-                <div className='absolute inset-0 rounded-[16px] bg-black/80'></div>
-
-                {/* Card Background Frame */}
-                <div className='absolute inset-0 overflow-hidden rounded-[16px]'>
-                  <Image
-                    src='/assets/images/features/frame.webp'
-                    alt='Feature card frame'
-                    sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-                    fill
-                    className='object-cover'
-                  />
-                </div>
-
-                {/* Content */}
-                <div className='font-cinzel relative z-50 flex items-center justify-center p-10 text-center'>
-                  {renderContent()}
-                </div>
-                {showArrow && <div className={getArrowStyles()} />}
-              </motion.div>
-            )}
-          </AnimatePresence>,
+                <div className='font-cinzel text-center'>{renderContent()}</div>
+              </LiquidGlass>
+              {showArrow && <div className={getArrowStyles()} />}
+            </div>
+          ),
           document.body,
         )}
     </>

@@ -101,7 +101,6 @@ export default function Header() {
                 background-color: rgba(5,2,18,0.2);
                 backdrop-filter: blur(8px);
                 -webkit-backdrop-filter: blur(8px);
-                border-bottom: 1px solid rgba(255,255,255,0.06);
                 box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
               }
               
@@ -167,8 +166,8 @@ export default function Header() {
                 Features
               </Link>
               <Link
-                href='#how-it-works'
-                onClick={(e) => handleSmoothScroll(e, 'how-it-works')}
+                href='#explore'
+                onClick={(e) => handleSmoothScroll(e, 'explore')}
                 className='font-merriweather text-base font-normal text-white transition-colors hover:text-purple-300'
               >
                 Explore
@@ -362,8 +361,8 @@ export default function Header() {
                   FEATURES
                 </Link>
                 <Link
-                  href='#how-it-works'
-                  onClick={(e) => handleSmoothScroll(e, 'how-it-works')}
+                  href='#explore'
+                  onClick={(e) => handleSmoothScroll(e, 'explore')}
                   className='font-cinzel self-stretch text-left text-[56px] leading-[100%] font-normal text-white uppercase hover:text-purple-400'
                 >
                   EXPLORE
