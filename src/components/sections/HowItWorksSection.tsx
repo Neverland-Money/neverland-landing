@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
+import FadeInWhenVisible from '@/components/ui/FadeInWhenVisible';
 import { StarIcon } from '@/components/ui/StarIcon';
 
 export default function HowItWorksSection() {
@@ -260,24 +261,26 @@ export default function HowItWorksSection() {
     <section className='relative overflow-hidden px-4 py-[80px] pb-[80px] lg:px-8 lg:py-[180px] lg:pb-[180px]'>
       <div className='mx-auto max-w-6xl'>
         {/* Header */}
-        <div className='relative mx-auto mb-16 max-w-[500px] text-center lg:mb-40'>
-          <div className='relative inline-block'>
-            <h2 className='font-cinzel mb-3 text-4xl leading-tight font-normal text-white uppercase lg:text-6xl'>
-              How it w
-              <span className='relative inline-block'>
-                o
-                <div className='absolute top-[47%] left-[51%] -translate-x-1/2 -translate-y-1/2 transform'>
-                  <StarIcon />
-                </div>
-              </span>
-              rks
-            </h2>
+        <FadeInWhenVisible delay={0} y={20}>
+          <div className='relative mx-auto mb-16 max-w-[500px] text-center lg:mb-40'>
+            <div className='relative inline-block'>
+              <h2 className='font-cinzel mb-3 text-4xl leading-tight font-normal text-white uppercase lg:text-6xl'>
+                How it w
+                <span className='relative inline-block'>
+                  o
+                  <div className='absolute top-[47%] left-[51%] -translate-x-1/2 -translate-y-1/2 transform'>
+                    <StarIcon />
+                  </div>
+                </span>
+                rks
+              </h2>
+            </div>
+            <p className='font-merriweather mx-auto max-w-[300px] text-lg leading-relaxed font-normal text-white lg:max-w-[385px]'>
+              Navigate the magical world of DeFi with our simple step-by-step
+              process.
+            </p>
           </div>
-          <p className='font-merriweather mx-auto max-w-[300px] text-lg leading-relaxed font-normal text-white lg:max-w-[385px]'>
-            Navigate the magical world of DeFi with our simple step-by-step
-            process.
-          </p>
-        </div>
+        </FadeInWhenVisible>
 
         {/* Timeline */}
         <div className='relative' ref={timelineRef}>

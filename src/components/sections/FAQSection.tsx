@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 
+import FadeInWhenVisible from '@/components/ui/FadeInWhenVisible';
 import { StarIcon } from '@/components/ui/StarIcon';
 
 import AccordionItem, { type FAQItem } from '../ui/AccordionItem';
@@ -62,34 +63,40 @@ export default function FAQSection() {
         }}
       />
       {/* Content Container */}
+
       <div className='relative z-10 flex min-h-full items-center justify-center px-4 py-12'>
         <div className='flex w-full max-w-[760px] flex-col items-center gap-12 md:gap-[50px]'>
           {/* Title */}
-          <div className='flex w-full justify-center'>
-            <h2 className='font-cinzel max-w-[641px] text-center text-4xl leading-[110%] font-normal text-white uppercase md:text-[60px]'>
-              Frequently Asked{' '}
-              <span className='relative inline-block'>
-                Questions
-                <div className='absolute top-[35%] left-[7%] h-4 w-4 -translate-x-1/2 -translate-y-1/2 transform md:top-[45%] md:left-[7.5%] md:h-6 md:w-6'>
-                  <StarIcon />
-                </div>
-              </span>
-            </h2>
-          </div>
+          <FadeInWhenVisible delay={0} y={20}>
+            <div className='flex w-full justify-center'>
+              <h2 className='font-cinzel max-w-[641px] text-center text-4xl leading-[110%] font-normal text-white uppercase md:text-[60px]'>
+                Frequently Asked{' '}
+                <span className='relative inline-block'>
+                  Questions
+                  <div className='absolute top-[35%] left-[7%] h-4 w-4 -translate-x-1/2 -translate-y-1/2 transform md:top-[45%] md:left-[7.5%] md:h-6 md:w-6'>
+                    <StarIcon />
+                  </div>
+                </span>
+              </h2>
+            </div>
+          </FadeInWhenVisible>
 
           {/* FAQ Items */}
-          <div className='flex w-full flex-col gap-2'>
-            {faqData.map((item) => (
-              <AccordionItem
-                key={item.id}
-                item={item}
-                isOpen={activeItem === item.id}
-                onToggle={() => toggleItem(item.id)}
-              />
-            ))}
-          </div>
+          <FadeInWhenVisible delay={0} y={20}>
+            <div className='flex w-full flex-col gap-2'>
+              {faqData.map((item) => (
+                <AccordionItem
+                  key={item.id}
+                  item={item}
+                  isOpen={activeItem === item.id}
+                  onToggle={() => toggleItem(item.id)}
+                />
+              ))}
+            </div>
+          </FadeInWhenVisible>
         </div>
       </div>
+
       {/* Bottom shadow overlay */}
       <div className='pointer-events-none absolute right-0 bottom-0 left-0 h-80 bg-gradient-to-t from-[#040211] to-transparent md:h-60' />
       {/* Top shadow overlay */}

@@ -1,5 +1,9 @@
-import React from 'react';
+'use client';
 
+import React from 'react';
+import Tilt from 'react-parallax-tilt';
+
+import FadeInWhenVisible from '@/components/ui/FadeInWhenVisible';
 import { StarIcon } from '@/components/ui/StarIcon';
 
 interface FeatureCardProps {
@@ -12,21 +16,41 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
   title,
   description,
   backgroundImage,
-}) => (
-  <div
-    className='relative flex h-60 w-full -scale-x-100 flex-col justify-between overflow-hidden rounded-2xl border border-white/20 bg-black bg-cover bg-center bg-no-repeat p-5 sm:w-60'
-    style={{ backgroundImage: `url('${backgroundImage}')` }}
-  >
-    <div className='relative z-10 flex h-full -scale-x-100 flex-col items-center justify-start gap-2'>
-      <h3 className='font-cinzel text-center text-lg leading-[110%] font-normal text-white uppercase'>
-        {title}
-      </h3>
-      <p className='font-merriweather text-center text-base leading-[140%] font-normal text-white/60'>
-        {description}
-      </p>
-    </div>
-  </div>
-);
+}) => {
+  return (
+    <Tilt
+      className='w-full -scale-x-100 sm:w-60'
+      perspective={1000}
+      scale={1}
+      tiltMaxAngleX={15}
+      tiltMaxAngleY={15}
+      glareEnable={true}
+      glareMaxOpacity={0.2}
+      glareColor='#be7af6'
+      glarePosition='all'
+      glareBorderRadius='12px'
+      transitionSpeed={1500}
+      tiltReverse={false}
+      // gyroscope={true}
+    >
+      <div
+        className='relative flex h-60 flex-col justify-between overflow-hidden rounded-2xl border border-white/20 bg-black bg-cover bg-center bg-no-repeat p-5'
+        style={{
+          backgroundImage: `url('${backgroundImage}')`,
+        }}
+      >
+        <div className='relative z-10 flex h-full -scale-x-100 flex-col items-center justify-start gap-2'>
+          <h3 className='font-cinzel text-center text-lg leading-[110%] font-normal text-white uppercase'>
+            {title}
+          </h3>
+          <p className='font-merriweather text-center text-base leading-[140%] font-normal text-white/60'>
+            {description}
+          </p>
+        </div>
+      </div>
+    </Tilt>
+  );
+};
 
 const InfoGridSection: React.FC = () => {
   const features = [
@@ -61,37 +85,41 @@ const InfoGridSection: React.FC = () => {
     <section id='about' className='w-full bg-transparent px-5 py-20 md:py-44'>
       <div className='mx-auto flex max-w-screen-xl flex-col items-center gap-[100px]'>
         {/* Header Section */}
-        <div className='relative flex w-full max-w-[678px] flex-col items-center gap-3'>
-          <div className='relative w-full'>
-            <h2 className='font-cinzel text-center text-4xl leading-[110%] font-normal text-white uppercase sm:text-5xl lg:text-6xl'>
-              What is Neverland?
-            </h2>
-            {/* Decorative Stars */}
-            <div className='absolute top-5 left-[-40px] hidden lg:block'>
-              <StarIcon />
+        <FadeInWhenVisible delay={0} y={20}>
+          <div className='relative flex w-full max-w-[678px] flex-col items-center gap-3'>
+            <div className='relative w-full'>
+              <h2 className='font-cinzel text-center text-4xl leading-[110%] font-normal text-white uppercase sm:text-5xl lg:text-6xl'>
+                What is Neverland?
+              </h2>
+              {/* Decorative Stars */}
+              <div className='absolute top-5 left-[-40px] hidden lg:block'>
+                <StarIcon />
+              </div>
+              <div className='absolute top-5 right-[-40px] hidden lg:block'>
+                <StarIcon />
+              </div>
             </div>
-            <div className='absolute top-5 right-[-40px] hidden lg:block'>
-              <StarIcon />
-            </div>
+            <p className='font-merriweather mt-4 w-full max-w-[550px] text-center text-lg leading-[140%] font-normal text-white'>
+              Neverland is a decentralized, non-custodial lending platform
+              governed by the community through vote-escrow tokenomics,
+              unlocking capital on the high-performance Monad blockchain.
+            </p>
           </div>
-          <p className='font-merriweather mt-4 w-full max-w-[550px] text-center text-lg leading-[140%] font-normal text-white'>
-            Neverland is a decentralized, non-custodial lending platform
-            governed by the community through vote-escrow tokenomics, unlocking
-            capital on the high-performance Monad blockchain.
-          </p>
-        </div>
+        </FadeInWhenVisible>
 
         {/* Features Grid */}
-        <div className='mx-auto grid max-w-full grid-cols-1 justify-center gap-5 sm:flex sm:max-w-none sm:flex-wrap'>
-          {features.map((feature, index) => (
-            <FeatureCard
-              key={index}
-              title={feature.title}
-              description={feature.description}
-              backgroundImage={feature.backgroundImage}
-            />
-          ))}
-        </div>
+        <FadeInWhenVisible delay={0} y={20}>
+          <div className='mx-auto grid max-w-full grid-cols-1 justify-center gap-5 sm:flex sm:max-w-none sm:flex-wrap'>
+            {features.map((feature, index) => (
+              <FeatureCard
+                key={index}
+                title={feature.title}
+                description={feature.description}
+                backgroundImage={feature.backgroundImage}
+              />
+            ))}
+          </div>
+        </FadeInWhenVisible>
       </div>
     </section>
   );
