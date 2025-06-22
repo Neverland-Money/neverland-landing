@@ -189,11 +189,15 @@ export default function HowItWorksSection() {
 
   const TimelineStep = ({ step }: { step: (typeof steps)[0] }) => {
     const { number, title, description, side } = step;
+    const isActive = activeStep === number;
+    const mobileTextRef = useRef<HTMLDivElement>(null);
+    const desktopTextRef = useRef<HTMLDivElement>(null);
+
     return (
       <>
         {/* Mobile: Only active card, fixed height; Desktop: original layout */}
         <div
-          className={`relative flex items-center justify-center lg:min-h-[240px] ${activeStep === number ? 'h-[300px]' : 'h-[80px]'} lg:h-auto`}
+          className={`relative flex items-center justify-center lg:min-h-[240px] ${isActive ? 'h-[300px]' : 'h-[80px]'} lg:h-auto`}
         >
           {/* Mobile version: only show card for active step, centered */}
           <div className='flex w-full flex-col items-center lg:hidden'>
@@ -202,7 +206,7 @@ export default function HowItWorksSection() {
                 {number}
               </span>
             </div>
-            {activeStep === number && (
+            {isActive && (
               <div className='mt-6 flex w-full justify-center px-2'>
                 <div
                   className='relative top-7 flex flex-col items-center gap-2 rounded-2xl border border-white/20'
@@ -213,12 +217,21 @@ export default function HowItWorksSection() {
                     backdropFilter: 'blur(10px)',
                   }}
                 >
-                  <h3 className='font-cinzel mb-2 text-center text-xl leading-tight font-normal text-white uppercase'>
-                    {title}
-                  </h3>
-                  <p className='font-merriweather text-center text-sm leading-relaxed font-normal text-white'>
-                    {description}
-                  </p>
+                  <div
+                    ref={mobileTextRef}
+                    style={{
+                      width: '100%',
+                      opacity: isActive ? 1 : 0.7,
+                      transition: 'opacity 0.8s ease-in-out',
+                    }}
+                  >
+                    <h3 className='font-cinzel mb-2 text-center text-xl leading-tight font-normal text-white uppercase'>
+                      {title}
+                    </h3>
+                    <p className='font-merriweather text-center text-sm leading-relaxed font-normal text-white'>
+                      {description}
+                    </p>
+                  </div>
                 </div>
               </div>
             )}
@@ -234,6 +247,11 @@ export default function HowItWorksSection() {
                 className={`max-w-sm flex-1 lg:max-w-md ${
                   side === 'left' ? 'text-right' : 'text-left'
                 }`}
+                ref={desktopTextRef}
+                style={{
+                  opacity: isActive ? 1 : 0.7,
+                  transition: 'opacity 0.8s ease-in-out',
+                }}
               >
                 <h3 className='font-cinzel mb-2 text-xl leading-tight font-normal text-white uppercase lg:text-2xl'>
                   {title}
