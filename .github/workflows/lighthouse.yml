@@ -61,7 +61,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: lighthouse-report-${{ github.run_id }}
-          path: ./lhci_reports
+          path: ./.lighthouseci
 
       - name: Format lighthouse score
         id: format_lighthouse_score
@@ -69,7 +69,7 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            const results = JSON.parse(fs.readFileSync('./lhci_reports/manifest.json', 'utf8'));
+            const results = JSON.parse(fs.readFileSync('./.lighthouseci/manifest.json', 'utf8'));
             const links = results.links;
 
             let comment = '## ⚡️ Lighthouse Report\n\n';

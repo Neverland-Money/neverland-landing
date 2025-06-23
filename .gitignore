@@ -48,5 +48,9 @@ next-env.d.ts
 # vscode
 .vscode
 
+# storybook
 *storybook.log
 storybook-static
+
+# lighthouse
+.lighthouseci
