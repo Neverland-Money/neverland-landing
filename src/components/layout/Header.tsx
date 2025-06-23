@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
+import { useScrollContext } from '@/components/SmoothScroll';
 import { trackEvent, EventNames } from '@/utils/analytics';
 
 export default function Header() {
@@ -12,6 +13,7 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
   const isMainPage = pathname === '/';
+  const { lenis } = useScrollContext();
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -45,10 +47,20 @@ export default function Header() {
     e.preventDefault();
     const targetElement = document.getElementById(targetId);
     if (targetElement) {
-      targetElement.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      });
+      // Use Lenis for smooth scrolling if available
+      if (lenis) {
+        lenis.scrollTo(targetElement, {
+          offset: 0, // No offset
+          duration: 1.5, // Smooth transition duration
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Same easing as in SmoothScroll
+        });
+      } else {
+        // Fallback to native scrolling
+        targetElement.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+      }
 
       // Track navigation click
       trackEvent(EventNames.BUTTON_CLICK, {
@@ -89,8 +101,7 @@ export default function Header() {
                 background-color: rgba(5,2,18,0.2);
                 backdrop-filter: blur(8px);
                 -webkit-backdrop-filter: blur(8px);
-                border-bottom: 1px solid rgba(255,255,255,0.06);
-                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+                box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
               }
               
               .liquid-glass-fade {
@@ -155,8 +166,8 @@ export default function Header() {
                 Features
               </Link>
               <Link
-                href='#how-it-works'
-                onClick={(e) => handleSmoothScroll(e, 'how-it-works')}
+                href='#explore'
+                onClick={(e) => handleSmoothScroll(e, 'explore')}
                 className='font-merriweather text-base font-normal text-white transition-colors hover:text-purple-300'
               >
                 Explore
@@ -287,9 +298,9 @@ export default function Header() {
                 loading='eager'
                 src='/assets/images/header/mobile-menu.svg'
                 alt='Open Menu'
-                width={24}
-                height={24}
-                className={`transition-all ${isScrolled ? 'brightness-110' : ''}`}
+                className={`h-[auto] w-[24px] transition-all ${isScrolled ? 'brightness-110' : ''}`}
+                width={0}
+                height={0}
               />
             </button>
           )}
@@ -303,19 +314,32 @@ export default function Header() {
         <div className='fixed inset-0 z-[60] overflow-y-auto bg-[rgba(5,2,18,0.85)] backdrop-blur-[17px] backdrop-filter md:hidden'>
           <div className='flex h-full w-full flex-col items-start justify-start px-4'>
             {/* Top row with Logo and Close button */}
-            <div className='mb-6 flex h-[80px] w-full items-center justify-between'>
+            <div className='mb-6 flex h-[72px] w-full items-center justify-between'>
+              {/* Logo Section - Left */}
+              <Link href='/'>
+                <div className='z-10 flex items-center gap-1 lg:z-10'>
+                  <Image
+                    src='/assets/images/header/logo.svg'
+                    alt='Logo'
+                    width={0}
+                    height={0}
+                    className='h-[auto] w-[40px] text-white'
+                    priority
+                  />
+                  <span className='font-cinzel-decorative text-xl font-normal tracking-wider text-white'>
+                    Neverland
+                  </span>
+                </div>
+              </Link>
               {/* Close button */}
-              <button
-                className='absolute top-8 right-5'
-                onClick={toggleMobileMenu}
-              >
+              <button className='relative right-2' onClick={toggleMobileMenu}>
                 <Image
                   loading='eager'
                   src='/assets/images/header/close.svg'
                   alt='Close Menu'
+                  className='h-[auto] w-[24px]'
                   width={0}
                   height={0}
-                  className='h-[auto] w-[16px]'
                 />
               </button>
             </div>
@@ -337,8 +361,8 @@ export default function Header() {
                   FEATURES
                 </Link>
                 <Link
-                  href='#how-it-works'
-                  onClick={(e) => handleSmoothScroll(e, 'how-it-works')}
+                  href='#explore'
+                  onClick={(e) => handleSmoothScroll(e, 'explore')}
                   className='font-cinzel self-stretch text-left text-[56px] leading-[100%] font-normal text-white uppercase hover:text-purple-400'
                 >
                   EXPLORE

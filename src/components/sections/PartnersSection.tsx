@@ -1,14 +1,15 @@
 'use client';
 
 import {
-  motion,
-  useMotionValue,
   animate,
   AnimationPlaybackControls,
+  motion,
+  useMotionValue,
 } from 'framer-motion';
 import Image from 'next/image';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
+import FadeInWhenVisible from '@/components/ui/FadeInWhenVisible';
 import PartnerCard from '@/components/ui/PartnerCard';
 import { StarIcon } from '@/components/ui/StarIcon';
 
@@ -195,23 +196,25 @@ export default function PartnersSection() {
   };
 
   return (
-    <section className='w-full py-[100px]'>
+    <section id='partners' className='w-full py-[100px]'>
       <div className='mx-auto flex max-w-[1540px] flex-col items-center gap-4 px-[50px] md:gap-24'>
         {/* Header Section */}
-        <div className='flex w-full max-w-[641px] flex-col items-center gap-3'>
-          <h2 className='font-cinzel text-center text-[44px] leading-[110%] font-normal text-white uppercase'>
-            <span className='relative inline-block'>
-              O
-              <div className='absolute top-[47%] left-[51%] -translate-x-1/2 -translate-y-1/2 transform'>
-                <StarIcon />
-              </div>
-            </span>
-            ur Foundations
-          </h2>
-          <p className='font-merriweather w-full max-w-[493px] text-center text-lg leading-[140%] font-normal text-white'>
-            We’re building Neverland on the shoulders of giants.
-          </p>
-        </div>
+        <FadeInWhenVisible delay={0} y={20}>
+          <div className='flex w-full max-w-[641px] flex-col items-center gap-3'>
+            <h2 className='font-cinzel text-center text-[44px] leading-[110%] font-normal text-white uppercase'>
+              <span className='relative inline-block'>
+                O
+                <div className='absolute top-[47%] left-[51%] -translate-x-1/2 -translate-y-1/2 transform'>
+                  <StarIcon />
+                </div>
+              </span>
+              ur Foundations
+            </h2>
+            <p className='font-merriweather w-full max-w-[493px] text-center text-lg leading-[140%] font-normal text-white'>
+              We’re building Neverland on the shoulders of giants.
+            </p>
+          </div>
+        </FadeInWhenVisible>
 
         {/* Partners Grid */}
         <div className='relative w-full overflow-hidden'>

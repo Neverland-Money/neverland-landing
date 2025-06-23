@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
+import FadeInWhenVisible from '@/components/ui/FadeInWhenVisible';
 import { StarIcon } from '@/components/ui/StarIcon';
 
 export default function HowItWorksSection() {
@@ -188,11 +189,15 @@ export default function HowItWorksSection() {
 
   const TimelineStep = ({ step }: { step: (typeof steps)[0] }) => {
     const { number, title, description, side } = step;
+    const isActive = activeStep === number;
+    const mobileTextRef = useRef<HTMLDivElement>(null);
+    const desktopTextRef = useRef<HTMLDivElement>(null);
+
     return (
       <>
         {/* Mobile: Only active card, fixed height; Desktop: original layout */}
         <div
-          className={`relative flex items-center justify-center lg:min-h-[240px] ${activeStep === number ? 'h-[300px]' : 'h-[80px]'} lg:h-auto`}
+          className={`relative flex items-center justify-center lg:min-h-[240px] ${isActive ? 'h-[300px]' : 'h-[80px]'} lg:h-auto`}
         >
           {/* Mobile version: only show card for active step, centered */}
           <div className='flex w-full flex-col items-center lg:hidden'>
@@ -201,7 +206,7 @@ export default function HowItWorksSection() {
                 {number}
               </span>
             </div>
-            {activeStep === number && (
+            {isActive && (
               <div className='mt-6 flex w-full justify-center px-2'>
                 <div
                   className='relative top-7 flex flex-col items-center gap-2 rounded-2xl border border-white/20'
@@ -212,12 +217,21 @@ export default function HowItWorksSection() {
                     backdropFilter: 'blur(10px)',
                   }}
                 >
-                  <h3 className='font-cinzel mb-2 text-center text-xl leading-tight font-normal text-white uppercase'>
-                    {title}
-                  </h3>
-                  <p className='font-merriweather text-center text-sm leading-relaxed font-normal text-white'>
-                    {description}
-                  </p>
+                  <div
+                    ref={mobileTextRef}
+                    style={{
+                      width: '100%',
+                      opacity: isActive ? 1 : 0.7,
+                      transition: 'opacity 0.8s ease-in-out',
+                    }}
+                  >
+                    <h3 className='font-cinzel mb-2 text-center text-xl leading-tight font-normal text-white uppercase'>
+                      {title}
+                    </h3>
+                    <p className='font-merriweather text-center text-sm leading-relaxed font-normal text-white'>
+                      {description}
+                    </p>
+                  </div>
                 </div>
               </div>
             )}
@@ -233,6 +247,11 @@ export default function HowItWorksSection() {
                 className={`max-w-sm flex-1 lg:max-w-md ${
                   side === 'left' ? 'text-right' : 'text-left'
                 }`}
+                ref={desktopTextRef}
+                style={{
+                  opacity: isActive ? 1 : 0.7,
+                  transition: 'opacity 0.8s ease-in-out',
+                }}
               >
                 <h3 className='font-cinzel mb-2 text-xl leading-tight font-normal text-white uppercase lg:text-2xl'>
                   {title}
@@ -257,27 +276,32 @@ export default function HowItWorksSection() {
   };
 
   return (
-    <section className='relative overflow-hidden px-4 py-[80px] pb-[80px] lg:px-8 lg:py-[180px] lg:pb-[180px]'>
+    <section
+      id='explore'
+      className='relative overflow-hidden px-4 py-[80px] pb-[80px] lg:px-8 lg:py-[180px] lg:pb-[180px]'
+    >
       <div className='mx-auto max-w-6xl'>
         {/* Header */}
-        <div className='relative mx-auto mb-16 max-w-[500px] text-center lg:mb-40'>
-          <div className='relative inline-block'>
-            <h2 className='font-cinzel mb-3 text-4xl leading-tight font-normal text-white uppercase lg:text-6xl'>
-              How it w
-              <span className='relative inline-block'>
-                o
-                <div className='absolute top-[47%] left-[51%] -translate-x-1/2 -translate-y-1/2 transform'>
-                  <StarIcon />
-                </div>
-              </span>
-              rks
-            </h2>
+        <FadeInWhenVisible delay={0} y={20}>
+          <div className='relative mx-auto mb-16 max-w-[500px] text-center lg:mb-40'>
+            <div className='relative inline-block'>
+              <h2 className='font-cinzel mb-3 text-4xl leading-tight font-normal text-white uppercase lg:text-6xl'>
+                How it w
+                <span className='relative inline-block'>
+                  o
+                  <div className='absolute top-[47%] left-[51%] -translate-x-1/2 -translate-y-1/2 transform'>
+                    <StarIcon />
+                  </div>
+                </span>
+                rks
+              </h2>
+            </div>
+            <p className='font-merriweather mx-auto max-w-[300px] text-lg leading-relaxed font-normal text-white lg:max-w-[385px]'>
+              Navigate the magical world of DeFi with our simple step-by-step
+              process.
+            </p>
           </div>
-          <p className='font-merriweather mx-auto max-w-[300px] text-lg leading-relaxed font-normal text-white lg:max-w-[385px]'>
-            Navigate the magical world of DeFi with our simple step-by-step
-            process.
-          </p>
-        </div>
+        </FadeInWhenVisible>
 
         {/* Timeline */}
         <div className='relative' ref={timelineRef}>

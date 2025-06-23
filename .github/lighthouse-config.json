@@ -1,10 +1,22 @@
 {
   "ci": {
     "collect": {
-      "startServerCommand": "npm run start",
-      "startServerReadyPattern": "ready started server",
-      "url": ["http://localhost:3000/", "http://localhost:3000/about"],
-      "numberOfRuns": 3
+      "startServerCommand": "pnpm start",
+      "startServerReadyPattern": "Ready in",
+      "url": ["http://localhost:3000"],
+      "numberOfRuns": 3,
+      "settings": {
+        "preset": "desktop",
+        "throttlingMethod": "provided",
+        "screenEmulation": {
+          "mobile": false,
+          "width": 1440,
+          "height": 900,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "formFactor": "desktop"
+      }
     },
     "assert": {
       "assertions": {
