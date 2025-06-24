@@ -1,26 +1,25 @@
 # These owners will be the default owners for everything in the repo.
 # Unless a later match takes precedence, these owners will be requested for
 # review when someone opens a pull request.
-* @0xCatalyst
+* @0xCatalyst @AliceInDeFi
 
 # UI/UX related files
-*.css @0xCatalyst
-*.scss @0xCatalyst
-/public/assets/ @0xCatalyst
+*.css @0xCatalyst @AliceInDeFi
+*.scss @0xCatalyst @AliceInDeFi
+/public/assets/ @0xCatalyst @AliceInDeFi
 
 # Core components
-/src/components/ @0xCatalyst
-/src/pages/ @0xCatalyst
+/src/components/ @0xCatalyst @AliceInDeFi
+/src/pages/ @0xCatalyst @AliceInDeFi
 
 # API and server-side code
-/src/api/ @0xCatalyst
-/src/lib/ @0xCatalyst
+/src/api/ @0xCatalyst @AliceInDeFi
+/src/lib/ @0xCatalyst @AliceInDeFi
 
 # Build configuration
-*.json @0xCatalyst
-*.yml @0xCatalyst
-/next.config.js @0xCatalyst
+*.json @0xCatalyst @AliceInDeFi
+*.yml @0xCatalyst @AliceInDeFi
+/next.config.js @0xCatalyst @AliceInDeFi
 
 # Documentation
-*.md @0xCatalyst
-/docs/ @0xCatalyst
+*.md @0xCatalyst @AliceInDeFi
