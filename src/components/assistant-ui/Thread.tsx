@@ -30,7 +30,15 @@ export const Thread: FC = () => {
         ['--thread-max-width' as string]: '42rem',
       }}
     >
-      <ThreadPrimitive.Viewport className='custom-scrollbar flex h-full flex-col items-center overflow-y-scroll scroll-smooth bg-inherit px-4 pt-8'>
+      <ThreadPrimitive.Viewport
+        className='custom-scrollbar flex h-full flex-col items-center overflow-y-auto scroll-smooth bg-inherit px-4 pt-8'
+        style={{
+          overscrollBehavior: 'contain',
+          WebkitOverflowScrolling: 'touch',
+          touchAction: 'pan-y',
+        }}
+        data-lenis-prevent
+      >
         <ThreadWelcome />
 
         <ThreadPrimitive.Messages
