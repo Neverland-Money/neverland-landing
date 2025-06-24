@@ -29,6 +29,125 @@ export const ChatButton = ({
   const buttonRef = useRef<HTMLButtonElement>(null); // Reference to the button element
   const divRef = useRef<HTMLDivElement>(null); // Reference to the div element when using isStyled
 
+  useEffect(() => {
+    // Save original styles
+    const originalStyles = {
+      overflow: document.body.style.overflow,
+      paddingRight: document.body.style.paddingRight,
+      position: document.body.style.position,
+      top: document.body.style.top,
+      width: document.body.style.width,
+      height: document.body.style.height,
+    };
+
+    // Define constant for storage key
+    const LENIS_STOPPED_KEY = 'lenisWasStopped';
+
+    if (isOpen && !isMinimized) {
+      // Calculate scrollbar width to prevent layout shift
+      const scrollbarWidth =
+        window.innerWidth - document.documentElement.clientWidth;
+      const scrollY = window.scrollY;
+
+      // Completely lock the body and Lenis scrolling
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      document.body.style.height = '100vh';
+
+      if (scrollbarWidth > 0) {
+        document.body.style.paddingRight = `${scrollbarWidth}px`;
+      }
+
+      // Store the scroll position for later restoration
+      document.body.dataset.scrollPosition = scrollY.toString();
+
+      // Stop Lenis scrolling completely when chat is open
+      try {
+        const customWindow = window as unknown as {
+          lenis?: {
+            stop: () => void;
+          };
+        };
+        const lenisInstance = customWindow.lenis || null;
+        if (lenisInstance && typeof lenisInstance.stop === 'function') {
+          lenisInstance.stop();
+          // Save to sessionStorage to access it later
+          sessionStorage.setItem(LENIS_STOPPED_KEY, 'true');
+        }
+      } catch (error) {
+        console.error('Error stopping Lenis scrolling:', error);
+      }
+    } else {
+      // Restore scrolling with a delay to allow animations to complete
+      setTimeout(() => {
+        document.body.style.overflow = originalStyles.overflow;
+        document.body.style.paddingRight = originalStyles.paddingRight;
+        document.body.style.position = originalStyles.position;
+        document.body.style.top = originalStyles.top;
+        document.body.style.width = originalStyles.width;
+        document.body.style.height = originalStyles.height;
+
+        // Restore scroll position
+        const scrollY = parseInt(document.body.dataset.scrollPosition || '0');
+        window.scrollTo(0, scrollY);
+
+        // Restart Lenis if it was stopped
+        try {
+          if (sessionStorage.getItem(LENIS_STOPPED_KEY) === 'true') {
+            const customWindow = window as unknown as {
+              lenis?: {
+                start: () => void;
+              };
+            };
+            const lenisInstance = customWindow.lenis || null;
+            if (lenisInstance && typeof lenisInstance.start === 'function') {
+              lenisInstance.start();
+              sessionStorage.removeItem(LENIS_STOPPED_KEY);
+            }
+          }
+        } catch (error) {
+          console.error('Error restarting Lenis scrolling:', error);
+        }
+      }, 300);
+    }
+
+    return () => {
+      // Cleanup function to restore original styles
+      document.body.style.overflow = originalStyles.overflow;
+      document.body.style.paddingRight = originalStyles.paddingRight;
+      document.body.style.position = originalStyles.position;
+      document.body.style.top = originalStyles.top;
+      document.body.style.width = originalStyles.width;
+      document.body.style.height = originalStyles.height;
+
+      // Restore scroll position on unmount if needed
+      const scrollY = parseInt(document.body.dataset.scrollPosition || '0');
+      if (document.body.style.position === 'fixed') {
+        window.scrollTo(0, scrollY);
+      }
+
+      // Make sure Lenis is restarted if component unmounts while chat is open
+      try {
+        if (sessionStorage.getItem(LENIS_STOPPED_KEY) === 'true') {
+          const customWindow = window as unknown as {
+            lenis?: {
+              start: () => void;
+            };
+          };
+          const lenisInstance = customWindow.lenis || null;
+          if (lenisInstance && typeof lenisInstance.start === 'function') {
+            lenisInstance.start();
+            sessionStorage.removeItem(LENIS_STOPPED_KEY);
+          }
+        }
+      } catch (error) {
+        console.error('Error restarting Lenis on unmount:', error);
+      }
+    };
+  }, [isOpen, isMinimized]);
+
   // Periodically trigger the glow effect
   useEffect(() => {
     if (isOpen || isMinimized) {

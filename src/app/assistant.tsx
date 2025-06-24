@@ -95,7 +95,17 @@ export const Assistant = ({ onMinimize, onClose }: AssistantProps) => {
             )}
           </div>
         </div>
-        <div className='flex-1 overflow-auto'>
+        <div
+          className='flex-1 overflow-auto'
+          onWheel={(e) => {
+            // Prevent the event from bubbling up to Lenis
+            e.stopPropagation();
+          }}
+          style={{
+            overscrollBehavior: 'contain', // Prevent pull-to-refresh and overscroll effects
+            WebkitOverflowScrolling: 'touch', // Enable smooth scrolling on iOS
+          }}
+        >
           <Thread />
         </div>
       </div>

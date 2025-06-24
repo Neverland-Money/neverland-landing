@@ -40,7 +40,26 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
       touchMultiplier: 1.5, // Make touch scrolling more responsive
       wheelMultiplier: 0.75, // Even lower value for smoother mouse wheel scrolling
       lerp: 0.09, // Linear interpolation - lower = smoother (0.1 is default)
+      orientation: 'vertical',
     });
+
+    // Add event delegations to exclude the chat window from Lenis
+    document.addEventListener(
+      'wheel',
+      (event) => {
+        // Check if the event target is within the chat component
+        const chatWindow = document.querySelector('[role="dialog"]');
+        if (
+          chatWindow &&
+          (chatWindow === event.target ||
+            chatWindow.contains(event.target as Node))
+        ) {
+          // If within chat window, prevent Lenis from handling it
+          event.stopPropagation();
+        }
+      },
+      { capture: true },
+    );
 
     // Monitor scroll progress
     lenis.on('scroll', ({ progress }: { progress: number }) => {
