@@ -23,8 +23,8 @@ export default function FeaturesSection() {
     // Adjust based on screen width breakpoints
     if (windowWidth > 0) {
       if (windowWidth < 640) {
-        // Mobile
-        opacityFactor = 0.1;
+        // Mobile - increased glow effect
+        opacityFactor = 0.25;
       } else if (windowWidth < 1024) {
         // Tablet
         opacityFactor = 0.2;
