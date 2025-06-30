@@ -1,6 +1,6 @@
 # Neverland Money - Landing Page
 
-A Next.js 15 landing page with TypeScript, Tailwind CSS, and AI chat integration. Features animated starfield backgrounds, responsive design, and vector-powered knowledge base using OpenAI + Pinecone.
+A Next.js 15.3 landing page with TypeScript, Tailwind CSS 4, and advanced AI chat integration. Features animated starfield backgrounds, responsive design, smooth scroll animations, and vector-powered knowledge base using OpenAI + Pinecone.
 
 ## Quick Start
 
@@ -10,6 +10,7 @@ A Next.js 15 landing page with TypeScript, Tailwind CSS, and AI chat integration
 - pnpm (package manager)
 - OpenAI API key (for chat functionality)
 - Pinecone API key (for vector search)
+- React 19 compatible dependencies
 
 ### Install pnpm
 
@@ -73,6 +74,7 @@ curl -fsSL https://get.pnpm.io/install.sh | sh -
 ## Development Commands
 
 - `pnpm dev` - Start development server with Turbopack
+- `pnpm dev:hostname` - Start development server with specific hostname (0.0.0.0)
 - `pnpm build` - Build for production
 - `pnpm start` - Start production server
 - `pnpm lint` - Run ESLint
@@ -106,13 +108,24 @@ The `SectionTracker` component uses the Intersection Observer API (via `react-in
 ```
 src/                         # Source code directory
 ├── app/                     # Next.js App Router pages
+│   ├── about/               # About us page (redirect)
 │   ├── api/chat/            # AI chat API endpoint
-│   ├── privacy-policy/      # Privacy policy page
-│   ├── terms-of-service/    # Terms of service page
+│   ├── contact/             # Contact page (redirect)
+│   ├── explore/             # Explore features page (redirect)
+│   ├── faq/                 # FAQ page (redirect)
+│   ├── features/            # Feature details page (redirect)
+│   ├── partners/            # Partners page (redirect)
+│   ├── privacy-policy/      # Privacy policy page (redirect)
+│   ├── security/            # Security page (redirect)
+│   ├── stats/               # Statistics page (redirect)
+│   ├── terms-of-service/    # Terms of service page (redirect)
+│   ├── assistant.tsx        # Assistant component integration
 │   ├── globals.css          # Global styles
 │   ├── layout.tsx           # Root layout with metadata and fonts
+│   ├── not-found.tsx        # 404 page component
 │   └── page.tsx             # Homepage component
 ├── components/              # Reusable component directory
+│   ├── SmoothScroll.tsx     # Lenis smooth scrolling integration
 │   ├── assistant-ui/        # AI chat interface components
 │   ├── layout/              # Structural layout components (Header, Footer)
 │   ├── sections/            # Page-specific content sections
@@ -132,14 +145,25 @@ Dynamic animated starfield with customizable:
 - Glow effects
 - Full page vs viewport sizing
 - Z-index layering
+- GSAP-powered animations
+
+### Smooth Scrolling
+
+- Lenis smooth scrolling integration
+- Optimized performance
+- Custom scroll triggers and animations
+- Enhanced user experience
 
 ### AI Chat System
 
-- OpenAI GPT integration
-- Pinecone vector database
+- OpenAI GPT integration with AI-SDK
+- Pinecone vector database with LangChain
 - Context-aware responses
 - Real-time streaming
 - Knowledge base search
+- Advanced Assistant UI components
+- Rich markdown rendering
+- Improved response handling
 
 ### Responsive Design
 
@@ -167,7 +191,7 @@ Dynamic animated starfield with customizable:
 
 ## Configuration
 
-### Tailwind CSS
+### Tailwind CSS 4
 
 Custom configuration with:
 
@@ -175,6 +199,8 @@ Custom configuration with:
 - Custom fonts (Cinzel, Lexend)
 - Animation utilities
 - Responsive breakpoints
+- Advanced utility classes
+- Optimized for React 19
 
 ### Next.js Config
 
@@ -193,7 +219,7 @@ Custom configuration with:
   - Pre-commit hook runs linting and formatting on staged files
   - Prevents committing code that doesn't meet quality standards
 
-## Storybook Component Library
+## Storybook Component Library (v9)
 
 This project includes a comprehensive Storybook setup for developing and testing UI components in isolation.
 
@@ -204,6 +230,7 @@ This project includes a comprehensive Storybook setup for developing and testing
 - **Accessibility Testing**: Built-in a11y testing with @storybook/addon-a11y
 - **Visual Testing**: Component testing with Vitest integration
 - **Responsive Design**: Test components across different viewport sizes
+- **Next.js Vite Integration**: Optimized for faster development experience
 
 ### Available Stories
 
@@ -264,9 +291,14 @@ This project is private and proprietary to Neverland Money.
 
 ## Acknowledgments
 
-- Built with [Next.js](https://nextjs.org/)
-- Styled with [Tailwind CSS](https://tailwindcss.com/)
-- Animated with [Framer Motion](https://www.framer.com/motion/)
-- AI powered by [OpenAI](https://openai.com/)
-- Vector search by [Pinecone](https://www.pinecone.io/)
+- Built with [Next.js 15.3](https://nextjs.org/)
+- React 19 for improved performance
+- Styled with [Tailwind CSS 4](https://tailwindcss.com/)
+- Animated with [Framer Motion](https://www.framer.com/motion/) and [GSAP](https://greensock.com/gsap/)
+- Smooth scrolling with [Lenis](https://github.com/studio-freight/lenis)
+- Enhanced scrolling with [OverlayScrollbars](https://kingsora.github.io/OverlayScrollbars/)
+- AI powered by [OpenAI](https://openai.com/) and [AI SDK](https://sdk.vercel.ai/docs)
+- Vector search by [Pinecone](https://www.pinecone.io/) and [LangChain](https://js.langchain.com/)
 - Icons by [Lucide](https://lucide.dev/)
+- Parallax effects with [React Parallax Tilt](https://www.npmjs.com/package/react-parallax-tilt)
+- Analytics by [Vercel Analytics](https://vercel.com/analytics) and [Speed Insights](https://vercel.com/docs/speed-insights)
