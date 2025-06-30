@@ -22,11 +22,20 @@ const ScrollContext = createContext<ScrollContextType>({
 
 export const useScrollContext = () => useContext(ScrollContext);
 
+import { CustomScrollIndicator } from './ui/CustomScrollIndicator';
+import { ScrollProgressBar } from './ui/ScrollProgressBar';
+
 interface SmoothScrollProps {
   children: ReactNode;
+  showProgressBar?: boolean;
+  showCustomScrollbar?: boolean;
 }
 
-export default function SmoothScroll({ children }: SmoothScrollProps) {
+export default function SmoothScroll({
+  children,
+  showProgressBar = true,
+  showCustomScrollbar = true,
+}: SmoothScrollProps) {
   const [scrollProgress, setScrollProgress] = useState<number>(0);
   // Store lenis instance in state to trigger re-renders
   const [lenis, setLenis] = useState<Lenis | null>(null);
@@ -44,22 +53,19 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
     });
 
     // Add event delegations to exclude the chat window from Lenis
-    document.addEventListener(
-      'wheel',
-      (event) => {
-        // Check if the event target is within the chat component
-        const chatWindow = document.querySelector('[role="dialog"]');
-        if (
-          chatWindow &&
-          (chatWindow === event.target ||
-            chatWindow.contains(event.target as Node))
-        ) {
-          // If within chat window, prevent Lenis from handling it
-          event.stopPropagation();
-        }
-      },
-      { capture: true },
-    );
+    const wheelEventListener = (event: WheelEvent) => {
+      // Check if the event target is within the chat component
+      const chatWindow = document.querySelector('[role="dialog"]');
+      if (
+        chatWindow &&
+        (chatWindow === event.target ||
+          chatWindow.contains(event.target as Node))
+      ) {
+        // If within chat window, prevent Lenis from handling it
+        event.stopPropagation();
+      }
+    };
+    document.addEventListener('wheel', wheelEventListener, { capture: true });
 
     // Monitor scroll progress
     lenis.on('scroll', ({ progress }: { progress: number }) => {
@@ -78,13 +84,27 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
     requestAnimationFrame(raf);
 
     return () => {
+      // Clean up the wheel event listener to prevent memory leaks
+      document.removeEventListener('wheel', wheelEventListener, {
+        capture: true,
+      });
+      // Destroy the Lenis instance
       lenis.destroy();
     };
   }, []);
 
   return (
-    <ScrollContext.Provider value={{ lenis, scrollProgress }}>
-      {children}
+    <ScrollContext.Provider
+      value={{
+        lenis,
+        scrollProgress,
+      }}
+    >
+      <div className='smooth-scroll-container'>
+        {children}
+        {showProgressBar && <ScrollProgressBar progress={scrollProgress} />}
+        {showCustomScrollbar && <CustomScrollIndicator />}
+      </div>
     </ScrollContext.Provider>
   );
 }
