@@ -11,6 +11,9 @@
     "format": "prettier --write .",
     "clean": "rm -rf .next node_modules && pnpm install",
     "build-storybook": "storybook build",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest watch",
     "storybook": "storybook dev -p 6006",
     "prepare": "husky"
   },
@@ -60,6 +63,8 @@
     "@storybook/addon-vitest": "^9.0.12",
     "@storybook/nextjs-vite": "^9.0.12",
     "@tailwindcss/postcss": "^4",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
     "@types/lodash": "^4.17.17",
     "@types/node": "^20",
     "@types/react": "^19",

@@ -17,11 +17,6 @@ interface ShootingStar {
   duration: number;
 }
 
-interface Offset {
-  x: number;
-  y: number;
-}
-
 export interface StarrySkyProps {
   /** Number of stars to render. Scales based on screen width with this value as maximum for 4K screens. Defaults to responsive values: 100 on mobile, 500 on desktop */
   starCount?: number;
@@ -45,7 +40,7 @@ export default function StarrySky({
   const [stars, setStars] = useState<Star[]>([]);
   const [shootingStars, setShootingStars] = useState<ShootingStar[]>([]);
   const [mounted, setMounted] = useState(false);
-  const [offset, setOffset] = useState<Offset>({ x: 0, y: 0 });
+
   const [isMobile, setIsMobile] = useState(false);
   const [documentHeight, setDocumentHeight] = useState(0);
 
@@ -116,59 +111,11 @@ export default function StarrySky({
       calculateDocumentHeight();
     }, 1000);
 
-    // Function to update star positions based on pointer position
-    const updateStarPositions = (
-      x: number,
-      y: number,
-      isTouchEvent = false,
-    ) => {
-      // Calculate position as percentage of screen
-      const percentX = x / window.innerWidth - 0.5; // -0.5 to 0.5
-      const percentY = y / window.innerHeight - 0.5; // -0.5 to 0.5
-
-      // Set offset for parallax effect - enhanced movement for mobile
-      const movementMultiplier = isTouchEvent ? 10 : 5; // Double the movement on touch
-
-      setOffset({
-        x: percentX * movementMultiplier,
-        y: percentY * movementMultiplier,
-      });
-    };
-
-    // Handle mouse movement (for desktop)
-    const handleMouseMove = (e: MouseEvent) => {
-      updateStarPositions(e.clientX, e.clientY, false);
-    };
-
-    // Handle touch movement (for mobile) - only on move, not on tap
-    const handleTouchMove = (e: TouchEvent) => {
-      if (e.touches && e.touches[0]) {
-        const touch = e.touches[0];
-        updateStarPositions(touch.clientX, touch.clientY, true);
-
-        // Prevent default to avoid scrolling while moving stars
-        // Only prevent default if specifically interacting with stars
-        if ((e.target as Element)?.closest('#sky')) {
-          e.preventDefault();
-        }
-      }
-    };
-
     // We don't need a touchstart handler as we only want to respond to touch movement
-
-    // Set up appropriate event listeners based on device
-    if (isMobile) {
-      // Only respond to touch movement, not to taps
-      window.addEventListener('touchmove', handleTouchMove, { passive: false });
-    } else {
-      window.addEventListener('mousemove', handleMouseMove);
-    }
 
     window.addEventListener('resize', updateDimensions);
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('resize', updateDimensions);
       if (resizeObserver) {
         resizeObserver.disconnect();
@@ -272,9 +219,10 @@ export default function StarrySky({
           pointerEvents: 'none',
           zIndex,
         }}
+        // Static position - no animation
         animate={{
-          x: offset.x,
-          y: offset.y,
+          x: 0,
+          y: 0,
         }}
         transition={{
           type: 'spring',
@@ -361,8 +309,8 @@ export default function StarrySky({
             zIndex,
           }}
           animate={{
-            x: offset.x,
-            y: `calc(10vh - 70% + ${offset.y * 0.5}px)`,
+            x: 0,
+            y: 'calc(10vh - 70%)',
             rotate: 120,
           }}
           transition={{
