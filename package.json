@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write .",
-    "clean": "rm -rf .next node_modules && pnpm install",
+    "clean": "rm -rf .next storybook-static coverage node_modules && pnpm install",
     "build-storybook": "storybook build",
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
