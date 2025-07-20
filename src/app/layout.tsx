@@ -61,7 +61,8 @@ const lexend = Lexend({
 
 export const metadata: Metadata = {
   title: 'Neverland Money',
-  description: 'Revolutionizing Lending & Tokenomics',
+  description:
+    'Neverland is a decentralized lending platform that reimagines DeFi incentives through sustainable veTokenomics, governance rewards, advanced yield strategies, self-repaying loans, and more. Coming soon on Monad!',
   metadataBase: new URL('https://neverland.money'),
   alternates: {
     canonical: '/',
@@ -72,14 +73,15 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Neverland Money',
-    description: 'Revolutionizing Lending & Tokenomics',
+    description:
+      'Neverland is a decentralized lending platform that reimagines DeFi incentives through sustainable veTokenomics, governance rewards, advanced yield strategies, self-repaying loans, and more. Coming soon on Monad!',
     url: 'https://neverland.money',
     siteName: 'Neverland Money',
     images: [
       {
-        url: '/assets/images/og-banner.png',
+        url: '/assets/images/og-banner.webp',
         width: 1200,
-        height: 630,
+        height: 675,
         alt: 'Neverland Money',
       },
     ],
@@ -89,8 +91,9 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Neverland Money',
-    description: 'Revolutionizing Lending & Tokenomics',
-    images: ['/assets/images/og-banner.png'],
+    description:
+      'Neverland is a decentralized lending platform that reimagines DeFi incentives through sustainable veTokenomics, governance rewards, advanced yield strategies, self-repaying loans, and more. Coming soon on Monad!',
+    images: ['/assets/images/og-banner.webp'],
   },
   keywords: [
     'decentralized finance',
