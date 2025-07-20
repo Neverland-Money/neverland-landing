@@ -75,6 +75,9 @@ export const Tooltip = ({
   const tooltipRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const isMouseOverTriggerRef = useRef(false);
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const isScrollingRef = useRef(false);
 
   const shouldShow = !disabled && (title || description || content);
 
@@ -156,13 +159,17 @@ export const Tooltip = ({
   const showTooltip = useCallback(() => {
     if (!shouldShow) return;
 
+    if (isScrollingRef.current) return;
+
     if (hideTimeoutRef.current) {
       clearTimeout(hideTimeoutRef.current);
     }
 
     if (delay > 0) {
       timeoutRef.current = setTimeout(() => {
-        setIsVisible(true);
+        if (!isScrollingRef.current) {
+          setIsVisible(true);
+        }
       }, delay);
     } else {
       setIsVisible(true);
@@ -184,10 +191,12 @@ export const Tooltip = ({
   }, [hideDelay]);
 
   const handleMouseEnter = () => {
+    isMouseOverTriggerRef.current = true;
     if (trigger.includes('hover')) showTooltip();
   };
 
   const handleMouseLeave = () => {
+    isMouseOverTriggerRef.current = false;
     if (trigger.includes('hover')) hideTooltip();
   };
 
@@ -219,25 +228,69 @@ export const Tooltip = ({
 
       // Add scroll and resize event listeners to update tooltip position
       const handlePositionUpdate = () => {
+        if (!triggerRef.current) {
+          hideTooltip();
+          return;
+        }
+
+        // For resize events, check if mouse is still over trigger using our ref
+        if (!isMouseOverTriggerRef.current && trigger.includes('hover')) {
+          hideTooltip();
+          return;
+        }
+
         calculatePosition();
-        // Force a re-render to update tooltip position
-        setIsVisible(true);
       };
 
-      window.addEventListener('scroll', handlePositionUpdate);
+      const handleScroll = () => {
+        // Set scrolling flag
+        isScrollingRef.current = true;
+
+        // Clear any existing scroll timeout
+        if (scrollTimeoutRef.current) {
+          clearTimeout(scrollTimeoutRef.current);
+        }
+
+        // For hover-triggered tooltips, only hide if mouse is not over trigger
+        if (trigger.includes('hover')) {
+          // If mouse is still over trigger, just update position after a short delay
+          if (isMouseOverTriggerRef.current) {
+            scrollTimeoutRef.current = setTimeout(() => {
+              isScrollingRef.current = false;
+              if (isMouseOverTriggerRef.current) {
+                calculatePosition();
+              }
+            }, 100); // Short delay to allow smooth scrolling to settle
+          } else {
+            // Mouse is not over trigger, hide immediately
+            hideTooltip();
+          }
+        } else {
+          // For click/focus tooltips, update position
+          handlePositionUpdate();
+        }
+
+        // Reset scrolling flag after scroll ends
+        scrollTimeoutRef.current = setTimeout(() => {
+          isScrollingRef.current = false;
+        }, 150);
+      };
+
+      window.addEventListener('scroll', handleScroll, true);
       window.addEventListener('resize', handlePositionUpdate);
 
       return () => {
-        window.removeEventListener('scroll', handlePositionUpdate);
+        window.removeEventListener('scroll', handleScroll, true);
         window.removeEventListener('resize', handlePositionUpdate);
       };
     }
-  }, [isVisible, calculatePosition]);
+  }, [isVisible, calculatePosition, trigger, hideTooltip]);
 
   useEffect(() => {
     return () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
       if (hideTimeoutRef.current) clearTimeout(hideTimeoutRef.current);
+      if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
     };
   }, []);
 
