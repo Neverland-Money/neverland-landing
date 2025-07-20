@@ -1,9 +1,17 @@
 'use client';
 
-import { ReactNode, useState, useRef, useEffect, useCallback } from 'react';
+import {
+  ReactNode,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { createPortal } from 'react-dom';
 
 import LiquidGlass from './LiquidGlass';
+import { throttle } from '../../utils/throttle';
 
 type TooltipPosition =
   | 'top'
@@ -190,6 +198,43 @@ export const Tooltip = ({
     }
   }, [hideDelay]);
 
+  // Define scroll handler function with proper dependencies
+  const scrollHandler = useCallback(() => {
+    // For hover-triggered tooltips, only hide if mouse is not over trigger
+    if (trigger.includes('hover')) {
+      if (!isMouseOverTriggerRef.current) {
+        // Mouse is not over trigger, hide immediately
+        hideTooltip();
+        return;
+      }
+      // If mouse is still over trigger, update position
+      calculatePosition();
+    } else {
+      // For click/focus tooltips, update position
+      const handlePositionUpdate = () => {
+        if (!triggerRef.current) {
+          hideTooltip();
+          return;
+        }
+
+        // For resize events, check if mouse is still over trigger using our ref
+        if (!isMouseOverTriggerRef.current && trigger.includes('hover')) {
+          hideTooltip();
+          return;
+        }
+
+        calculatePosition();
+      };
+      handlePositionUpdate();
+    }
+  }, [trigger, hideTooltip, calculatePosition]);
+
+  // Create throttled version of the scroll handler
+  const throttledScrollHandler = useMemo(
+    () => throttle(scrollHandler, 100),
+    [scrollHandler],
+  );
+
   const handleMouseEnter = () => {
     isMouseOverTriggerRef.current = true;
     if (trigger.includes('hover')) showTooltip();
@@ -242,6 +287,8 @@ export const Tooltip = ({
         calculatePosition();
       };
 
+      // throttledScrollHandler is now defined at component level
+
       const handleScroll = () => {
         // Set scrolling flag
         isScrollingRef.current = true;
@@ -251,24 +298,8 @@ export const Tooltip = ({
           clearTimeout(scrollTimeoutRef.current);
         }
 
-        // For hover-triggered tooltips, only hide if mouse is not over trigger
-        if (trigger.includes('hover')) {
-          // If mouse is still over trigger, just update position after a short delay
-          if (isMouseOverTriggerRef.current) {
-            scrollTimeoutRef.current = setTimeout(() => {
-              isScrollingRef.current = false;
-              if (isMouseOverTriggerRef.current) {
-                calculatePosition();
-              }
-            }, 100); // Short delay to allow smooth scrolling to settle
-          } else {
-            // Mouse is not over trigger, hide immediately
-            hideTooltip();
-          }
-        } else {
-          // For click/focus tooltips, update position
-          handlePositionUpdate();
-        }
+        // Use throttled handler for scroll events
+        throttledScrollHandler();
 
         // Reset scrolling flag after scroll ends
         scrollTimeoutRef.current = setTimeout(() => {
@@ -284,7 +315,13 @@ export const Tooltip = ({
         window.removeEventListener('resize', handlePositionUpdate);
       };
     }
-  }, [isVisible, calculatePosition, trigger, hideTooltip]);
+  }, [
+    isVisible,
+    calculatePosition,
+    trigger,
+    hideTooltip,
+    throttledScrollHandler,
+  ]);
 
   useEffect(() => {
     return () => {

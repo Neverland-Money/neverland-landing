@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 interface PartnerCardProps {
   icon: React.ReactNode;
   name: string;
-  href: string;
+  href: string | undefined;
 }
 
 export default function PartnerCard({ icon, name, href }: PartnerCardProps) {
@@ -180,7 +180,7 @@ export default function PartnerCard({ icon, name, href }: PartnerCardProps) {
       </motion.div>
 
       {/* Central Circle */}
-      <Link href={href} target='_blank' rel='noopener noreferrer'>
+      <Link href={href || '#'} target='_blank' rel='noopener noreferrer'>
         <div className='absolute top-1/2 left-1/2 flex h-[120px] w-[120px] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border border-[#530ee3] bg-black shadow-[0px_0px_16px_#7200d6_inset,0px_0px_90px_rgba(114,0,214,0.50)] md:h-[160px] md:w-[160px]'>
           <div
             className='flex h-10 w-10 items-center justify-center md:h-16 md:w-16'

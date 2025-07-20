@@ -219,11 +219,6 @@ export default function StarrySky({
           pointerEvents: 'none',
           zIndex,
         }}
-        // Static position - no animation
-        animate={{
-          x: 0,
-          y: 0,
-        }}
         transition={{
           type: 'spring',
           stiffness: 200,
