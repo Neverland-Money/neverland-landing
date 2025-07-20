@@ -6,11 +6,12 @@ A Next.js 15.3 landing page with TypeScript, Tailwind CSS 4, and advanced AI cha
 
 ### Prerequisites
 
-- Node.js 20+
-- pnpm (package manager)
-- OpenAI API key (for chat functionality)
-- Pinecone API key (for vector search)
-- React 19 compatible dependencies
+- **Node.js 20+**
+- **pnpm** (package manager)
+- **OpenAI** API key (for chat functionality)
+- **Pinecone** API key (for vector search)
+- **React 19** compatible dependencies
+- **Windows users**: **WSL** (Windows Subsystem for Linux) recommended
 
 ### Install pnpm
 
@@ -109,7 +110,8 @@ The `SectionTracker` component uses the Intersection Observer API (via `react-in
 src/                         # Source code directory
 ├── app/                     # Next.js App Router pages
 │   ├── about/               # About us page (redirect)
-│   ├── api/chat/            # AI chat API endpoint
+│   ├── api/                 # API routes
+│   │   └── chat/            # AI chat API endpoint
 │   ├── contact/             # Contact page (redirect)
 │   ├── explore/             # Explore features page (redirect)
 │   ├── faq/                 # FAQ page (redirect)
@@ -118,16 +120,11 @@ src/                         # Source code directory
 │   ├── privacy-policy/      # Privacy policy page (redirect)
 │   ├── security/            # Security page (redirect)
 │   ├── stats/               # Statistics page (redirect)
-│   ├── terms-of-service/    # Terms of service page (redirect)
-│   ├── assistant.tsx        # Assistant component integration
-│   ├── globals.css          # Global styles
-│   ├── layout.tsx           # Root layout with metadata and fonts
-│   ├── not-found.tsx        # 404 page component
-│   └── page.tsx             # Homepage component
+│   └── terms-of-service/    # Terms of service page (redirect)
 ├── components/              # Reusable component directory
-│   ├── SmoothScroll.tsx     # Lenis smooth scrolling integration
 │   ├── assistant-ui/        # AI chat interface components
-│   ├── layout/              # Structural layout components (Header, Footer)
+│   ├── hooks/               # Custom React hooks
+│   ├── layout/              # Structural layout components
 │   ├── sections/            # Page-specific content sections
 │   └── ui/                  # Core UI primitives and elements
 ├── lib/                     # Core utility functions
@@ -289,14 +286,14 @@ PINECONE_INDEX=your_production_index_name
 
 This project is licensed under the [Business Source License 1.1](./LICENSE) (BSL 1.1). The source code is made available for inspection and auditing, but you may not use this software or deploy it in production or commercial environments outside of the Neverland Foundation without explicit permission.
 
-After July 20, 2028 (the Change Date), the project will transition to the Apache License, Version 2.0.
+After July 20, 2028 (the Change Date), the project will transition to the MIT license.
 
 This is a source-available license, not an open-source license as defined by the Open Source Initiative. The primary goal is to provide transparency while protecting Neverland's intellectual property.
 
 ## Acknowledgments
 
 - Built with [Next.js 15.3](https://nextjs.org/)
-- React 19 for improved performance
+- [React 19](https://react.dev/) for improved performance
 - Styled with [Tailwind CSS 4](https://tailwindcss.com/)
 - Animated with [Framer Motion](https://www.framer.com/motion/) and [GSAP](https://greensock.com/gsap/)
 - Smooth scrolling with [Lenis](https://github.com/studio-freight/lenis)
