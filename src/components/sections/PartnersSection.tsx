@@ -28,19 +28,6 @@ const PartnerLogos = {
       />
     </div>
   ),
-  // Solidly
-  SolidlyLogo: () => (
-    <div className='flex h-16 w-16 items-center justify-center text-3xl font-bold text-white lg:h-24 lg:w-24'>
-      <Image
-        src='/assets/images/partners/solidly.svg'
-        alt='Solidly'
-        width={120}
-        height={120}
-        className='object-cover'
-        priority
-      />
-    </div>
-  ),
   // Chainlink
   ChainlinkLogo: () => (
     <div className='flex h-16 w-16 items-center justify-center text-3xl font-bold text-white lg:h-24 lg:w-24'>
@@ -68,11 +55,11 @@ const PartnerLogos = {
     </div>
   ),
   // Aerodrome
-  AerodromeLogo: () => (
+  VelodromeLogo: () => (
     <div className='flex h-16 w-16 items-center justify-center text-3xl font-bold text-white lg:h-24 lg:w-24'>
       <Image
-        src='/assets/images/partners/aerodrome.svg'
-        alt='Aerodrome'
+        src='/assets/images/partners/velodrome.svg'
+        alt='Velodrome'
         width={120}
         height={120}
         className='object-cover'
@@ -84,29 +71,72 @@ const PartnerLogos = {
 
 export default function PartnersSection() {
   const partners = [
-    { name: 'Monad', logo: <PartnerLogos.MonadLogo /> },
-    { name: 'Solidly', logo: <PartnerLogos.SolidlyLogo /> },
-    { name: 'Chainlink', logo: <PartnerLogos.ChainlinkLogo /> },
-    { name: 'Aave', logo: <PartnerLogos.AaveLogo /> },
-    { name: 'Aerodrome', logo: <PartnerLogos.AerodromeLogo /> },
+    {
+      name: 'Monad',
+      logo: <PartnerLogos.MonadLogo />,
+      href: 'https://monad.xyz',
+    },
+    { name: 'Aave', logo: <PartnerLogos.AaveLogo />, href: 'https://aave.com' },
+    {
+      name: 'Chainlink',
+      logo: <PartnerLogos.ChainlinkLogo />,
+      href: 'https://chain.link',
+    },
+    {
+      name: 'Velodrome',
+      logo: <PartnerLogos.VelodromeLogo />,
+      href: 'https://velodrome.finance/',
+    },
 
-    { name: 'Monad', logo: <PartnerLogos.MonadLogo /> },
-    { name: 'Solidly', logo: <PartnerLogos.SolidlyLogo /> },
-    { name: 'Chainlink', logo: <PartnerLogos.ChainlinkLogo /> },
-    { name: 'Aave', logo: <PartnerLogos.AaveLogo /> },
-    { name: 'Aerodrome', logo: <PartnerLogos.AerodromeLogo /> },
+    {
+      name: 'Monad',
+      logo: <PartnerLogos.MonadLogo />,
+      href: 'https://monad.xyz',
+    },
+    { name: 'Aave', logo: <PartnerLogos.AaveLogo />, href: 'https://aave.com' },
+    {
+      name: 'Chainlink',
+      logo: <PartnerLogos.ChainlinkLogo />,
+      href: 'https://chain.link',
+    },
+    {
+      name: 'Velodrome',
+      logo: <PartnerLogos.VelodromeLogo />,
+      href: 'https://velodrome.finance/',
+    },
+    {
+      name: 'Monad',
+      logo: <PartnerLogos.MonadLogo />,
+      href: 'https://monad.xyz',
+    },
+    { name: 'Aave', logo: <PartnerLogos.AaveLogo />, href: 'https://aave.com' },
+    {
+      name: 'Chainlink',
+      logo: <PartnerLogos.ChainlinkLogo />,
+      href: 'https://chain.link',
+    },
+    {
+      name: 'Velodrome',
+      logo: <PartnerLogos.VelodromeLogo />,
+      href: 'https://velodrome.finance/',
+    },
 
-    { name: 'Monad', logo: <PartnerLogos.MonadLogo /> },
-    { name: 'Solidly', logo: <PartnerLogos.SolidlyLogo /> },
-    { name: 'Chainlink', logo: <PartnerLogos.ChainlinkLogo /> },
-    { name: 'Aave', logo: <PartnerLogos.AaveLogo /> },
-    { name: 'Aerodrome', logo: <PartnerLogos.AerodromeLogo /> },
-
-    { name: 'Monad', logo: <PartnerLogos.MonadLogo /> },
-    { name: 'Solidly', logo: <PartnerLogos.SolidlyLogo /> },
-    { name: 'Chainlink', logo: <PartnerLogos.ChainlinkLogo /> },
-    { name: 'Aave', logo: <PartnerLogos.AaveLogo /> },
-    { name: 'Aerodrome', logo: <PartnerLogos.AerodromeLogo /> },
+    {
+      name: 'Monad',
+      logo: <PartnerLogos.MonadLogo />,
+      href: 'https://monad.xyz',
+    },
+    { name: 'Aave', logo: <PartnerLogos.AaveLogo />, href: 'https://aave.com' },
+    {
+      name: 'Chainlink',
+      logo: <PartnerLogos.ChainlinkLogo />,
+      href: 'https://chain.link',
+    },
+    {
+      name: 'Velodrome',
+      logo: <PartnerLogos.VelodromeLogo />,
+      href: 'https://velodrome.finance/',
+    },
   ];
 
   const [movementDistance, setMovementDistance] = useState('-400px');
@@ -232,6 +262,7 @@ export default function PartnersSection() {
                 key={index}
                 icon={partner.logo}
                 name={partner.name}
+                href={partner.href}
               />
             ))}
             {/* Duplicate set for seamless loop */}
@@ -240,6 +271,7 @@ export default function PartnersSection() {
                 key={`duplicate-${index}`}
                 icon={partner.logo}
                 name={partner.name}
+                href={partner.href}
               />
             ))}
             {/* Duplicate set for seamless loop */}
@@ -248,6 +280,7 @@ export default function PartnersSection() {
                 key={`duplicate-2-${index}`}
                 icon={partner.logo}
                 name={partner.name}
+                href={partner.href}
               />
             ))}
             {/* Duplicate set for seamless loop */}
@@ -256,6 +289,7 @@ export default function PartnersSection() {
                 key={`duplicate-3-${index}`}
                 icon={partner.logo}
                 name={partner.name}
+                href={partner.href}
               />
             ))}
             {/* Duplicate set for seamless loop */}
@@ -264,6 +298,7 @@ export default function PartnersSection() {
                 key={`duplicate-4-${index}`}
                 icon={partner.logo}
                 name={partner.name}
+                href={partner.href}
               />
             ))}
             {/* Duplicate set for seamless loop */}
@@ -272,6 +307,7 @@ export default function PartnersSection() {
                 key={`duplicate-5-${index}`}
                 icon={partner.logo}
                 name={partner.name}
+                href={partner.href}
               />
             ))}
           </motion.div>
