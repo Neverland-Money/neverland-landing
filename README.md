@@ -77,7 +77,7 @@ curl -fsSL https://get.pnpm.io/install.sh | sh -
 - `pnpm start` - Start production server
 - `pnpm lint` - Run ESLint
 - `pnpm format` - Format code with Prettier
-- `pnpm clean` - Clean .next and node_modules directories, then reinstall dependencies
+- `pnpm clean` - Clean .next, storybook-static, coverage and node_modules directories, then reinstall dependencies
 - `pnpm build-storybook` - Build Storybook for production
 - `pnpm storybook` - Start Storybook component library
 
@@ -262,7 +262,7 @@ PINECONE_INDEX=your_production_index_name
 
 This project is licensed under the [Business Source License 1.1](./LICENSE) (BSL 1.1). The source code is made available for inspection and auditing, but you may not use this software or deploy it in production or commercial environments outside of the Neverland Foundation without explicit permission.
 
-After July 17, 2028 (the Change Date), the project will transition to the Apache License, Version 2.0.
+After July 20, 2028 (the Change Date), the project will transition to the Apache License, Version 2.0.
 
 This is a source-available license, not an open-source license as defined by the Open Source Initiative. The primary goal is to provide transparency while protecting Neverland's intellectual property.
 
