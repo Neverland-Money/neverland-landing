@@ -150,7 +150,7 @@ export default function Header() {
 
           {/* Center Nav Menu - Desktop */}
           {isMainPage && (
-            <div className='hidden items-center gap-8 md:flex'>
+            <div className='hidden items-center gap-4 md:flex xl:gap-8'>
               <Link
                 href='#about'
                 onClick={(e) => handleSmoothScroll(e, 'about')}

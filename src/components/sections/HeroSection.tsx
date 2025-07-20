@@ -1,12 +1,8 @@
 'use client';
 
-// import { motion } from 'framer-motion';
-// import Link from 'next/link';
-
 import ActionButton from '@/components/ui/ActionButton';
-import { BlurredLoadingText } from '@/components/ui/BlurredLoadingText';
 import StarrySky from '@/components/ui/StarrySky';
-import { Tooltip } from '@/components/ui/Tooltip';
+import StatsCard from '@/components/ui/StatsCard';
 
 export default function HeroSection() {
   return (
@@ -69,7 +65,7 @@ export default function HeroSection() {
       {/* Main content container - exactly 248px from the bottom of header on desktop, less on mobile */}
       <div className='relative z-[6] mt-[120px] flex flex-col items-center md:mt-[248px] md:items-start'>
         {/* Content wrapper with max width */}
-        <div className='mx-auto w-full max-w-7xl px-4 xl:px-0'>
+        <div className='mx-auto w-full max-w-7xl px-4 2xl:px-0'>
           <div className='flex w-full max-w-[950px] flex-col items-center justify-center gap-6 md:items-start md:gap-9'>
             {/* Title and description section */}
             <div className='flex w-full flex-col items-center justify-center gap-2 md:items-start'>
@@ -83,7 +79,10 @@ export default function HeroSection() {
                   xmlns='http://www.w3.org/2000/svg'
                   className='h-auto w-full max-w-[950px]'
                   style={{ aspectRatio: '950/160' }}
+                  role='img'
+                  aria-labelledby='pageTitle'
                 >
+                  <title id='pageTitle'>MAGIC AND PIXIE DUST ON MONAD</title>
                   <text
                     fill='white'
                     style={{ whiteSpace: 'pre' }}
@@ -120,17 +119,8 @@ export default function HeroSection() {
                 </h1>
               </div>
 
-              {/* Description text - hidden on mobile, shown on md screens and above */}
-              <div className='mx-auto mr-auto hidden w-full max-w-[455px] md:mx-0 md:mr-auto md:block'>
-                <p className='font-merriweather text-center text-base leading-[140%] text-white md:text-left md:text-lg'>
-                  Neverland is a lending protocol built on Aave&apos;s secure
-                  system, governed by the community, and powered by Monad&apos;s
-                  fast blockchain.
-                </p>
-              </div>
-
-              {/* Mobile Description text */}
-              <div className='mx-auto mr-auto block w-full max-w-[455px] md:mx-0 md:mr-auto md:hidden'>
+              {/* Unified Description text with responsive styles */}
+              <div className='mx-auto mr-auto w-full max-w-[455px] md:mx-0 md:mr-auto'>
                 <p className='font-merriweather text-center text-[21px] leading-[140%] text-white md:text-left md:text-lg'>
                   Neverland is a lending protocol built on Aave&apos;s secure
                   system, governed by the community, and powered by Monad&apos;s
@@ -150,190 +140,40 @@ export default function HeroSection() {
         </div>
       </div>
       {/* Stats Cards - 80px from button above on desktop, 40px on mobile */}
-      <div className='z-[7] mx-auto mt-[40px] flex w-full max-w-7xl flex-col gap-4 px-4 md:mt-[80px] md:flex-row md:gap-6 xl:px-0'>
+      <div className='z-[7] mx-auto mt-[40px] flex w-full max-w-7xl flex-col gap-4 px-4 md:mt-[80px] md:flex-row md:gap-6 2xl:px-0'>
         {/* Total Value Locked Card - Desktop version */}
-        <div className='relative hidden h-[118px] w-[255px] rounded-3xl backdrop-blur-sm md:block'>
-          {/* Dark overlay with subtle background-blur matching */}
-          <div className='absolute inset-0 rounded-3xl bg-[#45016d]/50' />
-
-          {/* Variable thickness border container */}
-          <div className='absolute inset-0 overflow-hidden rounded-3xl border border-white/20'>
-            {/* Ultra-subtle top-left edge highlight */}
-            <div
-              className='absolute top-0 left-0 h-full w-full'
-              style={{
-                background:
-                  'linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 40%)',
-              }}
-            />
-
-            {/* Almost imperceptible bottom-right edge */}
-            <div
-              className='absolute right-0 bottom-0 h-full w-full'
-              style={{
-                boxShadow: 'inset -1px -1px 0 0 rgba(255, 255, 255, 0.08)',
-                background:
-                  'linear-gradient(315deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 40%)',
-              }}
-            />
-          </div>
-          {/* Content inside glass container */}
-          <div className='relative z-10 p-4'>
-            <div className='font-cinzel text-sm leading-[110%] font-normal text-[#ead5ff] uppercase'>
-              Total Value Locked
-            </div>
-
-            {/* Value */}
-            <div className='mt-[38px]'>
-              <BlurredLoadingText
-                text='000.00M'
-                className='font-cinzel text-[28px] leading-[110%] font-normal text-white md:text-[40px]'
-              />
-            </div>
-          </div>
-
-          {/* Tooltip */}
-          <Tooltip
-            content={
-              <div className='text-[14px] leading-[140%] text-white'>
-                Total value of deposited assets in the protocol.
-              </div>
-            }
-            position='top'
-            className='absolute -top-10 left-56 z-[99999] cursor-pointer'
-          >
-            <svg
-              width='18'
-              height='18'
-              viewBox='0 0 18 18'
-              fill='none'
-              xmlns='http://www.w3.org/2000/svg'
-            >
-              <rect
-                width='18'
-                height='18'
-                rx='9'
-                fill='#6B5390'
-                fillOpacity='0.6'
-              />
-              <path
-                fillRule='evenodd'
-                clipRule='evenodd'
-                d='M9.16667 5.75C9.6499 5.75 10.0417 5.35825 10.0417 4.875C10.0417 4.39175 9.6499 4 9.16667 4C8.68343 4 8.29167 4.39175 8.29167 4.875C8.29167 5.35825 8.68343 5.75 9.16667 5.75ZM8.58333 6.91667C8.26116 6.91667 8 7.17784 8 7.5C8 7.82217 8.26116 8.08333 8.58333 8.08333V12.75C8.58333 13.0722 8.84449 13.3333 9.16667 13.3333C9.48884 13.3333 9.75 13.0722 9.75 12.75V7.5C9.75 7.17784 9.48884 6.91667 9.16667 6.91667H8.58333Z'
-                fill='white'
-              />
-            </svg>
-          </Tooltip>
-        </div>
+        <StatsCard
+          title='Total Value Locked'
+          value='000.00M'
+          tooltipContent='Total value of deposited assets in the protocol.'
+          className='hidden md:block'
+        />
 
         {/* Active Users Card - Desktop version */}
-        <div className='relative hidden h-[118px] w-[255px] rounded-3xl backdrop-blur-sm md:block'>
-          {/* Dark overlay with subtle background-blur matching */}
-          <div className='absolute inset-0 rounded-3xl bg-[#45016d]/50' />
-
-          {/* Variable thickness border container */}
-          <div className='absolute inset-0 overflow-hidden rounded-3xl border border-white/20'>
-            {/* Ultra-subtle top-left edge highlight */}
-            <div
-              className='absolute top-0 left-0 h-full w-full'
-              style={{
-                background:
-                  'linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 40%)',
-              }}
-            />
-
-            {/* Almost imperceptible bottom-right edge */}
-            <div
-              className='absolute right-0 bottom-0 h-full w-full'
-              style={{
-                boxShadow: 'inset -1px -1px 0 0 rgba(255, 255, 255, 0.08)',
-                background:
-                  'linear-gradient(315deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 40%)',
-              }}
-            />
-          </div>
-          {/* Content inside glass container */}
-          <div className='relative z-10 p-4'>
-            <div className='font-cinzel text-sm leading-[110%] font-normal text-[#ead5ff] uppercase'>
-              Active Users
-            </div>
-
-            {/* Value */}
-            <div className='mt-[38px]'>
-              <BlurredLoadingText
-                text='900,000'
-                className='font-cinzel text-[28px] leading-[110%] font-normal text-white md:text-[40px]'
-              />
-            </div>
-          </div>
-
-          {/* Tooltip */}
-          <Tooltip
-            content={
-              <div className='text-[14px] leading-[140%] text-white'>
-                Number of users interacting with the protocol.
-              </div>
-            }
-            position='top'
-            className='absolute -top-10 left-56 z-[99999] cursor-pointer'
-          >
-            <svg
-              width='18'
-              height='18'
-              viewBox='0 0 18 18'
-              fill='none'
-              xmlns='http://www.w3.org/2000/svg'
-            >
-              <rect
-                width='18'
-                height='18'
-                rx='9'
-                fill='#6B5390'
-                fillOpacity='0.6'
-              />
-              <path
-                fillRule='evenodd'
-                clipRule='evenodd'
-                d='M9.16667 5.75C9.6499 5.75 10.0417 5.35825 10.0417 4.875C10.0417 4.39175 9.6499 4 9.16667 4C8.68343 4 8.29167 4.39175 8.29167 4.875C8.29167 5.35825 8.68343 5.75 9.16667 5.75ZM8.58333 6.91667C8.26116 6.91667 8 7.17784 8 7.5C8 7.82217 8.26116 8.08333 8.58333 8.08333V12.75C8.58333 13.0722 8.84449 13.3333 9.16667 13.3333C9.48884 13.3333 9.75 13.0722 9.75 12.75V7.5C9.75 7.17784 9.48884 6.91667 9.16667 6.91667H8.58333Z'
-                fill='white'
-              />
-            </svg>
-          </Tooltip>
-        </div>
+        <StatsCard
+          title='Active Users'
+          value='900,000'
+          tooltipContent='Number of users interacting with the protocol.'
+          className='hidden md:block'
+        />
 
         {/* Mobile Stats Layout - Fixed to bottom of viewport */}
         <div className='absolute right-0 bottom-[55px] left-0 z-[5] flex w-full flex-row justify-center gap-16 md:hidden'>
           {/* Total Value Locked */}
-          <div className='flex w-[126px] flex-col items-start justify-center gap-1'>
-            <BlurredLoadingText
-              text='$000.00M'
-              className='font-cinzel w-full text-center text-[28px] leading-[110%] font-normal text-white md:text-[40px]'
-            />
-            <div className='font-cinzel w-full text-sm leading-[110%] font-normal text-[#ead5ff] uppercase'>
-              <div className='flex w-full justify-between'>
-                <span>&#123; TOTAL VALUE</span>
-              </div>
-              <div className='flex w-full justify-end'>
-                <span>LOCKED &#125;</span>
-              </div>
-            </div>
-          </div>
+          <StatsCard
+            title='TOTAL VALUE LOCKED'
+            value='$000.00M'
+            tooltipContent='Total value of deposited assets in the protocol.'
+            isMobile={true}
+          />
 
           {/* Active Users */}
-          <div className='flex w-[126px] flex-col items-start justify-center gap-1'>
-            <BlurredLoadingText
-              text='900,000'
-              className='font-cinzel w-full text-center text-[28px] leading-[110%] font-normal text-white md:text-[40px]'
-            />
-            <div className='font-cinzel w-full text-sm leading-[110%] font-normal text-[#ead5ff] uppercase'>
-              <div className='flex w-full justify-between'>
-                <span>&#123; ACTIVE</span>
-              </div>
-              <div className='flex w-full justify-end'>
-                <span>USERS &#125;</span>
-              </div>
-            </div>
-          </div>
+          <StatsCard
+            title='ACTIVE USERS'
+            value='900,000'
+            tooltipContent='Number of users interacting with the protocol.'
+            isMobile={true}
+          />
         </div>
       </div>
     </div>

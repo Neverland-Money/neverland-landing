@@ -7,15 +7,48 @@ import StarrySky from '@/components/ui/StarrySky';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy | Neverland Money',
-  description: 'Privacy Policy for Neverland Money platform',
+  description: 'Neverland Money Privacy Policy - Last updated: June 30, 2025',
+  metadataBase: new URL('https://neverland.money'),
+  alternates: {
+    canonical: '/privacy-policy',
+  },
   robots: {
     index: true,
     follow: true,
   },
+  openGraph: {
+    title: 'Privacy Policy | Neverland Money',
+    description: 'Neverland Money Privacy Policy - Last updated: June 30, 2025',
+    url: 'https://neverland.money/privacy-policy',
+    siteName: 'Neverland Money',
+    images: [
+      {
+        url: '/assets/images/pp-page.webp',
+        width: 1200,
+        height: 675,
+        alt: 'Privacy Policy | Neverland Money',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Privacy Policy | Neverland Money',
+    description: 'Neverland Money Privacy Policy - Last updated: June 30, 2025',
+    images: ['/assets/images/pp-page.webp'],
+  },
+  keywords: [
+    'decentralized finance',
+    'lending',
+    'crypto',
+    'interest',
+    'blockchain',
+  ],
 };
 
 export default function PrivacyPolicy() {
-  const effectiveDate = new Date('2024-01-01');
+  const effectiveDate = new Date('2025-06-30');
 
   return (
     <main className='min-h-screen bg-[#01020D]'>
@@ -47,7 +80,7 @@ export default function PrivacyPolicy() {
               Privacy Policy
             </h1>
             <div className='mx-auto mb-6 h-1 w-24 bg-gradient-to-r from-purple-400 to-pink-400' />
-            <p className='font-lexend mx-auto max-w-2xl font-extralight text-purple-200'>
+            <p className='font-lexend mx-auto max-w-3xl font-extralight text-purple-200'>
               Learn how we collect, use, and protect your information when using
               the Neverland Money platform.
             </p>
@@ -449,6 +482,13 @@ export default function PrivacyPolicy() {
                 </p>
               </div>
             </section>
+
+            {/* End of document marker */}
+            <div className='mt-16 text-center'>
+              <div className='text-2xl font-light tracking-widest text-purple-300/50'>
+                • • •
+              </div>
+            </div>
           </div>
         </article>
 
