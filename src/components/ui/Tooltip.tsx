@@ -198,36 +198,30 @@ export const Tooltip = ({
     }
   }, [hideDelay]);
 
+  // Reusable function to update tooltip position with proper checks
+  const updateTooltipPosition = useCallback(() => {
+    if (!triggerRef.current) {
+      hideTooltip();
+      return;
+    }
+    // For hover-triggered tooltips, check if mouse is still over trigger
+    if (!isMouseOverTriggerRef.current && trigger.includes('hover')) {
+      hideTooltip();
+      return;
+    }
+    calculatePosition();
+  }, [trigger, hideTooltip, calculatePosition]);
+
   // Define scroll handler function with proper dependencies
   const scrollHandler = useCallback(() => {
     // For hover-triggered tooltips, only hide if mouse is not over trigger
-    if (trigger.includes('hover')) {
-      if (!isMouseOverTriggerRef.current) {
-        // Mouse is not over trigger, hide immediately
-        hideTooltip();
-        return;
-      }
-      // If mouse is still over trigger, update position
-      calculatePosition();
-    } else {
-      // For click/focus tooltips, update position
-      const handlePositionUpdate = () => {
-        if (!triggerRef.current) {
-          hideTooltip();
-          return;
-        }
-
-        // For resize events, check if mouse is still over trigger using our ref
-        if (!isMouseOverTriggerRef.current && trigger.includes('hover')) {
-          hideTooltip();
-          return;
-        }
-
-        calculatePosition();
-      };
-      handlePositionUpdate();
+    if (trigger.includes('hover') && !isMouseOverTriggerRef.current) {
+      hideTooltip();
+      return;
     }
-  }, [trigger, hideTooltip, calculatePosition]);
+    // Update tooltip position for all triggers
+    updateTooltipPosition();
+  }, [trigger, hideTooltip, updateTooltipPosition]);
 
   // Create throttled version of the scroll handler
   const throttledScrollHandler = useMemo(
@@ -272,20 +266,6 @@ export const Tooltip = ({
       calculatePosition();
 
       // Add scroll and resize event listeners to update tooltip position
-      const handlePositionUpdate = () => {
-        if (!triggerRef.current) {
-          hideTooltip();
-          return;
-        }
-
-        // For resize events, check if mouse is still over trigger using our ref
-        if (!isMouseOverTriggerRef.current && trigger.includes('hover')) {
-          hideTooltip();
-          return;
-        }
-
-        calculatePosition();
-      };
 
       // throttledScrollHandler is now defined at component level
 
@@ -308,16 +288,17 @@ export const Tooltip = ({
       };
 
       window.addEventListener('scroll', handleScroll, true);
-      window.addEventListener('resize', handlePositionUpdate);
+      window.addEventListener('resize', updateTooltipPosition);
 
       return () => {
         window.removeEventListener('scroll', handleScroll, true);
-        window.removeEventListener('resize', handlePositionUpdate);
+        window.removeEventListener('resize', updateTooltipPosition);
       };
     }
   }, [
     isVisible,
     calculatePosition,
+    updateTooltipPosition,
     trigger,
     hideTooltip,
     throttledScrollHandler,

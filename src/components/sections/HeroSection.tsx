@@ -71,7 +71,7 @@ export default function HeroSection() {
             <div className='flex w-full flex-col items-center justify-center gap-2 md:items-start'>
               {/* Main title SVG - hidden on mobile, shown on md screens and above */}
               <div className='hidden w-full max-w-[950px] md:block'>
-                <h1 id='pageTitle' className='sr-only'>
+                <h1 id='hero-title' className='sr-only'>
                   MAGIC AND PIXIE DUST ON MONAD
                 </h1>
                 <svg
