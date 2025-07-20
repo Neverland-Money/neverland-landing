@@ -43,12 +43,12 @@ export default function SmoothScroll({
 
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 2, // Increased duration for smoother scrolling
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // exponential easing function
+      duration: 1, // Increased duration for smoother scrolling
+      easing: (t) => Math.min(1, 1 - Math.pow(2, -10 * t)), // exponential easing function
       smoothWheel: true, // Enable smooth scrolling for mouse wheel
       touchMultiplier: 1.5, // Make touch scrolling more responsive
-      wheelMultiplier: 0.75, // Even lower value for smoother mouse wheel scrolling
-      lerp: 0.09, // Linear interpolation - lower = smoother (0.1 is default)
+      wheelMultiplier: 1, // Even lower value for smoother mouse wheel scrolling
+      lerp: 0.1, // Linear interpolation - lower = smoother (0.1 is default)
       orientation: 'vertical',
     });
 
