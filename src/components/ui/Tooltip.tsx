@@ -223,10 +223,19 @@ export const Tooltip = ({
     updateTooltipPosition();
   }, [trigger, hideTooltip, updateTooltipPosition]);
 
+  // Store the latest scrollHandler in a ref
+  const scrollHandlerRef = useRef(scrollHandler);
+  useEffect(() => {
+    scrollHandlerRef.current = scrollHandler;
+  }, [scrollHandler]);
+
   // Create throttled version of the scroll handler
   const throttledScrollHandler = useMemo(
-    () => throttle(scrollHandler, 100),
-    [scrollHandler],
+    () =>
+      throttle(() => {
+        scrollHandlerRef.current();
+      }, 100),
+    [],
   );
 
   const handleMouseEnter = () => {
