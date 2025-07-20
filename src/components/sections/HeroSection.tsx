@@ -65,7 +65,7 @@ export default function HeroSection() {
       {/* Main content container - exactly 248px from the bottom of header on desktop, less on mobile */}
       <div className='relative z-[6] mt-[120px] flex flex-col items-center md:mt-[248px] md:items-start'>
         {/* Content wrapper with max width */}
-        <div className='mx-auto w-full max-w-7xl px-4 xl:px-0'>
+        <div className='mx-auto w-full max-w-7xl px-4 2xl:px-0'>
           <div className='flex w-full max-w-[950px] flex-col items-center justify-center gap-6 md:items-start md:gap-9'>
             {/* Title and description section */}
             <div className='flex w-full flex-col items-center justify-center gap-2 md:items-start'>
@@ -141,7 +141,7 @@ export default function HeroSection() {
         </div>
       </div>
       {/* Stats Cards - 80px from button above on desktop, 40px on mobile */}
-      <div className='z-[7] mx-auto mt-[40px] flex w-full max-w-7xl flex-col gap-4 px-4 md:mt-[80px] md:flex-row md:gap-6 xl:px-0'>
+      <div className='z-[7] mx-auto mt-[40px] flex w-full max-w-7xl flex-col gap-4 px-4 md:mt-[80px] md:flex-row md:gap-6 2xl:px-0'>
         {/* Total Value Locked Card - Desktop version */}
         <StatsCard
           title='Total Value Locked'
