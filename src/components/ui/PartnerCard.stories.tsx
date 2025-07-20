@@ -95,10 +95,26 @@ export const ShortName: Story = {
 export const MultipleCards: Story = {
   render: () => (
     <div className='flex flex-wrap items-center justify-center gap-8'>
-      <PartnerCard name='TechCorp' icon={<TechIcon />} />
-      <PartnerCard name='Global Bank' icon={<BankIcon />} />
-      <PartnerCard name='FinanceHub' icon={<FinanceIcon />} />
-      <PartnerCard name='CryptoTech' icon={<CryptoIcon />} />
+      <PartnerCard
+        name='TechCorp'
+        icon={<TechIcon />}
+        href='https://example.com'
+      />
+      <PartnerCard
+        name='Global Bank'
+        icon={<BankIcon />}
+        href='https://example.com'
+      />
+      <PartnerCard
+        name='FinanceHub'
+        icon={<FinanceIcon />}
+        href='https://example.com'
+      />
+      <PartnerCard
+        name='CryptoTech'
+        icon={<CryptoIcon />}
+        href='https://example.com'
+      />
     </div>
   ),
   parameters: {
