@@ -99,13 +99,13 @@ export default function TermsOfService() {
               <div className='space-y-4 leading-relaxed'>
                 <p>
                   These Terms of Use (&quot;Terms&quot;) govern your access to
-                  and use of both the Neverland.money website (referred to as
-                  &quot;Neverland.money&quot;) and our DeFi interface (referred
+                  and use of both the neverland.money website (referred to as
+                  &quot;neverland.money&quot;) and our DeFi interface (referred
                   to as the &quot;Interface&quot;) collectively referred to as
                   the &quot;Services.&quot; The Services are brought to you by
                   Neverland Foundation, incorporated in the Cayman Islands
                   (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;).
-                  Neverland.money provides information and resources about the
+                  neverland.money provides information and resources about the
                   fundamentals of the decentralized non-custodial liquidity
                   protocol called the Neverland Protocol, comprised of
                   open-source self-executing smart contracts that are deployed
@@ -113,7 +113,7 @@ export default function TermsOfService() {
                   (the &quot;Neverland Protocol&quot; or the
                   &quot;Protocol&quot;). Neverland Money does not control or
                   operate any version of the Neverland Protocol on any
-                  blockchain network. Neverland.money acts solely as an
+                  blockchain network. neverland.money acts solely as an
                   infrastructure provider for the Protocol and does not provide
                   custodial, broker, or financial services to users.
                 </p>
@@ -197,7 +197,7 @@ export default function TermsOfService() {
               </h2>
               <div className='space-y-4 leading-relaxed'>
                 <p>
-                  <strong>Nature of the Service.</strong> Neverland.money
+                  <strong>Nature of the Service.</strong> neverland.money
                   provides an informational Interface to interact with the
                   Neverland Protocol. All content, materials, data, and other
                   information made available through the Interface are for
@@ -252,7 +252,7 @@ export default function TermsOfService() {
                   Protocol is not registered with any financial regulatory
                   authority in any jurisdiction and is not intended to
                   constitute an offer of securities or investment services. The
-                  Information provided through the Neverland.money and Interface
+                  Information provided through the neverland.money and Interface
                   does not constitute financial, investment, tax, legal, or
                   other professional advice, and you should not rely on it as
                   such. Users should consult independent advisors before
@@ -274,7 +274,7 @@ export default function TermsOfService() {
               </h2>
               <div className='space-y-4 leading-relaxed'>
                 <p>
-                  By accessing or using the Neverland.money, you expressly
+                  By accessing or using the neverland.money, you expressly
                   acknowledge, accept, and assume all risks associated with
                   blockchain technology, smart contracts and digital assets,
                   including but not limited to:
@@ -294,7 +294,7 @@ export default function TermsOfService() {
                   <li>
                     <strong>Regulatory Uncertainty:</strong> Laws governing
                     cryptocurrencies, and blockchain technologies are unsettled
-                    and may adversely impact the Neverland.money&apos;s
+                    and may adversely impact the neverland.money&apos;s
                     operations or your assets.
                   </li>
                   <li>
@@ -304,7 +304,7 @@ export default function TermsOfService() {
                   </li>
                   <li>
                     <strong>Third-Party Dependencies:</strong> The
-                    Neverland.money relies on third-party services, and
+                    neverland.money relies on third-party services, and
                     disruptions to these services may impair functionality.
                   </li>
                   <li>
@@ -467,18 +467,18 @@ export default function TermsOfService() {
                 </p>
                 <p>
                   <strong>Service Provided &quot;AS IS.&quot;</strong> The
-                  Neverland.money and its services are provided on an &quot;as
+                  neverland.money and its services are provided on an &quot;as
                   is&quot; and &quot;as available&quot; basis, without any
                   express or implied warranties of any kind. We expressly
                   disclaim all warranties, whether express, implied, statutory,
                   or otherwise, including but not limited to any warranties of
                   merchantability, fitness for a particular purpose,
-                  non-infringement, title, or that the Neverland.money&apos;s
+                  non-infringement, title, or that the neverland.money&apos;s
                   content or services will be accurate, error-free,
                   uninterrupted, secure, or free of harmful components. Users
                   are solely responsible for verifying any information obtained
-                  through the Neverland.money before relying on it for any
-                  purpose. We do not warrant that the Neverland.money will be
+                  through the neverland.money before relying on it for any
+                  purpose. We do not warrant that the neverland.money will be
                   continuous, error-free, secure, or free of viruses, malware,
                   or other harmful components.
                 </p>
@@ -495,19 +495,19 @@ export default function TermsOfService() {
                 <ul className='ml-6 list-disc space-y-2'>
                   <li>
                     The use of, inability to use, or reliance on the
-                    Neverland.money or its content;
+                    neverland.money or its content;
                   </li>
                   <li>
                     Any inaccuracies, errors, or omissions in the
-                    Neverland.money`s content;
+                    neverland.money&apos;s content;
                   </li>
                   <li>
                     Any third-party actions, services displayed on the
-                    Neverland.money; or
+                    neverland.money; or
                   </li>
                   <li>
                     Any modifications, discontinuation, suspension, or
-                    termination of the Neverland.money or its services.
+                    termination of the neverland.money or its services.
                   </li>
                 </ul>
                 <p>
@@ -519,7 +519,7 @@ export default function TermsOfService() {
                 <p>
                   If, notwithstanding the foregoing, we are found liable for any
                   claims arising from or related to the use of the
-                  Neverland.money, our aggregate liability shall in no event
+                  neverland.money, our aggregate liability shall in no event
                   exceed the amount of $1,000 (one thousand US dollars).
                 </p>
                 <p>
@@ -574,7 +574,7 @@ export default function TermsOfService() {
                 <p>
                   <strong>Initial Negotiations.</strong> In the event of any
                   dispute or claim arising out of or relating to these Terms or
-                  your use of the Neverland.money, both parties (i.e., you and
+                  your use of the neverland.money, both parties (i.e., you and
                   the Company) agree to first attempt to resolve the matter
                   through good faith negotiations. We encourage open
                   communication and a mutual effort to settle any issues before
@@ -614,7 +614,7 @@ export default function TermsOfService() {
                 <p>
                   <strong>Time Limit for Claims.</strong> Any claim or cause of
                   action arising from or relating to these Terms or the use of
-                  the Neverland.money must be initiated within one (1) year from
+                  the neverland.money must be initiated within one (1) year from
                   the date the cause of action arises. If a claim is not brought
                   within this timeframe, it will be deemed waived and barred.
                 </p>
