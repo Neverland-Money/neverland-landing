@@ -14,6 +14,7 @@ const config: Config = {
         inter: ['var(--font-inter)', 'sans-serif'],
         cinzel_decorative: ['var(--font-cinzel-decorative)', 'cursive'],
         lexend: ['var(--font-lexend)', 'sans-serif'],
+        quicksand: ['var(--font-quicksand)', 'sans-serif'],
       },
       colors: {
         primary: '#942FFF',
