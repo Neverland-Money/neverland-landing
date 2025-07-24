@@ -15,7 +15,7 @@ import StarrySky from '@/components/ui/StarrySky';
 export const metadata: Metadata = {
   title: 'Brand Kit | Neverland Money',
   description:
-    'Download Neverland Money brand assets, logos, and learn about our brand guidelines and usage policies.',
+    'Download Neverland brand assets, logos, and learn about our brand guidelines and usage policies.',
   metadataBase: new URL('https://neverland.money'),
   alternates: {
     canonical: '/brand',
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Brand Kit | Neverland Money',
     description:
-      'Download Neverland Money brand assets, logos, and learn about our brand guidelines and usage policies.',
+      'Download Neverland brand assets, logos, and learn about our brand guidelines and usage policies.',
     url: 'https://neverland.money/brand',
     siteName: 'Neverland Money',
     images: [
@@ -45,10 +45,10 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Brand Kit | Neverland Money',
     description:
-      'Download Neverland Money brand assets, logos, and learn about our brand guidelines and usage policies.',
+      'Download Neverland brand assets, logos, and learn about our brand guidelines and usage policies.',
     images: ['/assets/images/brand-page.webp'],
   },
-  keywords: ['brand kit', 'logo', 'assets', 'guidelines', 'Neverland Money'],
+  keywords: ['brand kit', 'logo', 'assets', 'guidelines', 'Neverland'],
 };
 
 export default function BrandPage() {
