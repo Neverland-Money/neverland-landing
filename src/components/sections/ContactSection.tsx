@@ -64,9 +64,14 @@ export default function ContactSection() {
             <span className='lg:hidden'>Docs</span>
           </Link>
           <Link
+            href='/brand'
+            className='font-merriweather text-sm leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70 lg:text-base'
+          >
+            <span className='hidden lg:inline'>Brand Guide</span>
+            <span className='lg:hidden'>Brand</span>
+          </Link>
+          <Link
             href='/privacy-policy'
-            target='_blank'
-            rel='noopener noreferrer'
             className='font-merriweather text-sm leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70 lg:text-base'
           >
             <span className='hidden lg:inline'>Privacy Policy</span>
@@ -74,8 +79,6 @@ export default function ContactSection() {
           </Link>
           <Link
             href='/terms-of-service'
-            target='_blank'
-            rel='noopener noreferrer'
             className='font-merriweather text-sm leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70 lg:text-base'
           >
             <span className='hidden lg:inline'>Terms of Service</span>
