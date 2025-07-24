@@ -14,6 +14,7 @@ const config: Config = {
         inter: ['var(--font-inter)', 'sans-serif'],
         cinzel_decorative: ['var(--font-cinzel-decorative)', 'cursive'],
         lexend: ['var(--font-lexend)', 'sans-serif'],
+        quicksand: ['var(--font-quicksand)', 'sans-serif'],
       },
       colors: {
         primary: '#942FFF',
@@ -27,7 +28,26 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({
+      addUtilities,
+    }: {
+      addUtilities: (utilities: Record<string, Record<string, string>>) => void;
+    }) {
+      addUtilities({
+        '.scrollbar-hide': {
+          /* IE and Edge */
+          '-ms-overflow-style': 'none',
+          /* Firefox */
+          'scrollbar-width': 'none',
+        },
+        '.scrollbar-hide::-webkit-scrollbar': {
+          /* Safari and Chrome */
+          display: 'none',
+        },
+      });
+    },
+  ],
 };
 
 export default config;

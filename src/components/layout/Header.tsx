@@ -135,16 +135,13 @@ export default function Header() {
           <Link href='/'>
             <div className='z-10 flex items-center gap-1'>
               <Image
-                src='/assets/images/header/logo.svg'
+                src='/assets/images/header/logo_full.svg'
                 alt='Logo'
                 width={0}
                 height={0}
-                className='h-[auto] w-[40px] text-white'
+                className='h-[auto] w-[180px] text-white'
                 priority
               />
-              <span className='font-cinzel-decorative text-xl font-normal tracking-wider text-white'>
-                Neverland
-              </span>
             </div>
           </Link>
 
@@ -317,18 +314,15 @@ export default function Header() {
             <div className='mb-6 flex h-[72px] w-full items-center justify-between'>
               {/* Logo Section - Left */}
               <Link href='/'>
-                <div className='z-10 flex items-center gap-1 lg:z-10'>
+                <div className='z-10 flex items-center gap-1'>
                   <Image
-                    src='/assets/images/header/logo.svg'
+                    src='/assets/images/header/logo_full.svg'
                     alt='Logo'
                     width={0}
                     height={0}
-                    className='h-[auto] w-[40px] text-white'
+                    className='h-[auto] w-[180px] text-white'
                     priority
                   />
-                  <span className='font-cinzel-decorative text-xl font-normal tracking-wider text-white'>
-                    Neverland
-                  </span>
                 </div>
               </Link>
               {/* Close button */}

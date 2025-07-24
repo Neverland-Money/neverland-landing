@@ -33,6 +33,7 @@ body::-webkit-scrollbar {
   --font-cinzel-decorative: var(--font-cinzel-decorative);
   --font-inter: var(--font-inter);
   --font-lexend: var(--font-lexend);
+  --font-quicksand: var(--font-quicksand);
 }
 
 /* Custom Scrollbar Styling */

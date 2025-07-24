@@ -112,20 +112,22 @@ src/                         # Source code directory
 │   ├── about/               # About us page (redirect)
 │   ├── api/                 # API routes
 │   │   └── chat/            # AI chat API endpoint
+│   ├── brand/               # Brand assets and guidelines page
 │   ├── contact/             # Contact page (redirect)
 │   ├── explore/             # Explore features page (redirect)
 │   ├── faq/                 # FAQ page (redirect)
 │   ├── features/            # Feature details page (redirect)
 │   ├── partners/            # Partners page (redirect)
-│   ├── privacy-policy/      # Privacy policy page (redirect)
+│   ├── privacy-policy/      # Privacy policy page
 │   ├── security/            # Security page (redirect)
 │   ├── stats/               # Statistics page (redirect)
-│   └── terms-of-service/    # Terms of service page (redirect)
+│   └── terms-of-service/    # Terms of service page
 ├── components/              # Reusable component directory
 │   ├── assistant-ui/        # AI chat interface components
 │   ├── hooks/               # Custom React hooks
 │   ├── layout/              # Structural layout components
 │   ├── sections/            # Page-specific content sections
+│   │   └── brand/           # Brand page components
 │   └── ui/                  # Core UI primitives and elements
 ├── lib/                     # Core utility functions
 └── utils/                   # Helper utilities for specific features
