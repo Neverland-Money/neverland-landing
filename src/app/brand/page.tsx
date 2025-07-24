@@ -70,7 +70,7 @@ export default function BrandPage() {
       </div>
 
       {/* Content */}
-      <div className='relative z-10 overflow-y-hidden'>
+      <div className='relative z-10 overflow-y-hidden lg:overflow-y-visible'>
         <Header />
 
         {/* Banner Section */}
