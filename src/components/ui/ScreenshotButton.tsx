@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import html2canvas from 'html2canvas';
 import { CameraIcon } from 'lucide-react';
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { formatTvl } from '@/lib/TvlContext';
 import { useUserbaseContext } from '@/lib/UserbaseContext';
@@ -25,18 +25,24 @@ export function ScreenshotButton() {
     ? `$${formatTvl(data.totalRevenueUsd)}`
     : '$0.00M';
 
-  // Generate stars for background
-  const stars = useMemo<Star[]>(() => {
+  // Generate stars for background - only on client to avoid hydration mismatch
+  // More stars at top, fewer at bottom
+  const [stars, setStars] = useState<Star[]>([]);
+  useEffect(() => {
     const result: Star[] = [];
     for (let i = 0; i < 150; i++) {
+      // Use weighted distribution - favor top of image
+      // Square the random value to bias toward 0 (top)
+      const yRandom = Math.random();
+      const yBiased = yRandom * yRandom * yRandom; // Cubing biases toward top
       result.push({
         x: Math.floor(Math.random() * 1200),
-        y: Math.floor(Math.random() * 675),
+        y: Math.floor(yBiased * 675),
         size: Math.random() * 2 + 0.5,
         opacity: Math.random() * 0.7 + 0.3,
       });
     }
-    return result;
+    setStars(result);
   }, []);
 
   const handleScreenshot = useCallback(async () => {
