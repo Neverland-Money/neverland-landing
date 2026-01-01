@@ -3,17 +3,10 @@
 import { motion } from 'framer-motion';
 import html2canvas from 'html2canvas';
 import { CameraIcon } from 'lucide-react';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 
 import { formatTvl } from '@/lib/TvlContext';
 import { useUserbaseContext } from '@/lib/UserbaseContext';
-
-interface Star {
-  x: number;
-  y: number;
-  size: number;
-  opacity: number;
-}
 
 export function ScreenshotButton() {
   const canvasRef = useRef<HTMLDivElement>(null);
@@ -24,26 +17,6 @@ export function ScreenshotButton() {
   const revenueValue = data?.totalRevenueUsd
     ? `$${formatTvl(data.totalRevenueUsd)}`
     : '$0.00M';
-
-  // Generate stars for background - only on client to avoid hydration mismatch
-  // More stars at top, fewer at bottom
-  const [stars, setStars] = useState<Star[]>([]);
-  useEffect(() => {
-    const result: Star[] = [];
-    for (let i = 0; i < 150; i++) {
-      // Use weighted distribution - favor top of image
-      // Square the random value to bias toward 0 (top)
-      const yRandom = Math.random();
-      const yBiased = yRandom * yRandom * yRandom; // Cubing biases toward top
-      result.push({
-        x: Math.floor(Math.random() * 1200),
-        y: Math.floor(yBiased * 675),
-        size: Math.random() * 2 + 0.5,
-        opacity: Math.random() * 0.7 + 0.3,
-      });
-    }
-    setStars(result);
-  }, []);
 
   const handleScreenshot = useCallback(async () => {
     if (!canvasRef.current || isGenerating) return;
@@ -138,53 +111,19 @@ export function ScreenshotButton() {
           pointerEvents: 'none',
         }}
       >
-        {/* Background stars */}
-        {stars.map((star, i) => (
-          <div
-            key={i}
-            style={{
-              position: 'absolute',
-              left: star.x,
-              top: star.y,
-              width: star.size,
-              height: star.size,
-              backgroundColor: 'white',
-              borderRadius: '50%',
-              opacity: star.opacity,
-              zIndex: 3,
-            }}
-          />
-        ))}
-
-        {/* Background gradient */}
+        {/* Background with stars */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src='/assets/images/hero/background-gradient.webp'
+          src='/assets/images/background-with-stars.webp'
           alt=''
           style={{
             position: 'absolute',
-            bottom: 0,
-            left: '50%',
-            transform: 'translateX(-50%)',
-            width: 'auto',
-            height: 'auto',
-            zIndex: 2,
-          }}
-        />
-
-        {/* Hero background */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src='/assets/images/hero/background.webp'
-          alt=''
-          style={{
-            position: 'absolute',
-            bottom: 0,
-            left: '50%',
-            transform: 'translateX(-50%)',
-            width: 'auto',
-            height: 'auto',
-            zIndex: 3,
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            zIndex: 1,
           }}
         />
 
