@@ -42,14 +42,14 @@ export default function ContactSection() {
           {/* CTA Button */}
           <FadeInWhenVisible delay={0} y={20}>
             <Link
-              href='https://app.neverland.money/'
+              href='https://discord.com/invite/neverland'
               target='_blank'
               rel='noopener noreferrer'
             >
               <ActionButton
-                text='Enter App'
+                text='Join us'
                 className='mx-auto w-[240px]'
-                buttonName='enter_app'
+                buttonName='join_discord'
                 buttonLocation='footer'
               />
             </Link>

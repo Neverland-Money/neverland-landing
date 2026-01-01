@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import html2canvas from 'html2canvas';
 import { CameraIcon } from 'lucide-react';
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { formatTvl } from '@/lib/TvlContext';
 import { useUserbaseContext } from '@/lib/UserbaseContext';
@@ -42,6 +42,16 @@ export function ScreenshotButton() {
       setIsGenerating(false);
     }
   }, [isGenerating]);
+
+  // Hide on mobile (screens < 768px) - start hidden, show on desktop after mount
+  const [showButton, setShowButton] = useState(false);
+  useEffect(() => {
+    if (window.innerWidth >= 768) {
+      setShowButton(true);
+    }
+  }, []);
+
+  if (!showButton) return null;
 
   return (
     <>
