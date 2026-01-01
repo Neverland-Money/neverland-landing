@@ -240,7 +240,7 @@ export default function PartnersSection() {
               </span>
               ur Foundations
             </h2>
-            <p className='font-merriweather w-full max-w-[493px] text-center text-lg leading-[140%] font-normal text-white'>
+            <p className='font-quicksand w-full max-w-[493px] text-center text-lg leading-[140%] font-normal text-white'>
               We’re building Neverland on the shoulders of giants.
             </p>
           </div>

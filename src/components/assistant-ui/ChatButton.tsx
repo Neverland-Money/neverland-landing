@@ -351,7 +351,7 @@ export const ChatButton = ({
             className={`fixed z-[1000] h-[75vh] w-[90vw] max-w-[450px] rounded-lg lg:h-[83vh] lg:w-[40vw] lg:max-w-[715px] ${
               isMinimized
                 ? 'pointer-events-none -translate-y-4 scale-95 opacity-0'
-                : 'font-merriweather translate-y-0 scale-100 bg-[linear-gradient(145deg,rgba(22,0,43,0.95),rgba(10,0,21,0.95))] opacity-100 backdrop-blur-sm'
+                : 'font-quicksand translate-y-0 scale-100 bg-[linear-gradient(145deg,rgba(22,0,43,0.95),rgba(10,0,21,0.95))] opacity-100 backdrop-blur-sm'
             } ${isInMenu ? 'bottom-1/2 left-24 translate-y-1/2' : 'bottom-10 left-6'}`}
             style={
               !isMinimized

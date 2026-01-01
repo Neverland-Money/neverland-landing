@@ -33,7 +33,7 @@ export default function ContactSection() {
               <h1 className='font-cinzel w-full text-4xl leading-[110%] font-normal text-white sm:text-5xl lg:text-6xl xl:text-[60px]'>
                 READY TO EMBARK ON YOUR DEFI ADVENTURE?
               </h1>
-              <p className='font-merriweather w-full max-w-[750px] text-lg leading-[140%] font-normal text-white'>
+              <p className='font-quicksand w-full max-w-[750px] text-lg leading-[140%] font-normal text-white'>
                 Join thousands of users experiencing the magic of Neverland
               </p>
             </div>
@@ -64,28 +64,28 @@ export default function ContactSection() {
             href='https://docs.neverland.money'
             target='_blank'
             rel='noopener noreferrer'
-            className='font-merriweather text-sm leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70 lg:text-base'
+            className='font-quicksand text-sm leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70 lg:text-base'
           >
             <span className='hidden lg:inline'>Documentation</span>
             <span className='lg:hidden'>Docs</span>
           </Link>
           <Link
             href='/brand'
-            className='font-merriweather text-sm leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70 lg:text-base'
+            className='font-quicksand text-sm leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70 lg:text-base'
           >
             <span className='hidden lg:inline'>Brand Guide</span>
             <span className='lg:hidden'>Brand</span>
           </Link>
           <Link
             href='/privacy-policy'
-            className='font-merriweather text-sm leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70 lg:text-base'
+            className='font-quicksand text-sm leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70 lg:text-base'
           >
             <span className='hidden lg:inline'>Privacy Policy</span>
             <span className='lg:hidden'>Privacy</span>
           </Link>
           <Link
             href='/terms-of-service'
-            className='font-merriweather text-sm leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70 lg:text-base'
+            className='font-quicksand text-sm leading-[110%] font-normal text-white transition-opacity duration-300 hover:opacity-70 lg:text-base'
           >
             <span className='hidden lg:inline'>Terms of Service</span>
             <span className='lg:hidden'>Terms</span>

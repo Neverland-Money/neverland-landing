@@ -26,7 +26,7 @@ export const Assistant = ({ onMinimize, onClose }: AssistantProps) => {
 
   return (
     <AssistantRuntimeProvider runtime={runtime}>
-      <div className='font-merriweather flex h-full flex-col bg-transparent'>
+      <div className='font-quicksand flex h-full flex-col bg-transparent'>
         <div
           className='flex h-14 items-center justify-between border-b px-4'
           style={{

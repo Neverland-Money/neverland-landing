@@ -81,7 +81,7 @@ const ThreadWelcome: FC = () => {
     <ThreadPrimitive.Empty>
       <div className='flex w-full max-w-[var(--thread-max-width)] flex-grow flex-col'>
         <div className='flex w-full flex-grow flex-col items-center justify-center'>
-          <p className='text-accent font-merriweather mt-4 text-center font-medium'>
+          <p className='text-accent font-quicksand mt-4 text-center font-medium'>
             <span className='block md:hidden'>
               Welcome to Neverland. <br />
               How can I assist you?

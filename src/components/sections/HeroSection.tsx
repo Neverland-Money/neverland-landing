@@ -131,7 +131,7 @@ export default function HeroSection() {
 
               {/* Unified Description text with responsive styles */}
               <div className='mx-auto mr-auto w-full max-w-[455px] md:mx-0 md:mr-auto'>
-                <p className='font-merriweather text-center text-[21px] leading-[140%] text-white md:text-left md:text-lg'>
+                <p className='font-quicksand text-center text-[21px] leading-[140%] text-white md:text-left md:text-lg'>
                   Neverland is a lending protocol built on Aave&apos;s secure
                   system, governed by the community, and powered by Monad&apos;s
                   fast blockchain.

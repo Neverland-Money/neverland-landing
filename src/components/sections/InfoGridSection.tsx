@@ -43,7 +43,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
           <h3 className='font-cinzel text-center text-lg leading-[110%] font-normal text-white uppercase'>
             {title}
           </h3>
-          <p className='font-merriweather text-center text-base leading-[140%] font-normal text-white/60'>
+          <p className='font-quicksand text-center text-base leading-[140%] font-normal text-white/60'>
             {description}
           </p>
         </div>
@@ -99,7 +99,7 @@ const InfoGridSection: React.FC = () => {
                 <StarIcon />
               </div>
             </div>
-            <p className='font-merriweather mt-4 w-full max-w-[550px] text-center text-lg leading-[140%] font-normal text-white'>
+            <p className='font-quicksand mt-4 w-full max-w-[550px] text-center text-lg leading-[140%] font-normal text-white'>
               Neverland is a decentralized, non-custodial lending platform
               governed by the community through vote-escrow tokenomics,
               unlocking capital on the high-performance Monad blockchain.

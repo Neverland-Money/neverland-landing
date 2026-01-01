@@ -228,7 +228,7 @@ export default function HowItWorksSection() {
                     <h3 className='font-cinzel mb-2 text-center text-xl leading-tight font-normal text-white uppercase'>
                       {title}
                     </h3>
-                    <p className='font-merriweather text-center text-sm leading-relaxed font-normal text-white'>
+                    <p className='font-quicksand text-center text-sm leading-relaxed font-normal text-white'>
                       {description}
                     </p>
                   </div>
@@ -256,7 +256,7 @@ export default function HowItWorksSection() {
                 <h3 className='font-cinzel mb-2 text-xl leading-tight font-normal text-white uppercase lg:text-2xl'>
                   {title}
                 </h3>
-                <p className='font-merriweather text-sm leading-relaxed font-normal text-white/60 lg:text-base'>
+                <p className='font-quicksand text-sm leading-relaxed font-normal text-white/60 lg:text-base'>
                   {description}
                 </p>
               </div>
@@ -296,7 +296,7 @@ export default function HowItWorksSection() {
                 rks
               </h2>
             </div>
-            <p className='font-merriweather mx-auto max-w-[300px] text-lg leading-relaxed font-normal text-white lg:max-w-[385px]'>
+            <p className='font-quicksand mx-auto max-w-[300px] text-lg leading-relaxed font-normal text-white lg:max-w-[385px]'>
               Navigate the magical world of DeFi with our simple step-by-step
               process.
             </p>

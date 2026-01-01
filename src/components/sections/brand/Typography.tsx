@@ -20,7 +20,7 @@ export function Typography() {
       name: 'Subtitles & Body Text',
       font: 'Merriweather',
       fontUrl: 'https://fonts.google.com/specimen/Merriweather',
-      className: 'text-xl md:text-2xl font-merriweather',
+      className: 'text-xl md:text-2xl font-quicksand',
       example: 'Powered by Monad',
     },
     {

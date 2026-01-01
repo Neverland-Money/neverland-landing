@@ -136,7 +136,7 @@ export default function FeaturesSection() {
             <h2 className='font-cinzel text-4xl leading-[110%] font-normal text-white uppercase sm:text-5xl lg:text-6xl'>
               Key Features
             </h2>
-            <p className='font-merriweather text-base leading-[140%] text-white sm:text-lg'>
+            <p className='font-quicksand text-base leading-[140%] text-white sm:text-lg'>
               Discover the magical features that make Neverland the perfect DeFi
               experience.
             </p>
@@ -194,7 +194,7 @@ export default function FeaturesSection() {
                 <h3 className='font-cinzel text-xl leading-[110%] font-normal text-white uppercase sm:text-2xl lg:text-[24px]'>
                   Capital Efficiency
                 </h3>
-                <p className='font-merriweather max-w-[280px] text-sm leading-[140%] text-white/80 sm:text-base'>
+                <p className='font-quicksand max-w-[280px] text-sm leading-[140%] text-white/80 sm:text-base'>
                   Advanced automated looping strategies ensure users leverage
                   low-utilization pools to maximize earnings.
                 </p>
@@ -249,7 +249,7 @@ export default function FeaturesSection() {
                 <h3 className='font-cinzel text-xl leading-[110%] font-normal text-white uppercase sm:text-2xl lg:text-[24px]'>
                   Self-Repaying Loans
                 </h3>
-                <p className='font-merriweather max-w-[299px] text-sm leading-[140%] text-white/80 sm:text-base'>
+                <p className='font-quicksand max-w-[299px] text-sm leading-[140%] text-white/80 sm:text-base'>
                   Set-and-forget feature to automatically leverage platform
                   incentives into loan repayments, providing a carefree, magical
                   experience.

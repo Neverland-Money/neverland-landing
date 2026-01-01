@@ -28,7 +28,6 @@ body::-webkit-scrollbar {
   --color-primary: var(--primary);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-merriweather: var(--font-merriweather);
   --font-cinzel: var(--font-cinzel);
   --font-cinzel-decorative: var(--font-cinzel-decorative);
   --font-inter: var(--font-inter);
@@ -78,7 +77,7 @@ body::-webkit-scrollbar {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-merriweather);
+  font-family: var(--font-quicksand);
   min-height: 100vh;
   overflow-x: hidden;
 }

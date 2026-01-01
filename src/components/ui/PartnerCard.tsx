@@ -191,7 +191,7 @@ export default function PartnerCard({ icon, name, href }: PartnerCardProps) {
 
           {/* Partner Name Label */}
 
-          <p className='font-merriweather mt-1 text-xs font-medium text-[#d6cfff] md:mt-2 md:text-sm'>
+          <p className='font-quicksand mt-1 text-xs font-medium text-[#d6cfff] md:mt-2 md:text-sm'>
             {name}
           </p>
         </div>

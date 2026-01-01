@@ -182,7 +182,7 @@ export default function AccordionItem({
           >
             <div className='px-4 pb-4 md:px-8 md:pb-6'>
               <div className='flex items-center justify-center'>
-                <div className='font-merriweather max-w-[364px] text-sm leading-[140%] whitespace-pre-line text-white md:max-w-[600px] md:text-base'>
+                <div className='font-quicksand max-w-[364px] text-sm leading-[140%] whitespace-pre-line text-white md:max-w-[600px] md:text-base'>
                   {parseMarkdown(item.answer)}
                 </div>
               </div>

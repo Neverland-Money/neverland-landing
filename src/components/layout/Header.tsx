@@ -151,42 +151,42 @@ export default function Header() {
               <Link
                 href='#about'
                 onClick={(e) => handleSmoothScroll(e, 'about')}
-                className='font-merriweather text-base font-normal text-white transition-colors hover:text-purple-300'
+                className='font-quicksand text-base font-normal text-white transition-colors hover:text-purple-300'
               >
                 About
               </Link>
               <Link
                 href='#features'
                 onClick={(e) => handleSmoothScroll(e, 'features')}
-                className='font-merriweather text-base font-normal text-white transition-colors hover:text-purple-300'
+                className='font-quicksand text-base font-normal text-white transition-colors hover:text-purple-300'
               >
                 Features
               </Link>
               <Link
                 href='#explore'
                 onClick={(e) => handleSmoothScroll(e, 'explore')}
-                className='font-merriweather text-base font-normal text-white transition-colors hover:text-purple-300'
+                className='font-quicksand text-base font-normal text-white transition-colors hover:text-purple-300'
               >
                 Explore
               </Link>
               <Link
                 href='#stats'
                 onClick={(e) => handleSmoothScroll(e, 'stats')}
-                className='font-merriweather text-base font-normal text-white transition-colors hover:text-purple-300'
+                className='font-quicksand text-base font-normal text-white transition-colors hover:text-purple-300'
               >
                 Stats
               </Link>
               <Link
                 href='#faq'
                 onClick={(e) => handleSmoothScroll(e, 'faq')}
-                className='font-merriweather text-base font-normal text-white transition-colors hover:text-purple-300'
+                className='font-quicksand text-base font-normal text-white transition-colors hover:text-purple-300'
               >
                 FAQ
               </Link>
               <Link
                 href='#contact'
                 onClick={(e) => handleSmoothScroll(e, 'contact')}
-                className='font-merriweather text-base font-normal text-white transition-colors hover:text-purple-300'
+                className='font-quicksand text-base font-normal text-white transition-colors hover:text-purple-300'
               >
                 Contact
               </Link>
@@ -220,14 +220,14 @@ export default function Header() {
 
             {/* Discord Icon */}
             <Link
-              href='https://discord.com/invite/neverland-money'
+              href='https://discord.com/invite/neverland'
               target='_blank noreferrer noopener'
               className='flex items-center rounded-full border border-white/20 p-2 transition-colors hover:border-purple-400'
               onClick={() => {
                 trackEvent(EventNames.EXTERNAL_LINK_CLICK, {
                   link_name: 'discord',
                   location: 'header_social',
-                  url: 'https://discord.com/invite/neverland-money',
+                  url: 'https://discord.com/invite/neverland',
                 });
               }}
             >
@@ -418,7 +418,7 @@ export default function Header() {
                 />
               </Link>
               <Link
-                href='https://discord.com/invite/neverland-money'
+                href='https://discord.com/invite/neverland'
                 target='_blank noreferrer noopener'
                 className='flex aspect-square h-[60px] w-[60px] flex-shrink-0 items-center justify-center rounded-full border-[1.818px] border-[#942ffe]'
               >
