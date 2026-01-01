@@ -9,6 +9,7 @@ import InfoGridSection from '@/components/sections/InfoGridSection';
 import LunarCircleSection from '@/components/sections/LunarCircleSection';
 import PartnersSection from '@/components/sections/PartnersSection';
 import SecuritySection from '@/components/sections/SecuritySection';
+import { ScreenshotButton } from '@/components/ui/ScreenshotButton';
 import ScrollToTopButton from '@/components/ui/ScrollToTopButton';
 import { SectionTracker } from '@/utils/sectionTracker';
 
@@ -44,6 +45,7 @@ export default function Home() {
         <ContactSection />
       </SectionTracker>
       <ChatButton />
+      <ScreenshotButton />
       <ScrollToTopButton />
     </main>
   );

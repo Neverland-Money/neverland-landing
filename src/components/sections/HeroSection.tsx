@@ -76,7 +76,7 @@ export default function HeroSection() {
       <div className='relative z-[6] mt-[120px] flex flex-col items-center md:mt-[248px] md:items-start'>
         {/* Content wrapper with max width */}
         <div className='mx-auto w-full max-w-7xl px-4 2xl:px-0'>
-          <div className='flex w-full max-w-[950px] flex-col items-center justify-center gap-6 md:items-start md:gap-9'>
+          <div className='flex w-full max-w-[950px] flex-col items-center justify-center gap-6 md:items-start md:gap-15'>
             {/* Title and description section */}
             <div className='flex w-full flex-col items-center justify-center gap-2 md:items-start'>
               {/* Main title SVG - hidden on mobile, shown on md screens and above */}
@@ -92,6 +92,22 @@ export default function HeroSection() {
                   role='img'
                   aria-labelledby='pageTitle'
                 >
+                  <defs>
+                    <filter
+                      id='textShadow'
+                      x='-20%'
+                      y='-20%'
+                      width='140%'
+                      height='140%'
+                    >
+                      <feDropShadow
+                        dx='2'
+                        dy='2'
+                        stdDeviation='2'
+                        floodColor='#070321'
+                      />
+                    </filter>
+                  </defs>
                   <title id='pageTitle'>MAGIC AND PIXIE DUST ON MONAD</title>
                   <text
                     fill='white'
@@ -99,6 +115,7 @@ export default function HeroSection() {
                     fontFamily='var(--font-cinzel)'
                     fontSize='80'
                     letterSpacing='0em'
+                    filter='url(#textShadow)'
                   >
                     <tspan x='0' y='64.16'>
                       MAGIC AND PIXIE{' '}
@@ -120,7 +137,10 @@ export default function HeroSection() {
 
               {/* Mobile title - shown on mobile, hidden on md screens and above */}
               <div className='block w-full text-center md:hidden'>
-                <h1 className='font-cinzel mb-2 text-[44px] leading-[130%] tracking-wide text-white'>
+                <h1
+                  className='font-cinzel mb-2 text-[44px] leading-[130%] tracking-wide text-white'
+                  style={{ textShadow: '2px 2px 4px #070321' }}
+                >
                   MAGIC AND
                   <br />
                   PIXIE DUST ON
@@ -131,10 +151,13 @@ export default function HeroSection() {
 
               {/* Unified Description text with responsive styles */}
               <div className='mx-auto mr-auto w-full max-w-[455px] md:mx-0 md:mr-auto'>
-                <p className='font-quicksand text-center text-[21px] leading-[140%] text-white md:text-left md:text-lg'>
-                  Neverland is a lending protocol built on Aave&apos;s secure
-                  system, governed by the community, and powered by Monad&apos;s
-                  fast blockchain.
+                <p
+                  className='font-quicksand relative -right-1.5 text-center text-[21px] leading-[140%] text-white md:text-left md:text-lg'
+                  style={{ textShadow: '2px 2px 4px #070321' }}
+                >
+                  Neverland is a next-generation, Monad-native lending protocol
+                  fusing the most secure, battle-tested lending technology with
+                  proprietary veTokenomics.
                 </p>
               </div>
             </div>

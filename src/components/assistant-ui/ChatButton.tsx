@@ -24,7 +24,6 @@ export const ChatButton = ({
   const [isMinimized, setIsMinimized] = useState(false);
   const [key, setKey] = useState(Date.now()); // Unique key for each conversation
   const [currentKey, setCurrentKey] = useState(key); // Current instance key that persists during minimize
-  const [isGlowing, setIsGlowing] = useState(false); // Controls glow animation
   const chatRef = useRef<HTMLDivElement>(null); // Reference to the chat container
   const buttonRef = useRef<HTMLButtonElement>(null); // Reference to the button element
   const divRef = useRef<HTMLDivElement>(null); // Reference to the div element when using isStyled
@@ -87,23 +86,6 @@ export const ChatButton = ({
       } catch (error) {
         console.error('Error restarting Lenis on unmount:', error);
       }
-    };
-  }, [isOpen, isMinimized]);
-
-  useEffect(() => {
-    if (isOpen || isMinimized) {
-      setIsGlowing(false);
-      return;
-    }
-
-    // Set up periodic glow effect every 5 seconds
-    const glowInterval = setInterval(() => {
-      setIsGlowing(true);
-      setTimeout(() => setIsGlowing(false), 2000); // Glow duration of 2 seconds
-    }, 5000);
-
-    return () => {
-      clearInterval(glowInterval);
     };
   }, [isOpen, isMinimized]);
 
@@ -280,29 +262,6 @@ export const ChatButton = ({
               </div>
             ))}
         </>
-      )}
-
-      {/* Pulsing glow effect */}
-      {((isOpen && isMinimized) || isGlowing) && (
-        <div
-          className={`absolute ${isInMenu ? 'relative' : 'fixed bottom-6 left-6'} pointer-events-none z-20`}
-        >
-          <motion.div
-            className='absolute -bottom-6 left-6 h-10 w-10 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#891de1]'
-            style={{
-              filter: 'blur(12px)',
-              boxShadow: '0px 0px 26px #891de1',
-            }}
-            animate={{
-              opacity: [0.3, 1, 0],
-              scale: [1, 1.4, 1],
-            }}
-            transition={{
-              duration: 2,
-              repeat: 0,
-            }}
-          />
-        </div>
       )}
 
       {/* Full Chat Interface - Always mounted when open, just visually hidden when minimized */}
