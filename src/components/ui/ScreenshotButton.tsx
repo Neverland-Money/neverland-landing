@@ -228,7 +228,7 @@ export function ScreenshotButton() {
             }}
           >
             Neverland is a next-generation, Monad-native lending protocol fusing
-            the most secure, lending technology with proprietary veTokenomics.
+            the most secure lending technology with proprietary veTokenomics.
           </div>
         </div>
 
