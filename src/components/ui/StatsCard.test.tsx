@@ -37,14 +37,14 @@ describe('StatsCard Component', () => {
   it('renders desktop version correctly', () => {
     render(
       <StatsCard
-        title='Total Value Locked'
+        title='Total Deposits'
         value='100M'
         tooltipContent='Total value of deposited assets'
       />,
     );
 
     // Check that title is rendered
-    expect(screen.getByText('Total Value Locked')).toBeInTheDocument();
+    expect(screen.getByText('Total Deposits')).toBeInTheDocument();
 
     // Check that value is passed to BlurredLoadingText
     const valueElement = screen.getByTestId('mocked-blurred-text');
@@ -58,7 +58,7 @@ describe('StatsCard Component', () => {
   it('renders mobile version correctly', () => {
     render(
       <StatsCard
-        title='TOTAL VALUE LOCKED'
+        title='Total Deposits'
         value='100M'
         tooltipContent='Total value of deposited assets'
         isMobile={true}
@@ -77,7 +77,7 @@ describe('StatsCard Component', () => {
   it('applies custom className when provided', () => {
     render(
       <StatsCard
-        title='Total Value Locked'
+        title='Total Deposits'
         value='100M'
         tooltipContent='Total value of deposited assets'
         className='custom-class'

@@ -181,9 +181,9 @@ export default function HeroSection() {
       </div>
       {/* Stats Cards - 80px from button above on desktop, 40px on mobile */}
       <div className='z-[7] mx-auto mt-[40px] flex w-full max-w-7xl flex-col gap-4 px-4 md:mt-[80px] md:flex-row md:gap-6 2xl:px-0'>
-        {/* Total Value Locked Card - Desktop version */}
+        {/* Total Deposits Card - Desktop version */}
         <StatsCard
-          title='Total Value Locked'
+          title='Total Deposits'
           value={tvlValue}
           tooltipContent='Total value of deposited assets in the protocol.'
           className='hidden md:block'
@@ -201,9 +201,9 @@ export default function HeroSection() {
 
         {/* Mobile Stats Layout - Fixed to bottom of viewport */}
         <div className='absolute right-0 bottom-[55px] left-0 z-[5] flex w-full flex-row justify-center gap-16 md:hidden'>
-          {/* Total Value Locked */}
+          {/* Total Deposits */}
           <StatsCard
-            title='TOTAL VALUE LOCKED'
+            title='Total Deposits'
             value={tvlValue}
             tooltipContent='Total value of deposited assets in the protocol.'
             isMobile={true}

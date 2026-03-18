@@ -282,7 +282,7 @@ export function ScreenshotButton() {
                 lineHeight: '1.1',
               }}
             >
-              Total Value Locked
+              Total Deposits
             </div>
             <div
               style={{

@@ -48,7 +48,7 @@ export default function LunarCircleSection() {
           <div className='flex h-[800px] flex-col items-center justify-between md:hidden'>
             {/* Stats above moon - each on own row */}
             <div className='relative z-50 flex w-full max-w-[600px] flex-col items-center gap-6 pt-16'>
-              {/* Total Value Locked - Left aligned */}
+              {/* Total Deposits - Left aligned */}
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -60,7 +60,7 @@ export default function LunarCircleSection() {
                   <BlurredLoadingText text={tvlValue} isLoading={loading} />
                 </div>
                 <div className='font-cinzel text-sm leading-[110%] font-normal text-white/60 uppercase'>
-                  &#123; TOTAL VALUE LOCKED &#125;
+                  &#123; Total Deposits &#125;
                 </div>
               </motion.div>
 
@@ -591,7 +591,7 @@ export default function LunarCircleSection() {
                 viewport={{ once: true, amount: 1 }}
                 className='mx-auto mb-8 flex w-full max-w-[600px] items-start justify-between md:mb-16 md:max-w-[1280px]'
               >
-                {/* Total Value Locked */}
+                {/* Total Deposits */}
                 <div className='flex w-[120px] flex-col items-center gap-2 md:w-[158px] md:items-start md:gap-3'>
                   <div className='font-cinzel mt-[-1px] text-3xl leading-[110%] font-normal text-white md:w-[158px] md:text-left md:text-5xl'>
                     <BlurredLoadingText text={tvlValue} isLoading={loading} />
