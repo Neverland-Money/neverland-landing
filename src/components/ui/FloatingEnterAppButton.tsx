@@ -21,7 +21,7 @@ export function FloatingEnterAppButton() {
       target='_blank'
       rel='noopener noreferrer'
       aria-label='Enter Neverland App'
-      className='fixed bottom-6 left-[72px] z-40 hidden md:block'
+      className='fixed bottom-6 left-6 z-40 hidden md:block'
       onClick={handleClick}
     >
       <motion.div

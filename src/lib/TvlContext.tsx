@@ -9,7 +9,9 @@ import {
   useRef,
 } from 'react';
 
-const TVL_ENDPOINT = process.env.NEXT_PUBLIC_TVL_ENDPOINT || '';
+const TVL_ENDPOINT =
+  process.env.NEXT_PUBLIC_TVL_ENDPOINT ||
+  'https://app.neverland.money/api/neverland/tvl';
 
 // Cache for 5 minutes
 const CACHE_DURATION = 5 * 60 * 1000;

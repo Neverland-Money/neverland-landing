@@ -1,6 +1,6 @@
 # Neverland Money - Landing Page
 
-A Next.js 15.3 landing page with TypeScript, Tailwind CSS 4, and advanced AI chat integration. Features animated starfield backgrounds, responsive design, smooth scroll animations, and vector-powered knowledge base using OpenAI + Pinecone.
+A Next.js 15.3 landing page with TypeScript and Tailwind CSS 4. Features animated starfield backgrounds, responsive design, and smooth scroll animations.
 
 ## Quick Start
 
@@ -8,8 +8,6 @@ A Next.js 15.3 landing page with TypeScript, Tailwind CSS 4, and advanced AI cha
 
 - **Node.js 20+**
 - **pnpm** (package manager)
-- **OpenAI** API key (for chat functionality)
-- **Pinecone** API key (for vector search)
 - **React 19** compatible dependencies
 - **Windows users**: **WSL** (Windows Subsystem for Linux) recommended
 
@@ -48,19 +46,13 @@ curl -fsSL https://get.pnpm.io/install.sh | sh -
 
    The installation automatically initializes Husky via the `prepare` script in package.json.
 
-3. **Set up environment variables**
+3. **Set up environment variables** (optional)
 
    ```bash
    cp .env.example .env
    ```
 
-   Edit `.env` and add your API keys:
-
-   ```env
-   OPENAI_API_KEY=your_openai_api_key_here
-   PINECONE_API_KEY=your_pinecone_api_key_here
-   PINECONE_INDEX=your_pinecone_index_name_here
-   ```
+   All variables have production defaults; see `.env.example` for available overrides.
 
 4. **Run the development server**
 
@@ -96,7 +88,6 @@ This project uses Vercel Analytics for tracking user interactions and engagement
   - Footer navigation and social link clicks
   - Hero and Footer section CTA button interactions
   - Scroll to Top button interactions
-  - Chat assistant interactions (open, minimize, close)
   - FAQ accordion expand/collapse actions
 - **Section Time Tracking**: Measures how long users spend viewing each section of the page using the `SectionTracker` component
 
@@ -110,8 +101,6 @@ The `SectionTracker` component uses the Intersection Observer API (via `react-in
 src/                         # Source code directory
 ├── app/                     # Next.js App Router pages
 │   ├── about/               # About us page (redirect)
-│   ├── api/                 # API routes
-│   │   └── chat/            # AI chat API endpoint
 │   ├── brand/               # Brand assets and guidelines page
 │   ├── contact/             # Contact page (redirect)
 │   ├── explore/             # Explore features page (redirect)
@@ -123,7 +112,6 @@ src/                         # Source code directory
 │   ├── stats/               # Statistics page (redirect)
 │   └── terms-of-service/    # Terms of service page
 ├── components/              # Reusable component directory
-│   ├── assistant-ui/        # AI chat interface components
 │   ├── hooks/               # Custom React hooks
 │   ├── layout/              # Structural layout components
 │   ├── sections/            # Page-specific content sections
@@ -153,40 +141,12 @@ Dynamic animated starfield with customizable:
 - Custom scroll triggers and animations
 - Enhanced user experience
 
-### AI Chat System
-
-- OpenAI GPT integration with AI-SDK
-- Pinecone vector database with LangChain
-- Context-aware responses
-- Real-time streaming
-- Knowledge base search
-- Advanced Assistant UI components
-- Rich markdown rendering
-- Improved response handling
-
 ### Responsive Design
 
 - Mobile-first approach
 - Tailwind CSS utility classes
 - Custom breakpoints
 - Smooth animations
-
-## API Setup
-
-### Required API Keys
-
-1. **OpenAI API Key**
-
-   - Visit [OpenAI Platform](https://platform.openai.com/api-keys)
-   - Create a new API key
-   - Add billing information (pay-per-use)
-
-2. **Pinecone API Key**
-
-   - Visit [Pinecone](https://www.pinecone.io/)
-   - Create a new project
-   - Create an index for vector storage
-   - Copy your API key and index name
 
 ## Configuration
 
@@ -235,7 +195,6 @@ This project includes a comprehensive Storybook setup for developing and testing
 
 - **UI Components**: Button, StarrySky, StarIcon, Tooltip, etc.
 - **Layout Components**: Header, sections, and page layouts
-- **Assistant Components**: ChatButton, Thread, and AI chat interface
 
 ### Running Storybook
 
@@ -268,13 +227,7 @@ The app can be deployed to any platform supporting Node.js:
 
 ### Environment Variables for Production
 
-Ensure all required environment variables are set:
-
-```env
-OPENAI_API_KEY=your_production_openai_key
-PINECONE_API_KEY=your_production_pinecone_key
-PINECONE_INDEX=your_production_index_name
-```
+No environment variables are required; all data sources have production defaults. See `.env.example` for optional overrides.
 
 ## Contributing
 
@@ -300,8 +253,6 @@ This is a source-available license, not an open-source license as defined by the
 - Animated with [Framer Motion](https://www.framer.com/motion/) and [GSAP](https://greensock.com/gsap/)
 - Smooth scrolling with [Lenis](https://github.com/studio-freight/lenis)
 - Enhanced scrolling with [OverlayScrollbars](https://kingsora.github.io/OverlayScrollbars/)
-- AI powered by [OpenAI](https://openai.com/) and [AI SDK](https://sdk.vercel.ai/docs)
-- Vector search by [Pinecone](https://www.pinecone.io/) and [LangChain](https://js.langchain.com/)
 - Icons by [Lucide](https://lucide.dev/)
 - Parallax effects with [React Parallax Tilt](https://www.npmjs.com/package/react-parallax-tilt)
 - Analytics by [Vercel Analytics](https://vercel.com/analytics) and [Speed Insights](https://vercel.com/docs/speed-insights)

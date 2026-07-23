@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 
-import { ChatButton } from '@/components/assistant-ui/ChatButton';
 import Header from '@/components/layout/Header';
 import { BrandBanner } from '@/components/sections/brand/BrandBanner';
 import { BrandDonts } from '@/components/sections/brand/BrandDonts';
@@ -133,7 +132,6 @@ export default function BrandPage() {
           </div>
         </div>
 
-        <ChatButton />
         <ScrollToTopButton />
       </div>
     </main>

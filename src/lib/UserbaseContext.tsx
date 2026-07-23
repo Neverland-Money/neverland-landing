@@ -9,8 +9,12 @@ import {
   useRef,
 } from 'react';
 
-const GOLDSKY_ENDPOINT = `https://api.goldsky.com/api/public/${process.env.NEXT_PUBLIC_SUBGRAPH_PROJECT_ID}/subgraphs/${process.env.NEXT_PUBLIC_SUBGRAPH_NAME}/${process.env.NEXT_PUBLIC_SUBGRAPH_VERSION}/gn`;
-const TVL_ENDPOINT = process.env.NEXT_PUBLIC_TVL_ENDPOINT || '';
+const TVL_ENDPOINT =
+  process.env.NEXT_PUBLIC_TVL_ENDPOINT ||
+  'https://app.neverland.money/api/neverland/tvl';
+const ENVIO_GRAPHQL_URL =
+  process.env.NEXT_PUBLIC_ENVIO_GRAPHQL_URL ||
+  'https://index.neverland.money/v1/graphql';
 
 // Cache for 5 minutes
 const CACHE_DURATION = 5 * 60 * 1000;
@@ -64,11 +68,14 @@ export function UserbaseProvider({ children }: { children: ReactNode }) {
   };
 
   const fetchProtocolStats = async (): Promise<ProtocolStats> => {
-    const res = await fetch(GOLDSKY_ENDPOINT, {
+    const res = await fetch(ENVIO_GRAPHQL_URL, {
       method: 'POST',
-      headers: { 'content-type': 'application/json' },
+      headers: {
+        'content-type': 'application/json',
+        'x-hasura-role': 'public',
+      },
       body: JSON.stringify({
-        query: `query ProtocolOverview {\n  protocolStats(id: "1") {\n    totalRevenueUsd\n    totalTransactions\n    uniqueUsers\n  }\n}`,
+        query: `query ProtocolOverview {\n  ProtocolStats_by_pk(id: "1") {\n    totalRevenueUsd\n    totalTransactions\n    uniqueUsers\n  }\n}`,
       }),
     });
 
@@ -81,11 +88,13 @@ export function UserbaseProvider({ children }: { children: ReactNode }) {
       throw new Error(JSON.stringify(json.errors));
     }
 
-    const stats = json.data?.protocolStats;
+    // Hasura types: totalRevenueUsd is Float (number), totalTransactions is
+    // BigInt (string), uniqueUsers is Int (number); Number() covers all.
+    const stats = json.data?.ProtocolStats_by_pk;
     return {
       totalRevenueUsd: String(stats?.totalRevenueUsd ?? '0'),
-      totalTransactions: parseInt(stats?.totalTransactions ?? '0'),
-      uniqueUsers: parseInt(stats?.uniqueUsers ?? '0'),
+      totalTransactions: Number(stats?.totalTransactions ?? 0),
+      uniqueUsers: Number(stats?.uniqueUsers ?? 0),
     };
   };
 

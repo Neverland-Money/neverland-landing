@@ -1,4 +1,3 @@
-import { ChatButton } from '@/components/assistant-ui/ChatButton';
 import Header from '@/components/layout/Header';
 import ContactSection from '@/components/sections/ContactSection';
 import FAQSection from '@/components/sections/FAQSection';
@@ -44,7 +43,6 @@ export default function Home() {
       <SectionTracker sectionId='contact' sectionName='Contact Section'>
         <ContactSection />
       </SectionTracker>
-      <ChatButton />
       <FloatingEnterAppButton />
       <ScrollToTopButton />
     </main>

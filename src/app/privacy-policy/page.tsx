@@ -2,7 +2,6 @@ import { ChevronRight } from 'lucide-react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
-import { ChatButton } from '@/components/assistant-ui/ChatButton';
 import Header from '@/components/layout/Header';
 import ScrollToTopButton from '@/components/ui/ScrollToTopButton';
 import StarrySky from '@/components/ui/StarrySky';
@@ -504,9 +503,6 @@ export default function PrivacyPolicy() {
             </div>
           </div>
         </article>
-
-        {/* Chat Button */}
-        <ChatButton />
 
         {/* Scroll to Top Button */}
         <ScrollToTopButton />
