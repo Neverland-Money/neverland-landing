@@ -6,14 +6,23 @@ import ActionButton from '@/components/ui/ActionButton';
 import StarrySky from '@/components/ui/StarrySky';
 import StatsCard from '@/components/ui/StatsCard';
 import { formatTvl } from '@/lib/TvlContext';
-import { useUserbaseContext } from '@/lib/UserbaseContext';
+import { hasStatValue, useUserbaseContext } from '@/lib/UserbaseContext';
 
 export default function HeroSection() {
   const { data, loading } = useUserbaseContext();
-  const totalRevenueValue = data?.totalRevenueUsd
-    ? `$${formatTvl(data.totalRevenueUsd)}`
+
+  // A stat only leaves the blur once the backend hands us a real figure; a
+  // missing or zero value stays blurred forever rather than showing its
+  // placeholder as if it were the measurement.
+  const tvl = data?.tvl;
+  const totalRevenueUsd = data?.totalRevenueUsd;
+  const hasTvl = hasStatValue(tvl);
+  const hasTotalRevenue = hasStatValue(totalRevenueUsd);
+
+  const totalRevenueValue = hasTotalRevenue
+    ? `$${formatTvl(totalRevenueUsd)}`
     : '$00.0M';
-  const tvlValue = data?.tvl ? `$${formatTvl(data.tvl)}` : '$000.00M';
+  const tvlValue = hasTvl ? `$${formatTvl(tvl)}` : '$000.00M';
 
   return (
     <div className='relative flex h-[100vh] max-h-[1000px] min-h-[700px] w-full flex-col overflow-hidden bg-[#01020D] md:max-h-[100vh] md:min-h-[944px]'>
@@ -187,7 +196,7 @@ export default function HeroSection() {
           value={tvlValue}
           tooltipContent='Total value of deposited assets in the protocol.'
           className='hidden md:block'
-          isLoading={loading}
+          isLoading={loading || !hasTvl}
         />
 
         {/* Total Revenue Card - Desktop version */}
@@ -196,7 +205,7 @@ export default function HeroSection() {
           value={totalRevenueValue}
           tooltipContent='Total protocol revenue generated from fees.'
           className='hidden md:block'
-          isLoading={loading}
+          isLoading={loading || !hasTotalRevenue}
         />
 
         {/* Mobile Stats Layout - Fixed to bottom of viewport */}
@@ -207,7 +216,7 @@ export default function HeroSection() {
             value={tvlValue}
             tooltipContent='Total value of deposited assets in the protocol.'
             isMobile={true}
-            isLoading={loading}
+            isLoading={loading || !hasTvl}
           />
 
           {/* Total Revenue */}
@@ -216,7 +225,7 @@ export default function HeroSection() {
             value={totalRevenueValue}
             tooltipContent='Total protocol revenue generated from fees.'
             isMobile={true}
-            isLoading={loading}
+            isLoading={loading || !hasTotalRevenue}
           />
         </div>
       </div>

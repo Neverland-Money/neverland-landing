@@ -20,10 +20,12 @@ const ENVIO_GRAPHQL_URL =
 const CACHE_DURATION = 5 * 60 * 1000;
 
 interface TvlData {
-  tvl: string;
-  tvlRaw: number;
-  totalBorrowed: string;
-  totalBorrowedRaw: number;
+  // The endpoint answers 200 with nulls when the market totals are
+  // unavailable, so nothing sourced from them is guaranteed to be a number.
+  tvl: string | null;
+  tvlRaw: number | null;
+  totalBorrowed: string | null;
+  totalBorrowedRaw: number | null;
   activeReserves: number;
   totalReserves: number;
   timestamp: string;
@@ -106,23 +108,44 @@ export function UserbaseProvider({ children }: { children: ReactNode }) {
       return;
     }
 
-    try {
-      setLoading(true);
-      const [tvlData, protocolStats] = await Promise.all([
-        fetchTvlData(),
-        fetchProtocolStats(),
-      ]);
+    setLoading(true);
 
-      setData({ ...tvlData, ...protocolStats });
-      setError(null);
-      lastFetchTime.current = now;
-      // Only stop loading on success
-      setLoading(false);
-    } catch (err) {
-      console.error('Error fetching stats:', err);
-      setError(err instanceof Error ? err : new Error('Unknown error'));
-      // Keep loading=true on error to maintain blur effect
+    // Settled rather than all: one failing source must only cost its own
+    // stats, never drag the figures that did arrive back behind the blur.
+    const [tvlResult, statsResult] = await Promise.allSettled([
+      fetchTvlData(),
+      fetchProtocolStats(),
+    ]);
+
+    const failures = [tvlResult, statsResult]
+      .filter((result) => result.status === 'rejected')
+      .map((result) => result.reason);
+
+    failures.forEach((reason) =>
+      console.error('Error fetching stats:', reason),
+    );
+
+    if (tvlResult.status === 'rejected' && statsResult.status === 'rejected') {
+      setError(
+        failures[0] instanceof Error ? failures[0] : new Error('Unknown error'),
+      );
+      // Nothing usable arrived: stay loading so every stat keeps its blur.
+      return;
     }
+
+    setData({
+      ...(tvlResult.status === 'fulfilled' ? tvlResult.value : {}),
+      ...(statsResult.status === 'fulfilled' ? statsResult.value : {}),
+    });
+    setError(
+      failures.length === 0
+        ? null
+        : failures[0] instanceof Error
+          ? failures[0]
+          : new Error('Unknown error'),
+    );
+    lastFetchTime.current = now;
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -147,6 +170,28 @@ export function useUserbaseContext() {
     );
   }
   return context;
+}
+
+/**
+ * Whether a stat actually came back from the backend and can be shown.
+ *
+ * A missing, malformed or zero figure is never a real measurement, so it must
+ * keep its blurred placeholder instead of being published as a number.
+ * @param value - Raw stat value as delivered by the API
+ * @returns True only for a finite value greater than zero
+ */
+export function hasStatValue(
+  value: string | number | null | undefined,
+): value is string | number {
+  if (value === null || value === undefined) {
+    return false;
+  }
+
+  // Number() and not parseFloat(): the latter parses a leading prefix, so
+  // "12invalid" would pass as 12 and "1,234" as 1, publishing an invented
+  // figure as a measurement. The whole string has to be a number.
+  const numeric = typeof value === 'string' ? Number(value) : value;
+  return Number.isFinite(numeric) && numeric > 0;
 }
 
 /**
