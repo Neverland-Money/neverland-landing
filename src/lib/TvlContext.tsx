@@ -98,7 +98,10 @@ export function useTvlContext() {
  * @returns Formatted string (e.g., "425.85K" or "1.23M")
  */
 export function formatTvl(tvl: string | number): string {
-  const value = typeof tvl === 'string' ? parseFloat(tvl) : tvl;
+  // Same full-string conversion as hasStatValue: the guard and the formatter
+  // must read a value identically, or a string the guard admits can format
+  // into a different number than it was admitted for.
+  const value = typeof tvl === 'string' ? Number(tvl) : tvl;
 
   if (value >= 1_000_000) {
     return `${(value / 1_000_000).toFixed(2)}M`;

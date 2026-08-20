@@ -187,7 +187,10 @@ export function hasStatValue(
     return false;
   }
 
-  const numeric = typeof value === 'string' ? parseFloat(value) : value;
+  // Number() and not parseFloat(): the latter parses a leading prefix, so
+  // "12invalid" would pass as 12 and "1,234" as 1, publishing an invented
+  // figure as a measurement. The whole string has to be a number.
+  const numeric = typeof value === 'string' ? Number(value) : value;
   return Number.isFinite(numeric) && numeric > 0;
 }
 
