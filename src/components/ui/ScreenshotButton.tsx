@@ -6,17 +6,23 @@ import { CameraIcon } from 'lucide-react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { formatTvl } from '@/lib/TvlContext';
-import { useUserbaseContext } from '@/lib/UserbaseContext';
+import { hasStatValue, useUserbaseContext } from '@/lib/UserbaseContext';
 
 export function ScreenshotButton() {
   const canvasRef = useRef<HTMLDivElement>(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const { data } = useUserbaseContext();
 
-  const tvlValue = data?.tvl ? `$${formatTvl(data.tvl)}` : '$0.00M';
-  const revenueValue = data?.totalRevenueUsd
-    ? `$${formatTvl(data.totalRevenueUsd)}`
-    : '$0.00M';
+  // html2canvas cannot reproduce the loading blur, so a stat the backend
+  // never delivered is left out of the shot entirely instead of being
+  // captured as a zero.
+  const tvl = data?.tvl;
+  const totalRevenueUsd = data?.totalRevenueUsd;
+  const hasTvl = hasStatValue(tvl);
+  const hasTotalRevenue = hasStatValue(totalRevenueUsd);
+
+  const tvlValue = hasTvl ? `$${formatTvl(tvl)}` : '';
+  const revenueValue = hasTotalRevenue ? `$${formatTvl(totalRevenueUsd)}` : '';
 
   const handleScreenshot = useCallback(async () => {
     if (!canvasRef.current || isGenerating) return;
@@ -260,82 +266,86 @@ export function ScreenshotButton() {
           }}
         >
           {/* TVL Card */}
-          <div
-            style={{
-              width: '200px',
-              height: '90px',
-              borderRadius: '18px',
-              backgroundColor: 'rgba(69, 1, 109, 0.7)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
-              padding: '12px',
-              boxSizing: 'border-box',
-              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
-            }}
-          >
+          {hasTvl && (
             <div
               style={{
-                fontFamily: 'Cinzel, serif',
-                fontSize: '11px',
-                fontWeight: 400,
-                color: '#ead5ff',
-                textTransform: 'uppercase',
-                lineHeight: '1.1',
+                width: '200px',
+                height: '90px',
+                borderRadius: '18px',
+                backgroundColor: 'rgba(69, 1, 109, 0.7)',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                padding: '12px',
+                boxSizing: 'border-box',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
               }}
             >
-              Total Deposits
+              <div
+                style={{
+                  fontFamily: 'Cinzel, serif',
+                  fontSize: '11px',
+                  fontWeight: 400,
+                  color: '#ead5ff',
+                  textTransform: 'uppercase',
+                  lineHeight: '1.1',
+                }}
+              >
+                Total Deposits
+              </div>
+              <div
+                style={{
+                  marginTop: '14px',
+                  fontFamily: 'Cinzel, serif',
+                  fontSize: '28px',
+                  fontWeight: 400,
+                  color: 'white',
+                  lineHeight: '1.1',
+                }}
+              >
+                {tvlValue}
+              </div>
             </div>
-            <div
-              style={{
-                marginTop: '14px',
-                fontFamily: 'Cinzel, serif',
-                fontSize: '28px',
-                fontWeight: 400,
-                color: 'white',
-                lineHeight: '1.1',
-              }}
-            >
-              {tvlValue}
-            </div>
-          </div>
+          )}
 
           {/* Revenue Card */}
-          <div
-            style={{
-              width: '200px',
-              height: '90px',
-              borderRadius: '18px',
-              backgroundColor: 'rgba(69, 1, 109, 0.7)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
-              padding: '12px',
-              boxSizing: 'border-box',
-              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
-            }}
-          >
+          {hasTotalRevenue && (
             <div
               style={{
-                fontFamily: 'Cinzel, serif',
-                fontSize: '11px',
-                fontWeight: 400,
-                color: '#ead5ff',
-                textTransform: 'uppercase',
-                lineHeight: '1.1',
+                width: '200px',
+                height: '90px',
+                borderRadius: '18px',
+                backgroundColor: 'rgba(69, 1, 109, 0.7)',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                padding: '12px',
+                boxSizing: 'border-box',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
               }}
             >
-              Total Revenue
+              <div
+                style={{
+                  fontFamily: 'Cinzel, serif',
+                  fontSize: '11px',
+                  fontWeight: 400,
+                  color: '#ead5ff',
+                  textTransform: 'uppercase',
+                  lineHeight: '1.1',
+                }}
+              >
+                Total Revenue
+              </div>
+              <div
+                style={{
+                  marginTop: '14px',
+                  fontFamily: 'Cinzel, serif',
+                  fontSize: '28px',
+                  fontWeight: 400,
+                  color: 'white',
+                  lineHeight: '1.1',
+                }}
+              >
+                {revenueValue}
+              </div>
             </div>
-            <div
-              style={{
-                marginTop: '14px',
-                fontFamily: 'Cinzel, serif',
-                fontSize: '28px',
-                fontWeight: 400,
-                color: 'white',
-                lineHeight: '1.1',
-              }}
-            >
-              {revenueValue}
-            </div>
-          </div>
+          )}
         </div>
       </div>
     </>

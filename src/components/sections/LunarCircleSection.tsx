@@ -5,19 +5,34 @@ import Image from 'next/image';
 
 import { BlurredLoadingText } from '@/components/ui/BlurredLoadingText';
 import { formatTvl } from '@/lib/TvlContext';
-import { useUserbaseContext, formatNumber } from '@/lib/UserbaseContext';
+import {
+  hasStatValue,
+  useUserbaseContext,
+  formatNumber,
+} from '@/lib/UserbaseContext';
 
 export default function LunarCircleSection() {
   const { data, loading } = useUserbaseContext();
-  const activeUsers = data?.uniqueUsers
-    ? formatNumber(data.uniqueUsers)
-    : '000,000';
-  const allTimeTransactions = data?.totalTransactions
-    ? formatNumber(data.totalTransactions)
+
+  // A stat only leaves the blur once the backend hands us a real figure; a
+  // missing or zero value stays blurred forever rather than showing its
+  // placeholder as if it were the measurement.
+  const tvl = data?.tvl;
+  const totalRevenueUsd = data?.totalRevenueUsd;
+  const uniqueUsers = data?.uniqueUsers;
+  const totalTransactions = data?.totalTransactions;
+  const hasTvl = hasStatValue(tvl);
+  const hasTotalRevenue = hasStatValue(totalRevenueUsd);
+  const hasUniqueUsers = hasStatValue(uniqueUsers);
+  const hasTotalTransactions = hasStatValue(totalTransactions);
+
+  const activeUsers = hasUniqueUsers ? formatNumber(uniqueUsers) : '000,000';
+  const allTimeTransactions = hasTotalTransactions
+    ? formatNumber(totalTransactions)
     : '00,000';
-  const tvlValue = data?.tvl ? `$${formatTvl(data.tvl)}` : '$000M';
-  const totalRevenueValue = data?.totalRevenueUsd
-    ? `$${formatTvl(data.totalRevenueUsd)}`
+  const tvlValue = hasTvl ? `$${formatTvl(tvl)}` : '$000M';
+  const totalRevenueValue = hasTotalRevenue
+    ? `$${formatTvl(totalRevenueUsd)}`
     : '$00.0M';
   return (
     <section
@@ -57,7 +72,10 @@ export default function LunarCircleSection() {
                 className='flex w-full flex-col items-start gap-2 px-4'
               >
                 <div className='font-cinzel text-3xl leading-[110%] font-normal text-white'>
-                  <BlurredLoadingText text={tvlValue} isLoading={loading} />
+                  <BlurredLoadingText
+                    text={tvlValue}
+                    isLoading={loading || !hasTvl}
+                  />
                 </div>
                 <div className='font-cinzel text-sm leading-[110%] font-normal text-white/60 uppercase'>
                   &#123; Total Deposits &#125;
@@ -75,7 +93,7 @@ export default function LunarCircleSection() {
                 <div className='font-cinzel text-3xl leading-[110%] font-normal text-white'>
                   <BlurredLoadingText
                     text={allTimeTransactions}
-                    isLoading={loading}
+                    isLoading={loading || !hasTotalTransactions}
                   />
                 </div>
                 <div className='font-cinzel text-sm leading-[110%] font-normal text-white/60 uppercase'>
@@ -315,7 +333,10 @@ export default function LunarCircleSection() {
                 className='flex w-full flex-col items-start gap-2 px-4'
               >
                 <div className='font-cinzel text-3xl leading-[110%] font-normal text-white'>
-                  <BlurredLoadingText text={activeUsers} isLoading={loading} />
+                  <BlurredLoadingText
+                    text={activeUsers}
+                    isLoading={loading || !hasUniqueUsers}
+                  />
                 </div>
                 <div className='font-cinzel text-sm leading-[110%] font-normal text-white/60 uppercase'>
                   &#123; ACTIVE USERS &#125;
@@ -333,7 +354,7 @@ export default function LunarCircleSection() {
                 <div className='font-cinzel text-3xl leading-[110%] font-normal text-white'>
                   <BlurredLoadingText
                     text={totalRevenueValue}
-                    isLoading={loading}
+                    isLoading={loading || !hasTotalRevenue}
                   />
                 </div>
                 <div className='font-cinzel text-sm leading-[110%] font-normal text-white/60 uppercase'>
@@ -594,7 +615,10 @@ export default function LunarCircleSection() {
                 {/* Total Deposits */}
                 <div className='flex w-[120px] flex-col items-center gap-2 md:w-[158px] md:items-start md:gap-3'>
                   <div className='font-cinzel mt-[-1px] text-3xl leading-[110%] font-normal text-white md:w-[158px] md:text-left md:text-5xl'>
-                    <BlurredLoadingText text={tvlValue} isLoading={loading} />
+                    <BlurredLoadingText
+                      text={tvlValue}
+                      isLoading={loading || !hasTvl}
+                    />
                   </div>
                   <div className='relative h-8 w-full md:h-10'>
                     <div className='font-cinzel absolute top-0 left-0 h-[16px] w-full text-lg leading-[110%] font-normal text-white/60 uppercase md:h-[18px]'>
@@ -611,7 +635,7 @@ export default function LunarCircleSection() {
                   <div className='font-cinzel mt-[-1px] text-3xl leading-[110%] font-normal text-white md:w-[158px] md:text-left md:text-5xl'>
                     <BlurredLoadingText
                       text={allTimeTransactions}
-                      isLoading={loading}
+                      isLoading={loading || !hasTotalTransactions}
                     />
                   </div>
                   <div className='relative h-8 w-full px-0.5 md:h-10'>
@@ -638,7 +662,7 @@ export default function LunarCircleSection() {
                   <div className='font-cinzel mt-[-1px] text-3xl leading-[110%] font-normal text-white md:w-[158px] md:text-left md:text-5xl'>
                     <BlurredLoadingText
                       text={totalRevenueValue}
-                      isLoading={loading}
+                      isLoading={loading || !hasTotalRevenue}
                     />
                   </div>
                   <div className='flex flex-col items-center gap-0 md:relative md:h-10 md:w-full md:items-start'>
@@ -656,7 +680,7 @@ export default function LunarCircleSection() {
                   <div className='font-cinzel mt-[-1px] text-3xl leading-[110%] font-normal text-white md:w-[158px] md:text-left md:text-5xl'>
                     <BlurredLoadingText
                       text={activeUsers}
-                      isLoading={loading}
+                      isLoading={loading || !hasUniqueUsers}
                     />
                   </div>
                   <div className='flex flex-col items-center gap-0 md:relative md:h-10 md:w-full md:items-start'>
